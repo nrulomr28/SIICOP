@@ -1,0 +1,82 @@
+﻿card {
+    border-radius: 2px;
+    border-top: 4px solid #8CDDCD;
+    box-shadow: 0 2px 1px rgba(0,0,0,0.05);
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    margin-bottom: 30px;
+}
+
+.card {
+    border-top: 4px solid #8CDDCD !important;
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+.table-1-card .card-block {
+    padding-top: 10px;
+    padding-bottom: 0;
+}
+
+.card-block {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+.widget-primary-card,
+.widget-success-card,
+.widget-Blue-card,
+.widget-verdeAgua-card {
+    border-top: none;
+    background-color: #1abc9c;
+    color: #fff;
+}
+
+    widget-primary-card .row-table > [class*=col-]:first-child,
+    .widget-success-card .row-table > [class*=col-]:first-child,
+    .widget-Blue-card .row-table > [class*=col-]:first-child,
+    .widget-verdeAgua-card .row-table > [class*=col-]:first-child {
+        background-color: #148f77;
+        text-align: center;
+    }
+
+.widget-success-card {
+    background-color: #2ecc71;
+}
+
+.widget-Blue-card {
+    background-color: #44B8CE;
+}
+
+.widget-verdeAgua-card {
+    background-color: #328899;
+}
+
+.table-card .row-table i {
+    font-size: 28px;
+}
+
+.card-block-big {
+    padding: 1em !important;
+}
+
+.widget-primary-card .row-table > [class*=col-]:first-child, .widget-success-card .row-table > [class*=col-]:first-child {
+    background-color: #148f77;
+    text-align: center;
+}
+

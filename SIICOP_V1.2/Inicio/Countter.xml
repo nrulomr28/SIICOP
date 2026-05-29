@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="yes"?>
+<counter>
+  <count>
+    <hits>17</hits>
+  </count>
+  <system.web>
+    <authorization>
+      <allow users="?,*" />
+    </authorization>
+  </system.web>
+</counter>
