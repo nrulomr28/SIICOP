@@ -2318,14 +2318,18 @@
     <Compile Include="Clases\DTOs\ComboItemDTO.cs" />
     <Compile Include="Clases\DTOs\MunicipioDto.cs" />
     <Compile Include="Clases\DTOs\ProgramaDto.cs" />
+    <Compile Include="Clases\DTOs\TotalAccionesBeneficiadosDto.cs" />
     <Compile Include="Clases\Helpers\ErrorLogger.cs" />
     <Compile Include="Clases\Helpers\SessionHelper.cs" />
+    <Compile Include="Clases\Models\EntornoConstantes.cs" />
     <Compile Include="Clases\Repositories\CatalogoReporteActividadesRepository.cs" />
     <Compile Include="Clases\Repositories\CatalogoRepository.cs" />
     <Compile Include="Clases\Repositories\ProgramaRepository.cs" />
+    <Compile Include="Clases\Repositories\ReporteAccionesRepository.cs" />
     <Compile Include="Clases\Repositories\ReporteRepository.cs" />
     <Compile Include="Clases\Services\CatalogoReporteActividadesService.cs" />
     <Compile Include="Clases\Services\CatalogoService.cs" />
+    <Compile Include="Clases\Services\EntornoService.cs" />
     <Compile Include="Clases\Services\ReporteService.cs" />
     <Compile Include="Datos\Cat_Acciones.cs">
       <DependentUpon>SIICOB.tt</DependentUpon>
@@ -2375,12 +2379,10 @@
     <Compile Include="Datos\Profiles.cs">
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Datos\Repositorio\AccionesBenefRepository.cs" />
     <Compile Include="Datos\Repositorio\EntornoRepository.cs" />
     <Compile Include="Datos\Repositorio\UbicacionRepository.cs" />
     <Compile Include="Datos\Repositorio\ProgramaRepository.cs" />
     <Compile Include="Datos\Repositorio\ReporteRepository.cs" />
-    <Compile Include="Datos\Repositorio\TipoRepository.cs" />
     <Compile Include="Datos\Sessions.cs">
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>

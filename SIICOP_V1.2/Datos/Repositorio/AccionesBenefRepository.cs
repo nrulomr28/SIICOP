@@ -9,17 +9,7 @@ namespace SIICOP_V1._2.Datos.Repositorio
 {
 
     public class ReporteAccionesBeneficiarios
-    {
-        public class DTOReporteAcciones
-        {
-            public int programasID { get; set; }
-            public string NombrePrograma { get; set; }
-            public int TotalHombres { get; set; }
-            public int TotalMujeres { get; set; }
-            public int TotalAtendidos { get; set; }
-            public int TotalAcciones { get; set; }
-        }
-
+    {        
 
 
         public List<DTOReporteAcciones> ObtenerReporteBeneficiarios(int? mes, int? anio)

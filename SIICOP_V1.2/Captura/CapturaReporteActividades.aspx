@@ -5,37 +5,45 @@
     <script src="../Scripts/sweetalert2.all.min.js"></script>
     <script src="../Scripts/Alert_Gral.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/locales/es.min.js"></script>
-
-    <br />
-    <br />
+    
     <link href="../Content/styleFormularios.css" rel="stylesheet" />
     <asp:HiddenField ID="HiddenField1cn" runat="server" Value="0" />
     <div class="container-fluid" id="main" style="padding-top: 3%">
-        <%--<div class="row">--%>
+        
         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
             <div id="sidebar">
                 <div class="sosmed">
-                    <div class="user">
-                        <div class="text-center">
-    <img src="../Imagenes/data-entry.png"
-         class="img-circle"
-         style="width:48px;height:48px;" />
+                    <div class="panel panel-default">
 
-    <h4 style="margin-top:10px;">
-        REPORTE DE ACTIVIDADES
-    </h4>
+    <div class="panel-body">
 
-    <asp:Label ID="lblPrograma"
-        runat="server"
-        CssClass="text-warning">
-    </asp:Label>
+        <div class="row">
+
+            <div class="col-sm-1 text-center">
+
+                <img src="../Imagenes/data-entry.png"
+                     style="width:48px;height:48px;" />
+
+            </div>
+
+            <div class="col-sm-11">
+
+                <h3 style="margin-top:0;">
+                    REPORTE DE ACTIVIDADES
+                </h3>
+
+                <asp:Label ID="lblPrograma"
+                    runat="server"
+                    CssClass="label label-warning">
+                </asp:Label>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
-
-
-                        <div class="link-me">
-                            <div class="hr-center"></div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -58,8 +66,7 @@
                             <div class="timeline-panel">
                                 <h4 style="text-align: center">
                                     <asp:Label ID="lblfecha" runat="server" Text=""></asp:Label>
-                                </h4>
-                                <br />
+                                </h4>                                
                                 <div class="hr-left"></div>
 
                                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">

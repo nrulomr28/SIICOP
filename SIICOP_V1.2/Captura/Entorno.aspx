@@ -1,14 +1,18 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Entorno.aspx.cs" Inherits="SIICOP_V1._2.Captura.Entorno" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteV2.Master" AutoEventWireup="true" CodeBehind="Entorno.aspx.cs" Inherits="SIICOP_V1._2.Captura.Entorno" %>
 
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <br />
-    <br />
-
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">    
 
     <div class="container text-center">
 
-        <h2>Entorno</h2>
+        <h2 style="color:#6D132D;">
+    Selección de Entorno
+</h2>
+
+<p>
+    Selecciono el entorno donde se realizará
+    la actividad.
+</p>
 
         <div class="d-flex justify-content-center mt-5">
 
@@ -27,10 +31,6 @@
         </div>
 
     </div>
-
-    <br />
-    <br />
-
-
+    
 
 </asp:Content>
