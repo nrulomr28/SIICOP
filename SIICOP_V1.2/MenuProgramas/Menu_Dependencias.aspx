@@ -8,29 +8,59 @@
 
 
     <style>
-        .contenedor {
-            position: relative; /* permite superponer elementos */
-            display: inline-block;
-        }
+       .contenedor {
+    position: relative;
+    margin-bottom: 20px;
+}
 
-            .contenedor .img-responsive {
-                width: 100%;
-                height: auto;
-            }
+.titulo-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
 
-        .titulo {
-            position: absolute;
-            top: 50%; /* centra verticalmente */
-            left: 50%; /* centra horizontalmente */
-            transform: translate(-50%, -50%);
-            background-color: rgba(0,0,0,0.6); /* fondo negro semitransparente */
-            color: #fff; /* texto blanco */
-            padding: 15px 15px;
-            border-radius: 6px;
-            font-size: 28px;
-            font-weight: bold;
-            text-align: center;
-        }
+    transform: translate(-50%, -50%);
+
+    background: rgba(0,0,0,.65);
+    color: #fff;
+
+    padding: 12px 24px;
+
+    border-radius: 6px;
+
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.img-dgpvi {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+
+    border-radius: 4px;
+}
+
+.img-estrategia {
+    width: 100%;
+    height: 420px;
+    object-fit: contain;
+
+    border-radius: 4px;
+}
+
+.separator-container h2 {
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.opacar {
+    transition: all .25s ease;
+}
+
+.opacar:hover {
+    opacity: .90;
+    transform: scale(1.01);
+}
+
     </style>
 
 
@@ -46,35 +76,38 @@
 
                     <div class="row ex1">
 
-                        <div class="col-md-6 col-sm-6 text-center contenedor">
-                            <asp:ImageButton ID="ImageButton5" runat="server"
-                                ImageUrl="~/Imagenes/Menudependencia/DGVI.png"
-                                CommandArgument=""
-                                OnCommand="Imagen_Click" class="img-responsive img-thumbnail opacar" />
-                            <h3 class="fw-bold titulo">DGPVI</h3>
-                        </div>
+    <!-- DGPVI -->
+    <div class="col-md-4 col-sm-4 text-center contenedor">
 
-                        <div class="visible-xs"></div>
+        <asp:ImageButton ID="ImageButton5"
+            runat="server"
+            ImageUrl="~/Imagenes/Menudependencia/IMG_ATNCAUSAS.png"
+            CommandArgument=""
+            OnCommand="Imagen_Click"
+            CssClass="img-responsive img-thumbnail img-dgpvi opacar" />
 
-                        <div class="col-md-6 col-sm-6 text-center contenedor">
-                            <asp:ImageButton ID="ImageButton4" runat="server"
-                                ImageUrl="~/Imagenes/Menudependencia/EstrategiadeSeguridad.jpg"
-                                CommandArgument="Estrategia"
-                                OnCommand="Imagen_Click" class="img-responsive img-thumbnail opacar" />
-                            <%--<h3 class="fw-bold titulo">Estrategia Interinstitucional</h3>--%>
-                        </div>
+        <div class="titulo-overlay">
+            DGPVI
+        </div>
 
+    </div>
 
-                     
-                    </div>
+    <!-- Estrategia -->
+    <div class="col-md-8 col-sm-8 text-center contenedor">
 
+        <asp:ImageButton ID="ImageButton4"
+            runat="server"
+            ImageUrl="~/Imagenes/Menudependencia/IMG_ESTRATEGIA.jpg"
+            CommandArgument="Estrategia"
+            OnCommand="Imagen_Click"
+            CssClass="img-responsive img-thumbnail img-estrategia opacar" />
 
+    </div>
+
+</div>
                   
-
                     <div class="row ex1">
                     </div>
-
-
 
                 </div>
 

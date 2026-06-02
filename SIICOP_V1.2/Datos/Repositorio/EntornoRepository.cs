@@ -24,7 +24,7 @@ namespace SIICOP_V1._2.Datos.Repositorio
             catch (Exception ex)
             {
 
-                throw new Exception("Error al obtener entorn", ex);
+                throw new Exception("Error al obtener entorno", ex);
             }
 
         }

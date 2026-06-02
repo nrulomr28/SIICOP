@@ -828,9 +828,7 @@ namespace SIICOP_V1._2.VistasReportes
                     int currentPage = GvRedesPazCap.PageIndex + 1;
                     // Actualiza el Label control con la �gina actual.
                     pageLabel.Text = "Página " + currentPage.ToString() + " de " + GvRedesPazCap.PageCount.ToString();
-
                 }
-
 
             }
             catch

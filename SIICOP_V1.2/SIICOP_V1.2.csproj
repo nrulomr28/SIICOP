@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.SqlServer.Types.170.1000.7\build\net472\Microsoft.SqlServer.Types.props" Condition="Exists('..\packages\Microsoft.SqlServer.Types.170.1000.7\build\net472\Microsoft.SqlServer.Types.props')" />
-  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\EntityFramework.6.5.2\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.2\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -50,6 +49,9 @@
     <Reference Include="AjaxControlToolkit, Version=20.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
       <HintPath>..\packages\AjaxControlToolkit.20.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
     </Reference>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="AspNet.ScriptManager.bootstrap, Version=5.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AspNet.ScriptManager.bootstrap.5.2.3\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
     </Reference>
@@ -57,13 +59,16 @@
       <HintPath>..\packages\AspNet.ScriptManager.jQuery.3.7.1\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.5.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.5.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="EPPlus, Version=4.1.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.4.1.1\lib\net40\EPPlus.dll</HintPath>
+    <Reference Include="EPPlus, Version=8.6.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.8.6.0\lib\net462\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus.Interfaces, Version=8.4.0.0, Culture=neutral, PublicKeyToken=a694d7f3b0907a61, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.Interfaces.8.4.0\lib\net462\EPPlus.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="ExcelLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelLibrary.1.2011.7.31\lib\ExcelLibrary.dll</HintPath>
@@ -74,7 +79,22 @@
     <Reference Include="Microsoft.AspNet.EntityDataSource, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.EntityDataSource.6.0.0\lib\net40\Microsoft.AspNet.EntityDataSource.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.FriendlyUrls, Version=1.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.Cryptography, Version=10.0.0.8, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Cryptography.10.0.8\lib\net462\Microsoft.Bcl.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.3.0.1\lib\netstandard2.0\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1652.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
     </Reference>
@@ -93,6 +113,12 @@
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1652.0\lib\net40\Microsoft.ReportViewer.WebForms.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ScriptManager.MSAjax, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.MSAjax.5.0.0\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.WebForms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.WebForms.5.0.0\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.SqlServer.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=23ec7fc2d6eaa4a5, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.Server.1.0.0\lib\net46\Microsoft.SqlServer.Server.dll</HintPath>
     </Reference>
@@ -105,19 +131,46 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Formats.Asn1, Version=10.0.0.8, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Formats.Asn1.10.0.8\lib\net462\System.Formats.Asn1.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.6.1\lib\net462\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Xml, Version=10.0.0.8, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Xml.10.0.8\lib\net462\System.Security.Cryptography.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Web.Providers.1.0\lib\System.Web.Providers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -125,43 +178,16 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="Microsoft.ScriptManager.MSAjax">
-      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.MSAjax.5.0.0\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.ScriptManager.WebForms">
-      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.WebForms.5.0.0\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="WebGrease">
-      <Private>True</Private>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
-    <Reference Include="Antlr3.Runtime">
-      <Private>True</Private>
-      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.FriendlyUrls">
-      <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="About.aspx" />
     <Content Include="Bienvenido_C4.aspx" />
     <Content Include="Bienvenido_CEPREVIDE.aspx" />
     <Content Include="Bienvenido_CVcMyCPC.aspx" />
-    <Content Include="Bienvenido_DGPRS.aspx" />
+    <Content Include="Bienvenido_DGRS.aspx" />
     <Content Include="Bienvenido_DGTSV.aspx" />
     <Content Include="Captura\Atencion_Empresarial.aspx" />
     <Content Include="Captura\CapturaReporteActividades.aspx" />
@@ -176,7 +202,7 @@
     <Content Include="Captura\Captura_Dependencias.aspx" />
     <Content Include="Captura\Construccion_Cultura_Incluyente.aspx" />
     <Content Include="Captura\CVcMyCPC\Reporte_Actividades_SESCESP.aspx" />
-    <Content Include="Captura\DGPRS\Actividades_DGPRS.aspx" />
+    <Content Include="Captura\DGRS\Actividades_DGRS.aspx" />
     <Content Include="Captura\DGTSV\Ficha_idetificacion_diaria.aspx" />
     <Content Include="Captura\Atencion_Integral.aspx" />
     <Content Include="Captura\Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx" />
@@ -187,7 +213,6 @@
     <Content Include="Captura\Redes_vecinales.aspx" />
     <Content Include="Captura\Prevención_de_la_Violencia_por_Razones_de_Género.aspx" />
     <Content Include="Captura\Enlace_con_el_Sector_Empresarial.aspx" />
-    <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -1812,6 +1837,10 @@
       <LastGenOutput>SIICOB.cs</LastGenOutput>
     </Content>
     <Content Include="Default2.aspx" />
+    <Content Include="Error\Error404.aspx" />
+    <Content Include="Error\Error500.aspx" />
+    <Content Include="Error\ErrorAcceso.aspx" />
+    <Content Include="Error\ErrorGeneral.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\fontawesome-free\less\brands.less" />
@@ -1911,15 +1940,15 @@
     <Content Include="Imagenes\Banner\CVcMyCPC\Pines\Enlace.png" />
     <Content Include="Imagenes\Banner\CVcMyCPC\Pines\VinculacionI.png" />
     <Content Include="Imagenes\Banner\Deporte_y_Cultura.jpg" />
-    <Content Include="Imagenes\Banner\DGPRS\Iconos\Clases.png" />
-    <Content Include="Imagenes\Banner\DGPRS\Iconos\Ejercicios.png" />
-    <Content Include="Imagenes\Banner\DGPRS\Iconos\IMotivacionalpx.png" />
-    <Content Include="Imagenes\Banner\DGPRS\Impulsando_prevencion_educa.jpg" />
-    <Content Include="Imagenes\Banner\DGPRS\Motivando_reinsercion_social.jpg" />
-    <Content Include="Imagenes\Banner\DGPRS\Pines\Clases.png" />
-    <Content Include="Imagenes\Banner\DGPRS\Pines\Ejercicios.png" />
-    <Content Include="Imagenes\Banner\DGPRS\Pines\Motivacional.png" />
-    <Content Include="Imagenes\Banner\DGPRS\prevencion_atraves_info.jpg" />
+    <Content Include="Imagenes\Banner\DGRS\Iconos\Clases.png" />
+    <Content Include="Imagenes\Banner\DGRS\Iconos\Ejercicios.png" />
+    <Content Include="Imagenes\Banner\DGRS\Iconos\IMotivacionalpx.png" />
+    <Content Include="Imagenes\Banner\DGRS\Impulsando_prevencion_educa.jpg" />
+    <Content Include="Imagenes\Banner\DGRS\Motivando_reinsercion_social.jpg" />
+    <Content Include="Imagenes\Banner\DGRS\Pines\Clases.png" />
+    <Content Include="Imagenes\Banner\DGRS\Pines\Ejercicios.png" />
+    <Content Include="Imagenes\Banner\DGRS\Pines\Motivacional.png" />
+    <Content Include="Imagenes\Banner\DGRS\prevencion_atraves_info.jpg" />
     <Content Include="Imagenes\Banner\DGTSV\Banner_DGTSV.jpg" />
     <Content Include="Imagenes\Banner\DGTSV\Icono\Íconos_120px.png" />
     <Content Include="Imagenes\Banner\DGTSV\Icono\Íconos_64px.png" />
@@ -1934,7 +1963,7 @@
     <Content Include="Imagenes\data-entry.png" />
     <Content Include="Imagenes\EscuelaSegura.png" />
     <Content Include="Imagenes\file_add.png" />
-    <Content Include="Imagenes\Foros y Ferias.png" />
+    <Content Include="Imagenes\ForosFerias.png" />
     <Content Include="Imagenes\ImgMaster\logo_veracruz.png" />
     <Content Include="Imagenes\ImgMaster\ssp.png" />
     <Content Include="Imagenes\ImgMaster\veracruz_orgullo.png" />
@@ -1950,7 +1979,8 @@
     <Content Include="Imagenes\Menudependencia\DGTV.png" />
     <Content Include="Imagenes\Menudependencia\DGVI.png" />
     <Content Include="Imagenes\Menudependencia\Estrategia.jpg" />
-    <Content Include="Imagenes\Menudependencia\EstrategiadeSeguridad.jpg" />
+    <Content Include="Imagenes\Menudependencia\IMG_ESTRATEGIA.jpg" />
+    <Content Include="Imagenes\Menudependencia\IMG_ATNCAUSAS.png" />
     <Content Include="Imagenes\Menudependencia\PE_1.png" />
     <Content Include="Imagenes\Menudependencia\PE_2.png" />
     <Content Include="Imagenes\Menudependencia\SESCESP.png" />
@@ -2053,6 +2083,7 @@
     <Content Include="SysAdmin\Calendar.aspx" />
     <Content Include="SysAdmin\ControlRoles.aspx" />
     <Content Include="SysAdmin\ControlUser.aspx" />
+    <Content Include="SysAdmin\ErrorLog.aspx" />
     <Content Include="SysAdmin\Nuevo_Usuario.aspx" />
     <Content Include="SysAdmin\Cambiar_Contrasena.aspx" />
     <Content Include="TotalAccionesBeneficiados.aspx" />
@@ -2077,17 +2108,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Bundle.config" />
-    <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="About.aspx.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="About.aspx.designer.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Bienvenido_C4.aspx.cs">
       <DependentUpon>Bienvenido_C4.aspx</DependentUpon>
@@ -2110,12 +2133,12 @@
     <Compile Include="Bienvenido_CVcMyCPC.aspx.designer.cs">
       <DependentUpon>Bienvenido_CVcMyCPC.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Bienvenido_DGPRS.aspx.cs">
-      <DependentUpon>Bienvenido_DGPRS.aspx</DependentUpon>
+    <Compile Include="Bienvenido_DGRS.aspx.cs">
+      <DependentUpon>Bienvenido_DGRS.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Bienvenido_DGPRS.aspx.designer.cs">
-      <DependentUpon>Bienvenido_DGPRS.aspx</DependentUpon>
+    <Compile Include="Bienvenido_DGRS.aspx.designer.cs">
+      <DependentUpon>Bienvenido_DGRS.aspx</DependentUpon>
     </Compile>
     <Compile Include="Bienvenido_DGTSV.aspx.cs">
       <DependentUpon>Bienvenido_DGTSV.aspx</DependentUpon>
@@ -2215,12 +2238,12 @@
     <Compile Include="Captura\CVcMyCPC\Reporte_Actividades_SESCESP.aspx.designer.cs">
       <DependentUpon>Reporte_Actividades_SESCESP.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Captura\DGPRS\Actividades_DGPRS.aspx.cs">
-      <DependentUpon>Actividades_DGPRS.aspx</DependentUpon>
+    <Compile Include="Captura\DGRS\Actividades_DGRS.aspx.cs">
+      <DependentUpon>Actividades_DGRS.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Captura\DGPRS\Actividades_DGPRS.aspx.designer.cs">
-      <DependentUpon>Actividades_DGPRS.aspx</DependentUpon>
+    <Compile Include="Captura\DGRS\Actividades_DGRS.aspx.designer.cs">
+      <DependentUpon>Actividades_DGRS.aspx</DependentUpon>
     </Compile>
     <Compile Include="Captura\DGTSV\Ficha_idetificacion_diaria.aspx.cs">
       <DependentUpon>Ficha_idetificacion_diaria.aspx</DependentUpon>
@@ -2292,16 +2315,15 @@
     <Compile Include="Captura\Enlace_con_el_Sector_Empresarial.aspx.designer.cs">
       <DependentUpon>Enlace_con_el_Sector_Empresarial.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Contact.aspx.cs">
-      <DependentUpon>Contact.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Contact.aspx.designer.cs">
-      <DependentUpon>Contact.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Datos\Applications.cs">
-      <DependentUpon>SIICOB.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Clases\DTOs\MunicipioDto.cs" />
+    <Compile Include="Clases\DTOs\ProgramaDto.cs" />
+    <Compile Include="Clases\Helpers\ErrorLogger.cs" />
+    <Compile Include="Clases\Helpers\SessionHelper.cs" />
+    <Compile Include="Clases\Repositories\CatalogoRepository.cs" />
+    <Compile Include="Clases\Repositories\ProgramaRepository.cs" />
+    <Compile Include="Clases\Repositories\ReporteRepository.cs" />
+    <Compile Include="Clases\Services\CatalogoService.cs" />
+    <Compile Include="Clases\Services\ReporteService.cs" />
     <Compile Include="Datos\Cat_Acciones.cs">
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>
@@ -2338,9 +2360,6 @@
     <Compile Include="Datos\Localidades.cs">
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Datos\Memberships.cs">
-      <DependentUpon>SIICOB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Datos\Municipios.cs">
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>
@@ -2359,9 +2378,6 @@
     <Compile Include="Datos\Repositorio\ProgramaRepository.cs" />
     <Compile Include="Datos\Repositorio\ReporteRepository.cs" />
     <Compile Include="Datos\Repositorio\TipoRepository.cs" />
-    <Compile Include="Datos\Roles.cs">
-      <DependentUpon>SIICOB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Datos\Sessions.cs">
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>
@@ -2384,9 +2400,6 @@
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>
     <Compile Include="Datos\sp_helpdiagrams_Result.cs">
-      <DependentUpon>SIICOB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Datos\sysdiagrams.cs">
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>
     <Compile Include="Datos\tbAuditoria.cs">
@@ -2455,9 +2468,6 @@
     <Compile Include="Datos\tc_zona.cs">
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Datos\Users.cs">
-      <DependentUpon>SIICOB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Datos\vw_Indicadores_Acciones.cs">
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>
@@ -2497,6 +2507,34 @@
     </Compile>
     <Compile Include="Default2.aspx.designer.cs">
       <DependentUpon>Default2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Error\Error404.aspx.cs">
+      <DependentUpon>Error404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error\Error404.aspx.designer.cs">
+      <DependentUpon>Error404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Error\Error500.aspx.cs">
+      <DependentUpon>Error500.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error\Error500.aspx.designer.cs">
+      <DependentUpon>Error500.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Error\ErrorAcceso.aspx.cs">
+      <DependentUpon>ErrorAcceso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error\ErrorAcceso.aspx.designer.cs">
+      <DependentUpon>ErrorAcceso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Error\ErrorGeneral.aspx.cs">
+      <DependentUpon>ErrorGeneral.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error\ErrorGeneral.aspx.designer.cs">
+      <DependentUpon>ErrorGeneral.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -2668,6 +2706,13 @@
     </Compile>
     <Compile Include="SysAdmin\ControlUser.aspx.designer.cs">
       <DependentUpon>ControlUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysAdmin\ErrorLog.aspx.cs">
+      <DependentUpon>ErrorLog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysAdmin\ErrorLog.aspx.designer.cs">
+      <DependentUpon>ErrorLog.aspx</DependentUpon>
     </Compile>
     <Compile Include="SysAdmin\Nuevo_Usuario.aspx.cs">
       <DependentUpon>Nuevo_Usuario.aspx</DependentUpon>
@@ -2848,6 +2893,7 @@
     <Content Include="Datos\SIICOB.edmx.diagram">
       <DependentUpon>SIICOB.edmx</DependentUpon>
     </Content>
+    <Content Include="Policia_en_tu_colonia\Web.config" />
     <Content Include="Content\bootstrap.rtl.min.css.map" />
     <Content Include="Content\bootstrap.rtl.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
@@ -2865,7 +2911,6 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="packages.config" />
-    <Content Include="Policia_en_tu_colonia\Web.config" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Scripts\Web.config" />
@@ -2881,6 +2926,7 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.1.min.map" />
+    <Content Include="Site.Mobile.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2918,16 +2964,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.SqlServer.Types.170.1000.7\build\net472\Microsoft.SqlServer.Types.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.SqlServer.Types.170.1000.7\build\net472\Microsoft.SqlServer.Types.props'))" />
-  </Target>
-  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -2935,4 +2971,17 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.2\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.2\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.2\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.2\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.SqlServer.Types.170.1000.7\build\net472\Microsoft.SqlServer.Types.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.SqlServer.Types.170.1000.7\build\net472\Microsoft.SqlServer.Types.props'))" />
+    <Error Condition="!Exists('..\packages\System.ValueTuple.4.6.2\build\net471\System.ValueTuple.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.ValueTuple.4.6.2\build\net471\System.ValueTuple.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.5.2\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.2\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Import Project="..\packages\System.ValueTuple.4.6.2\build\net471\System.ValueTuple.targets" Condition="Exists('..\packages\System.ValueTuple.4.6.2\build\net471\System.ValueTuple.targets')" />
 </Project>

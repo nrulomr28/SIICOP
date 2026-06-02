@@ -4,23 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="13d2a1ab26f042bd9db230d717eb3350" Name="Diagram1" ZoomLevel="93">
-        <EntityTypeShape EntityType="SIICOPModel.Applications" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+      <Diagram DiagramId="13d2a1ab26f042bd9db230d717eb3350" Name="Diagram1" ZoomLevel="116">
         <EntityTypeShape EntityType="SIICOPModel.Cat_Acciones" Width="1.5" PointX="7.5" PointY="44.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.Cat_area" Width="1.5" PointX="0.75" PointY="31.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.Cat_Delegacion" Width="1.5" PointX="3" PointY="43.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.Cat_Dependencias" Width="1.5" PointX="0.75" PointY="34.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.Cat_Region" Width="1.5" PointX="0.75" PointY="37.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.Cat_SubAcciones" Width="1.5" PointX="9.75" PointY="45.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SIICOPModel.cat_Zona_Estado" Width="1.5" PointX="3" PointY="48.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SIICOPModel.Localidades" Width="1.5" PointX="7.5" PointY="48.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SIICOPModel.Memberships" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIICOPModel.cat_Zona_Estado" Width="1.5" PointX="7.875" PointY="48" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIICOPModel.Localidades" Width="1.5" PointX="3.5" PointY="48.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.Personales" Width="1.5" PointX="3" PointY="32.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.PersonalUsuario" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.Profiles" Width="1.5" PointX="7.5" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SIICOPModel.Roles" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.Sessions" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SIICOPModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.tb_AcionesBeneficiadosXmes" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.tb_Agenda" Width="1.5" PointX="9.75" PointY="39.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.tb_Beneficiados_dgprs" Width="1.5" PointX="9.75" PointY="48.625" IsExpanded="true" />
@@ -39,7 +35,6 @@
         <EntityTypeShape EntityType="SIICOPModel.tcProblematicaMunicipal" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.tcProblematicaSeguridad" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.tcProblematicaVialidad" Width="1.5" PointX="7.5" PointY="32" IsExpanded="true" />
-        <EntityTypeShape EntityType="SIICOPModel.Users" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.vw_Indicadores_Acciones" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.vw_Indicadores_Acciones_Convenios" Width="1.5" PointX="2.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.vw_Indicadores_Beneficiados" Width="1.5" PointX="4.75" PointY="13.75" IsExpanded="true" />
@@ -51,9 +46,6 @@
         <EntityTypeShape EntityType="SIICOPModel.wv_reportesGeneralExcel" Width="1.5" PointX="6.75" PointY="17.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.Wv_TotalAcciones" Width="1.5" PointX="11.75" PointY="17.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.Wv_TotalSubprogramas" Width="1.5" PointX="13.75" PointY="17.75" IsExpanded="true" />
-        <AssociationConnector Association="SIICOPModel.MembershipApplication" ManuallyRouted="false" />
-        <AssociationConnector Association="SIICOPModel.RoleApplication" ManuallyRouted="false" />
-        <AssociationConnector Association="SIICOPModel.UserApplication" ManuallyRouted="false" />
         <AssociationConnector Association="SIICOPModel.FK_Cat_Acciones_TB_subprograma" ManuallyRouted="false" />
         <AssociationConnector Association="SIICOPModel.FK_Cat_SubAcciones_Cat_Acciones" ManuallyRouted="false" />
         <AssociationConnector Association="SIICOPModel.FK_tb_Agenda_Cat_Acciones" ManuallyRouted="false" />
@@ -62,9 +54,7 @@
         <AssociationConnector Association="SIICOPModel.FK_Personales_Cat_Dependencias" ManuallyRouted="false" />
         <AssociationConnector Association="SIICOPModel.FK_tb_programa_Cat_Dependencias" ManuallyRouted="false" />
         <AssociationConnector Association="SIICOPModel.FK_Personales_Cat_Region" ManuallyRouted="false" />
-        <AssociationConnector Association="SIICOPModel.MembershipUser" ManuallyRouted="false" />
         <AssociationConnector Association="SIICOPModel.FK_tc_PoliciaenTucolonia_Personales" ManuallyRouted="false" />
-        <AssociationConnector Association="SIICOPModel.UserProfile" ManuallyRouted="false" />
         <AssociationConnector Association="SIICOPModel.FK_tb_Agenda_tb_programa" ManuallyRouted="false" />
         <AssociationConnector Association="SIICOPModel.FK_tb_Agenda_TB_subprograma" ManuallyRouted="false" />
         <AssociationConnector Association="SIICOPModel.FK_TB_subprograma_tb_programa" ManuallyRouted="false" />
@@ -73,9 +63,8 @@
         <AssociationConnector Association="SIICOPModel.FK_tcProblematicaVialidad_tc_PoliciaenTucolonia" ManuallyRouted="false" />
         <AssociationConnector Association="SIICOPModel.FK_tc_Seguimiento_tcPoliciaColonias" ManuallyRouted="false" />
         <AssociationConnector Association="SIICOPModel.FK_tcPoliciaColonias_tcCuadrantes" ManuallyRouted="false" />
-        <AssociationConnector Association="SIICOPModel.UsersInRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="SIICOPModel.tc_zona" Width="1.5" PointX="0.75" PointY="18.75" />
-        <EntityTypeShape EntityType="SIICOPModel.Municipios" Width="1.5" PointX="5.25" PointY="49.125" />
+        <EntityTypeShape EntityType="SIICOPModel.Municipios" Width="1.5" PointX="1.375" PointY="46.75" />
         <AssociationConnector Association="SIICOPModel.FK_Municipios_Cat_Delegacion" />
         <AssociationConnector Association="SIICOPModel.FK_Municipios_cat_Zona_Estado" />
         <AssociationConnector Association="SIICOPModel.FK_Localidades_Municipios" />

@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 // conjunto de atributos. Cambie los valores de estos atributos para modificar la información
 // asociada a un ensamblado.
 [assembly: AssemblyTitle("SIICOP_V1._2")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Sistema Integral de Control Operativo de Planteles")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SIICOP_V1._2")]
+[assembly: AssemblyCompany("Gobierno del Estado de Veracruz")]
+[assembly: AssemblyProduct("SIICOP")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -30,5 +30,5 @@ using System.Runtime.InteropServices;
 //
 // Puede especificar todos los valores o usar los valores predeterminados de número de compilación y de revisión 
 // mediante el carácter '*', como se muestra a continuación:
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("2.0.0.0")]
+[assembly: AssemblyFileVersion("2.0.2606.1")]

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Bienvenidos DGPRS" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Bienvenido_DGPRS.aspx.cs" Inherits="SIICOP_V1._2.Bienvenido_DGPRS" %>
+﻿<%@ Page Title="Bienvenidos DGRS" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Bienvenido_DGRS.aspx.cs" Inherits="SIICOP_V1._2.Bienvenido_DGRS" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <script src="<%= ResolveUrl("~/Scripts/sweetalert2.all.js") %>" type="text/javascript"></script>
     <link href="Content/BotonoesCargaTrabajo.css" rel="stylesheet" />
@@ -33,14 +33,14 @@
             </ol>
             <div class="carousel-inner" role="listbox">
              <div class="item active">
-                    <img class="second-slide" runat="server" id="img2" src="~/Imagenes/Banner/DGPRS/Impulsando_prevencion_educa.jpg" alt="Second slide">
+                    <img class="second-slide" runat="server" id="img2" src="~/Imagenes/Banner/DGRS/Impulsando_prevencion_educa.jpg" alt="Second slide">
                     <div class="container">
                         <div class="carousel-caption">
                         </div>
                     </div>
                 </div>
                 <div class="item">
-                    <img class="third-slide" runat="server" id="img3" src="~/Imagenes/Banner/DGPRS/Motivando_reinsercion_social.jpg" alt="Third slide">
+                    <img class="third-slide" runat="server" id="img3" src="~/Imagenes/Banner/DGRS/Motivando_reinsercion_social.jpg" alt="Third slide">
                     <div class="container">
                         <div class="carousel-caption">
                         </div>
@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="item">
-                    <img class="third-slide" runat="server" id="img4" src="~/Imagenes/Banner/DGPRS/prevencion_atraves_info.jpg" alt="Third slide">
+                    <img class="third-slide" runat="server" id="img4" src="~/Imagenes/Banner/DGRS/prevencion_atraves_info.jpg" alt="Third slide">
                     <div class="container">
                         <div class="carousel-caption">
                         </div>

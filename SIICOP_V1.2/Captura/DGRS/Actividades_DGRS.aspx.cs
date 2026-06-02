@@ -165,7 +165,7 @@ namespace SIICOP_V1._2.Captura.DGPRS
                     Session.Abandon();
                     FormsAuthentication.RedirectToLoginPage();
                     FormsAuthentication.SignOut();
-                    Response.Redirect("~/Inicio/Inicio.aspx");
+                    Response.Redirect("~/Inicio/Inicio_Sesion.aspx");
                 }
             }
         }

@@ -27,7 +27,6 @@ namespace SIICOP_V1._2.Datos
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Applications> Applications { get; set; }
         public virtual DbSet<Cat_Acciones> Cat_Acciones { get; set; }
         public virtual DbSet<Cat_area> Cat_area { get; set; }
         public virtual DbSet<Cat_Delegacion> Cat_Delegacion { get; set; }
@@ -36,13 +35,10 @@ namespace SIICOP_V1._2.Datos
         public virtual DbSet<Cat_SubAcciones> Cat_SubAcciones { get; set; }
         public virtual DbSet<cat_Zona_Estado> cat_Zona_Estado { get; set; }
         public virtual DbSet<Localidades> Localidades { get; set; }
-        public virtual DbSet<Memberships> Memberships { get; set; }
         public virtual DbSet<Personales> Personales { get; set; }
         public virtual DbSet<PersonalUsuario> PersonalUsuario { get; set; }
         public virtual DbSet<Profiles> Profiles { get; set; }
-        public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Sessions> Sessions { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tb_AcionesBeneficiadosXmes> tb_AcionesBeneficiadosXmes { get; set; }
         public virtual DbSet<tb_Agenda> tb_Agenda { get; set; }
         public virtual DbSet<tb_Beneficiados_dgprs> tb_Beneficiados_dgprs { get; set; }
@@ -61,7 +57,6 @@ namespace SIICOP_V1._2.Datos
         public virtual DbSet<tcProblematicaMunicipal> tcProblematicaMunicipal { get; set; }
         public virtual DbSet<tcProblematicaSeguridad> tcProblematicaSeguridad { get; set; }
         public virtual DbSet<tcProblematicaVialidad> tcProblematicaVialidad { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<vw_Indicadores_Acciones> vw_Indicadores_Acciones { get; set; }
         public virtual DbSet<vw_Indicadores_Acciones_Convenios> vw_Indicadores_Acciones_Convenios { get; set; }
         public virtual DbSet<vw_Indicadores_Beneficiados> vw_Indicadores_Beneficiados { get; set; }

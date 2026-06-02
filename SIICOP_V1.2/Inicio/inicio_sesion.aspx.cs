@@ -54,9 +54,9 @@ namespace SIICOP_V1._2.Inicio
                     {
                         Response.Redirect("~/Bienvenido_CVcMyCPC.aspx");
                     }
-                    if (depen == "DGPRS")
+                    if (depen == "DGRS")
                     {
-                        Response.Redirect("~/Bienvenido_DGPRS.aspx");
+                        Response.Redirect("~/Bienvenido_DGRS.aspx");
                     }
                 }
             }

@@ -57,10 +57,7 @@ namespace SIICOP_V1._2.Datos.Repositorio
 
                 throw new Exception("Error al obtener coordinacion", ex);
             }
-
         }
-
-
        
 
         public List<Municipios> ObtenerMunicipios()
@@ -77,10 +74,7 @@ namespace SIICOP_V1._2.Datos.Repositorio
                 // aquí puedes loguear
                 throw new Exception("Error al obtener municipios", ex);
             }
-
         }
-
-
 
         public bool? ObtenerMunicipiosPrioridad(int municipioId)
         {
@@ -156,12 +150,7 @@ namespace SIICOP_V1._2.Datos.Repositorio
             {
                 throw new Exception("Error al obtener la prioridad de la colonia", ex);
             }
-
         }
-
-
-
-
 
         public List<Localidades> ObtenerLocalidades(int municipioId)
         {
@@ -182,10 +171,5 @@ namespace SIICOP_V1._2.Datos.Repositorio
             }
 
         }
-
-
-
     }
-
-
 }

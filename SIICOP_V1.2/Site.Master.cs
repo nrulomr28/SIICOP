@@ -57,7 +57,7 @@ namespace SIICOP_V1._2
                 {
                     MembershipUser myObject = System.Web.Security.Membership.GetUser();
                     string UserID = myObject.ProviderUserKey.ToString();
-                    //lblRol.Text = " ROL: " + System.Web.Security.Roles.GetRolesForUser(Context.User.Identity.Name)[0];
+                    
                 }
                 catch (Exception ex) { ex.GetBaseException(); }
 

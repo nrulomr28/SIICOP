@@ -211,13 +211,11 @@
                                                             <li runat="server"><a href="~/VistasReportes/C4/Vista_de_datos_de_actividades_C4.aspx" runat="server" target="_blank"><b>C4</b></a></li>
                                                             <li runat="server"><a href="~/VistasReportes/CVcMyCPC/Vista_de_datos_SESCESP.aspx" runat="server" target="_blank"><b>SESCESP</b></a></li>
                                                             <li><a href="~/VistasReportes/CEPREVIDE/Vista_de_datos_de_actividades_CEPREVIDE.aspx" runat="server" target="_blank"><b>CEPREVIDE</b></a></li>
-                                                            <li><a href="~/VistasReportes/DGPRS/Vista_de_datos_DGPRS.aspx" runat="server"><b>DGPRS</b></a></li>
-                                                            <%--<li><a href="~/SysAdmin/ControlUser.aspx" runat="server"><b>Control de usuarios</b></a></li>--%>
+                                                            <li><a href="~/VistasReportes/DGPRS/Vista_de_datos_DGPRS.aspx" runat="server"><b>DGPRS</b></a></li>                                                            
                                                         </ul>
                                                     </li>
                                                     <li runat="server"><a href="~/Graficas/Productividad.aspx" runat="server"><b>Productividad</b>&nbsp;<i class="fas fa-chart-bar"></i></a></li>
-                                                 <%--   <li runat="server"><a href="~/Graficas/SIAGEE.aspx" runat="server"><b>Visualizador geográfico</b>&nbsp;<span class="fas fa-chart-pie" aria-hidden="true"></span></a></li>
-                                                 <li><a runat="server" href="~/Graficas/Monitoreo_de_acciones.aspx">Informe de resultados</a></li>   --%>
+                                                 
                                                     <li class="dropdown">
                                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><b>Ajustes</b> <b class="caret"></b>&nbsp;<span class="fas fa-cogs" aria-hidden="true"></span></a>
                                                         <ul class="dropdown-menu" style="font-size: 11px;">
@@ -235,8 +233,7 @@
                                         <RoleGroups>
                                             <asp:RoleGroup Roles="Visualizador">
                                                 <ContentTemplate>
-                                                    <li runat="server"><a href="~/Graficas/Productividad.aspx" runat="server"><b>Productividad</b>&nbsp;<i class="fas fa-chart-bar"></i></a></li>
-                                              <%--      <li runat="server"><a href="~/Graficas/SIAGEE.aspx" runat="server"><b>Visualizador geográfico</b>&nbsp;<span class="fas fa-chart-pie" aria-hidden="true"></span></a></li>   --%>
+                                                    <li runat="server"><a href="~/Graficas/Productividad.aspx" runat="server"><b>Productividad</b>&nbsp;<i class="fas fa-chart-bar"></i></a></li>                                              
                                                  <li><a runat="server" href="~/Graficas/Monitoreo_de_acciones.aspx">Informe de resultados</a></li>
                                                 </ContentTemplate>
                                             </asp:RoleGroup>
@@ -291,8 +288,7 @@
                                                     <li class="dropdown">
                                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><b>Capturas</b> <b class="caret"></b>&nbsp;<span class="far fa-edit" aria-hidden="true"></span></a>
                                                         <ul class="dropdown-menu" style="font-size: 11px;">
-                                                            <li runat="server"><a href="~/Captura/Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx" runat="server" target="_blank"><b>Redes Veracruzanas </b></a></li>
-                                                            <%--<li runat="server"><a href="~/Captura/Construccion_Cultura_Incluyente.aspx" runat="server" target="_blank"><b>Inclusión de personas en situación de vunerabilidad</b></a></li>--%>
+                                                            <li runat="server"><a href="~/Captura/Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx" runat="server" target="_blank"><b>Redes Veracruzanas </b></a></li>                                                            
                                                         </ul>
                                                     </li>
                                                     <li runat="server"><a href="~/VistasReportes/vista_Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx" runat="server"><b>Vista de datos</b>&nbsp;<span class="fa fa-list-ul" aria-hidden="true"></span></a></li>
@@ -311,7 +307,6 @@
                                                             <li runat="server"><a href="~/Captura/Enlace_con_el_Sector_Empresarial.aspx" runat="server" target="_blank"><b>Sector Empresarial</b></a></li>
                                                         </ul>
                                                     </li>
-                                                    <%--   <li runat="server"><a href="~/Captura/Enlace_con_el_Sector_Empresarial.aspx" runat="server"><b>Captura de datos</b>&nbsp;<span class="far fa-edit" aria-hidden="true"></span></a></li>--%>
                                                     <li runat="server"><a href="~/VistasReportes/Info_Enlace_con_el_Sector_Empresarial.aspx" runat="server"><b>Vista de datos Empresarial</b>&nbsp;<span class="fa fa-list-ul" aria-hidden="true"></span></a></li>
                                                     <li runat="server"><a href="~/VistasReportes/Vista_Prevencion_de_la_Violencia_por_Razones_de_Genero.aspx" runat="server"><b>Vista de datos Violencia a la Mujer</b>&nbsp;<span class="fa fa-list-ul" aria-hidden="true"></span></a></li>
 

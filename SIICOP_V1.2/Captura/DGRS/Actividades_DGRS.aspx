@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Actividades DGPRS" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Actividades_DGPRS.aspx.cs" Inherits="SIICOP_V1._2.Captura.DGPRS.Actividades_DGPRS" %>
+﻿<%@ Page Title="Actividades DGRS" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Actividades_DGRS.aspx.cs" Inherits="SIICOP_V1._2.Captura.DGPRS.Actividades_DGPRS" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <link runat="server" href="../../Content/styleFormularios.css" rel="stylesheet" type="text/css" />
      <br />

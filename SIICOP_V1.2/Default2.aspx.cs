@@ -18,7 +18,8 @@ namespace SIICOP_V1._2
         //int año = 2020;
         int año = DateTime.Now.Year;
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {            
+
             if (!IsPostBack)
             {
                 string sUsuarioActual = System.Web.Security.Membership.GetUser().UserName;

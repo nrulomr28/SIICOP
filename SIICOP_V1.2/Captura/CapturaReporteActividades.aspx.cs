@@ -29,8 +29,6 @@ namespace SIICOP_V1._2.Captura
         string sUsuarioActual;
         public enum AccionExpediente { Creacion, Edicion, Visualizacion }
 
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -110,7 +108,7 @@ namespace SIICOP_V1._2.Captura
         {
             lblPrograma.Text = string.Empty;
             MostrarPrograma(programasID);
-            determinarAccion();
+            DeterminarAccion();
         }
 
         private void ConfigurarPaneles()
@@ -147,7 +145,7 @@ namespace SIICOP_V1._2.Captura
 
 
         #region ***** DETERMINACION DE LA ACCIÓN DEL REPOTE YA SEA CREAR NUEVO O EDITAR Y LLENAR REPORTE
-        protected void determinarAccion()
+        protected void DeterminarAccion()
         {
 
             if (Session["idExpediente_Accion"] != null && Session["AccionExpediente"] != null)
@@ -197,7 +195,7 @@ namespace SIICOP_V1._2.Captura
 
 
         #endregion
-        protected void ddlAmbito_SelectedIndexChanged(object sender, EventArgs e)
+        protected void DdlAmbito_SelectedIndexChanged(object sender, EventArgs e)
         {
             Ambitos();
         }
@@ -233,7 +231,7 @@ namespace SIICOP_V1._2.Captura
 
 
         #region BOTON PARA SALIR DEL REPORTE
-        protected void btnSalir_Click(object sender, EventArgs e)
+        protected void BtnSalir_Click(object sender, EventArgs e)
         {
             this.Session["idExpediente_Accion"] = (object)null;
             this.Session["AccionExpediente"] = (object)null;
@@ -246,20 +244,15 @@ namespace SIICOP_V1._2.Captura
 
         #region *** BOTON PARA GUARDAR LA ACTIVIDAD
 
-
-
-
-
-        protected void lnkbtnGuardar_Click(object sender, EventArgs e)
+        protected void LnkbtnGuardar_Click(object sender, EventArgs e)
         {
 
             programasID = Session["programasID"] != null ? (int?)Session["programasID"] : null;
 
-
             bool valido = true;
             string textoValidacion = "<ul>";
             int r = 0;
-            int tamanoarchivo;
+            //int tamanoarchivo;
             string fileName = "";
             string contentType = "";
             bool actividadfueradefecha = Convert.ToBoolean(Session["actividades_fuera_tiempo"]);
@@ -276,11 +269,9 @@ namespace SIICOP_V1._2.Captura
                         textoValidacion += "<li>Solo permite subir imagenes, en formatos PNG Y JPG</li>";
                         valido = false;
                     }
-
-
                     r += postedFile.ContentLength;
                 }
-                //tamanoarchivo = Server.HtmlDecode.postedFile.ContentLength;
+                
                 if (r >= 3000000)
                 {
                     textoValidacion += "<li>El tamaño maximo permitido por archivo es de " + "3 " + " MB</li>";
@@ -314,11 +305,7 @@ namespace SIICOP_V1._2.Captura
                 textoValidacion += "<li>Por favor ingresar una dirección correcta no cuenta con coordenadas para hacer el punteo </ li>";
                 valido = false;
             }
-            //if (string.IsNullOrEmpty(route.Value) || string.IsNullOrEmpty(entrecalle1.Value) || string.IsNullOrEmpty(entrecalle2.Value) || string.IsNullOrEmpty(colony.Value))
-            //{
-            //    textoValidacion += "<li>Es obligatorio la calle, las entre calles y la colonia </ li>";
-            //    valido = false;
-            //}
+
             if (ddlMuNICIPIO.SelectedIndex == 0 || string.IsNullOrEmpty(ddlMuNICIPIO.SelectedValue))
             {
                 textoValidacion += "<li>Es obligatorio el municipio</li>";
@@ -330,24 +317,7 @@ namespace SIICOP_V1._2.Captura
                 valido = false;
             }
 
-            //if (ddlsubprograma.SelectedIndex == 0 || string.IsNullOrEmpty(ddlsubprograma.SelectedValue))
-            //{
-            //    textoValidacion += "<li>Es obligatorio el Subprograma</li>";
-            //    valido = false;
-            //}
-
-            //if (ddlAcciones.SelectedIndex == 0 || string.IsNullOrEmpty(ddlAcciones.SelectedValue))
-            //{
-            //    textoValidacion += "<li>Es obligatorio Seleccioner una acción</li>";
-            //    valido = false;
-            //}
-            //if (string.IsNullOrEmpty(txtnombreescuela.Text))
-            //{
-            //    textoValidacion += "<li>Es obligatorio ingresar la esceula donde ralizaron la actividad </li>";
-            //    txtnombreescuela.Focus();
-            //    txtnombreescuela.BorderColor = System.Drawing.Color.Red;
-            //    valido = false;
-            //}
+            
             if (string.IsNullOrEmpty(txtnombrecontacto.Text))
             {
                 textoValidacion += "<li>Es obligatorio ingresar el nombre del contacto </li>";
@@ -376,8 +346,6 @@ namespace SIICOP_V1._2.Captura
                 lblValidacionesTxt.Text = textoValidacion;
 
                 //ScriptManager.RegisterStartupScript(this, GetType(), "CamposObligatorios", "CamposObligatorios('" + textoValidacion  + "');", true);
-
-
 
                 ScriptManager.RegisterStartupScript(this, GetType(), "openModalvalidador", "openModalvalidador();", true);
                 ScriptManager.RegisterStartupScript(this, GetType(), "sumar", "sumar();", true);
@@ -493,9 +461,7 @@ namespace SIICOP_V1._2.Captura
                     NuevoRegistros.TotalMujeresAtendidas = new int?(Mujeres);
                     NuevoRegistros.total_atendidos = new int?(TotalA);
 
-                    //    NuevoRegistros.total_atendidos = new int?(this.txtatendiosH.Text == string.Empty ? 0 : Convert.ToInt32(this.txtatendiosH.Text));
-
-                    // NuevoRegistros.total_atendidos = new int?(this.txtatendiosH.Text == string.Empty ? 0 : Convert.ToInt32(this.txtatendiosH.Text));
+                    
                     NuevoRegistros.capturaAPP = "NO";
                     NuevoRegistros.DelegacionOcoonurbacion = coordinacion;
                     ctx.tb_Reporte_Diario.Add(NuevoRegistros);
@@ -506,19 +472,15 @@ namespace SIICOP_V1._2.Captura
                         Latitud = this.lati.Value,
                         Longitud = this.longi.Value,
                         calle = this.route.Value == string.Empty ? "" : this.route.Value,
-                        coloni = this.colony.Value == string.Empty ? "" : this.colony.Value,
-                        //  Entrecalle1 = this.entrecalle1.Value == string.Empty ? "" : this.entrecalle1.Value,
-                        //  Entrecalle2 = this.entrecalle2.Value == string.Empty ? "" : this.entrecalle2.Value,
-                        //    RegionID = new int?(this.ddlRegion.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlRegion.SelectedValue)),
-                        //   DelegacionID = new int?(this.ddlDelegacion.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlDelegacion.SelectedValue)),
+                        coloni = this.colony.Value == string.Empty ? "" : this.colony.Value,                        
                         MunicipioID = new int?(this.ddlMuNICIPIO.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlMuNICIPIO.SelectedValue)),
                         LocalidadID = new int?(Convert.ToInt32(this.ddlLocalidad.SelectedValue)),
 
-                        mpio_prioritario = ddlMunicipioPrioritario.SelectedValue == "1" ? true : false,
-                        mpio_homicidio = ddlMunicipioHomicidio.SelectedValue == "1" ? true : false,
-                        col_prioritario = ddlColoniaPrioritaria.SelectedValue == "1" ? true : false,
-                        mpio_indigena = ddlMunicipioIndigena.SelectedValue == "1" ? true : false,
-                        programa_istmo = ddlProgramaIstmo.SelectedValue == "1" ? true : false
+                        mpio_prioritario = ddlMunicipioPrioritario.SelectedValue == "1",
+                        mpio_homicidio = ddlMunicipioHomicidio.SelectedValue == "1",
+                        col_prioritario = ddlColoniaPrioritaria.SelectedValue == "1",
+                        mpio_indigena = ddlMunicipioIndigena.SelectedValue == "1",
+                        programa_istmo = ddlProgramaIstmo.SelectedValue == "1"
 
                     });
 
@@ -550,7 +512,7 @@ namespace SIICOP_V1._2.Captura
                     nuevoDatosGral.no_acciones_dgpvi = int.TryParse(ddlNoaccionesDGPVI.SelectedValue, out var val) ? val : (int?)null;
                     nuevoDatosGral.no_acciones_institucionales = int.TryParse(ddlNoAccionesInstitucionales.SelectedValue, out var val2) ? val2 : (int?)null;
                     nuevoDatosGral.total_acciones_ravi = txtTotalAccionesRAVI.Text == "" ? (int?)null : Convert.ToInt32(txtTotalAccionesRAVI.Text);
-                    nuevoDatosGral.ofrecieron_segurichat = ddlOfrecioSegurichat.SelectedValue == "1" ? true : false;
+                    nuevoDatosGral.ofrecieron_segurichat = ddlOfrecioSegurichat.SelectedValue == "1";
                     nuevoDatosGral.segurichat = this.txtSegurichat.Text == string.Empty ? "" : this.txtSegurichat.Text.ToUpper();
 
 
@@ -600,8 +562,7 @@ namespace SIICOP_V1._2.Captura
                             }
                         }
                     }
-                    ctx.SaveChanges();
-                    //ScriptManager.RegisterStartupScript((Page)this, this.GetType(), "redirect", "alert('Datos guardados con exito'); window.location='" + this.Request.ApplicationPath + "TotalAccionesBeneficiados.aspx';", true);
+                    ctx.SaveChanges();                    
                     claveF = "RVCPZ-DVI";
                     Guid id = IdResumenGuid;
                     var folio = ctx.sp_folio_actividad(id, claveF, extencion).ToString();
@@ -620,23 +581,6 @@ namespace SIICOP_V1._2.Captura
 
             }
         }
-
-
-        //private bool ValidateVideoExtension(string nombreImg)
-        //{
-        //    FileInfo info = new FileInfo(nombreImg);
-        //    switch (info.Extension.ToLower())
-        //    {
-        //        case ".png":
-        //        case ".PNG":
-        //        case ".jpg":
-        //        case ".JPG":
-        //        case ".bmp":
-        //            return true;
-        //        default:
-        //            return false;
-        //    }
-        // }
 
         #endregion
 
@@ -913,9 +857,6 @@ namespace SIICOP_V1._2.Captura
         #endregion
 
 
-
-
-
         private void CargarProgramas()
         {
             try
@@ -933,8 +874,8 @@ namespace SIICOP_V1._2.Captura
             catch (Exception ex)
             {
                 // Mostrar mensaje amigable
-                //lblError.Text = "Ocurrió un error al cargar municipios";
-                //lblError.Visible = true;
+                lblError.Text = "Ocurrió un error al cargar municipios";
+                lblError.Visible = true;
 
                 // (opcional) log
                 System.Diagnostics.Debug.WriteLine(ex.Message);
