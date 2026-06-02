@@ -71,14 +71,12 @@ namespace SIICOP_V1._2.Captura
                         }
                         break;
                     case (int)AccionExpediente.Edicion:
-                       // ddlDelegacion.DataBind();
+                  
                         ddlMuNICIPIO.DataBind();
                         ddlsubprograma.DataBind();
-                   //   expediente_Edicion_Visualizacion();
+                  
                         break;
-                  //case (int)AccionExpediente.Visualizacion:
-                   //    expediente_Edicion_Visualizacion();
-                   //    break;
+                  
                 }
             }
             else

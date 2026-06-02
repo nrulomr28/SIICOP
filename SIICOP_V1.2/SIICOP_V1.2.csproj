@@ -2315,13 +2315,16 @@
     <Compile Include="Captura\Enlace_con_el_Sector_Empresarial.aspx.designer.cs">
       <DependentUpon>Enlace_con_el_Sector_Empresarial.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Clases\DTOs\ComboItemDTO.cs" />
     <Compile Include="Clases\DTOs\MunicipioDto.cs" />
     <Compile Include="Clases\DTOs\ProgramaDto.cs" />
     <Compile Include="Clases\Helpers\ErrorLogger.cs" />
     <Compile Include="Clases\Helpers\SessionHelper.cs" />
+    <Compile Include="Clases\Repositories\CatalogoReporteActividadesRepository.cs" />
     <Compile Include="Clases\Repositories\CatalogoRepository.cs" />
     <Compile Include="Clases\Repositories\ProgramaRepository.cs" />
     <Compile Include="Clases\Repositories\ReporteRepository.cs" />
+    <Compile Include="Clases\Services\CatalogoReporteActividadesService.cs" />
     <Compile Include="Clases\Services\CatalogoService.cs" />
     <Compile Include="Clases\Services\ReporteService.cs" />
     <Compile Include="Datos\Cat_Acciones.cs">

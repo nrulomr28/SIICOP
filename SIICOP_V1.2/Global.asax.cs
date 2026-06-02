@@ -1,4 +1,4 @@
-﻿using SIICOP_V1._2.Clases;
+﻿using SIICOP_V1._2.Clases.Helpers;
 using System;
 using System.Web;
 using System.Web.Optimization;

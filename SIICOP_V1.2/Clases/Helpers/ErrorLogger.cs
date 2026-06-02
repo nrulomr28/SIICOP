@@ -4,7 +4,7 @@ using System.Data.EntityClient;
 using System.Data.SqlClient;
 using System.Web;
 
-namespace SIICOP_V1._2.Clases
+namespace SIICOP_V1._2.Clases.Helpers
 {
     public static class ErrorLogger
     {

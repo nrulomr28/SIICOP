@@ -106,7 +106,6 @@
 
                                             </div>
 
-
                                             <div id="PanelCoordinacion" runat="server">
 
                                                 <div class="row gy-3 gx-4">

@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿
+using SIICOP_V1._2.Clases.Services;
 using SIICOP_V1._2.Datos;
 using SIICOP_V1._2.Datos.Repositorio;
 using System;
@@ -28,6 +29,8 @@ namespace SIICOP_V1._2.Captura
         SIICOPEntities ctx = new SIICOPEntities();
         string sUsuarioActual;
         public enum AccionExpediente { Creacion, Edicion, Visualizacion }
+
+        private readonly CatalogoService _catalogoService = new CatalogoService();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -126,20 +129,11 @@ namespace SIICOP_V1._2.Captura
             Context.ApplicationInstance.CompleteRequest();
         }
 
-        protected void MostrarPrograma(int? programasID)
+        protected void MostrarPrograma(int? programaId)
         {
-            var query = from p in ctx.tb_programa
-                        where p.programasID == programasID
-                        select p.NombrePrograma;
-
-            if (query != null)
-            {
-                lblPrograma.Text = "" + ctx.tb_programa.Where(p => p.programasID == programasID).Select(p => p.NombrePrograma).FirstOrDefault();
-            }
-            else
-            {
-                lblPrograma.Text = "";
-            }
+            lblPrograma.Text =
+                            _catalogoService.ObtenerNombrePrograma(programaId)
+                            ?? string.Empty;
 
         }
 
@@ -195,7 +189,7 @@ namespace SIICOP_V1._2.Captura
 
 
         #endregion
-        protected void DdlAmbito_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlAmbito_SelectedIndexChanged(object sender, EventArgs e)
         {
             Ambitos();
         }
@@ -231,7 +225,7 @@ namespace SIICOP_V1._2.Captura
 
 
         #region BOTON PARA SALIR DEL REPORTE
-        protected void BtnSalir_Click(object sender, EventArgs e)
+        protected void btnSalir_Click(object sender, EventArgs e)
         {
             this.Session["idExpediente_Accion"] = (object)null;
             this.Session["AccionExpediente"] = (object)null;
@@ -244,7 +238,7 @@ namespace SIICOP_V1._2.Captura
 
         #region *** BOTON PARA GUARDAR LA ACTIVIDAD
 
-        protected void LnkbtnGuardar_Click(object sender, EventArgs e)
+        protected void lnkbtnGuardar_Click(object sender, EventArgs e)
         {
 
             programasID = Session["programasID"] != null ? (int?)Session["programasID"] : null;

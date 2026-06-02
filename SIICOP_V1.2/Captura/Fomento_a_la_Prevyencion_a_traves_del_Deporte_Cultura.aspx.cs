@@ -84,7 +84,7 @@ namespace SIICOP_V1._2.Captura
             }
             else
             {
-                //salidaBandeja();
+                
             }
         }
         protected void expediente_Llenar(Guid idExpediente)
