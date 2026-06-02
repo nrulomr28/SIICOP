@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CapturaReporteActividades.aspx.cs" Inherits="SIICOP_V1._2.Captura.CapturaReporteActividades" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteV2.Master" AutoEventWireup="true" CodeBehind="CapturaReporteActividades.aspx.cs" Inherits="SIICOP_V1._2.Captura.CapturaReporteActividades" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">

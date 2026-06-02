@@ -110,6 +110,11 @@
 
 <form runat="server">
 
+      <asp:ScriptManager
+        ID="ScriptManager1"
+        runat="server"
+        EnableScriptGlobalization="true" />
+
 <div class="container-fluid topbar">
 
     <div class="row h-100">
