@@ -1,4 +1,4 @@
-﻿using SIICOP_V1._2.Captura;
+﻿
 using SIICOP_V1._2.Captura.DGTSV;
 using System;
 using System.Web.UI.WebControls;
@@ -26,22 +26,28 @@ namespace SIICOP_V1._2.MenuProgramas
 
         protected void Imagen_Click(object sender, CommandEventArgs e)
         {
+            string opcion = e.CommandArgument?.ToString();
 
-            if (e.CommandArgument.Equals("Estrategia"))
+            if (opcion == "Estrategia")
             {
-                
-                Session["ImagenSeleccionada"] = e.CommandArgument;
+                Session["ImagenSeleccionada"] = true;
                 Session["programasID"] = null;
-                Response.Redirect("~/Captura/CapturaReporteActividades.aspx", true);
-            }
-            else
-            {
-              
-                Session["ImagenSeleccionada"] = null;
-                Response.Redirect("~/MenuProgramas/Principal.aspx", true);
+
+                Response.Redirect(
+                    "~/Captura/CapturaReporteActividades.aspx",
+                    true);
+
+                return;
             }
 
+            Session["ImagenSeleccionada"] = null;
+
+            Response.Redirect(
+                "~/MenuProgramas/Principal.aspx",
+                true);
         }
+
+
 
     }
 

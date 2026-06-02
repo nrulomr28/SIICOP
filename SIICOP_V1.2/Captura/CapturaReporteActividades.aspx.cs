@@ -42,21 +42,15 @@ namespace SIICOP_V1._2.Captura
                 return;
             }
 
-            programasID = Convert.ToInt32(Session["programasID"]);
-
-            if (programasID == 0)
+            if (!SesionValida())
             {
-                PanelCoordinacion.Visible = false;
-                PanelMunicipiosPrioritarios.Visible = false;
-                PanelRAVI.Visible = false;
+                Response.Redirect("~/MenuProgramas/Principal.aspx");
+                return;
+            }
 
-            }
-            else
-            {
-                PanelCoordinacion.Visible = true;
-                PanelMunicipiosPrioritarios.Visible = true;
-                PanelRAVI.Visible = true;
-            }
+            programasID = (int)Session["programasID"];
+
+            ConfigurarPanelesPrograma();
 
 
             if (!IsPostBack)
@@ -94,6 +88,14 @@ namespace SIICOP_V1._2.Captura
 
         }
 
+        private void ConfigurarPanelesPrograma()
+        {
+            bool visible = programasID != 0;
+
+            PanelCoordinacion.Visible = visible;
+            PanelMunicipiosPrioritarios.Visible = visible;
+            PanelRAVI.Visible = visible;
+        }
 
 
         private bool UsuarioTieneAcceso()
@@ -116,11 +118,14 @@ namespace SIICOP_V1._2.Captura
 
         private void ConfigurarPaneles()
         {
+            bool esEstrategia =
+                Session["ImagenSeleccionada"] != null;
 
-            bool imagenSeleccioneda = Session["ImagenSeleccionada"] != null;
-            PanelAccionImplentada.Visible = imagenSeleccioneda;
-            PanelListados.Visible = !imagenSeleccioneda;
+            PanelAccionImplentada.Visible =
+                esEstrategia;
 
+            PanelListados.Visible =
+                !esEstrategia;
         }
 
         private void RedirigirInicio()
@@ -563,7 +568,7 @@ namespace SIICOP_V1._2.Captura
                     ScriptManager.RegisterStartupScript(this, GetType(), "openGuardadoExito", "openGuardadoExito();", true);
                     Session["actividades_fuera_tiempo"] = null;
 
-                    Session["ImagenSeleccioneda"] = null;
+                    Session["ImagenSeleccionada"] = null;
                     Session["programasID"] = null;
 
                 }
