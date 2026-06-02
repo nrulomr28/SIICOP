@@ -3,11 +3,11 @@ using SIICOP_V1._2.Clases.Services;
 using SIICOP_V1._2.Datos;
 using SIICOP_V1._2.Datos.Repositorio;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -243,343 +243,437 @@ namespace SIICOP_V1._2.Captura
 
         #region *** BOTON PARA GUARDAR LA ACTIVIDAD
 
-        protected void lnkbtnGuardar_Click(object sender, EventArgs e)
+        protected void lnkbtnGuardar_Click(
+    object sender,
+    EventArgs e)
         {
+            programasID = Session["programasID"] as int?;
 
-            programasID = Session["programasID"] != null ? (int?)Session["programasID"] : null;
+            string errores;
 
-            bool valido = true;
-            string textoValidacion = "<ul>";
-            int r = 0;
-            //int tamanoarchivo;
+            if (!ValidarFormulario(out errores))
+            {
+                MostrarErrores(errores);
+                return;
+            }
+
+            GuardarReporte();
+        }
+
+        private void GuardarReporte()
+        {
+            nino = 0;
+            nina = 0;
+            padresH = 0;
+            padresM = 0;
+            TotalA = 0;
+
             string fileName = "";
             string contentType = "";
-            bool actividadfueradefecha = Convert.ToBoolean(Session["actividades_fuera_tiempo"]);
+
+            var usuario = ObtenerUsuarioActual();
+
+            personalID = usuario.Personalid;
+
+            string coordinacion =
+                ObtenerCoordinacion(
+                    Convert.ToInt32(
+                        usuario.cat_areaidarea));
+
+            try
+            {
+                string claveF = "";
+                Guid IdResumenGuid = Guid.NewGuid();
+                Session["idresumen"] = IdResumenGuid;
+                tb_Reporte_Diario NuevoRegistros = new tb_Reporte_Diario();
+                NuevoRegistros.idResumenDiario = IdResumenGuid;
+                NuevoRegistros.Personalid = personalID;
+                NuevoRegistros.fechacaptura = DateTime.Now;
+                NuevoRegistros.fecha = new DateTime?(Convert.ToDateTime(this.txtFecha.Text));
+
+
+                NuevoRegistros.coordinador = string.IsNullOrWhiteSpace(txtCoordinador.Text) ? "" : txtCoordinador.Text.Trim();
+
+                NuevoRegistros.idzona = int.TryParse(ddlZona.SelectedValue, out var valor) ? valor : (int?)null;
+
+                NuevoRegistros.idcoordinacion = int.TryParse(ddlCoordinacion.SelectedValue, out var coord) ? (int?)coord : null;
+
+
+                NuevoRegistros.programasID = programasID;
+                NuevoRegistros.subprogramaId = new int?(this.ddlsubprograma.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlsubprograma.SelectedValue));
+
+                // NuevoRegistros.AccionesID = new int?(this.ddlAcciones.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlAcciones.SelectedValue));
+                NuevoRegistros.AccionesID = string.IsNullOrEmpty(ddlAcciones.SelectedValue) ? 0 : Convert.ToInt32(ddlAcciones.SelectedValue);
+
+
+                NuevoRegistros.accion_implementada = txtAccionImplementada.Text == string.Empty ? "" : txtAccionImplementada.Text.ToUpper();
+
+                NuevoRegistros.descripcion_actividad = this.txtDescripcionActividad.Text == string.Empty ? "" : this.txtDescripcionActividad.Text.ToUpper();
+                NuevoRegistros.personal_atendio_actividad = this.txtpersonal_atendio_actividad.Text == string.Empty ? "" : this.txtpersonal_atendio_actividad.Text.ToUpper();
+                NuevoRegistros.seguimiento = this.txtSeguimiento.Text == string.Empty ? "" : this.txtSeguimiento.Text.ToUpper();
+
+                int MODE = Convert.ToInt32(ddlAmbito.SelectedValue);
+
+                int Hombres = 0;
+                int Mujeres = 0;
+
+
+                if (this.txnina.Value != "")
+                    nina = int.Parse(this.txnina.Value, (IFormatProvider)CultureInfo.InvariantCulture);
+                if (this.txnino.Value != "")
+                    nino = int.Parse(this.txnino.Value, (IFormatProvider)CultureInfo.InvariantCulture);
+                if (this.txhombres.Value != "")
+                    padresH = int.Parse(this.txhombres.Value, (IFormatProvider)CultureInfo.InvariantCulture);
+                if (this.txmujeres.Value != "")
+                    padresM = int.Parse(this.txmujeres.Value, (IFormatProvider)CultureInfo.InvariantCulture);
+
+
+                Hombres = nino + padresH;
+                Mujeres = nina + padresM;
+                TotalA = Mujeres + Hombres;
+                NuevoRegistros.TotalHombresAtendidos = new int?(Hombres);
+                NuevoRegistros.TotalMujeresAtendidas = new int?(Mujeres);
+                NuevoRegistros.total_atendidos = new int?(TotalA);
+
+
+                NuevoRegistros.capturaAPP = "NO";
+                NuevoRegistros.DelegacionOcoonurbacion = coordinacion;
+                ctx.tb_Reporte_Diario.Add(NuevoRegistros);
+
+                ctx.tb_DireccionReporte.Add(new tb_DireccionReporte()
+                {
+                    idResumenDiario = IdResumenGuid,
+                    Latitud = this.lati.Value,
+                    Longitud = this.longi.Value,
+                    calle = this.route.Value == string.Empty ? "" : this.route.Value,
+                    coloni = this.colony.Value == string.Empty ? "" : this.colony.Value,
+                    MunicipioID = new int?(this.ddlMuNICIPIO.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlMuNICIPIO.SelectedValue)),
+                    LocalidadID = new int?(Convert.ToInt32(this.ddlLocalidad.SelectedValue)),
+
+                    mpio_prioritario = ddlMunicipioPrioritario.SelectedValue == "1",
+                    mpio_homicidio = ddlMunicipioHomicidio.SelectedValue == "1",
+                    col_prioritario = ddlColoniaPrioritaria.SelectedValue == "1",
+                    mpio_indigena = ddlMunicipioIndigena.SelectedValue == "1",
+                    programa_istmo = ddlProgramaIstmo.SelectedValue == "1"
+
+                });
+
+                TB_DatosGralReporte nuevoDatosGral = new TB_DatosGralReporte();
+                nuevoDatosGral.idResumenDiario = IdResumenGuid;
+                nuevoDatosGral.NombreLugar_Escuela = this.ddlnombreescuela.SelectedValue;
+                nuevoDatosGral.NombreContacto = this.txtnombrecontacto.Text == string.Empty ? "" : this.txtnombrecontacto.Text.ToUpper();
+                nuevoDatosGral.telcel = this.txtTelefono.Text;
+                nuevoDatosGral.ClavePlantel = this.txtclave.Text == string.Empty ? "" : this.txtclave.Text.ToUpper();
+                nuevoDatosGral.Nivel = this.ddlNivel.SelectedValue;
+                nuevoDatosGral.Ambito = Convert.ToInt32(ddlAmbito.SelectedValue);
+                nuevoDatosGral.EjeId = Convert.ToInt32(ddlEje.SelectedValue);
+
+
+                nuevoDatosGral.niñas = new int?(this.txnina.Value == "" ? 0 : Convert.ToInt32(this.txnina.Value));
+                nuevoDatosGral.niños = new int?(this.txnino.Value == "" ? 0 : Convert.ToInt32(this.txnino.Value));
+                nuevoDatosGral.hombres = new int?(this.txhombres.Value == "" ? 0 : Convert.ToInt32(this.txhombres.Value));
+                nuevoDatosGral.mujeres = new int?(this.txmujeres.Value == "" ? 0 : Convert.ToInt32(this.txmujeres.Value));
+
+
+                nuevoDatosGral.plantel_diagnosticado = ddlPlantelDiagnosticado.SelectedValue == "1" ? true : false;
+                nuevoDatosGral.inst_participantes = this.txtInstitucionesParticipantes.Text == string.Empty ? "" : this.txtInstitucionesParticipantes.Text.ToUpper();
+                nuevoDatosGral.tema_impartido = this.txtTemaImpartido.Text == string.Empty ? "" : this.txtTemaImpartido.Text.ToUpper();
+                nuevoDatosGral.casos_ravi = ddlCasosRavi.SelectedValue == "1" ? true : false;
+                nuevoDatosGral.nocasos_ravi = new int?(this.txtNoCasosRavi.Text == "" ? 0 : Convert.ToInt32(this.txtNoCasosRavi.Text));
+                nuevoDatosGral.dirigido = this.txtDirigidoA.Text == string.Empty ? "" : this.txtDirigidoA.Text.ToUpper();
+                nuevoDatosGral.giro_comercios = this.txtGiroComercio.Text == string.Empty ? "" : this.txtGiroComercio.Text.ToUpper();
+
+                nuevoDatosGral.no_acciones_dgpvi = int.TryParse(ddlNoaccionesDGPVI.SelectedValue, out var val) ? val : (int?)null;
+                nuevoDatosGral.no_acciones_institucionales = int.TryParse(ddlNoAccionesInstitucionales.SelectedValue, out var val2) ? val2 : (int?)null;
+                nuevoDatosGral.total_acciones_ravi = txtTotalAccionesRAVI.Text == "" ? (int?)null : Convert.ToInt32(txtTotalAccionesRAVI.Text);
+                nuevoDatosGral.ofrecieron_segurichat = ddlOfrecioSegurichat.SelectedValue == "1";
+                nuevoDatosGral.segurichat = this.txtSegurichat.Text == string.Empty ? "" : this.txtSegurichat.Text.ToUpper();
+
+
+
+                ctx.TB_DatosGralReporte.Add(nuevoDatosGral);
+
+                tbAuditoria audit = new tbAuditoria()
+                {
+                    auditoriaGuid = new Guid?(Guid.NewGuid()),
+                    fecha = new DateTime?(DateTime.Now),
+                    area = this.txtArea.Text,
+                    idTipomodificacion = new int?(1),
+                    PagModificacion = this.Page.Title,
+                    Descripcion = "Nuevo registro de nuevas capturas",
+                    usuario = this.txtResponsable.Text,
+                    IdABC = Convert.ToString(IdResumenGuid)
+                };
+                ctx.tbAuditoria.Add(audit);
+                string extencion = "";
+                if (this.file.HasFile)
+                {
+                    foreach (HttpPostedFile postedFile in file.PostedFiles)
+                    {
+                        fileName = Path.GetFileName(postedFile.FileName);
+                        contentType = postedFile.ContentType;
+                        extencion = System.IO.Path.GetExtension(postedFile.FileName);
+                        using (Stream fs = postedFile.InputStream)
+                        {
+                            using (BinaryReader br = new BinaryReader(fs))
+                            {
+                                byte[] bytes = br.ReadBytes((Int32)fs.Length);
+                                string base64String = Convert.ToBase64String(bytes);
+                                {
+                                    tb_fotografia foto = new tb_fotografia()
+                                    {
+                                        contentType = contentType,
+                                        ImagenSubida = new DateTime?(DateTime.Now),
+                                        FileName = fileName,
+                                        ImgBase64 = base64String,
+                                        ImagenExtencion = extencion
+                                    };
+                                    foto.idResumenDiario = new Guid?(NuevoRegistros.idResumenDiario);
+                                    ctx.tb_fotografia.Add(foto);
+                                }
+
+                            }
+                        }
+                    }
+                }
+                ctx.SaveChanges();
+                claveF = "RVCPZ-DVI";
+                Guid id = IdResumenGuid;
+                var folio = ctx.sp_folio_actividad(id, claveF, extencion).ToString();
+                ScriptManager.RegisterStartupScript(this, GetType(), "openGuardadoExito", "openGuardadoExito();", true);
+                Session["actividades_fuera_tiempo"] = null;
+
+                Session["ImagenSeleccionada"] = null;
+                Session["programasID"] = null;
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(
+                    this,
+                    GetType(),
+                    "alertMessage",
+                    "alert('ERRO AL GUARDAR LOS DATOS')",
+                    true);
+            }
+        }
+
+        private bool ValidarFormulario(out string mensaje)
+        {
+            bool valido = true;
+            string textoValidacion = "<ul>";
+
+            int tamanoTotalArchivos = 0;
+
+            bool actividadFueraDeFecha =
+                Convert.ToBoolean(
+                    Session["actividades_fuera_tiempo"]);
+
             if (file.HasFile)
             {
-                foreach (HttpPostedFile postedFile in (IEnumerable<HttpPostedFile>)this.file.PostedFiles)
+                var validadorImagenes =
+                    new Validaciones.Imagenes();
+
+                foreach (HttpPostedFile archivo in file.PostedFiles)
                 {
-                    fileName = file.FileName;
-                    Validaciones.Imagenes vl = new Validaciones.Imagenes();
+                    string nombreArchivo =
+                        archivo.FileName;
 
-
-                    if (vl.ValidateVideoExtension(fileName) == false)
+                    if (!validadorImagenes
+                            .ValidateVideoExtension(
+                                nombreArchivo))
                     {
-                        textoValidacion += "<li>Solo permite subir imagenes, en formatos PNG Y JPG</li>";
+                        textoValidacion +=
+                            "<li>Solo permite subir imágenes en formato PNG o JPG</li>";
+
                         valido = false;
                     }
-                    r += postedFile.ContentLength;
+
+                    tamanoTotalArchivos +=
+                        archivo.ContentLength;
                 }
-                
-                if (r >= 3000000)
+
+                if (tamanoTotalArchivos >= 3000000)
                 {
-                    textoValidacion += "<li>El tamaño maximo permitido por archivo es de " + "3 " + " MB</li>";
+                    textoValidacion +=
+                        "<li>El tamaño máximo permitido por archivo es de 3 MB</li>";
+
                     valido = false;
                 }
             }
             else
             {
-                textoValidacion += "<li>Es obigatorio por lo menos 1 Imagen</li>";
+                textoValidacion +=
+                    "<li>Es obligatorio subir al menos una imagen</li>";
+
                 valido = false;
             }
 
-            if (actividadfueradefecha == true)
+            if (actividadFueraDeFecha)
             {
+                textoValidacion +=
+                    "<li>La actividad está fuera de tiempo. Debe registrarse dentro del mes en curso</li>";
 
-                textoValidacion += "<li>La actividad esta fuera de tiempo, si quieres guardar la actividad debe ser con el mes que esta en curso</li>";
                 txtFecha.Focus();
-                txtFecha.BorderColor = System.Drawing.Color.Red;
-                valido = false;
+                txtFecha.BorderColor =
+                    System.Drawing.Color.Red;
 
+                valido = false;
             }
-            if (string.IsNullOrEmpty(txtFecha.Text))
+
+            if (string.IsNullOrWhiteSpace(txtFecha.Text))
             {
-                textoValidacion += "<li>Es obligatorio la fecha del reporte</li>";
+                textoValidacion +=
+                    "<li>Es obligatorio capturar la fecha del reporte</li>";
+
                 txtFecha.Focus();
-                txtFecha.BorderColor = System.Drawing.Color.Red;
-                valido = false;
-            }
-            if (string.IsNullOrEmpty(lati.Value) || string.IsNullOrEmpty(longi.Value))
-            {
-                textoValidacion += "<li>Por favor ingresar una dirección correcta no cuenta con coordenadas para hacer el punteo </ li>";
+                txtFecha.BorderColor =
+                    System.Drawing.Color.Red;
+
                 valido = false;
             }
 
-            if (ddlMuNICIPIO.SelectedIndex == 0 || string.IsNullOrEmpty(ddlMuNICIPIO.SelectedValue))
+            if (string.IsNullOrWhiteSpace(lati.Value) ||
+                string.IsNullOrWhiteSpace(longi.Value))
             {
-                textoValidacion += "<li>Es obligatorio el municipio</li>";
-                valido = false;
-            }
-            if (ddlLocalidad.SelectedIndex == 0 || string.IsNullOrEmpty(ddlLocalidad.SelectedValue))
-            {
-                textoValidacion += "<li>Es obligatorio la localidad</li>";
+                textoValidacion +=
+                    "<li>Debe capturar una dirección válida con coordenadas geográficas</li>";
+
                 valido = false;
             }
 
-            
-            if (string.IsNullOrEmpty(txtnombrecontacto.Text))
+            if (ddlMuNICIPIO.SelectedIndex == 0 ||
+                string.IsNullOrWhiteSpace(
+                    ddlMuNICIPIO.SelectedValue))
             {
-                textoValidacion += "<li>Es obligatorio ingresar el nombre del contacto </li>";
-                valido = false;
-            }
-            if (string.IsNullOrEmpty(txtTelefono.Text))
-            {
-                textoValidacion += "<li>Es obligatorio ingresar el numero del contacto </li>";
-                valido = false;
-            }
-            if (string.IsNullOrEmpty(txtDescripcionActividad.Text))
-            {
-                textoValidacion += "<li>Es obligatorio ingresar una descripción de la actividad </li>";
+                textoValidacion +=
+                    "<li>Es obligatorio seleccionar un municipio</li>";
+
                 valido = false;
             }
 
-            if (txtatendiosH.Text == "" || (txtatendiosM.Text == ""))
+            if (ddlLocalidad.SelectedIndex == 0 ||
+                string.IsNullOrWhiteSpace(
+                    ddlLocalidad.SelectedValue))
             {
-                textoValidacion += "<li>Es obligatorio ingresar los beneficiados </li>";
+                textoValidacion +=
+                    "<li>Es obligatorio seleccionar una localidad</li>";
+
+                valido = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(
+                    txtnombrecontacto.Text))
+            {
+                textoValidacion +=
+                    "<li>Es obligatorio ingresar el nombre del contacto</li>";
+
+                valido = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(
+                    txtTelefono.Text))
+            {
+                textoValidacion +=
+                    "<li>Es obligatorio ingresar el teléfono de contacto</li>";
+
+                valido = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(
+                    txtDescripcionActividad.Text))
+            {
+                textoValidacion +=
+                    "<li>Es obligatorio ingresar la descripción de la actividad</li>";
+
+                valido = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(
+                    txtatendiosH.Text) ||
+                string.IsNullOrWhiteSpace(
+                    txtatendiosM.Text))
+            {
+                textoValidacion +=
+                    "<li>Es obligatorio capturar los beneficiarios</li>";
+
                 valido = false;
             }
 
             if (!valido)
             {
                 textoValidacion += "</ul>";
-                lblValidacionesTxt.Text = textoValidacion;
-
-                //ScriptManager.RegisterStartupScript(this, GetType(), "CamposObligatorios", "CamposObligatorios('" + textoValidacion  + "');", true);
-
-                ScriptManager.RegisterStartupScript(this, GetType(), "openModalvalidador", "openModalvalidador();", true);
-                ScriptManager.RegisterStartupScript(this, GetType(), "sumar", "sumar();", true);
-
             }
-            else
+
+            mensaje = textoValidacion;
+
+            return valido;
+        }
+
+
+        private void MostrarErrores(string mensaje)
+        {
+            lblValidacionesTxt.Text = mensaje;
+
+            ScriptManager.RegisterStartupScript(
+                this,
+                GetType(),
+                "openModalvalidador",
+                "openModalvalidador();",
+                true);
+
+            ScriptManager.RegisterStartupScript(
+                this,
+                GetType(),
+                "sumar",
+                "sumar();",
+                true);
+        }
+
+        private Personales ObtenerUsuarioActual()
+        {
+            string usuarioActual =
+                System.Web.Security
+                    .Membership
+                    .GetUser()
+                    .UserName;
+
+            return ctx.Personales
+                      .FirstOrDefault(x =>
+                            x.login == usuarioActual);
+        }
+
+        private string ObtenerCoordinacion(int area)
+        {
+            switch (area)
             {
-                int area;
-                string coordinacion;
-                nino = 0;
-                nina = 0;
-                padresH = 0;
-                padresM = 0;
-                TotalA = 0;
+                case 1022:
+                case 7:
+                case 4:
+                case 6:
+                case 8:
+                case 5:
+                case 3:
+                case 1023:
+                case 1025:
+                    return "CONURBACION XALAPA XX";
 
-                sUsuarioActual = System.Web.Security.Membership.GetUser().UserName;
-                var ID = ctx.Personales.Where(x => x.login == this.sUsuarioActual).FirstOrDefault();
-                personalID = ID.Personalid;
-                area = Convert.ToInt32(ID.cat_areaidarea);
+                case 1020:
+                    return "CONURBACION VERACRUZ XXIII";
 
-                if (area == 1022 || area == 7 || area == 4 || area == 6 || area == 8 || area == 5 || area == 3 || area == 1023 || area == 1025)
-                {
-                    coordinacion = "CONURBACION XALAPA XX";
-                }
-                else
-                {
-                    if (area == 1020)
-                    {
-                        coordinacion = "CONURBACION VERACRUZ XXIII";
+                case 1012:
+                    return "CONURBACION POZA RICA";
 
-                    }
-                    else
-                    {
-                        if (area == 1012)
-                        {
-                            coordinacion = "CONURBACION POZA RICA";
+                case 1011:
+                    return "COORDINACION CORDOBA";
 
-                        }
-                        else
-                        {
-                            if (area == 1011)
-                            {
-                                coordinacion = "COORDINACION CORDOBA";
+                case 1009:
+                    return "COORDINACION COATZACOALCOS";
 
-                            }
-                            else
-                            {
-                                if (area == 1009)
-                                {
-                                    coordinacion = "COORDINACION COATZACOALCOS";
-
-                                }
-                                else
-                                {
-                                    coordinacion = "ENLACES";
-                                }
-                            }
-                        }
-                    }
-                }
-                try
-                {
-                    string claveF = "";
-                    Guid IdResumenGuid = Guid.NewGuid();
-                    Session["idresumen"] = IdResumenGuid;
-                    tb_Reporte_Diario NuevoRegistros = new tb_Reporte_Diario();
-                    NuevoRegistros.idResumenDiario = IdResumenGuid;
-                    NuevoRegistros.Personalid = personalID;
-                    NuevoRegistros.fechacaptura = DateTime.Now;
-                    NuevoRegistros.fecha = new DateTime?(Convert.ToDateTime(this.txtFecha.Text));
-
-
-                    NuevoRegistros.coordinador = string.IsNullOrWhiteSpace(txtCoordinador.Text) ? "" : txtCoordinador.Text.Trim();
-
-                    NuevoRegistros.idzona = int.TryParse(ddlZona.SelectedValue, out var valor) ? valor : (int?)null;
-
-                    NuevoRegistros.idcoordinacion = int.TryParse(ddlCoordinacion.SelectedValue, out var coord) ? (int?)coord : null;
-
-
-                    NuevoRegistros.programasID = programasID;
-                    NuevoRegistros.subprogramaId = new int?(this.ddlsubprograma.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlsubprograma.SelectedValue));
-
-                    // NuevoRegistros.AccionesID = new int?(this.ddlAcciones.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlAcciones.SelectedValue));
-                    NuevoRegistros.AccionesID = string.IsNullOrEmpty(ddlAcciones.SelectedValue) ? 0 : Convert.ToInt32(ddlAcciones.SelectedValue);
-
-
-                    NuevoRegistros.accion_implementada = txtAccionImplementada.Text == string.Empty ? "" : txtAccionImplementada.Text.ToUpper();
-
-                    NuevoRegistros.descripcion_actividad = this.txtDescripcionActividad.Text == string.Empty ? "" : this.txtDescripcionActividad.Text.ToUpper();
-                    NuevoRegistros.personal_atendio_actividad = this.txtpersonal_atendio_actividad.Text == string.Empty ? "" : this.txtpersonal_atendio_actividad.Text.ToUpper();                    
-                    NuevoRegistros.seguimiento = this.txtSeguimiento.Text == string.Empty ? "" : this.txtSeguimiento.Text.ToUpper();
-
-                    int MODE = Convert.ToInt32(ddlAmbito.SelectedValue);
-
-                    int Hombres = 0;
-                    int Mujeres = 0;
-
-
-                    if (this.txnina.Value != "")
-                        nina = int.Parse(this.txnina.Value, (IFormatProvider)CultureInfo.InvariantCulture);
-                    if (this.txnino.Value != "")
-                        nino = int.Parse(this.txnino.Value, (IFormatProvider)CultureInfo.InvariantCulture);
-                    if (this.txhombres.Value != "")
-                        padresH = int.Parse(this.txhombres.Value, (IFormatProvider)CultureInfo.InvariantCulture);
-                    if (this.txmujeres.Value != "")
-                        padresM = int.Parse(this.txmujeres.Value, (IFormatProvider)CultureInfo.InvariantCulture);
-
-
-                    Hombres = nino + padresH;
-                    Mujeres = nina + padresM;
-                    TotalA = Mujeres + Hombres;
-                    NuevoRegistros.TotalHombresAtendidos = new int?(Hombres);
-                    NuevoRegistros.TotalMujeresAtendidas = new int?(Mujeres);
-                    NuevoRegistros.total_atendidos = new int?(TotalA);
-
-                    
-                    NuevoRegistros.capturaAPP = "NO";
-                    NuevoRegistros.DelegacionOcoonurbacion = coordinacion;
-                    ctx.tb_Reporte_Diario.Add(NuevoRegistros);
-
-                    ctx.tb_DireccionReporte.Add(new tb_DireccionReporte()
-                    {
-                        idResumenDiario = IdResumenGuid,
-                        Latitud = this.lati.Value,
-                        Longitud = this.longi.Value,
-                        calle = this.route.Value == string.Empty ? "" : this.route.Value,
-                        coloni = this.colony.Value == string.Empty ? "" : this.colony.Value,                        
-                        MunicipioID = new int?(this.ddlMuNICIPIO.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlMuNICIPIO.SelectedValue)),
-                        LocalidadID = new int?(Convert.ToInt32(this.ddlLocalidad.SelectedValue)),
-
-                        mpio_prioritario = ddlMunicipioPrioritario.SelectedValue == "1",
-                        mpio_homicidio = ddlMunicipioHomicidio.SelectedValue == "1",
-                        col_prioritario = ddlColoniaPrioritaria.SelectedValue == "1",
-                        mpio_indigena = ddlMunicipioIndigena.SelectedValue == "1",
-                        programa_istmo = ddlProgramaIstmo.SelectedValue == "1"
-
-                    });
-
-                    TB_DatosGralReporte nuevoDatosGral = new TB_DatosGralReporte();
-                    nuevoDatosGral.idResumenDiario = IdResumenGuid;
-                    nuevoDatosGral.NombreLugar_Escuela = this.ddlnombreescuela.SelectedValue;
-                    nuevoDatosGral.NombreContacto = this.txtnombrecontacto.Text == string.Empty ? "" : this.txtnombrecontacto.Text.ToUpper();
-                    nuevoDatosGral.telcel = this.txtTelefono.Text;
-                    nuevoDatosGral.ClavePlantel = this.txtclave.Text == string.Empty ? "" : this.txtclave.Text.ToUpper();
-                    nuevoDatosGral.Nivel = this.ddlNivel.SelectedValue;
-                    nuevoDatosGral.Ambito = Convert.ToInt32(ddlAmbito.SelectedValue);
-                    nuevoDatosGral.EjeId = Convert.ToInt32(ddlEje.SelectedValue);
-
-
-                    nuevoDatosGral.niñas = new int?(this.txnina.Value == "" ? 0 : Convert.ToInt32(this.txnina.Value));
-                    nuevoDatosGral.niños = new int?(this.txnino.Value == "" ? 0 : Convert.ToInt32(this.txnino.Value));
-                    nuevoDatosGral.hombres = new int?(this.txhombres.Value == "" ? 0 : Convert.ToInt32(this.txhombres.Value));
-                    nuevoDatosGral.mujeres = new int?(this.txmujeres.Value == "" ? 0 : Convert.ToInt32(this.txmujeres.Value));
-
-
-                    nuevoDatosGral.plantel_diagnosticado = ddlPlantelDiagnosticado.SelectedValue == "1" ? true : false;
-                    nuevoDatosGral.inst_participantes = this.txtInstitucionesParticipantes.Text == string.Empty ? "" : this.txtInstitucionesParticipantes.Text.ToUpper();
-                    nuevoDatosGral.tema_impartido = this.txtTemaImpartido.Text == string.Empty ? "" : this.txtTemaImpartido.Text.ToUpper();
-                    nuevoDatosGral.casos_ravi = ddlCasosRavi.SelectedValue == "1" ? true : false;
-                    nuevoDatosGral.nocasos_ravi = new int?(this.txtNoCasosRavi.Text == "" ? 0 : Convert.ToInt32(this.txtNoCasosRavi.Text));
-                    nuevoDatosGral.dirigido = this.txtDirigidoA.Text == string.Empty ? "" : this.txtDirigidoA.Text.ToUpper();
-                    nuevoDatosGral.giro_comercios = this.txtGiroComercio.Text == string.Empty ? "" : this.txtGiroComercio.Text.ToUpper();
-
-                    nuevoDatosGral.no_acciones_dgpvi = int.TryParse(ddlNoaccionesDGPVI.SelectedValue, out var val) ? val : (int?)null;
-                    nuevoDatosGral.no_acciones_institucionales = int.TryParse(ddlNoAccionesInstitucionales.SelectedValue, out var val2) ? val2 : (int?)null;
-                    nuevoDatosGral.total_acciones_ravi = txtTotalAccionesRAVI.Text == "" ? (int?)null : Convert.ToInt32(txtTotalAccionesRAVI.Text);
-                    nuevoDatosGral.ofrecieron_segurichat = ddlOfrecioSegurichat.SelectedValue == "1";
-                    nuevoDatosGral.segurichat = this.txtSegurichat.Text == string.Empty ? "" : this.txtSegurichat.Text.ToUpper();
-
-
-
-                    ctx.TB_DatosGralReporte.Add(nuevoDatosGral);
-
-                    tbAuditoria audit = new tbAuditoria()
-                    {
-                        auditoriaGuid = new Guid?(Guid.NewGuid()),
-                        fecha = new DateTime?(DateTime.Now),
-                        area = this.txtArea.Text,
-                        idTipomodificacion = new int?(1),
-                        PagModificacion = this.Page.Title,
-                        Descripcion = "Nuevo registro de nuevas capturas",
-                        usuario = this.txtResponsable.Text,
-                        IdABC = Convert.ToString(IdResumenGuid)
-                    };
-                    ctx.tbAuditoria.Add(audit);
-                    string extencion = "";
-                    if (this.file.HasFile)
-                    {
-                        foreach (HttpPostedFile postedFile in file.PostedFiles)
-                        {
-                            fileName = Path.GetFileName(postedFile.FileName);
-                            contentType = postedFile.ContentType;
-                            extencion = System.IO.Path.GetExtension(postedFile.FileName);
-                            using (Stream fs = postedFile.InputStream)
-                            {
-                                using (BinaryReader br = new BinaryReader(fs))
-                                {
-                                    byte[] bytes = br.ReadBytes((Int32)fs.Length);
-                                    string base64String = Convert.ToBase64String(bytes);
-                                    {
-                                        tb_fotografia foto = new tb_fotografia()
-                                        {
-                                            contentType = contentType,
-                                            ImagenSubida = new DateTime?(DateTime.Now),
-                                            FileName = fileName,
-                                            ImgBase64 = base64String,
-                                            ImagenExtencion = extencion
-                                        };
-                                        foto.idResumenDiario = new Guid?(NuevoRegistros.idResumenDiario);
-                                        ctx.tb_fotografia.Add(foto);
-                                    }
-
-                                }
-                            }
-                        }
-                    }
-                    ctx.SaveChanges();                    
-                    claveF = "RVCPZ-DVI";
-                    Guid id = IdResumenGuid;
-                    var folio = ctx.sp_folio_actividad(id, claveF, extencion).ToString();
-                    ScriptManager.RegisterStartupScript(this, GetType(), "openGuardadoExito", "openGuardadoExito();", true);
-                    Session["actividades_fuera_tiempo"] = null;
-
-                    Session["ImagenSeleccionada"] = null;
-                    Session["programasID"] = null;
-
-                }
-                catch (Exception ex)
-                {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "alertMessage", "alert('ERRO AL GUARDAR LOS DATOS')", true);
-
-                }
-
+                default:
+                    return "ENLACES";
             }
         }
+
 
         #endregion
 
