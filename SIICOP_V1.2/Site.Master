@@ -48,6 +48,8 @@
             </Scripts>
         </asp:ScriptManager>
 
+        
+
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="row">
                 <div class="col-md-12">
@@ -81,6 +83,17 @@
                             <div class="collapse navbar-collapse navbar-ex1-collapse">
                                 <ul class="nav navbar-nav navbar-right texto_menu" style="margin-bottom: 0px;">
                                     <li><a runat="server" href="TotalAccionesBeneficiados.aspx">Bienvenidos&nbsp;<span class="fa fa-home" aria-hidden="true"></span></a></li>
+
+                                    <asp:LoginView runat="server">
+    <AnonymousTemplate>
+        <h1 style="color:red">ANONIMO</h1>
+    </AnonymousTemplate>
+
+    <LoggedInTemplate>
+        <h1 style="color:green">AUTENTICADO</h1>
+    </LoggedInTemplate>
+</asp:LoginView>
+
                                     <asp:LoginView ID="LgSysAdmin" runat="server">
                                         <RoleGroups>
                                             <asp:RoleGroup Roles="SysAdmin">

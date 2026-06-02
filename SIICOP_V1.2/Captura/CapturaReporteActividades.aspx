@@ -17,18 +17,19 @@
                 <div class="sosmed">
                     <div class="user">
                         <div class="text-center">
-                            <img src="../Imagenes/data-entry.png" width="60%" class="img-circle">
-                        </div>
-                        <div class="user-head">
+    <img src="../Imagenes/data-entry.png"
+         class="img-circle"
+         style="width:48px;height:48px;" />
 
-                            <h1>REPORTE DE ACTIVIDADES</h1>
-                            <div class="hr-center"></div>
+    <h4 style="margin-top:10px;">
+        REPORTE DE ACTIVIDADES
+    </h4>
 
-                            <h5>
-                                <asp:Label ID="lblPrograma" runat="server" Text="tesh" Style="color: #feff00"></asp:Label>
-                            </h5>
-
-                        </div>
+    <asp:Label ID="lblPrograma"
+        runat="server"
+        CssClass="text-warning">
+    </asp:Label>
+</div>
 
 
                         <div class="link-me">
@@ -60,8 +61,6 @@
                                 </h4>
                                 <br />
                                 <div class="hr-left"></div>
-
-
 
                                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                     <ContentTemplate>
@@ -126,7 +125,7 @@
 
 
                                                     <div class="col-md-4">
-                                                        <label class="control-label">Región Estrategia</label>
+                                                        <label class="control-label">Región estrategia</label>
                                                         <asp:DropDownList runat="server" ID="ddlCoordinacion" CssClass="form-control">
                                                         </asp:DropDownList>
                                                     </div>

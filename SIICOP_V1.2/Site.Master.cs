@@ -1,6 +1,7 @@
 ﻿using SIICOP_V1._2.Captura.DGTSV;
 using System;
 using System.Web;
+using System.Web.Providers.Entities;
 using System.Web.Security;
 using System.Web.UI;
 
@@ -75,8 +76,7 @@ namespace SIICOP_V1._2
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
+            
         }
 
         protected void btnLogout_Click(object sender, EventArgs e)

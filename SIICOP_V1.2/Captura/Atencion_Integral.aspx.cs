@@ -19,20 +19,7 @@ namespace SIICOP_V1._2.Captura
         int padresH;
         int padresM;
         int TotalA;
-        // int DocentesH;
-        // int DocentesM;
-        // int EmpreH;
-        // int EmpreM;
-        // int AgreH;
-        // int AgreM;
-        // int CiudadanoH;
-        // int CiudadanoM;
-        // int ActoresH;
-        // int ActoresM;
-        // int PresiM;
-        // int PresiH;
-        // int otrosH;
-        // int OtrosM;
+        
         SIICOPEntities ctx = new SIICOPEntities();
         string sUsuarioActual;
         public enum AccionExpediente { Creacion, Edicion, Visualizacion }

@@ -1,0 +1,217 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true"
+    CodeBehind="SiteV2.master.cs"
+    Inherits="SIICOP_V1._2.SiteV2Master" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+
+    <title>SIICOP | <%: Page.Title %></title>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1" />
+
+    <link href="~/Content/bootstrap.min.css"
+          rel="stylesheet"
+          runat="server" />
+
+    <link href="~/Content/fontawesome-free/css/all.min.css"
+          rel="stylesheet" />
+
+    <style>
+
+        body
+        {
+            background: #f5f6fa;
+            padding-top: 70px;
+        }
+
+        .topbar
+        {
+            background: white;
+            border-bottom: 1px solid #ddd;
+            height: 70px;
+        }
+
+        .logo-area
+        {
+            display:flex;
+            align-items:center;
+            gap:15px;
+        }
+
+        .menu-area a
+        {
+            margin-left:20px;
+            color:#444;
+            text-decoration:none;
+            font-weight:600;
+        }
+
+        .menu-area a:hover
+        {
+            color:#6D132D;
+        }
+
+        .user-area
+        {
+            text-align:right;
+        }
+
+        .content-wrapper
+        {
+            padding:20px;
+        }
+
+        .footer-siicop
+        {
+            background:#6D132D;
+            color:white;
+            padding:15px;
+            margin-top:40px;
+            text-align:center;
+        }
+
+        .footer-siicop
+{
+    background:#6D132D;
+    color:white;
+    padding:20px;
+    margin-top:40px;
+    text-align:center;
+    font-size:12px;
+    line-height:1.5;
+}
+
+.footer-siicop p
+{
+    margin-bottom:8px;
+}
+
+.footer-siicop .footer-copy
+{
+    font-weight:bold;
+}
+
+.footer-siicop .footer-site
+{
+    color:#AA983F;
+    font-weight:bold;
+}
+
+    </style>
+
+</head>
+
+<body>
+
+<form runat="server">
+
+<div class="container-fluid topbar">
+
+    <div class="row h-100">
+
+        <div class="col-md-4 logo-area">
+
+            <img src="/Imagenes/ImgMaster/logo_veracruz.png"
+                 style="height:50px;" />
+
+            <img src="/Imagenes/ImgMaster/ssp.png"
+                 style="height:50px;" />
+
+            <img src="/Imagenes/SIICOP_2.png"
+                 style="height:55px;" />
+
+        </div>
+
+        <div class="col-md-5 menu-area">
+
+            <a href="/TotalAccionesBeneficiados.aspx">
+                Inicio
+            </a>
+
+            <a href="#">
+                Captura
+            </a>
+
+            <a href="#">
+                Productividad
+            </a>
+
+            <a href="#">
+                Reportes
+            </a>
+
+        </div>
+
+        <div class="col-md-3 user-area">
+
+            <br />
+
+            Bienvenido:
+
+            <strong>
+                <asp:LoginName
+                    ID="LoginName1"
+                    runat="server" />
+            </strong>
+
+            &nbsp;
+
+            <asp:LinkButton
+                ID="btnLogout"
+                runat="server"
+                OnClick="btnLogout_Click">
+
+                Salir
+
+            </asp:LinkButton>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container-fluid content-wrapper">
+
+    <asp:ContentPlaceHolder
+        ID="MainContent"
+        runat="server" />
+
+</div>
+
+<div class="footer-siicop">
+
+    <p>
+        Se prohíbe la reproducción total o parcial contenida en este
+        sistema informático sin el consentimiento expreso y por escrito
+        de la Secretaría de Seguridad Pública del Estado de Veracruz.
+
+        Esta plataforma digital deberá ser utilizada únicamente por el
+        personal autorizado y debidamente certificado de esta Secretaría.
+
+        Cualquier violación de la integridad del sistema será castigado
+        severamente.
+    </p>
+
+    <p class="footer-copy">
+        &copy; <%: DateTime.Now.Year %>
+        - GOBIERNO DEL ESTADO DE VERACRUZ /
+        SECRETARÍA DE SEGURIDAD PÚBLICA /
+        DERECHOS RESERVADOS.
+    </p>
+
+    <p class="footer-site">
+        VERACRUZ.GOB.MX
+    </p>
+
+</div>
+
+</form>
+
+</body>
+</html>
