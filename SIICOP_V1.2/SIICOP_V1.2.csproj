@@ -236,6 +236,7 @@
     <Content Include="Content\css\VeracruzL.png" />
     <Content Include="Content\css\VeraHB.png" />
     <Content Include="Content\css\VeraVB.png" />
+    <Content Include="Content\Error.css" />
     <Content Include="Content\fileinput.css" />
     <Content Include="Content\fontawesome-free\css\all.css" />
     <Content Include="Content\fontawesome-free\css\all.min.css" />
@@ -1826,6 +1827,8 @@
     <Content Include="Content\styleFormularios.css" />
     <Content Include="Content\StyleGraficasprogra.css" />
     <Content Include="Content\StyleResultados.css" />
+    <Content Include="ControlesCompartidos\ErrorFooter.ascx" />
+    <Content Include="ControlesCompartidos\ErrorHeader.ascx" />
     <Content Include="Datos\SIICOB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SIICOB.edmx</DependentUpon>
@@ -1963,10 +1966,10 @@
     <Content Include="Imagenes\data-entry.png" />
     <Content Include="Imagenes\EscuelaSegura.png" />
     <Content Include="Imagenes\file_add.png" />
+    <Content Include="Imagenes\CintilloFooter.png" />
     <Content Include="Imagenes\ForosFerias.png" />
     <Content Include="Imagenes\ImgMaster\logo_veracruz.png" />
     <Content Include="Imagenes\ImgMaster\ssp.png" />
-    <Content Include="Imagenes\ImgMaster\veracruz_orgullo.png" />
     <Content Include="Imagenes\IntegraciónCiudadana.png" />
     <Content Include="Imagenes\Logo SIICOP.png" />
     <Content Include="Imagenes\LogotipoSIICOP_2.jpg" />
@@ -1984,6 +1987,7 @@
     <Content Include="Imagenes\Menudependencia\PE_1.png" />
     <Content Include="Imagenes\Menudependencia\PE_2.png" />
     <Content Include="Imagenes\Menudependencia\SESCESP.png" />
+    <Content Include="Imagenes\CintilloSSPDTI.png" />
     <Content Include="Imagenes\PartcipacionCiudadana.png" />
     <Content Include="Imagenes\PinesReporte\check.png" />
     <Content Include="Imagenes\PinesReporte\ConstrucionCultura.png" />
@@ -2331,6 +2335,20 @@
     <Compile Include="Clases\Services\CatalogoService.cs" />
     <Compile Include="Clases\Services\EntornoService.cs" />
     <Compile Include="Clases\Services\ReporteService.cs" />
+    <Compile Include="ControlesCompartidos\ErrorFooter.ascx.cs">
+      <DependentUpon>ErrorFooter.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlesCompartidos\ErrorFooter.ascx.designer.cs">
+      <DependentUpon>ErrorFooter.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ControlesCompartidos\ErrorHeader.ascx.cs">
+      <DependentUpon>ErrorHeader.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlesCompartidos\ErrorHeader.ascx.designer.cs">
+      <DependentUpon>ErrorHeader.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Datos\Cat_Acciones.cs">
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>

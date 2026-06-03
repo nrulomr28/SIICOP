@@ -2,12 +2,24 @@
     CodeBehind="Error500.aspx.cs"
     Inherits="SIICOP_V1._2.Error.Error500" %>
 
+<%@ Register Src="~/ControlesCompartidos/ErrorHeader.ascx"
+    TagPrefix="uc"
+    TagName="ErrorHeader" %>
+
+<%@ Register Src="~/ControlesCompartidos/ErrorFooter.ascx"
+    TagPrefix="uc"
+    TagName="ErrorFooter" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta charset="utf-8" />
     <title>SIICOP - Error interno</title>
+
+    <link href="~/Content/Error.css"
+      rel="stylesheet"
+      runat="server" />
 
     <style>
 
@@ -46,14 +58,7 @@
             color: #666;
             margin-top: 20px;
             line-height: 1.7;
-        }
-
-        .sistema {
-            margin-bottom: 30px;
-            color: #004b87;
-            font-size: 22px;
-            font-weight: 600;
-        }
+        }        
 
         .info {
             margin-top: 30px;
@@ -95,12 +100,7 @@
         .btn-secondary:hover {
             background-color: #565e64;
         }
-
-        .footer {
-            margin-top: 40px;
-            font-size: 12px;
-            color: #999;
-        }
+        
 
     </style>
 
