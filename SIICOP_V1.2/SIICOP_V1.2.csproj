@@ -2038,7 +2038,7 @@
     <Content Include="MenuProgramas\Menu.aspx" />
     <Content Include="MenuProgramas\Menu_2026.aspx" />
     <Content Include="MenuProgramas\Menu_Dependencias.aspx" />
-    <Content Include="MenuProgramas\Principal.aspx" />
+    <Content Include="MenuProgramas\SeleccionPrograma.aspx" />
     <Content Include="MenuProgramas\SESCESP\Programas_SESCESP.aspx" />
     <Content Include="Policia_en_tu_colonia\Reporte_Seguimiento.aspx" />
     <Content Include="Scripts\Alert_Gral.js" />
@@ -2673,12 +2673,12 @@
     <Compile Include="MenuProgramas\Menu_Dependencias.aspx.designer.cs">
       <DependentUpon>Menu_Dependencias.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MenuProgramas\Principal.aspx.cs">
-      <DependentUpon>Principal.aspx</DependentUpon>
+    <Compile Include="MenuProgramas\SeleccionPrograma.aspx.cs">
+      <DependentUpon>SeleccionPrograma.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MenuProgramas\Principal.aspx.designer.cs">
-      <DependentUpon>Principal.aspx</DependentUpon>
+    <Compile Include="MenuProgramas\SeleccionPrograma.aspx.designer.cs">
+      <DependentUpon>SeleccionPrograma.aspx</DependentUpon>
     </Compile>
     <Compile Include="MenuProgramas\SESCESP\Programas_SESCESP.aspx.cs">
       <DependentUpon>Programas_SESCESP.aspx</DependentUpon>

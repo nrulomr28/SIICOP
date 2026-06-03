@@ -11,7 +11,7 @@ namespace SIICOP_V1._2.MenuProgramas
 {
 
 
-    public partial class Principal
+    public partial class SeleccionPrograma
     {
 
         /// <summary>

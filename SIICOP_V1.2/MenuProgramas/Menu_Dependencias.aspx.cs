@@ -43,7 +43,7 @@ namespace SIICOP_V1._2.MenuProgramas
             Session["ImagenSeleccionada"] = null;
 
             Response.Redirect(
-                "~/MenuProgramas/Principal.aspx",
+                "~/MenuProgramas/SeleccionPrograma.aspx",
                 true);
         }
 

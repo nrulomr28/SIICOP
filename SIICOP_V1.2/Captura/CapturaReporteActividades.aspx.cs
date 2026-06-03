@@ -43,7 +43,7 @@ namespace SIICOP_V1._2.Captura
 
             if (!SesionValida())
             {
-                Response.Redirect("~/MenuProgramas/Principal.aspx");
+                Response.Redirect("~/MenuProgramas/SeleccionPrograma.aspx");
                 return;
             }
 
@@ -333,7 +333,7 @@ namespace SIICOP_V1._2.Captura
                     this,
                     GetType(),
                     "alertMessage",
-                    "alert('ERRO AL GUARDAR LOS DATOS')",
+                    "alert('ERROR AL GUARDAR EL REGISTRO')",
                     true);
             }
         }

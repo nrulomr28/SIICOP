@@ -19,8 +19,7 @@ namespace SIICOP_V1._2.Datos.Repositorio
                 }
             }
             catch (Exception ex)
-            {
-                // aquí puedes loguear
+            {                
                 throw new Exception("Error al obtener municipios", ex);
             }
 
