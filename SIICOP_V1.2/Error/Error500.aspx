@@ -23,83 +23,24 @@
 
     <style>
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Segoe UI, Arial, sans-serif;
-            background-color: #f5f7fa;
-        }
-
-        .contenedor {
-            max-width: 850px;
-            margin: 80px auto;
-            background: white;
-            border-radius: 10px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 2px 12px rgba(0,0,0,.10);
-        }
+              
 
         .codigo {
-            font-size: 90px;
-            font-weight: bold;
-            color: #dc3545;
-            margin: 0;
-        }
+    font-size: 90px;
+    font-weight: bold;
+    color: #dc3545;
+    margin: 0;
+}
 
-        .titulo {
-            font-size: 30px;
-            color: #333;
-            margin-top: 10px;
-        }
-
-        .mensaje {
-            font-size: 18px;
-            color: #666;
-            margin-top: 20px;
-            line-height: 1.7;
-        }        
-
-        .info {
-            margin-top: 30px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-left: 4px solid #dc3545;
-            text-align: left;
-            font-size: 14px;
-            color: #555;
-        }
-
-        .botones {
-            margin-top: 35px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 25px;
-            margin: 5px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .btn-primary {
-            background-color: #004b87;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #00345d;
-        }
-
-        .btn-secondary {
-            background-color: #6c757d;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background-color: #565e64;
-        }
+.info {
+    margin-top: 30px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-left: 4px solid #dc3545;
+    text-align: left;
+    font-size: 14px;
+    color: #555;
+}
         
 
     </style>
@@ -111,13 +52,9 @@
 
     <div class="contenedor">
 
-        <div class="sistema">
-            SIICOP
-            <br />
-            <span style="font-size:14px;font-weight:normal;">
-                Sistema Integral de Control Operativo de Planteles
-            </span>
-        </div>
+        <uc:ErrorHeader
+            ID="ErrorHeader1"
+            runat="server" />
 
         <h1 class="codigo">500</h1>
 
@@ -152,21 +89,21 @@
         <div class="botones">
 
             <a href="javascript:history.back();"
-               class="btn btn-secondary">
+                class="btn btn-secondary">
                 Regresar
             </a>
 
             <a href="~/Inicio/inicio_sesion.aspx"
-               runat="server"
-               class="btn btn-primary">
+                runat="server"
+                class="btn btn-primary">
                 Ir al inicio
             </a>
 
         </div>
 
-        <div class="footer">
-            Código de error: 500 - Internal Server Error
-        </div>
+        <uc:ErrorFooter
+            ID="ErrorFooter1"
+            runat="server" />
 
     </div>
 

@@ -18,10 +18,7 @@
     <link href="Content/fontawesome-free/css/brands.min.css" rel="stylesheet" />
     <link href="Content/fontawesome-free/css/solid.css" rel="stylesheet" />
    
-    <link href="Content/fileinput.css" rel="stylesheet" />
-    <%--   <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/bundles/modernizr") %>
-    </asp:PlaceHolder>--%>
+    <link href="Content/fileinput.css" rel="stylesheet" />    
 
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
@@ -501,9 +498,7 @@
           <footer class="footer p-2  card" style="background-color: #AA983F;">
             <div class="container-fluid float-md-start">
                 <div class="row">
-                    <%--                    <div class=" col-sm-12 col-md-1">
-                        <img src="../Images/veracruz_orgullo.png" id="escudo" width="100%" />
-                    </div>--%>
+                    
                     <div class="col-sm-12 col-md-12" style="color: white">
                         <p class="align-self-center text-center">Se prohíbe la reproducción total o parcial contenida en este sistema informático sin el consentimiento expreso y por escrito de la Secretaría de Seguridad Pública de Estado de Veracruz. Esta plataforma digital deberá ser utilizada únicamente por el personal autorizado y debidamente certificado de esta Secretaría. Cualquier violación de la integridad del sistema será castigado severamente. </p>
                         <p class="align-self-center text-center">
