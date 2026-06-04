@@ -11,16 +11,16 @@ namespace SIICOP_V1._2.MenuProgramas
 {
 
 
-    public partial class SeleccionPrograma
+    public partial class MenuDependencias
     {
 
         /// <summary>
-        /// Control rptProgramas.
+        /// Control lnkbtnDGTVS.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptProgramas;
+        protected global::System.Web.UI.WebControls.LinkButton lnkbtnDGTVS;
     }
 }

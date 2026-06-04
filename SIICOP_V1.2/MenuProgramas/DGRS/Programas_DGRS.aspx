@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Menú de programas DGPRS" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Programas_DGPRS.aspx.cs" Inherits="SIICOP_V1._2.MenuProgramas.DGPRS.Programas_DGPRS" %>
+﻿<%@ Page Title="Menú de programas DGPRS" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Programas_DGRS.aspx.cs" Inherits="SIICOP_V1._2.MenuProgramas.DGPRS.Programas_DGPRS" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <link runat="server" href="../../Content/Menu_Programas.css" rel="stylesheet" type="text/css" />

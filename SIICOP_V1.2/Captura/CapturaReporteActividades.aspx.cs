@@ -43,7 +43,7 @@ namespace SIICOP_V1._2.Captura
 
             if (!SesionValida())
             {
-                Response.Redirect("~/MenuProgramas/SeleccionPrograma.aspx");
+                Response.Redirect("~/Captura/Entorno.aspx");
                 return;
             }
 
@@ -158,14 +158,12 @@ namespace SIICOP_V1._2.Captura
                         }
                         break;
                     case (int)AccionExpediente.Edicion:
-                        // ddlDelegacion.DataBind();
+                        
                         ddlMuNICIPIO.DataBind();
                         ddlsubprograma.DataBind();
-                        //   expediente_Edicion_Visualizacion();
+                        
                         break;
-                        //case (int)AccionExpediente.Visualizacion:
-                        //    expediente_Edicion_Visualizacion();
-                        //    break;
+                        
                 }
             }
             else

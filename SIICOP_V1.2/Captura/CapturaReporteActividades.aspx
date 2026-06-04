@@ -1005,7 +1005,7 @@
                                                         </div>
 
                                                         <div class="col-md-2">
-                                                            <label for="ddlOfrecioSegurichat">se ofreció segurichat</label>
+                                                            <label for="ddlOfrecioSegurichat">¿Se ofreció segurichat?</label>
                                                             <asp:DropDownList runat="server" ID="ddlOfrecioSegurichat" CssClass="form-control" AutoPostBack="true">
                                                                 <asp:ListItem Value="">--Seleccione--</asp:ListItem>
                                                                 <asp:ListItem Value="1">Sí</asp:ListItem>

@@ -11,16 +11,25 @@ namespace SIICOP_V1._2.MenuProgramas
 {
 
 
-    public partial class SeleccionPrograma
+    public partial class MenuDependencias
     {
 
         /// <summary>
-        /// Control rptProgramas.
+        /// Control ImageButton5.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptProgramas;
+        protected global::System.Web.UI.WebControls.ImageButton ImageButton5;
+
+        /// <summary>
+        /// Control ImageButton4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageButton4;
     }
 }

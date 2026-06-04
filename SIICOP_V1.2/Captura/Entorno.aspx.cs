@@ -1,76 +1,35 @@
-﻿using SIICOP_V1._2.Clases.Models;
-using SIICOP_V1._2.Clases.Services;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace SIICOP_V1._2.Captura
 {
     public partial class Entorno : System.Web.UI.Page
     {
-        private readonly EntornoService _service =
-            new EntornoService();
-
-        protected void Page_Load(
-            object sender,
-            EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                MostrarSeleccionActual();
-            }
+
         }
 
-        protected void btnEscolar_Click(
-            object sender,
-            EventArgs e)
+        protected void btnEscolar_Click(object sender, EventArgs e)
         {
-            SeleccionarEntorno(
-                EntornoConstantes.Escolar);
+            EnviarDatos(2);
         }
 
-        protected void btnComunitario_Click(
-            object sender,
-            EventArgs e)
+        protected void btnComunitario_Click(object sender, EventArgs e)
         {
-            SeleccionarEntorno(
-                EntornoConstantes.Comunitario);
+            EnviarDatos(1);
         }
 
-        private void SeleccionarEntorno(
-            int entornoId)
-        {
-            _service.GuardarSeleccion(
-                entornoId);
 
-            Response.Redirect(
-                _service.ObtenerUrlRedireccion(
-                    entornoId));
+
+        protected void EnviarDatos(int valor)
+        {
+            Response.Redirect("~/Captura/CapturaReporteActividades?ValorEntorno=" + valor);
         }
 
-        private void MostrarSeleccionActual()
-        {
-            var entorno =
-                _service.ObtenerSeleccion();
-
-            if (!entorno.HasValue)
-                return;
-
-            btnEscolar.CssClass =
-                "btn btn-primary btn-lg px-5 py-4 me-5";
-
-            btnComunitario.CssClass =
-                "btn btn-primary btn-lg px-5 py-4 ms-5";
-
-            if (entorno ==
-                EntornoConstantes.Escolar)
-            {
-                btnEscolar.CssClass =
-                    "btn btn-success btn-lg px-5 py-4 me-5";
-            }
-            else
-            {
-                btnComunitario.CssClass =
-                    "btn btn-success btn-lg px-5 py-4 ms-5";
-            }
-        }
     }
 }

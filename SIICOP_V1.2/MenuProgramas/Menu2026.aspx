@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Menú de dependencias" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Menu_2026.aspx.cs" Inherits="SIICOP_V1._2.MenuProgramas.Menu_Dependencias" %>
+﻿<%@ Page Title="Menú de dependencias" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Menu2026.aspx.cs" Inherits="SIICOP_V1._2.MenuProgramas.MenuDependencias" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />

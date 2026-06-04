@@ -7,11 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SIICOP_V1._2.VistasReportes.DGPRS {
-    
-    
-    public partial class Vista_de_datos_DGPRS {
-        
+namespace SIICOP_V1._2.VistasReportes.DGRS
+{
+
+
+    public partial class Vista_de_datos_DGRS
+    {
+
         /// <summary>
         /// Control txtFInicialC.
         /// </summary>
@@ -20,7 +22,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFInicialC;
-        
+
         /// <summary>
         /// Control ceFIC.
         /// </summary>
@@ -29,7 +31,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.CalendarExtender ceFIC;
-        
+
         /// <summary>
         /// Control txtfechafin.
         /// </summary>
@@ -38,7 +40,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtfechafin;
-        
+
         /// <summary>
         /// Control CalendarExtender1.
         /// </summary>
@@ -47,7 +49,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtender1;
-        
+
         /// <summary>
         /// Control ddlZona.
         /// </summary>
@@ -56,7 +58,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlZona;
-        
+
         /// <summary>
         /// Control ddlProgramas.
         /// </summary>
@@ -65,7 +67,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlProgramas;
-        
+
         /// <summary>
         /// Control edsProgramasBUsca.
         /// </summary>
@@ -74,7 +76,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.EntityDataSource edsProgramasBUsca;
-        
+
         /// <summary>
         /// Control RESPONSA.
         /// </summary>
@@ -83,7 +85,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl RESPONSA;
-        
+
         /// <summary>
         /// Control btnBuscar.
         /// </summary>
@@ -92,7 +94,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnBuscar;
-        
+
         /// <summary>
         /// Control lkbtnexcel.
         /// </summary>
@@ -101,7 +103,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lkbtnexcel;
-        
+
         /// <summary>
         /// Control lnkbtnZip.
         /// </summary>
@@ -110,7 +112,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkbtnZip;
-        
+
         /// <summary>
         /// Control Div1.
         /// </summary>
@@ -119,7 +121,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div1;
-        
+
         /// <summary>
         /// Control lkmapa.
         /// </summary>
@@ -128,7 +130,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lkmapa;
-        
+
         /// <summary>
         /// Control lblTotalRegistros.
         /// </summary>
@@ -137,7 +139,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTotalRegistros;
-        
+
         /// <summary>
         /// Control upd.
         /// </summary>
@@ -146,7 +148,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel upd;
-        
+
         /// <summary>
         /// Control GvPCAdmin.
         /// </summary>
@@ -155,7 +157,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GvPCAdmin;
-        
+
         /// <summary>
         /// Control EdsVistaPCaAdmin.
         /// </summary>
@@ -164,7 +166,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.EntityDataSource EdsVistaPCaAdmin;
-        
+
         /// <summary>
         /// Control validadottxt.
         /// </summary>
@@ -173,7 +175,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label validadottxt;
-        
+
         /// <summary>
         /// Control hfDependencia.
         /// </summary>
@@ -182,7 +184,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfDependencia;
-        
+
         /// <summary>
         /// Control folio.
         /// </summary>
@@ -191,7 +193,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl folio;
-        
+
         /// <summary>
         /// Control nombrescuela.
         /// </summary>
@@ -200,7 +202,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl nombrescuela;
-        
+
         /// <summary>
         /// Control direccion.
         /// </summary>
@@ -209,7 +211,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl direccion;
-        
+
         /// <summary>
         /// Control clave.
         /// </summary>
@@ -218,7 +220,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl clave;
-        
+
         /// <summary>
         /// Control niveledu.
         /// </summary>
@@ -227,7 +229,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl niveledu;
-        
+
         /// <summary>
         /// Control zona.
         /// </summary>
@@ -236,7 +238,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl zona;
-        
+
         /// <summary>
         /// Control muniz.
         /// </summary>
@@ -245,7 +247,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl muniz;
-        
+
         /// <summary>
         /// Control muni.
         /// </summary>
@@ -254,7 +256,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl muni;
-        
+
         /// <summary>
         /// Control h.
         /// </summary>
@@ -263,7 +265,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl h;
-        
+
         /// <summary>
         /// Control m.
         /// </summary>
@@ -272,7 +274,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl m;
-        
+
         /// <summary>
         /// Control total.
         /// </summary>
@@ -281,7 +283,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl total;
-        
+
         /// <summary>
         /// Control peros.
         /// </summary>
@@ -290,7 +292,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl peros;
-        
+
         /// <summary>
         /// Control descri.
         /// </summary>
@@ -299,7 +301,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl descri;
-        
+
         /// <summary>
         /// Control updPanel.
         /// </summary>
@@ -308,7 +310,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updPanel;
-        
+
         /// <summary>
         /// Control foto1.
         /// </summary>
@@ -317,7 +319,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl foto1;
-        
+
         /// <summary>
         /// Control foto2.
         /// </summary>
@@ -326,7 +328,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl foto2;
-        
+
         /// <summary>
         /// Control foto3.
         /// </summary>
@@ -335,7 +337,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl foto3;
-        
+
         /// <summary>
         /// Control foto11.
         /// </summary>
@@ -344,7 +346,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl foto11;
-        
+
         /// <summary>
         /// Control ImagenEvidencia1.
         /// </summary>
@@ -353,7 +355,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image ImagenEvidencia1;
-        
+
         /// <summary>
         /// Control foto22.
         /// </summary>
@@ -362,7 +364,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl foto22;
-        
+
         /// <summary>
         /// Control ImagenEvidencia2.
         /// </summary>
@@ -371,7 +373,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image ImagenEvidencia2;
-        
+
         /// <summary>
         /// Control foto33.
         /// </summary>
@@ -380,7 +382,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl foto33;
-        
+
         /// <summary>
         /// Control ImagenEvidencia3.
         /// </summary>
@@ -389,7 +391,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image ImagenEvidencia3;
-        
+
         /// <summary>
         /// Control foto34.
         /// </summary>
@@ -398,7 +400,7 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl foto34;
-        
+
         /// <summary>
         /// Control ImagenEvidencia4.
         /// </summary>

@@ -2030,14 +2030,16 @@
     <Content Include="Inicio\Countter.xml" />
     <Content Include="Inicio\Inicio.aspx" />
     <Content Include="Inicio\inicio_sesion.aspx" />
+    <Content Include="Inicio\Launcher.aspx" />
     <Content Include="Inicio\Reporte.aspx" />
     <Content Include="MenuProgramas\C4\Programas_C4.aspx" />
     <Content Include="MenuProgramas\CREPREVIDE\Programa_CEPREVIDE.aspx" />
-    <Content Include="MenuProgramas\DGPRS\Programas_DGPRS.aspx" />
+    <Content Include="MenuProgramas\DGRS\Programas_DGRS.aspx" />
     <Content Include="MenuProgramas\meenu2019.aspx" />
     <Content Include="MenuProgramas\Menu.aspx" />
-    <Content Include="MenuProgramas\Menu_2026.aspx" />
-    <Content Include="MenuProgramas\Menu_Dependencias.aspx" />
+    <Content Include="MenuProgramas\Menu2026.aspx" />
+    <Content Include="MenuProgramas\MenuDependencias.aspx" />
+    <Content Include="MenuProgramas\Principal.aspx" />
     <Content Include="MenuProgramas\SeleccionPrograma.aspx" />
     <Content Include="MenuProgramas\SESCESP\Programas_SESCESP.aspx" />
     <Content Include="Policia_en_tu_colonia\Reporte_Seguimiento.aspx" />
@@ -2095,7 +2097,7 @@
     <Content Include="VistasReportes\C4\Vista_de_datos_de_actividades_C4.aspx" />
     <Content Include="VistasReportes\CEPREVIDE\Vista_de_datos_de_actividades_CEPREVIDE.aspx" />
     <Content Include="VistasReportes\CVcMyCPC\Vista_de_datos_SESCESP.aspx" />
-    <Content Include="VistasReportes\DGPRS\Vista_de_datos_DGPRS.aspx" />
+    <Content Include="VistasReportes\DGRS\Vista_de_datos_DGRS.aspx" />
     <Content Include="VistasReportes\DGTSV\Vista_de_datos_de_actividades_DGTSV.aspx" />
     <Content Include="VistasReportes\Info_Enlace_con_el_Sector_Empresarial.aspx" />
     <Content Include="VistasReportes\Info_Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx" />
@@ -2320,6 +2322,7 @@
       <DependentUpon>Enlace_con_el_Sector_Empresarial.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clases\DTOs\ComboItemDTO.cs" />
+    <Compile Include="Clases\DTOs\MenuCardDto.cs" />
     <Compile Include="Clases\DTOs\MunicipioDto.cs" />
     <Compile Include="Clases\DTOs\ProgramaDto.cs" />
     <Compile Include="Clases\DTOs\TotalAccionesBeneficiadosDto.cs" />
@@ -2334,6 +2337,7 @@
     <Compile Include="Clases\Services\CatalogoReporteActividadesService.cs" />
     <Compile Include="Clases\Services\CatalogoService.cs" />
     <Compile Include="Clases\Services\EntornoService.cs" />
+    <Compile Include="Clases\Services\MenuService.cs" />
     <Compile Include="Clases\Services\ReporteService.cs" />
     <Compile Include="ControlesCompartidos\ErrorFooter.ascx.cs">
       <DependentUpon>ErrorFooter.ascx</DependentUpon>
@@ -2611,6 +2615,13 @@
     <Compile Include="Inicio\inicio_sesion.aspx.designer.cs">
       <DependentUpon>inicio_sesion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Inicio\Launcher.aspx.cs">
+      <DependentUpon>Launcher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inicio\Launcher.aspx.designer.cs">
+      <DependentUpon>Launcher.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Inicio\Reporte.aspx.cs">
       <DependentUpon>Reporte.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2638,12 +2649,12 @@
     <Compile Include="MenuProgramas\CREPREVIDE\Programa_CEPREVIDE.aspx.designer.cs">
       <DependentUpon>Programa_CEPREVIDE.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MenuProgramas\DGPRS\Programas_DGPRS.aspx.cs">
-      <DependentUpon>Programas_DGPRS.aspx</DependentUpon>
+    <Compile Include="MenuProgramas\DGRS\Programas_DGRS.aspx.cs">
+      <DependentUpon>Programas_DGRS.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MenuProgramas\DGPRS\Programas_DGPRS.aspx.designer.cs">
-      <DependentUpon>Programas_DGPRS.aspx</DependentUpon>
+    <Compile Include="MenuProgramas\DGRS\Programas_DGRS.aspx.designer.cs">
+      <DependentUpon>Programas_DGRS.aspx</DependentUpon>
     </Compile>
     <Compile Include="MenuProgramas\meenu2019.aspx.cs">
       <DependentUpon>meenu2019.aspx</DependentUpon>
@@ -2659,19 +2670,26 @@
     <Compile Include="MenuProgramas\Menu.aspx.designer.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MenuProgramas\Menu_2026.aspx.cs">
-      <DependentUpon>Menu_2026.aspx</DependentUpon>
+    <Compile Include="MenuProgramas\Menu2026.aspx.cs">
+      <DependentUpon>Menu2026.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MenuProgramas\Menu_2026.aspx.designer.cs">
-      <DependentUpon>Menu_2026.aspx</DependentUpon>
+    <Compile Include="MenuProgramas\Menu2026.aspx.designer.cs">
+      <DependentUpon>Menu2026.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MenuProgramas\Menu_Dependencias.aspx.cs">
-      <DependentUpon>Menu_Dependencias.aspx</DependentUpon>
+    <Compile Include="MenuProgramas\MenuDependencias.aspx.cs">
+      <DependentUpon>MenuDependencias.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MenuProgramas\Menu_Dependencias.aspx.designer.cs">
-      <DependentUpon>Menu_Dependencias.aspx</DependentUpon>
+    <Compile Include="MenuProgramas\MenuDependencias.aspx.designer.cs">
+      <DependentUpon>MenuDependencias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MenuProgramas\Principal.aspx.cs">
+      <DependentUpon>Principal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MenuProgramas\Principal.aspx.designer.cs">
+      <DependentUpon>Principal.aspx</DependentUpon>
     </Compile>
     <Compile Include="MenuProgramas\SeleccionPrograma.aspx.cs">
       <DependentUpon>SeleccionPrograma.aspx</DependentUpon>
@@ -2794,12 +2812,12 @@
     <Compile Include="VistasReportes\CVcMyCPC\Vista_de_datos_SESCESP.aspx.designer.cs">
       <DependentUpon>Vista_de_datos_SESCESP.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\DGPRS\Vista_de_datos_DGPRS.aspx.cs">
-      <DependentUpon>Vista_de_datos_DGPRS.aspx</DependentUpon>
+    <Compile Include="VistasReportes\DGRS\Vista_de_datos_DGRS.aspx.cs">
+      <DependentUpon>Vista_de_datos_DGRS.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VistasReportes\DGPRS\Vista_de_datos_DGPRS.aspx.designer.cs">
-      <DependentUpon>Vista_de_datos_DGPRS.aspx</DependentUpon>
+    <Compile Include="VistasReportes\DGRS\Vista_de_datos_DGRS.aspx.designer.cs">
+      <DependentUpon>Vista_de_datos_DGRS.aspx</DependentUpon>
     </Compile>
     <Compile Include="VistasReportes\DGTSV\Vista_de_datos_de_actividades_DGTSV.aspx.cs">
       <DependentUpon>Vista_de_datos_de_actividades_DGTSV.aspx</DependentUpon>

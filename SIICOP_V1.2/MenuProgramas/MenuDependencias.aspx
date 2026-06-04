@@ -1,7 +1,4 @@
-﻿<%@ Page Title="Menú de dependencias" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Menu_Dependencias.aspx.cs" Inherits="SIICOP_V1._2.MenuProgramas.Menu_Dependencias" %>
-
-
-
+﻿<%@ Page Title="Menú de dependencias" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MenuDependencias.aspx.cs" Inherits="SIICOP_V1._2.MenuProgramas.MenuDependencias" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
@@ -82,9 +79,9 @@
         <asp:ImageButton ID="ImageButton5"
             runat="server"
             ImageUrl="~/Imagenes/Menudependencia/IMG_ATNCAUSAS.png"
-            CommandArgument=""
+            CommandArgument="DGPVI"
             OnCommand="Imagen_Click"
-            CssClass="img-responsive img-thumbnail img-dgpvi opacar" />
+            CssClass="img-responsive img-thumbnail img-dgpvi opacar"/>
 
         <div class="titulo-overlay">
             DGPVI

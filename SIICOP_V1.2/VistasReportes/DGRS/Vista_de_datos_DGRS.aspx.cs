@@ -1,6 +1,6 @@
 ﻿using ICSharpCode.SharpZipLib.Zip;
 using OfficeOpenXml;
-using SIICOP_V1._2.Captura.DGPRS;
+using SIICOP_V1._2.Captura.DGRS;
 using SIICOP_V1._2.Datos;
 using System;
 using System.Collections.Generic;
@@ -13,10 +13,10 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 
-namespace SIICOP_V1._2.VistasReportes.DGPRS
+namespace SIICOP_V1._2.VistasReportes.DGRS
 {
 
-    public partial class Vista_de_datos_DGPRS : System.Web.UI.Page
+    public partial class Vista_de_datos_DGRS : System.Web.UI.Page
     {
         SIICOPEntities ctx = new SIICOPEntities();
 
@@ -205,20 +205,20 @@ namespace SIICOP_V1._2.VistasReportes.DGPRS
 
                 if (prevencion == Progrmaid)
                 {
-                    this.Session["AccionReporte"] = Actividades_DGPRS.AccionReporte.Edicion;
+                    this.Session["AccionReporte"] = Actividades_DGRS.AccionReporte.Edicion;
                     this.Session["idReporte_Accion"] = (object)idExped;
                     this.Response.Redirect("~/Captura/DGPRS/Actividades_DGPRS.aspx");
                 }
 
                 if (campaña == Progrmaid)
                 {
-                    this.Session["AccionReporte"] = Actividades_DGPRS.AccionReporte.Edicion;
+                    this.Session["AccionReporte"] = Actividades_DGRS.AccionReporte.Edicion;
                     this.Session["idReporte_Accion"] = (object)idExped;
                     this.Response.Redirect("~/Captura/DGPRS/Actividades_DGPRS.aspx");
                 }
                 if (motivando == Progrmaid)
                 {
-                    this.Session["AccionReporte"] = Actividades_DGPRS.AccionReporte.Edicion;
+                    this.Session["AccionReporte"] = Actividades_DGRS.AccionReporte.Edicion;
                     this.Session["idReporte_Accion"] = (object)idExped;
                     this.Response.Redirect("~/Captura/DGPRS/Actividades_DGPRS.aspx");
                 }

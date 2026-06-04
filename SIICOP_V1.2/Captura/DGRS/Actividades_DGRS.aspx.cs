@@ -8,9 +8,9 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace SIICOP_V1._2.Captura.DGPRS
+namespace SIICOP_V1._2.Captura.DGRS
 {
-    public partial class Actividades_DGPRS : System.Web.UI.Page
+    public partial class Actividades_DGRS : System.Web.UI.Page
     {
         SIICOPEntities ctx = new SIICOPEntities();
         public enum AccionReporte { Creacion, Edicion, Visualizacion }
@@ -150,7 +150,7 @@ namespace SIICOP_V1._2.Captura.DGPRS
             if (!IsPostBack)
             {
                 //Primera vez que se carga la pàgina o le dieron un F5
-                if (User.IsInRole("SYSADMIN") || User.IsInRole("Administrador") || User.IsInRole("DGPRS"))
+                if (User.IsInRole("SYSADMIN") || User.IsInRole("Administrador") || User.IsInRole("DGRS"))
                 {
 
                     this.determinarAccion();
@@ -206,7 +206,7 @@ namespace SIICOP_V1._2.Captura.DGPRS
                         }
                         else
                         {
-                            this.Response.Redirect("~/Bienvenido_DGPRS.aspx");
+                            this.Response.Redirect("~/Bienvenido_DGRS.aspx");
                         }
                         break;
                     case (int)AccionReporte.Edicion:
@@ -219,7 +219,7 @@ namespace SIICOP_V1._2.Captura.DGPRS
             }
             else
             {
-                this.Response.Redirect("~/Bienvenido_DGPRS.aspx");
+                this.Response.Redirect("~/Bienvenido_DGRS.aspx");
             }
             //Session["idPrograma_Accion"] = null;
         }
@@ -497,15 +497,15 @@ namespace SIICOP_V1._2.Captura.DGPRS
 
             if (idPrograma == 29)
             {
-                claveF = "IPD-DGPRS";
+                claveF = "IPD-DGRS";
             }
             if (idPrograma == 30)
             {
-                claveF = "MRS-DGPRS";
+                claveF = "MRS-DGRS";
             }
             if (idPrograma == 31)
             {
-                claveF = "CSPTI-DGPRS";
+                claveF = "CSPTI-DGRS";
             }
 
 
@@ -524,11 +524,7 @@ namespace SIICOP_V1._2.Captura.DGPRS
                 textoValidacion += "<li>Por favor ingresar una dirección correcta no cuenta con coordenadas para hacer el punteo </ li>";
                 valido = false;
             }
-            //if (string.IsNullOrEmpty(route.Value) || string.IsNullOrEmpty(entrecalle1.Value) || string.IsNullOrEmpty(entrecalle2.Value) || string.IsNullOrEmpty(colony.Value))
-            //{
-            //    textoValidacion += "<li>Es obligatorio la calle, las entre calles y la colonia </ li>";
-            //    valido = false;
-            //}
+            
 
             if (ddlMuNICIPIO.SelectedIndex == 0 || string.IsNullOrEmpty(ddlMuNICIPIO.SelectedValue))
             {
@@ -1558,7 +1554,7 @@ namespace SIICOP_V1._2.Captura.DGPRS
             this.Session["AccionReporte"] = (object)null;
             this.Session["idPrograma_Accion"] = (object)null;
             this.Session["ProgramaId"] = (object)null;
-            this.Response.Redirect("~/VistasReportes/DGPRS/Vista_de_datos_DGPRS.aspx");
+            this.Response.Redirect("~/VistasReportes/DGRS/Vista_de_datos_DGPRS.aspx");
             this.HDFactividad.Value = (string)null;
             this.btnGuardarEdicion.Visible = false;
             this.btnSalir.Visible = false;

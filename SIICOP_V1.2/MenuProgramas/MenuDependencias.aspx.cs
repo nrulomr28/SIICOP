@@ -5,7 +5,7 @@ using System.Web.UI.WebControls;
 
 namespace SIICOP_V1._2.MenuProgramas
 {
-    public partial class Menu_Dependencias : System.Web.UI.Page
+    public partial class MenuDependencias : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,16 +39,26 @@ namespace SIICOP_V1._2.MenuProgramas
 
                 return;
             }
+            if (opcion == "DGPVI")
+            {
+                Session["ImagenSeleccionada"] = true;
+                Session["programasID"] = null;
 
+                Response.Redirect(
+                    "~/MenuProgramas/Principal.aspx",
+                    true);
+
+                return;
+            }
+            
             Session["ImagenSeleccionada"] = null;
 
             Response.Redirect(
-                "~/MenuProgramas/SeleccionPrograma.aspx",
+                "~/Captura/Entorno.aspx",
                 true);
         }
 
-
-
+        
     }
 
 

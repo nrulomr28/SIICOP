@@ -3,7 +3,7 @@ using System;
 
 namespace SIICOP_V1._2.MenuProgramas
 {
-    public partial class Menu_Dependencias : System.Web.UI.Page
+    public partial class MenuDependencias : System.Web.UI.Page
     {
    
     }

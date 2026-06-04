@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Vista_de_datos_DGPRS.aspx.cs" Inherits="SIICOP_V1._2.VistasReportes.DGPRS.Vista_de_datos_DGPRS" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Vista_de_datos_DGRS.aspx.cs" Inherits="SIICOP_V1._2.VistasReportes.DGRS.Vista_de_datos_DGRS" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     
    

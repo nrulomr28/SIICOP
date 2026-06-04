@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SIICOP_V1._2.Captura.DGPRS
+namespace SIICOP_V1._2.Captura.DGRS
 {
 
 
-    public partial class Actividades_DGPRS
+    public partial class Actividades_DGRS
     {
 
         /// <summary>

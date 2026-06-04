@@ -1,9 +1,9 @@
-﻿using SIICOP_V1._2.Captura.DGPRS;
+﻿using SIICOP_V1._2.Captura.DGRS;
 using SIICOP_V1._2.Datos;
 using System;
 using System.Web.Security;
 
-namespace SIICOP_V1._2.MenuProgramas.DGPRS
+namespace SIICOP_V1._2.MenuProgramas.DGRS
 {
     public partial class Programas_DGPRS : System.Web.UI.Page
     {
@@ -14,7 +14,7 @@ namespace SIICOP_V1._2.MenuProgramas.DGPRS
             if (!IsPostBack)
             {
                 //Primera vez que se carga la pàgina o le dieron un F5
-                if (User.IsInRole("SYSADMIN") || User.IsInRole("Administrador") || User.IsInRole("DGPRS"))
+                if (User.IsInRole("SYSADMIN") || User.IsInRole("Administrador") || User.IsInRole("DGRS"))
                 {
 
 
@@ -35,21 +35,21 @@ namespace SIICOP_V1._2.MenuProgramas.DGPRS
 
         protected void lnkbtnPrevenDeli_Click(object sender, EventArgs e)
         {
-            this.Session["AccionReporte"] = Actividades_DGPRS.AccionReporte.Creacion;
+            this.Session["AccionReporte"] = Actividades_DGRS.AccionReporte.Creacion;
             this.Session["idPrograma_Accion"] = 29;
             this.Session["idReporte_Accion"] = 1;
             this.Response.Redirect("~/Captura/DGPRS/Actividades_DGPRS.aspx");
         }
         protected void lnkBtnMotivacionSociaL_Click(object sender, EventArgs e)
         {
-            this.Session["AccionReporte"] = Actividades_DGPRS.AccionReporte.Creacion;
+            this.Session["AccionReporte"] = Actividades_DGRS.AccionReporte.Creacion;
             this.Session["idPrograma_Accion"] = 30;
             this.Session["idReporte_Accion"] = 1;
             this.Response.Redirect("~/Captura/DGPRS/Actividades_DGPRS.aspx");
         }
         protected void lnkBtnCampañaPreven_Click(object sender, EventArgs e)
         {
-            this.Session["AccionReporte"] = Actividades_DGPRS.AccionReporte.Creacion;
+            this.Session["AccionReporte"] = Actividades_DGRS.AccionReporte.Creacion;
             this.Session["idPrograma_Accion"] = 31;
             this.Session["idReporte_Accion"] = 1;
             this.Response.Redirect("~/Captura/DGPRS/Actividades_DGPRS.aspx");

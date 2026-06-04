@@ -49,17 +49,30 @@
         .badge-custom {
             background-color: #777;
         }
+
+        .card-title
+{
+    min-height: 110px;
+}
+        .card
+{
+    transition: all .2s ease;
+}
+
+.card:hover
+{
+    transform: translateY(-3px);
+}
+
     </style>
 
-    <div class="container">
-        <br />
-        <br />
+    <div class="container">        
         <div class="row mt-3">
             <div class="col-md-8 col-md-offset-2">
                 <h3 class="text-center">
                     <strong>
                         <i class="fas fa-tasks"></i>
-                        Crear Reporte de actividades de la DVI
+                        Generación de reporte de actividades.
                     </strong>
                 </h3>
             </div>
@@ -69,51 +82,16 @@
         <div class="row mt-3">
 
             <div class="col-md-8 col-md-offset-2">
-
-                <%--<div class="panel panel-primary panel-custom">--%>
+                
 
 
                 <div class="panel-body">
 
                     <div class="grid-wrapper">
 
-                        <asp:GridView ID="gvProgramas" runat="server"
-                            AutoGenerateColumns="False"
-                            DataKeyNames="programasID"
-                            CssClass="table table-striped table-bordered table-hover table-custom"
-                            GridLines="None"
-                            BorderStyle="None"
-                            OnSelectedIndexChanged="gvProgramas_SelectedIndexChanged">
+                        
 
-                            <Columns>
-
-                                <asp:TemplateField HeaderText="No.">
-                                    <ItemStyle Width="60px" />
-                                    <ItemTemplate>
-                                        <span class="badge badge-custom">
-                                            <%# Container.DataItemIndex + 1 %>
-                                        </span>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-
-                                <asp:BoundField DataField="programasID"
-                                    Visible="false" />
-
-                                <asp:TemplateField HeaderText="Programa">
-                                    <ItemTemplate>
-                                        <asp:LinkButton ID="lnkPrograma" runat="server"
-                                            Text='<%# Eval("NombrePrograma") %>'
-                                            CommandName="Select"
-                                            CssClass="program-link">
-                                        </asp:LinkButton>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-
-                            </Columns>
-
-                        </asp:GridView>
-
-                        <%--<div class="container mt-4">
+                        <div class="container mt-4">
 
     <h2 class="mb-4">
         Seleccione un programa
@@ -178,13 +156,12 @@
 
     </div>
 
-</div>--%>
+</div>
 
                     </div>
 
                 </div>
-
-                <%--  </div>--%>
+                
             </div>
         </div>
     </div>
