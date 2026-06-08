@@ -240,6 +240,15 @@ namespace SIICOP_V1._2
         protected global::System.Web.UI.WebControls.LoginView LoginForaneo;
 
         /// <summary>
+        /// Control LoginView7.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LoginView LoginView7;
+
+        /// <summary>
         /// Control btnLogout.
         /// </summary>
         /// <remarks>

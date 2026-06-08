@@ -63,56 +63,36 @@
 
     <br />
     <br />
-    <div class="container">
-        <div class="row">
-            <article id="post-69889" class="post-69889 page type-page status-publish hentry">
-                <div class="separator-container">
-                    <h2 style="text-align: center;">Áreas adscritas</h2>
-                </div>
-                <div class="nota-contenido-page">
+<div class="container">
+      <article id="post-69889" class="page">
+          <div class="separator-container">
+              <h2 class="text-center">Áreas adscritas</h2>
+          </div>
 
-                    <div class="row ex1">
-
-    <!-- DGPVI -->
-    <div class="col-md-4 col-sm-4 text-center contenedor">
-
-        <asp:ImageButton ID="ImageButton5"
-            runat="server"
-            ImageUrl="~/Imagenes/Menudependencia/IMG_ATNCAUSAS.png"
-            CommandArgument="DGPVI"
-            OnCommand="Imagen_Click"
-            CssClass="img-responsive img-thumbnail img-dgpvi opacar"/>
-
-        <div class="titulo-overlay">
-            DGPVI
-        </div>
-
-    </div>
-
-    <!-- Estrategia -->
-    <div class="col-md-8 col-sm-8 text-center contenedor">
-
-        <asp:ImageButton ID="ImageButton4"
-            runat="server"
-            ImageUrl="~/Imagenes/Menudependencia/IMG_ESTRATEGIA.jpg"
-            CommandArgument="Estrategia"
-            OnCommand="Imagen_Click"
-            CssClass="img-responsive img-thumbnail img-estrategia opacar" />
-
-    </div>
-
-</div>
-                  
-                    <div class="row ex1">
-                    </div>
-
-                </div>
+          <div class="nota-contenido-page">
+              <div class="row">
 
 
-                <!-- .entry-content -->
-            </article>
-            <!-- #post-## -->
-        </div>
-    </div>
+                  <div id="PanelDGPVI" runat="server" visible="false" class="col-md-6 col-sm-6 text-center contenedor">
+                      <asp:ImageButton ID="ImageButton5" runat="server"
+                          ImageUrl="~/Imagenes/Menudependencia/DGPVI.png"
+                          CommandArgument=""
+                          OnCommand="Imagen_Click" class="img-responsive img-thumbnail opacar" />
+                      <h3 class="fw-bold titulo">DGPVI</h3>
+                  </div>
+
+
+                  <div id="PanelEjeAtencion" runat="server" visible="true" class="col-md-6 col-sm-6 text-center contenedor">
+                      <asp:ImageButton ID="ImageButton4" runat="server"
+                          ImageUrl="~/Imagenes/Menudependencia/IMG_ESTRATEGIA.jpg"
+                          CommandArgument="Estrategia"
+                          OnCommand="Imagen_Click" class="img-responsive img-thumbnail opacar" />
+                      <h3 class="fw-bold titulo">Eje Atención</h3>
+                  </div>
+
+              </div>
+          </div>
+      </article>
+  </div>
     <br />
 </asp:Content>

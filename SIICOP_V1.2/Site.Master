@@ -452,6 +452,20 @@
                                             </asp:RoleGroup>
                                         </RoleGroups>
                                     </asp:LoginView>
+
+                                    <asp:LoginView ID="LoginView7" runat="server">
+      <RoleGroups>
+          <asp:RoleGroup Roles="CapEjeAtencion">
+              <ContentTemplate>
+                  <li runat="server"><a href="~/MenuProgramas/MenuDependencias.aspx" runat="server"><b>Captura de datos</b>&nbsp;<span class="far fa-edit" aria-hidden="true"></span></a></li>
+
+
+
+              </ContentTemplate>
+          </asp:RoleGroup>
+      </RoleGroups>
+  </asp:LoginView>
+
                                     <li>
                                         <asp:LinkButton ID="btnLogout" runat="server" CssClass="btn-xs" OnClick="btnLogout_Click">
                                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Cerrar sesión

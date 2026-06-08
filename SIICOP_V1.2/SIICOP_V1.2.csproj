@@ -1961,7 +1961,6 @@
     <Content Include="Imagenes\Banner\Redes_Vecinales.jpg" />
     <Content Include="Imagenes\Banner\Sector_Empresarial.jpg" />
     <Content Include="Imagenes\Banner\Violencia.jpg" />
-    <Content Include="Imagenes\ComitédeContraloría.png" />
     <Content Include="Imagenes\Convivencia_Escudos.png" />
     <Content Include="Imagenes\data-entry.png" />
     <Content Include="Imagenes\EscuelaSegura.png" />
@@ -1980,7 +1979,7 @@
     <Content Include="Imagenes\Menudependencia\DGPRS.png" />
     <Content Include="Imagenes\Menudependencia\DGTE.png" />
     <Content Include="Imagenes\Menudependencia\DGTV.png" />
-    <Content Include="Imagenes\Menudependencia\DGVI.png" />
+    <Content Include="Imagenes\Menudependencia\DGPVI.png" />
     <Content Include="Imagenes\Menudependencia\Estrategia.jpg" />
     <Content Include="Imagenes\Menudependencia\IMG_ESTRATEGIA.jpg" />
     <Content Include="Imagenes\Menudependencia\IMG_ATNCAUSAS.png" />

@@ -12,6 +12,30 @@ namespace SIICOP_V1._2.MenuProgramas
             if (!Page.IsPostBack)
             {
                 Session["ImagenSeleccionada"] = null;
+
+                if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("CapEjeAtencion"))
+                    {
+
+                        PanelEjeAtencion.Visible = true;
+                        PanelEjeAtencion.Attributes["class"] = "col-md-6 col-sm-6 text-center contenedor col-md-offset-3";
+                        PanelDGPVI.Visible = false;
+                    }
+                    else
+                    {
+
+                        PanelEjeAtencion.Visible = true;
+                        PanelEjeAtencion.Attributes["class"] = "col-md-6 col-sm-6 text-center contenedor";
+                        PanelDGPVI.Visible = true;
+                        PanelDGPVI.Attributes["class"] = "col-md-6 col-sm-6 text-center contenedor";
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Inicio/inicio_sesion.aspx");
+                }
+
             }
 
         }

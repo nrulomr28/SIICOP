@@ -99,7 +99,7 @@ namespace SIICOP_V1._2.Captura
 
         private bool UsuarioTieneAcceso()
         {
-            var rolesPermitidos = new[] { "SYSADMIN", "Administrador", "Cap_RVCPZ", "Admin_RVCPZ" };
+            var rolesPermitidos = new[] { "SYSADMIN", "Administrador", "Cap_RVCPZ", "Admin_RVCPZ", "CapEjeAtencion" };
             return rolesPermitidos.Any(User.IsInRole);
         }
 
