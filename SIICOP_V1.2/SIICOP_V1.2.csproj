@@ -2053,6 +2053,12 @@
     <Content Include="Scripts\easyResponsiveTabs.js" />
     <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\fileinput_locale_LANG.js" />
+    <Content Include="Documentacion\arquitectura.md" />
+    <Content Include="Documentacion\bitacora-reorganizacion.md" />
+    <Content Include="Documentacion\decisiones-tecnicas.md" />
+    <Content Include="Documentacion\deuda-tecnica.md" />
+    <Content Include="Documentacion\inventario-modulos.md" />
+    <Content Include="Clases\Config\connectionStrings.config" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -2336,8 +2342,13 @@
     <Compile Include="Clases\Services\CatalogoReporteActividadesService.cs" />
     <Compile Include="Clases\Services\CatalogoService.cs" />
     <Compile Include="Clases\Services\EntornoService.cs" />
+    <Compile Include="Clases\Services\MenuFactory.cs" />
     <Compile Include="Clases\Services\MenuService.cs" />
+    <Compile Include="Clases\Services\Menus\MenuCapEjeAtencion.cs" />
+    <Compile Include="Clases\Services\Menus\MenuSysAdmin.cs" />
+    <Compile Include="Clases\Services\Menus\MenuVisualizador.cs" />
     <Compile Include="Clases\Services\ReporteService.cs" />
+    <Compile Include="Constantes\RolesSistema.cs" />
     <Compile Include="ControlesCompartidos\ErrorFooter.ascx.cs">
       <DependentUpon>ErrorFooter.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

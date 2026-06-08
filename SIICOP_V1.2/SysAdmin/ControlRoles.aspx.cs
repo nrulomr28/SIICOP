@@ -120,8 +120,10 @@ namespace SIICOP_V1._2.SysAdmin
                 RolesUserList.DataSource = usersBelongingToRole;
                 RolesUserList.DataBind();
             }
-            catch (Exception xxx)
+            catch (Exception ex)
             {
+                ActionStatus.Text =
+                        $"Error al consultar usuarios: {ex.Message}";
             }
         }
 
@@ -193,8 +195,26 @@ namespace SIICOP_V1._2.SysAdmin
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            Roles.CreateRole(TextBox1.Text);
-    
+            string nuevoRol = TextBox1.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(nuevoRol))
+            {
+                ActionStatus.Text = "Escribe un nombre de rol.";
+                return;
+            }
+
+            if (Roles.RoleExists(nuevoRol))
+            {
+                ActionStatus.Text =
+                    $"El rol {nuevoRol} ya existe.";
+                return;
+            }
+
+            Roles.CreateRole(nuevoRol);
+
+            ActionStatus.Text =
+                $"Rol {nuevoRol} creado correctamente.";
+
             BindUsersToUserList();
             BindRolesToList();
         }
