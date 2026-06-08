@@ -53,6 +53,31 @@
         ID="MainContent"
         runat="server" />
 
+    <footer class="footer card pt-2" style="background-color: #611232;">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12" style="color:white;">
+
+                <p class="text-center">
+                    Se prohíbe la reproducción total o parcial del contenido de este sistema informático sin autorización expresa de la Secretaría de Seguridad Pública del Estado de Veracruz. Esta plataforma deberá ser utilizada únicamente por personal autorizado para el desempeño de sus funciones institucionales.
+                </p>
+
+                <p class="text-center">
+                    El acceso, uso o modificación no autorizada de la información contenida en este sistema podrá ser sancionado conforme a la legislación aplicable.
+                </p>
+
+                <p class="text-center">
+                    &copy; <%: DateTime.Now.Year %> - GOBIERNO DEL ESTADO DE VERACRUZ · SECRETARÍA DE SEGURIDAD PÚBLICA
+                </p>
+
+                <p class="text-center">
+                    VERACRUZ.GOB.MX
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
 </form>
 
 </body>
