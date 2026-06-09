@@ -18,3 +18,11 @@ Acciones:
 
 Estado:
 Master funcional y estable.
+
+## Desecho o desuso de páginas de bienvenida.
+Fecha: 09/06/2026
+
+Las páginas Bienvenido_* dejan de ser utilizadas
+como punto de entrada principal.
+
+El acceso institucional se centraliza en Launcher.aspx.

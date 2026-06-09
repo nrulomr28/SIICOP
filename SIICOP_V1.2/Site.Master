@@ -62,13 +62,13 @@
             <a runat="server"
                href="~/Inicio/Launcher.aspx"
                class="btn btn-outline-light btn-sm me-1">
-                Aplicaciones
+                Inicio
             </a>
 
             <a runat="server"
                href="~/TotalAccionesBeneficiados.aspx"
                class="btn btn-outline-light btn-sm me-1">
-                Inicio
+                Pendiente...
             </a>
 
             <asp:LinkButton

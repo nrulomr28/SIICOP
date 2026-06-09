@@ -184,11 +184,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Bienvenido_C4.aspx" />
-    <Content Include="Bienvenido_CEPREVIDE.aspx" />
-    <Content Include="Bienvenido_CVcMyCPC.aspx" />
-    <Content Include="Bienvenido_DGRS.aspx" />
-    <Content Include="Bienvenido_DGTSV.aspx" />
+    <Content Include="Legacy\Bienvenido_C4.aspx" />
+    <Content Include="Legacy\Bienvenido_CEPREVIDE.aspx" />
+    <Content Include="Legacy\Bienvenido_CVcMyCPC.aspx" />
+    <Content Include="Legacy\Bienvenido_DGRS.aspx" />
+    <Content Include="Legacy\Bienvenido_DGTSV.aspx" />
     <Content Include="Captura\Atencion_Empresarial.aspx" />
     <Content Include="Captura\CapturaReporteActividades.aspx" />
     <Content Include="Captura\Entorno.aspx" />
@@ -2123,39 +2123,39 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Bienvenido_C4.aspx.cs">
+    <Compile Include="Legacy\Bienvenido_C4.aspx.cs">
       <DependentUpon>Bienvenido_C4.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Bienvenido_C4.aspx.designer.cs">
+    <Compile Include="Legacy\Bienvenido_C4.aspx.designer.cs">
       <DependentUpon>Bienvenido_C4.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Bienvenido_CEPREVIDE.aspx.cs">
+    <Compile Include="Legacy\Bienvenido_CEPREVIDE.aspx.cs">
       <DependentUpon>Bienvenido_CEPREVIDE.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Bienvenido_CEPREVIDE.aspx.designer.cs">
+    <Compile Include="Legacy\Bienvenido_CEPREVIDE.aspx.designer.cs">
       <DependentUpon>Bienvenido_CEPREVIDE.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Bienvenido_CVcMyCPC.aspx.cs">
+    <Compile Include="Legacy\Bienvenido_CVcMyCPC.aspx.cs">
       <DependentUpon>Bienvenido_CVcMyCPC.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Bienvenido_CVcMyCPC.aspx.designer.cs">
+    <Compile Include="Legacy\Bienvenido_CVcMyCPC.aspx.designer.cs">
       <DependentUpon>Bienvenido_CVcMyCPC.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Bienvenido_DGRS.aspx.cs">
+    <Compile Include="Legacy\Bienvenido_DGRS.aspx.cs">
       <DependentUpon>Bienvenido_DGRS.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Bienvenido_DGRS.aspx.designer.cs">
+    <Compile Include="Legacy\Bienvenido_DGRS.aspx.designer.cs">
       <DependentUpon>Bienvenido_DGRS.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Bienvenido_DGTSV.aspx.cs">
+    <Compile Include="Legacy\Bienvenido_DGTSV.aspx.cs">
       <DependentUpon>Bienvenido_DGTSV.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Bienvenido_DGTSV.aspx.designer.cs">
+    <Compile Include="Legacy\Bienvenido_DGTSV.aspx.designer.cs">
       <DependentUpon>Bienvenido_DGTSV.aspx</DependentUpon>
     </Compile>
     <Compile Include="Captura\Atencion_Empresarial.aspx.cs">
