@@ -11,108 +11,150 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
     <style runat="server" id="styleLauncher">
+
 .dashboard-card
 {
-    border-radius: 20px;
-    min-height: 280px;
-    transition: all .30s ease;
+    border-radius: 18px;
+    min-height: 260px;
+    transition: all .25s ease;
     cursor: pointer;
     border: none;
     overflow: hidden;
+    background: #fff;
+
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
 }
 
 .dashboard-card:hover
 {
-    transform: translateY(-10px) scale(1.03);
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 1rem 3rem rgba(0,0,0,.15);
 }
 
 .dashboard-card .card-body
 {
-    padding-top: 40px;
+    padding: 40px 25px;
 }
 
 .dashboard-card i
 {
-    font-size: 5rem;
-    color: #6D132D;
-    margin-bottom: 25px;
+    font-size: 4.5rem;
+    margin-bottom: 20px;
+    transition: all .25s ease;
 }
 
 .dashboard-card h4
 {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    margin-bottom: 15px;
+    color: #212529;
 }
 
 .dashboard-card p
 {
-    color: #666;
+    color: #6c757d;
+    margin-bottom: 0;
 }
+
+.dashboard-card:hover i
+{
+    transform: scale(1.08);
+}
+
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="text-center mb-5">
+       <!-- HERO -->
+<div class="container-fluid py-5 text-center"
+     style="background: linear-gradient(135deg,#611232,#7a1838); color:white;">
 
-    <h1>
-        Sistema de Información Control y Productividad
+    <img src="<%= ResolveUrl("~/Imagenes/SIICOP_2.png") %>"
+         style="height:110px;"
+         class="mb-3" />
+
+    <h1 class="fw-bold">
+        SIICOP
     </h1>
 
-    <h5>
-        Bienvenido: <%: User.Identity.Name %>
+    <h5 class="mb-3">
+        Sistema Integral de Información, Control Operativo y Productividad
     </h5>
+
+    <div class="badge bg-light text-dark p-2">
+        Usuario: <%: User.Identity.Name %>
+    </div>
 
 </div>
 
-        <div>
+<!-- CONTENIDO -->
+<div class="container py-5">
 
-             <div class="container mt-5">
+    <div class="row mb-4">
 
-        <div class="row">
+        <div class="col-md-12 text-center">
 
-            <asp:Repeater
-    ID="rptMenu"
-    runat="server">
+            <h2 class="fw-bold">
+                Módulos / Opciones de usuario.
+            </h2>
 
-    <ItemTemplate>
+            <p class="text-muted">
+                Seleccione un módulo para continuar
+            </p>
 
-        <div class="col-md-3 mb-4">
+        </div>
 
-            <a href="<%# ResolveUrl(Eval("Url").ToString()) %>"
-               style="text-decoration:none;">
+    </div>
 
-                <div class="card dashboard-card"
-     style='border-top:8px solid <%# Eval("Color") %>;'>
+    <div class="row">
 
-                    <div class="card-body text-center">
+        <asp:Repeater
+            ID="rptMenu"
+            runat="server">
 
-                        <i class="<%# Eval("Icono") %> fa-3x mb-3"></i>
+            <ItemTemplate>
 
-                        <h4>
-                            <%# Eval("Titulo") %>
-                        </h4>
+                <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
 
-                        <p>
-                            <%# Eval("Descripcion") %>
-                        </p>
+                    <a href="<%# ResolveUrl(Eval("Url").ToString()) %>"
+                       style="text-decoration:none;">
 
-                    </div>
+                        <div class="card dashboard-card shadow-sm"
+                             style='border-top:8px solid <%# Eval("Color") %>;'>
+
+                            <div class="card-body text-center">
+
+                                <i class="<%# Eval("Icono") %>"
+                                   style='color:<%# Eval("Color") %>;'>
+
+                                </i>
+
+                                <h4>
+                                    <%# Eval("Titulo") %>
+                                </h4>
+
+                                <p>
+                                    <%# Eval("Descripcion") %>
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </a>
 
                 </div>
 
-            </a>
+            </ItemTemplate>
 
-        </div>
-
-    </ItemTemplate>
-
-</asp:Repeater>
-        </div>
-
-                   </div>
+        </asp:Repeater>
 
     </div>
+
+</div>
+
     </form>
 </body>
 </html>
