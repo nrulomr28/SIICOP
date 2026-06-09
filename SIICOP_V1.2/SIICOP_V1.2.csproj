@@ -2058,7 +2058,7 @@
     <Content Include="Documentacion\decisiones-tecnicas.md" />
     <Content Include="Documentacion\deuda-tecnica.md" />
     <Content Include="Documentacion\inventario-modulos.md" />
-    <Content Include="Clases\Config\connectionStrings.config" />
+    <Content Include="Clases\Config\ConnectionStrings.config" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
