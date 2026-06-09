@@ -6,36 +6,33 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Errores SIICOP</title>
-    <style>
-        table
-{
-    width:100%;
-    border-collapse:collapse;
-}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet" />
 
-table th
-{
-    background:#004b87;
-    color:white;
-    padding:8px;
-}
-
-table td
-{
-    padding:6px;
-    border-bottom:1px solid #ddd;
-}
-
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>    
 </head>
 <body>
     <form id="formPrincipal" runat="server"> 
-    <asp:TextBox ID="txtUsuario" runat="server" />
+<div class="row mb-4"> 
+    <div class="col-md-12"> 
+        <h2 class="fw-bold"> Bitácora de errores </h2> 
+        <p class="text-muted"> Consulta y seguimiento de excepciones registradas por SIICOP. 
+                                                                                              </p> 
+    </div> 
+</div>
 
-<asp:Button ID="btnBuscar"
-            runat="server"
-            Text="Buscar"
-            OnClick="btnBuscar_Click" />
+<div class="card-body"> 
+    <div class="row"> 
+        <div class="col-md-10"> 
+            <asp:TextBox ID="txtUsuario" runat="server" CssClass="form-control" placeholder="Buscar por usuario..." /> 
+        </div> 
+        <div class="col-md-2"> <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary w-100" OnClick="btnBuscar_Click" /> 
+        </div> 
+        </div> 
+</div>
+
+        <div class="card-body"> 
+            <div class="table-responsive">
 
 <asp:GridView ID="gvErrores"
               runat="server"
@@ -77,7 +74,8 @@ table td
             runat="server"
             CommandArgument='<%# Eval("ErrorLogId") %>'
             OnClick="lnkDetalle_Click"
-            Text="Ver" />
+            Text="🔍 Ver detalle" 
+            CssClass="btn btn-outline-primary btn-sm" />
 
     </ItemTemplate>
 
@@ -87,34 +85,98 @@ table td
 
 </asp:GridView>
 
+</div> 
 
-        <asp:Panel ID="pnlDetalle"
-           runat="server"
-           Visible="false">
+        </div>
+        <div class="modal fade"
+     id="modalDetalle"
+     tabindex="-1"
+     aria-hidden="true">
 
-    <h3>Detalle del Error</h3>
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
 
-    <asp:Label ID="lblFecha" runat="server" />
-    <br />
+        <div class="modal-content">
 
-    <asp:Label ID="lblUsuario" runat="server" />
-    <br />
+            <div class="modal-header"
+                 style="background-color:#611232;color:white;">
 
-    <asp:Label ID="lblPagina" runat="server" />
-    <br />
+                <h5 class="modal-title">
+                    Detalle del Error
+                </h5>
 
-    <asp:Label ID="lblTipoError" runat="server" />
-    <br />
+                <button type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal">
+                </button>
 
-    <asp:TextBox ID="txtStackTrace"
-                 runat="server"
-                 TextMode="MultiLine"
-                 Rows="15"
-                 Width="100%"
-                 ReadOnly="true" />
+            </div>
 
-</asp:Panel>
+            <div class="modal-body">
+
+                <div class="row mb-3">
+
+                    <div class="col-md-6">
+                        <strong>Fecha:</strong><br />
+                        <asp:Label ID="lblFecha" runat="server" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <strong>Usuario:</strong><br />
+                        <asp:Label ID="lblUsuario" runat="server" />
+                    </div>
+
+                </div>
+
+                <div class="row mb-3">
+
+                    <div class="col-md-6">
+                        <strong>Página:</strong><br />
+                        <asp:Label ID="lblPagina" runat="server" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <strong>Tipo Error:</strong><br />
+                        <asp:Label ID="lblTipoError" runat="server" />
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <h6>
+                    Stack Trace
+                </h6>
+
+                <asp:TextBox
+                    ID="txtStackTrace"
+                    runat="server"
+                    TextMode="MultiLine"
+                    Rows="18"
+                    Width="100%"
+                    ReadOnly="true"
+                    CssClass="form-control font-monospace" />
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                    Cerrar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 
         </form>
 </body>
 </html>
+
+

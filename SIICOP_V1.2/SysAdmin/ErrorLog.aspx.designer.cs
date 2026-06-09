@@ -51,15 +51,6 @@ namespace SIICOP_V1._2.SysAdmin
         protected global::System.Web.UI.WebControls.GridView gvErrores;
 
         /// <summary>
-        /// Control pnlDetalle.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlDetalle;
-
-        /// <summary>
         /// Control lblFecha.
         /// </summary>
         /// <remarks>

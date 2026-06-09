@@ -118,36 +118,58 @@ namespace SIICOP_V1._2.SysAdmin
 
                     if (dr.Read())
                     {
-                        pnlDetalle.Visible = true;
+                        //pnlDetalle.Visible = true;
 
                         lblFecha.Text =
-                            "<b>Fecha:</b> " +
+                            
                             Convert.ToDateTime(dr["Fecha"])
                                 .ToString("dd/MM/yyyy HH:mm:ss");
 
                         lblUsuario.Text =
-                            "<br/><b>Usuario:</b> " +
+                            
                             Convert.ToString(dr["Usuario"]);
 
                         lblPagina.Text =
-                            "<br/><b>Página:</b> " +
+                            
                             Convert.ToString(dr["Pagina"]);
 
                         lblTipoError.Text =
-                            "<br/><b>Tipo Error:</b> " +
+                            
                             Convert.ToString(dr["ErrorType"]);
 
                         txtStackTrace.Text =
                             Convert.ToString(dr["StackTrace"]);
                     }
+
+                    ClientScript.RegisterStartupScript(
+    GetType(),
+    "mostrarModal",
+    @"
+    var modal =
+        new bootstrap.Modal(
+            document.getElementById('modalDetalle'));
+
+    modal.show();
+    ",
+    true);
                 }
             }
             catch (Exception ex)
             {
                 txtStackTrace.Text =
-                    ex.ToString();
+        ex.ToString();
 
-                pnlDetalle.Visible = true;
+                ClientScript.RegisterStartupScript(
+                    GetType(),
+                    "mostrarModal",
+                    @"
+        var modal =
+            new bootstrap.Modal(
+                document.getElementById('modalDetalle'));
+
+        modal.show();
+        ",
+                    true);
             }
         }
 
