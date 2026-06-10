@@ -100,8 +100,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <script type="text/javascript">
-                                            // This example displays an address form, using the autocomplete feature
-                                            // of the Google Places API to help users fill in the information.
+                                            
                                             var dir = "";
                                             var placeSearch, autocomplete;
                                             var componentForm = {

@@ -26,3 +26,14 @@ Las páginas Bienvenido_* dejan de ser utilizadas
 como punto de entrada principal.
 
 El acceso institucional se centraliza en Launcher.aspx.
+
+
+2026-06-10
+
+Durante la consolidación de navegación SiteV2 se identificó que
+Principal.aspx duplicaba la funcionalidad de SeleccionPrograma.aspx.
+
+SeleccionPrograma.aspx conserva la asignación de Session["programasID"],
+la selección de entorno y la navegación hacia CapturaReporteActividades.
+
+Principal.aspx fue reclasificada como Legacy.

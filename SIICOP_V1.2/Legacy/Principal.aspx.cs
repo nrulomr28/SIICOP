@@ -14,10 +14,8 @@ namespace SIICOP_V1._2.MenuProgramas
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
-                
+            {                
                 CargarGrid();
-
             }
 
         }
@@ -25,13 +23,8 @@ namespace SIICOP_V1._2.MenuProgramas
         protected void gvProgramas_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-
             int programasID = Convert.ToInt32(gvProgramas.SelectedDataKey.Value);
-
-
             Session["programasID"] = programasID;
-
-
             Response.Redirect("~/Captura/CapturaReporteActividades.aspx");
 
         }

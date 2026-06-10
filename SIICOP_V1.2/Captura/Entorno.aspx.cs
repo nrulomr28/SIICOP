@@ -11,6 +11,7 @@ namespace SIICOP_V1._2.Captura
 
         protected void btnEscolar_Click(object sender, EventArgs e)
         {
+            Session["programasID"] = 1; // temporal
             EnviarDatos(2);
         }
 
@@ -23,7 +24,8 @@ namespace SIICOP_V1._2.Captura
 
         protected void EnviarDatos(int valor)
         {
-            Response.Redirect("~/Captura/CapturaReporteActividades?ValorEntorno=" + valor);
+            Response.Redirect(
+            $"~/Captura/CapturaReporteActividades.aspx?ValorEntorno={valor}");
         }
 
     }

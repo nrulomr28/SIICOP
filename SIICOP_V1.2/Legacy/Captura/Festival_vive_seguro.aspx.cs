@@ -218,11 +218,7 @@ namespace SIICOP_V1._2.Captura
                 textoValidacion += "<li>Por favor ingresar una dirección correcta no cuenta con coordenadas para hacer el punteo </ li>";
                 valido = false;
             }
-            //if (string.IsNullOrEmpty(route.Value) || string.IsNullOrEmpty(entrecalle1.Value) || string.IsNullOrEmpty(entrecalle2.Value) || string.IsNullOrEmpty(colony.Value))
-            //{
-            //    textoValidacion += "<li>Es obligatorio la calle, las entre calles y la colonia </ li>";
-            //    valido = false;
-            //}
+            
             if (ddlMuNICIPIO.SelectedIndex == 0 || string.IsNullOrEmpty(ddlMuNICIPIO.SelectedValue))
             {
                 textoValidacion += "<li>Es obligatorio el municipio</li>";
@@ -243,13 +239,7 @@ namespace SIICOP_V1._2.Captura
                 textoValidacion += "<li>Es obligatorio seleccionar una acción</li>";
                 valido = false;
             }
-            //if (string.IsNullOrEmpty(txtnombreescuela.Text))
-            //{
-            //    textoValidacion += "<li>Es obligatorio ingresar la esceula donde ralizaron la actividad </li>";
-            //    txtnombreescuela.Focus();
-            //    txtnombreescuela.BorderColor = System.Drawing.Color.Red;
-            //    valido = false;
-            //}
+            
             if (string.IsNullOrEmpty(txtnombrecontacto.Text))
            {
                textoValidacion += "<li>Es obligatorio ingresar el nombre del contacto </li>";
@@ -294,21 +284,7 @@ namespace SIICOP_V1._2.Captura
                 padresH = 0;
                 padresM = 0;
                 TotalA = 0;
-                //   DocentesH = 0;
-                //DocentesM = 0;
-                //PresiH = 0;
-                //PresiM = 0;
-                //EmpreH = 0;
-                //EmpreM = 0;
-                //AgreH = 0;
-                //AgreM = 0;
-                //CiudadanoH = 0;
-                //CiudadanoM = 0;
-                //ActoresH = 0;
-                //ActoresM = 0;
-                //personalID = 0;
-                //otrosH = 0;
-                //OtrosM = 0;
+                
                 sUsuarioActual = System.Web.Security.Membership.GetUser().UserName;
                 var ID = ctx.Personales.Where(x => x.login == this.sUsuarioActual).FirstOrDefault();
                 personalID = ID.Personalid;
@@ -411,10 +387,7 @@ namespace SIICOP_V1._2.Captura
                         Longitud = this.longi.Value,
                         calle = this.route.Value == string.Empty ? "" : this.route.Value,
                         coloni = this.colony.Value == string.Empty ? "" : this.colony.Value,
-                    //  Entrecalle1 = this.entrecalle1.Value == string.Empty ? "" : this.entrecalle1.Value,
-                    //  Entrecalle2 = this.entrecalle2.Value == string.Empty ? "" : this.entrecalle2.Value,
-                    //    RegionID = new int?(this.ddlRegion.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlRegion.SelectedValue)),
-                     //   DelegacionID = new int?(this.ddlDelegacion.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlDelegacion.SelectedValue)),
+                    
                         MunicipioID = new int?(this.ddlMuNICIPIO.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlMuNICIPIO.SelectedValue)),
                         LocalidadID = new int?(Convert.ToInt32(this.ddlLocalidad.SelectedValue))
                     });
@@ -432,11 +405,7 @@ namespace SIICOP_V1._2.Captura
                     nuevoDatosGral.niñas = new int?(this.txnina.Value == "" ? 0 : Convert.ToInt32(this.txnina.Value));
                     nuevoDatosGral.niños = new int?(this.txnino.Value == "" ? 0 : Convert.ToInt32(this.txnino.Value));
                     nuevoDatosGral.hombres = new int?(this.txhombres.Value == "" ? 0 : Convert.ToInt32(this.txhombres.Value));
-                    nuevoDatosGral.mujeres = new int?(this.txmujeres.Value == "" ? 0 : Convert.ToInt32(this.txmujeres.Value));
-                       
-              
-
-                  
+                    nuevoDatosGral.mujeres = new int?(this.txmujeres.Value == "" ? 0 : Convert.ToInt32(this.txmujeres.Value));                                                       
 
                     ctx.TB_DatosGralReporte.Add(nuevoDatosGral);
 
@@ -499,26 +468,12 @@ namespace SIICOP_V1._2.Captura
 
             }
         }
-        //private bool ValidateVideoExtension(string nombreImg)
-        //{
-        //    FileInfo info = new FileInfo(nombreImg);
-        //    switch (info.Extension.ToLower())
-        //    {
-        //        case ".png":
-        //        case ".PNG":
-        //        case ".jpg":
-        //        case ".JPG":
-        //        case ".bmp":
-        //            return true;
-        //        default:
-        //            return false;
-        //    }
-       // }
+       
 
         #endregion
 
         #region redimensionar_Imagen
-        public System.Drawing.Image RedimencionarImagen(System.Drawing.Image ImagenOriginal, int Alto)
+        public System.Drawing.Image RedimensionarImagen(System.Drawing.Image ImagenOriginal, int Alto)
 
         {
             var Radio = (double)Alto / ImagenOriginal.Height;
