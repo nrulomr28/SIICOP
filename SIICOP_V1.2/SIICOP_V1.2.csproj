@@ -85,8 +85,8 @@
     <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Bcl.Cryptography, Version=10.0.0.8, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.Cryptography.10.0.8\lib\net462\Microsoft.Bcl.Cryptography.dll</HintPath>
+    <Reference Include="Microsoft.Bcl.Cryptography, Version=10.0.0.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.Cryptography.10.0.9\lib\net462\Microsoft.Bcl.Cryptography.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -143,8 +143,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Formats.Asn1, Version=10.0.0.8, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Formats.Asn1.10.0.8\lib\net462\System.Formats.Asn1.dll</HintPath>
+    <Reference Include="System.Formats.Asn1, Version=10.0.0.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Formats.Asn1.10.0.9\lib\net462\System.Formats.Asn1.dll</HintPath>
     </Reference>
     <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
@@ -158,8 +158,8 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
-    <Reference Include="System.Security.Cryptography.Xml, Version=10.0.0.8, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.Xml.10.0.8\lib\net462\System.Security.Cryptography.Xml.dll</HintPath>
+    <Reference Include="System.Security.Cryptography.Xml, Version=10.0.0.9, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Xml.10.0.9\lib\net462\System.Security.Cryptography.Xml.dll</HintPath>
     </Reference>
     <Reference Include="System.ValueTuple" />
     <Reference Include="System.Web.Extensions" />
@@ -2091,12 +2091,12 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="SqlServerTypes\readme.htm" />
-    <Content Include="SysAdmin\Calendar.aspx" />
-    <Content Include="SysAdmin\ControlRoles.aspx" />
-    <Content Include="SysAdmin\ControlUser.aspx" />
-    <Content Include="SysAdmin\ErrorLog.aspx" />
-    <Content Include="SysAdmin\Nuevo_Usuario.aspx" />
-    <Content Include="SysAdmin\Cambiar_Contrasena.aspx" />
+    <Content Include="sysadmin\Calendar.aspx" />
+    <Content Include="sysadmin\ControlRoles.aspx" />
+    <Content Include="sysadmin\ControlUser.aspx" />
+    <Content Include="sysadmin\ErrorLog.aspx" />
+    <Content Include="sysadmin\Nuevo_Usuario.aspx" />
+    <Content Include="sysadmin\Cambiar_Contrasena.aspx" />
     <Content Include="TotalAccionesBeneficiados.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="VistasReportes\C4\Vista_de_datos_de_actividades_C4.aspx" />
@@ -2744,46 +2744,46 @@
     <Compile Include="SiteV2.Master.designer.cs">
       <DependentUpon>SiteV2.Master</DependentUpon>
     </Compile>
-    <Compile Include="SysAdmin\Calendar.aspx.cs">
+    <Compile Include="sysadmin\Calendar.aspx.cs">
       <DependentUpon>Calendar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SysAdmin\Calendar.aspx.designer.cs">
+    <Compile Include="sysadmin\Calendar.aspx.designer.cs">
       <DependentUpon>Calendar.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SysAdmin\ControlRoles.aspx.cs">
+    <Compile Include="sysadmin\ControlRoles.aspx.cs">
       <DependentUpon>ControlRoles.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SysAdmin\ControlRoles.aspx.designer.cs">
+    <Compile Include="sysadmin\ControlRoles.aspx.designer.cs">
       <DependentUpon>ControlRoles.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SysAdmin\ControlUser.aspx.cs">
+    <Compile Include="sysadmin\ControlUser.aspx.cs">
       <DependentUpon>ControlUser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SysAdmin\ControlUser.aspx.designer.cs">
+    <Compile Include="sysadmin\ControlUser.aspx.designer.cs">
       <DependentUpon>ControlUser.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SysAdmin\ErrorLog.aspx.cs">
+    <Compile Include="sysadmin\ErrorLog.aspx.cs">
       <DependentUpon>ErrorLog.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SysAdmin\ErrorLog.aspx.designer.cs">
+    <Compile Include="sysadmin\ErrorLog.aspx.designer.cs">
       <DependentUpon>ErrorLog.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SysAdmin\Nuevo_Usuario.aspx.cs">
+    <Compile Include="sysadmin\Nuevo_Usuario.aspx.cs">
       <DependentUpon>Nuevo_Usuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SysAdmin\Nuevo_Usuario.aspx.designer.cs">
+    <Compile Include="sysadmin\Nuevo_Usuario.aspx.designer.cs">
       <DependentUpon>Nuevo_Usuario.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SysAdmin\Cambiar_Contrasena.aspx.cs">
+    <Compile Include="sysadmin\Cambiar_Contrasena.aspx.cs">
       <DependentUpon>Cambiar_Contrasena.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SysAdmin\Cambiar_Contrasena.aspx.designer.cs">
+    <Compile Include="sysadmin\Cambiar_Contrasena.aspx.designer.cs">
       <DependentUpon>Cambiar_Contrasena.aspx</DependentUpon>
     </Compile>
     <Compile Include="TotalAccionesBeneficiados.aspx.cs">
@@ -2972,7 +2972,7 @@
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Scripts\Web.config" />
-    <Content Include="SysAdmin\Web.config">
+    <Content Include="sysadmin\Web.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="VistasReportes\Web.config" />

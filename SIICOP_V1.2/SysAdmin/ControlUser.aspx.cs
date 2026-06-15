@@ -263,7 +263,7 @@ namespace SIICOP_V1._2.SysAdmin
                 }
                 if (iddepen == 6)
                 {
-                    iNUevoregistro.Dependencia = "DGPRS";
+                    iNUevoregistro.Dependencia = "DPRS";
                 }
 
                 iNUevoregistro.login = txtUsuarioLogin.Text;

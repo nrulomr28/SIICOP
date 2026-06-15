@@ -8,7 +8,7 @@
         function Correcto() {
             swal({
                 title: "Correcto!",
-                text: "El usuario se creo con exito",
+                text: "El usuario se creó con exito",
                 icon: "success",
                 button: "Aceptar",
 

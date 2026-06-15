@@ -15,3 +15,25 @@
 - Completar catálogo de módulos.
 - Identificar responsables.
 - Identificar dependencias entre módulos.
+
+
+# Vigentes
+
+Launcher.aspx
+MenuDependencias.aspx
+SeleccionPrograma.aspx
+CapturaReporteActividades.aspx
+ErrorLog.aspx
+
+# En revisión
+
+Entorno.aspx
+
+# Legacy
+
+Bienvenido_*
+Menu.aspx
+Menu2026.aspx
+meenu2019.aspx
+Principal.aspx
+Capturas históricas individuales

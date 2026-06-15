@@ -29,7 +29,7 @@ namespace SIICOP_V1._2.Servicios.Menus
                     "Usuarios",
                     "Administración de cuentas",
                     "fas fa-users-cog",
-                    "~/SysAdmin/ControlUser.aspx",
+                    "~/sysadmin/ControlUser.aspx",
                     "card-warning",
                     "#fd7e14"),
 
@@ -37,7 +37,7 @@ namespace SIICOP_V1._2.Servicios.Menus
                     "Roles",
                     "Control de permisos",
                     "fas fa-user-shield",
-                    "~/SysAdmin/ControlRoles.aspx",
+                    "~/sysadmin/ControlRoles.aspx",
                     "card-danger",
                     "#dc3545")
             };

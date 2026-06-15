@@ -134,21 +134,14 @@
                                 <h4>
                                     <%# Eval("Titulo") %>
                                 </h4>
-
                                 <p>
                                     <%# Eval("Descripcion") %>
                                 </p>
-
                             </div>
-
                         </div>
-
                     </a>
-
                 </div>
-
             </ItemTemplate>
-
         </asp:Repeater>
 
     </div>
