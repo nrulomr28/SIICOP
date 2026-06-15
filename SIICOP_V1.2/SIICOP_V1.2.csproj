@@ -2091,6 +2091,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="sysadmin\Administracion.aspx" />
     <Content Include="sysadmin\Calendar.aspx" />
     <Content Include="sysadmin\ControlRoles.aspx" />
     <Content Include="sysadmin\ControlUser.aspx" />
@@ -2743,6 +2744,13 @@
     </Compile>
     <Compile Include="SiteV2.Master.designer.cs">
       <DependentUpon>SiteV2.Master</DependentUpon>
+    </Compile>
+    <Compile Include="sysadmin\Administracion.aspx.cs">
+      <DependentUpon>Administracion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sysadmin\Administracion.aspx.designer.cs">
+      <DependentUpon>Administracion.aspx</DependentUpon>
     </Compile>
     <Compile Include="sysadmin\Calendar.aspx.cs">
       <DependentUpon>Calendar.aspx</DependentUpon>
