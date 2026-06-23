@@ -1,4 +1,6 @@
-﻿namespace SIICOP_V1._2.Datos.DTO
+﻿using System;
+
+namespace SIICOP_V1._2.Clases.DTOs
 {
     public class UsuarioDto
     {
@@ -11,7 +13,7 @@
         public string Dependencia { get; set; }
 
         public string AreaTrabajo { get; set; }
-
-        public string FechaCreacion { get; set; }
+        public DateTime? FechaCreacion { get; set; }
+    }
     }
 }

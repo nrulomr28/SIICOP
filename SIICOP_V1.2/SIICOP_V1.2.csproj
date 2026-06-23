@@ -2059,6 +2059,7 @@
     <Content Include="Documentacion\deuda-tecnica.md" />
     <Content Include="Documentacion\inventario-modulos.md" />
     <Content Include="Clases\Config\ConnectionStrings.config" />
+    <Content Include="Documentacion\admin-usuarios.md" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -2125,7 +2126,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Clases\DTOs\UsuarioDto.cs" />
-    <Compile Include="Datos\Repositorio\UsuarioRepository.cs" />
+    <Compile Include="Clases\Services\UsuarioService.cs" />
+    <Compile Include="Clases\Repositories\UsuarioRepository.cs" />
     <Compile Include="Legacy\Bienvenidas\Bienvenido_C4.aspx.cs">
       <DependentUpon>Bienvenido_C4.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2414,8 +2416,8 @@
     <Compile Include="Datos\Profiles.cs">
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Datos\Repositorio\EntornoRepository.cs" />
-    <Compile Include="Datos\Repositorio\UbicacionRepository.cs" />
+    <Compile Include="Clases\Repositories\EntornoRepository.cs" />
+    <Compile Include="Clases\Repositories\UbicacionRepository.cs" />
     <Compile Include="Datos\Repositorio\ProgramaRepository.cs" />
     <Compile Include="Datos\Repositorio\ReporteRepository.cs" />
     <Compile Include="Datos\Sessions.cs">
