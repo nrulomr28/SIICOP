@@ -2124,6 +2124,8 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Clases\DTOs\UsuarioDto.cs" />
+    <Compile Include="Datos\Repositorio\UsuarioRepository.cs" />
     <Compile Include="Legacy\Bienvenidas\Bienvenido_C4.aspx.cs">
       <DependentUpon>Bienvenido_C4.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2328,7 +2330,7 @@
       <DependentUpon>Enlace_con_el_Sector_Empresarial.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clases\DTOs\ComboItemDTO.cs" />
-    <Compile Include="Clases\DTOs\MenuCardDto.cs" />
+    <Compile Include="Clases\Models\MenuCardDto.cs" />
     <Compile Include="Clases\DTOs\MunicipioDto.cs" />
     <Compile Include="Clases\DTOs\ProgramaDto.cs" />
     <Compile Include="Clases\DTOs\TotalAccionesBeneficiadosDto.cs" />

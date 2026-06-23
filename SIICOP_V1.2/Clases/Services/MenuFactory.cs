@@ -1,4 +1,5 @@
-﻿using SIICOP_V1._2.Clases.DTOs.SIICOP_V1._2.Models;
+﻿
+using SIICOP_V1._2.Models;
 
 namespace SIICOP_V1._2.Servicios
 {

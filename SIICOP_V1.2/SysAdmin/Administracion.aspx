@@ -107,7 +107,37 @@
                     </h5>
 
                     <p class="text-muted">
-                        Próxima migración desde ControlUser.aspx
+                        <asp:GridView
+    ID="gvUsuarios"
+    runat="server"
+    CssClass="table table-hover"
+    AutoGenerateColumns="False">
+
+    <Columns>
+
+        <asp:BoundField
+            DataField="NombreCompleto"
+            HeaderText="Nombre" />
+
+        <asp:BoundField
+            DataField="Login"
+            HeaderText="Login" />
+
+        <asp:BoundField
+            DataField="Dependencia"
+            HeaderText="Dependencia" />
+
+        <asp:BoundField
+            DataField="AreaTrabajo"
+            HeaderText="Área" />
+
+        <asp:BoundField
+            DataField="FechaCreacion"
+            HeaderText="Alta" />
+
+    </Columns>
+
+</asp:GridView>
                     </p>
 
                 </div>

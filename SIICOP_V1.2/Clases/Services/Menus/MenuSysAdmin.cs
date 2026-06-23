@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using SIICOP_V1._2.Clases.DTOs.SIICOP_V1._2.Models;
+﻿using SIICOP_V1._2.Models;
+using System.Collections.Generic;
+
 
 namespace SIICOP_V1._2.Servicios.Menus
 {

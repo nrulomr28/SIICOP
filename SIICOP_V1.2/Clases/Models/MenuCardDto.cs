@@ -1,6 +1,4 @@
 ﻿
-namespace SIICOP_V1._2.Clases.DTOs
-{
     namespace SIICOP_V1._2.Models
     {
         public class MenuCardDto
@@ -18,4 +16,3 @@ namespace SIICOP_V1._2.Clases.DTOs
             public string Color { get; set; }
         }
     }
-}
