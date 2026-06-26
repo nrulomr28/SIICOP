@@ -2126,6 +2126,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Clases\DTOs\UsuarioDto.cs" />
+    <Compile Include="Clases\Helpers\DependenciaHelper.cs" />
     <Compile Include="Clases\Services\UsuarioService.cs" />
     <Compile Include="Clases\Repositories\UsuarioRepository.cs" />
     <Compile Include="Legacy\Bienvenidas\Bienvenido_C4.aspx.cs">
