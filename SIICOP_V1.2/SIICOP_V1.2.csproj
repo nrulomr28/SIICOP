@@ -64,8 +64,8 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.5.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="EPPlus, Version=8.6.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.8.6.0\lib\net462\EPPlus.dll</HintPath>
+    <Reference Include="EPPlus, Version=8.6.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.8.6.1\lib\net462\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="EPPlus.Interfaces, Version=8.4.0.0, Culture=neutral, PublicKeyToken=a694d7f3b0907a61, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.Interfaces.8.4.0\lib\net462\EPPlus.Interfaces.dll</HintPath>
@@ -184,6 +184,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\vista-reportes.css" />
     <Content Include="Legacy\Bienvenidas\Bienvenido_C4.aspx" />
     <Content Include="Legacy\Bienvenidas\Bienvenido_CEPREVIDE.aspx" />
     <Content Include="Legacy\Bienvenidas\Bienvenido_CVcMyCPC.aspx" />
@@ -2110,7 +2111,7 @@
     <Content Include="VistasReportes\Info_Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx" />
     <Content Include="VistasReportes\Informe_Seguridad_social_paz_social_entorno_educativo.aspx" />
     <Content Include="VistasReportes\Informe_Construccion_Cultura_Incluyente.aspx" />
-    <Content Include="VistasReportes\VistaAdmiReportes.aspx" />
+    <Content Include="VistasReportes\ConsultaActividadesRegistradas.aspx" />
     <Content Include="VistasReportes\VistaEncuentros_Ciudadanos_por_la_Seguridad.aspx" />
     <Content Include="VistasReportes\vistaInforme_Redes_vecinales.aspx" />
     <Content Include="VistasReportes\Vista_de_reportes_dependencia.aspx" />
@@ -2877,12 +2878,12 @@
     <Compile Include="VistasReportes\Informe_Construccion_Cultura_Incluyente.aspx.designer.cs">
       <DependentUpon>Informe_Construccion_Cultura_Incluyente.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\VistaAdmiReportes.aspx.cs">
-      <DependentUpon>VistaAdmiReportes.aspx</DependentUpon>
+    <Compile Include="VistasReportes\ConsultaActividadesRegistradas.aspx.cs">
+      <DependentUpon>ConsultaActividadesRegistradas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VistasReportes\VistaAdmiReportes.aspx.designer.cs">
-      <DependentUpon>VistaAdmiReportes.aspx</DependentUpon>
+    <Compile Include="VistasReportes\ConsultaActividadesRegistradas.aspx.designer.cs">
+      <DependentUpon>ConsultaActividadesRegistradas.aspx</DependentUpon>
     </Compile>
     <Compile Include="VistasReportes\VistaEncuentros_Ciudadanos_por_la_Seguridad.aspx.cs">
       <DependentUpon>VistaEncuentros_Ciudadanos_por_la_Seguridad.aspx</DependentUpon>

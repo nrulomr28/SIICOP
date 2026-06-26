@@ -1,0 +1,227 @@
+﻿/* ==========================================================
+   VISTA DE REPORTES
+   ----------------------------------------------------------
+   Aquí concentro todos los estilos exclusivos de la pantalla
+   de Consulta de Actividades.
+
+   No modifico styleFormularios.css para evitar afectar otros
+   formularios del sistema.
+   ========================================================== */
+
+
+/* ==========================================================
+   ENCABEZADO
+   ----------------------------------------------------------
+   Defino la identidad visual de la pantalla.
+   ========================================================== */
+
+.page-header-report {
+    margin-bottom: 2rem;
+}
+
+    .page-header-report h2 {
+        color: #611232;
+        font-weight: 600;
+        margin-bottom: .35rem;
+    }
+
+    .page-header-report p {
+        color: #6c757d;
+        margin-bottom: 0;
+    }
+
+
+/* ==========================================================
+   CONTENEDOR GENERAL
+   ----------------------------------------------------------
+   Centralizo el contenido y evito que el formulario se
+   expanda demasiado en pantallas grandes.
+   ========================================================== */
+
+.report-container {
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+
+/* ==========================================================
+   PROGRAMAS
+   ----------------------------------------------------------
+   Agrupo visualmente los programas sin alterar su
+   funcionalidad. Solamente mejoro la presentación.
+   ========================================================== */
+
+.report-programs {
+    margin-bottom: 2.5rem;
+}
+
+.program-card {
+    text-align: center;
+    padding: 16px 12px;
+    border-radius: 12px;
+    transition: .25s ease;
+    cursor: default;
+}
+
+    .program-card img {
+        height: 40px;
+        margin-bottom: 10px;
+    }
+
+    .program-card p {
+        font-size: .90rem;
+        margin-bottom: 0;
+    }
+
+    .program-card:hover {
+        background: #f8f9fa;
+        transform: translateY(-2px);
+    }
+
+
+/* ==========================================================
+   FILTROS
+   ----------------------------------------------------------
+   Encierro los filtros dentro de una tarjeta para separar
+   claramente el área de búsqueda del resto del formulario.
+   ========================================================== */
+
+.report-filters {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+}
+
+    .report-filters .form-control,
+    .report-filters select {
+        transition: border-color .20s ease, box-shadow .20s ease;
+    }
+
+        .report-filters .form-control:focus,
+        .report-filters select:focus {
+            border-color: #611232;
+            box-shadow: 0 0 0 .20rem rgba(97,18,50,.15);
+        }
+    .report-filters label {
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: .35rem;
+    }
+/* ==========================================================
+   ACCIONES
+   ----------------------------------------------------------
+   Mantengo todos los botones alineados y permito que se
+   acomoden automáticamente cuando la pantalla sea pequeña.
+   ========================================================== */
+
+.report-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+
+/* ==========================================================
+   RESULTADOS
+   ----------------------------------------------------------
+   Preparo el contenedor donde vivirá el GridView.
+   Aquí concentraré posteriormente estilos de encabezados,
+   paginación y total de registros.
+   ========================================================== */
+
+.report-grid {
+    margin-top: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+}
+
+.report-grid-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: .75rem;
+}
+
+.report-total {
+    background: #611232;
+    color: #fff;
+    padding: .55rem 1rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: .95rem;
+}
+.report-grid table {
+    margin-bottom: 0;
+}
+
+.report-grid .table-responsive {
+    margin-top: 1rem;
+}
+
+.report-grid .table thead th {
+    background: #611232;
+    color: #ffffff;
+    border-color: #7b173e;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.report-grid table tbody td {
+    vertical-align: middle;
+}
+
+.report-grid table tbody tr:hover {
+    background: #fff9e8;
+}
+
+/* ==========================================================
+   TÍTULOS DE SECCIÓN
+   ----------------------------------------------------------
+   Mantengo un estilo homogéneo para futuras secciones del
+   formulario como Resultados, Exportación o Indicadores.
+   ========================================================== */
+
+.report-section-title {
+    color: #611232;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+   ----------------------------------------------------------
+   Ajusto algunos espacios cuando la pantalla se reduce para
+   mantener una buena experiencia de uso.
+   ========================================================== */
+
+@media (max-width: 992px) {
+
+    .page-header-report {
+        text-align: center;
+    }
+
+    .program-card {
+        margin-bottom: 1rem;
+    }
+
+    .report-actions {
+        justify-content: center;
+    }
+
+    .report-grid-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .75rem;
+    }
+}
+/*BOTONES*/
+.report-actions .btn {
+    min-width: 120px;
+}

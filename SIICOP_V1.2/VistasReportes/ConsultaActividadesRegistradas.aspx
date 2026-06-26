@@ -1,63 +1,73 @@
-﻿<%@ Page Title="VISTA DE RESÚMEN" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="VistaAdmiReportes.aspx.cs" Inherits="SIICOP_V1._2.VistasReportes.VistaAdmiReportes" %>
+﻿<%@ Page Title="Consulta de actividades registradas" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ConsultaActividadesRegistradas.aspx.cs" Inherits="SIICOP_V1._2.VistasReportes.ConsultaActividadesRegistradas" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
     <link href="../Content/styleFormularios.css" rel="stylesheet" />
+    <link href="../Content/vista-reportes.css" rel="stylesheet" />
 
+    <div class="page-header-report">
 
-    <div class="container" style="padding-top: 3%">
-        <div class="row">
-            <div id="sidebar">
-                <div class="sosmed">
-                    <div class="user">
-                        <div class="user-head">
-                            <h1>VISTA DE RESÚMENES</h1>
-                            <div class="hr-center"></div>
+    <h2>Consulta de Actividades</h2>
 
-                        </div>
-                        <div class="link-me">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <p>
+        Consulta, filtrado y exportación de actividades registradas.
+    </p>
 
+</div>
 
     <div class="container-fluid">
         <div class="col-md-12">
             <div class="row">
-                <div class="col-md-1" style="text-align: center">
+                <div  class="col-lg-2 col-md-4 col-sm-6">
+                     <div class="program-card">
                     <img src="../Imagenes/PinesReporte/Empresarial.png" />
                     <p>Enlace con el Sector Empresarial</p>
+                         </div>
                 </div>
 
-                <div class="col-md-1" style="text-align: center">
+                <div class="col-lg-2 col-md-4 col-sm-6">
+
+                <div class="program-card">
                     <img src="../Imagenes/PinesReporte/RedesVecinales.png" />
                     <p>Redes vecinales</p>
                 </div>
-                <div class="col-md-1" style="text-align: center">
+                    </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+
+                    <div class="program-card">
                     <img src="../Imagenes/PinesReporte/Escolar.png" />
                     <p>Seguridad Ciudadana y Paz Social en Entornos Educativos</p>
                 </div>
-                <div class="col-md-1" style="text-align: center">
+                    </div>
+                <div class="col-lg-2 col-md-4 col-sm-6">
+
+                    <div class="program-card">
                     <img src="../Imagenes/PinesReporte/ViolenciaGenero.png" />
                     <p>Prevención de la Violencia por Razones de Género</p>
+                        </div>
                 </div>
-                <div class="col-md-1" style="text-align: center">
+                <div class="col-lg-2 col-md-4 col-sm-6">
+
+                    <div class="program-card">
                     <img src="../Imagenes/PinesReporte/EncuentroCiudadano.png" />
                     <p>Encuentros Ciudadanos por la Seguridad</p>
+                        </div>
                 </div>
-                <div class="col-md-1" style="text-align: center">
+                <div class="col-lg-2 col-md-4 col-sm-6">
+
+                <div class="program-card">
                     <img src="../Imagenes/PinesReporte/ConstrucionCultura.png" />
                     <p>Inclusión de personas en situación de vunerabilidad</p>
                 </div>
+                    </div>
 
-                <div class="col-md-1" style="text-align: center">
+                <div class="col-lg-2 col-md-4 col-sm-6">
+
+                    <div class="program-card">
                     <img src="../Imagenes/PinesReporte/DeporteYcultura.png" />
                     <p>Fomento a la Prevención a través del Deporte la Cultura</p>
                 </div>
-
+                    </div>
             </div>
         </div>
     </div>
@@ -66,10 +76,9 @@
 
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
+            <div class="report-filters">
 
-
-            <div class="container-fluid">
-                <div class="well" style="background-color: white">
+            <div class="container-fluid">                
 
                     <div class="row">
                         <div class="col-md-2">
@@ -132,7 +141,6 @@
 
                     </div>
 
-
                     <div class="row">
 
                         <div class="col-md-4">
@@ -149,7 +157,12 @@
 
                             <div class="col-md-1">
 
-                                <asp:LinkButton ID="btnBuscar" runat="server" CssClass="btn btn-info" Text="Buscar" OnClick="btnBuscar_Click"><span class="glyphicon glyphicon-search"></span>&nbsp;Buscar</asp:LinkButton>
+                                <asp:LinkButton ID="btnBuscar" runat="server" 
+                                    CssClass="btn btn-info" Text="Buscar" 
+                                    OnClick="btnBuscar_Click">
+                                    <span class="glyphicon glyphicon-search">
+
+                                    </span>&nbsp;Buscar</asp:LinkButton>
 
                             </div>
 
@@ -157,16 +170,16 @@
 
                                 <div class="dropdown">
                                     <a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><b>Descargar</b> <b class="caret"></b>&nbsp;<span class="fa fa-download" aria-hidden="true"></span></a>
-                                    <ul class="dropdown-menu" style="font-size: 11px;">
+                                    <ul class="dropdown-menu">
                                         <li runat="server">
-                                            <asp:LinkButton ID="lkbtnexcel" runat="server" Style="font-size: 1.5em" Text="excel" title="Exportar" OnClick="lkbtnexcel_Click">Actividades&nbsp;<span class="far fa-file-excel" style="color:green"></span></asp:LinkButton>
+                                            <asp:LinkButton ID="lkbtnexcel" runat="server"  Text="excel" title="Exportar" OnClick="lkbtnexcel_Click">Actividades&nbsp;<span class="far fa-file-excel" ></span></asp:LinkButton>
                                         </li>
                                         <li runat="server">
-                                            <asp:LinkButton ID="lnBtnExpCedula" runat="server" Style="font-size: 1.5em" Text="excel" title="Exportar" OnClick="lnBtnExpCedula_Click1">Cedulas &nbsp;<span style="color:blue" class="fas fa-chart-line"></span></asp:LinkButton>
+                                            <asp:LinkButton ID="lnBtnExpCedula" runat="server"  Text="excel" title="Exportar" OnClick="lnBtnExpCedula_Click1">Cedulas &nbsp;<span ></span></asp:LinkButton>
                                         </li>
 
                                         <li runat="server">
-                                            <asp:LinkButton ID="lnkbtnZip" runat="server" Style="font-size: 1.5em" Text="Foto" title="Exportar" OnClick="lnkbtnZip_Click">Imagenes &nbsp;<span style="color:RED" class="fa fa-file-archive"></span></asp:LinkButton>
+                                            <asp:LinkButton ID="lnkbtnZip" runat="server"  Text="Foto" title="Exportar" OnClick="lnkbtnZip_Click">Imagenes &nbsp;<span  class="fa fa-file-archive"></span></asp:LinkButton>
                                         </li>
                                     </ul>
                                 </div>
@@ -174,102 +187,282 @@
 
                         </div>
                         <div class="col-md-1" runat="server" id="Div1">
-                            <asp:LinkButton ID="lkmapa" runat="server" CssClass="btn btn-warning" Style="font-size: 1.8em" Text="excel" title="Ver georeferencia" OnClick="lkmapa_Click"><span class="fas fa-map-marked-alt"></span>&nbsp;</asp:LinkButton>
+                            <asp:LinkButton ID="lkmapa" runat="server" CssClass="btn btn-warning" Text="excel" title="Ver georeferencia" OnClick="lkmapa_Click"><span class="fas fa-map-marked-alt"></span>&nbsp;</asp:LinkButton>
                         </div>
                     </div>
 
 
-                    <br />
-                    <div class="col-lg-2 pull-right">
-                        <div class="form-group pull-right">
-                            <asp:Label ID="lblTotalRegistros" runat="server" CssClass="label label-warning" Font-Size="18px" Font-Bold="true"></asp:Label>
-                        </div>
+                    <div class="report-grid">
+
+    <div class="report-grid-header">
+
+        <h4 class="report-section-title">
+            Resultados
+        </h4>
+
+        <asp:Label
+            ID="lblTotalRegistros"
+            runat="server"
+            CssClass="report-total">
+        </asp:Label>
+
+    </div>
+
+    <div class="table-responsive">
+
+        <asp:GridView
+            ID="GvPCAdmin"
+            runat="server"
+            EmptyDataText="Sin registros."
+
+            CssClass="table table-striped table-bordered table-hover table-sm"
+
+            CellPadding="3"
+
+            AllowPaging="True"
+
+            PageSize="10"
+
+            AutoGenerateColumns="False"
+
+            DataKeyNames="idResumenDiario,programasID"
+
+            AllowSorting="True"
+
+            OnRowCommand="GvPCAdmin_RowCommand"
+
+            OnRowDataBound="GvPCAdmin_RowDataBound"
+
+            OnRowCreated="GvPCAdmin_RowCreated">
+
+            <Columns>
+
+                <asp:BoundField
+                    DataField="FolioActividad"
+                    HeaderText="Folio"
+                    SortExpression="FolioActividad" />
+
+                <asp:TemplateField
+                    HeaderText="Fecha"
+                    SortExpression="fecha">
+
+                    <ItemTemplate>
+
+                        <asp:Label
+                            ID="Label1"
+                            runat="server"
+                            Text='<%# Bind("fecha","{0:dddd-dd-MMMM-yyyy}") %>' />
+
+                    </ItemTemplate>
+
+                </asp:TemplateField>
+
+                <asp:BoundField
+                    DataField="MUNICIPIO"
+                    HeaderText="Municipio"
+                    SortExpression="MUNICIPIO" />
+
+                <asp:BoundField
+                    DataField="nombrecompleto"
+                    HeaderText="Capturista"
+                    SortExpression="nombrecompleto" />
+
+                <asp:BoundField
+                    DataField="personal_atendio_actividad"
+                    HeaderText="Encargado de actividad"
+                    SortExpression="personal_atendio_actividad" />
+
+                <asp:BoundField
+                    DataField="AreaTrabajo"
+                    HeaderText="Delegación o Conurbación"
+                    SortExpression="AreaTrabajo" />
+
+                <asp:BoundField
+                    DataField="NombrePrograma"
+                    HeaderText="Programa"
+                    SortExpression="NombrePrograma" />
+
+                <asp:BoundField
+                    DataField="NombreSubPrograma"
+                    HeaderText="Subprograma"
+                    SortExpression="NombreSubPrograma" />
+
+                <asp:BoundField
+                    DataField="AccionesNombre"
+                    HeaderText="Acciones"
+                    SortExpression="AccionesNombre" />
+
+                <asp:BoundField
+                    DataField="TotalHombresAtendidos"
+                    HeaderText="Hombres"
+                    SortExpression="TotalHombresAtendidos" />
+
+                <asp:BoundField
+                    DataField="TotalMujeresAtendidas"
+                    HeaderText="Mujeres"
+                    SortExpression="TotalMujeresAtendidas" />
+
+                <asp:BoundField
+                    DataField="total_atendidos"
+                    HeaderText="Total beneficiados"
+                    SortExpression="total_atendidos" />
+
+                <asp:BoundField
+                    DataField="descripcion_actividad"
+                    HeaderText="Descripción"
+                    SortExpression="descripcion_actividad" />
+
+                <asp:TemplateField HeaderText="Pin">
+
+                    <ItemTemplate>
+
+                        <asp:Image
+                            ID="imgpato"
+                            runat="server"
+                            Width="25"
+                            Height="25"
+                            AlternateText='<%# Eval("programasID") %>' />
+
+                    </ItemTemplate>
+
+                    <ItemStyle HorizontalAlign="Center" />
+
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="¿Fotos cargadas?">
+
+                    <ItemTemplate>
+
+                        <asp:ImageButton
+                            ID="imgFoto"
+                            runat="server"
+                            Width="25"
+                            Height="25"
+                            AlternateText='<%# Eval("fotos") %>'
+                            CommandArgument='<%# Eval("idResumenDiario") %>'
+                            CommandName="VERFOTO"
+                            ToolTip="Ver fotografías" />
+
+                    </ItemTemplate>
+
+                    <ItemStyle HorizontalAlign="Center" />
+
+                </asp:TemplateField>
+
+                <asp:TemplateField ShowHeader="False">
+
+                    <ItemTemplate>
+
+                        <asp:LinkButton
+
+                            ID="lkbEditar"
+
+                            runat="server"
+
+                            CssClass="btn btn-primary btn-sm"
+
+                            CommandName="Editar"
+
+                            CommandArgument='<%# Eval("idResumenDiario") %>'
+
+                            CausesValidation="False"
+
+                            ToolTip="Editar">
+
+                            <i class="fas fa-edit"></i>
+
+                        </asp:LinkButton>
+
+                    </ItemTemplate>
+
+                    <ItemStyle HorizontalAlign="Center" />
+
+                </asp:TemplateField>
+
+                <asp:TemplateField ShowHeader="False">
+
+                    <ItemTemplate>
+
+                        <asp:LinkButton
+
+                            ID="lkbEliminar"
+
+                            runat="server"
+
+                            CssClass="btn btn-danger btn-sm"
+
+                            CommandName="Eliminar"
+
+                            CommandArgument='<%# Eval("idResumenDiario") %>'
+
+                            CausesValidation="False"
+
+                            ToolTip="Eliminar">
+
+                            <i class="fa fa-trash"></i>
+
+                        </asp:LinkButton>
+
+                    </ItemTemplate>
+
+                    <ItemStyle HorizontalAlign="Center" />
+
+                </asp:TemplateField>
+
+            </Columns>
+
+            <PagerTemplate>
+
+                <div class="row align-items-center">
+
+                    <div class="col-auto">
+
+                        <strong>Página</strong>
+
                     </div>
-                    <div class="row">
 
-                        <asp:GridView ID="GvPCAdmin" runat="server" EmptyDataText="Sin Registros"
-                            CssClass="table table-striped  table-bordered table-hover  table-sm table-responsive"
-                            CellPadding="3" AllowPaging="True" PageSize="10"
-                            AutoGenerateColumns="False" DataKeyNames="idResumenDiario,programasID"                            
-                            OnRowCommand="GvPCAdmin_RowCommand"
-                            OnRowDataBound="GvPCAdmin_RowDataBound"
-                            OnRowCreated="GvPCAdmin_RowCreated" AllowSorting="True">
-                            <Columns>
-                                <asp:BoundField DataField="FolioActividad" HeaderText="Folio" SortExpression="FolioActividad"></asp:BoundField>
+                    <div class="col-auto">
 
-                                <asp:TemplateField HeaderText="Fecha" SortExpression="fecha">
-                                    <ItemTemplate>
-                                        <asp:Label runat="server" Text='<%# Bind("fecha", "{0:dddd-dd-MMMM-yyyy}") %>' ID="Label1"></asp:Label>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:BoundField DataField="MUNICIPIO" HeaderText="Municipio" SortExpression="MUNICIPIO"></asp:BoundField>
-                                <asp:BoundField DataField="nombrecompleto" HeaderText="Capturista" SortExpression="nombrecompleto"></asp:BoundField>
-                                <asp:BoundField DataField="personal_atendio_actividad" HeaderText="Encargado de actividad" SortExpression="personal_atendio_actividad"></asp:BoundField>
-                                <asp:BoundField DataField="AreaTrabajo" HeaderText="Delegación o Conurbación" SortExpression="AreaTrabajo"></asp:BoundField>
-                                <asp:BoundField DataField="NombrePrograma" HeaderText="Programa" SortExpression="NombrePrograma"></asp:BoundField>
-                                <asp:BoundField DataField="NombreSubPrograma" HeaderText="Subprograma" SortExpression="NombreSubPrograma"></asp:BoundField>
-                                <asp:BoundField DataField="AccionesNombre" HeaderText="Acciones" SortExpression="AccionesNombre"></asp:BoundField>
-                                <asp:BoundField DataField="TotalHombresAtendidos" HeaderText="Hombres" SortExpression="TotalHombresAtendidos"></asp:BoundField>
-                                <asp:BoundField DataField="TotalMujeresAtendidas" HeaderText="Mujeres" SortExpression="TotalMujeresAtendidas"></asp:BoundField>
-                                <asp:BoundField DataField="total_atendidos" HeaderText="Total beneficiados" SortExpression="total_atendidos"></asp:BoundField>
-                                <asp:BoundField DataField="descripcion_actividad" HeaderText="Descripción" SortExpression="descripcion_actividad"></asp:BoundField>
+                        <asp:DropDownList
 
-                                <asp:TemplateField HeaderText="Pin">
-                                    <ItemTemplate>
-                                        <asp:Image runat="server" AlternateText='<%# Eval("programasID") %>' ID="imgpato" Width="25" Height="25"></asp:Image>
-                                    </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
-                                </asp:TemplateField>
-                                <asp:TemplateField HeaderText="¿Fotos cargadas?">
-                                    <ItemTemplate>
-                                        <asp:ImageButton runat="server" AlternateText='<%# Eval("fotos") %>' ID="imgFoto" Width="25" Height="25" CommandArgument='<%# Eval("idResumenDiario") %>' CommandName="VERFOTO" ToolTip="Ver fotos" />
-                                    </ItemTemplate>
-                                    <ItemStyle HorizontalAlign="Center"></ItemStyle>
-                                </asp:TemplateField>
+                            ID="PageDropDownListAdmin"
 
-                                <asp:TemplateField ShowHeader="False">
-                                    <ItemTemplate>
+                            runat="server"
 
-                                        <div class="col-md-7">
-                                            <asp:LinkButton runat="server" Text="Editar" class="btn btn-primary btn-sm" CommandName="Editar" CausesValidation="False" ID="lkbEditar" ToolTip="Editar" CommandArgument='<%# Eval("idResumenDiario") %>'>
-                                    <i class="fas fa-edit" ></i>
-                                            </asp:LinkButton>
-                                        </div>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:TemplateField ShowHeader="False">
-                                    <ItemTemplate>
-                                        <div class="col-md-7">
-                                            <asp:LinkButton runat="server" Text="Eliminar" class="btn btn-danger btn-sm" CommandName="Eliminar" CausesValidation="False" ID="lkbEliminar" ToolTip="Eliminar" CommandArgument='<%# Eval("idResumenDiario") %>'>
-                                    <i class="fa fa-trash"></i>
-                                            </asp:LinkButton>
-                                        </div>
-                                        </div>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                            </Columns>
-                            <PagerTemplate>
-                                <div class="row" style="margin-top: 20px;">
-                                    <div class="col-lg-1" style="text-align: right;">
-                                        <h5>
-                                            <asp:Label ID="MessageLabel" Text="Pág." runat="server" /></h5>
-                                    </div>
-                                    <div class="col-lg-2 col-md-3" style="text-align: left;">
-                                        <asp:DropDownList ID="PageDropDownListAdmin" Width="60%" AutoPostBack="true" OnSelectedIndexChanged="PageDropDownListAdmin_SelectedIndexChanged" runat="server" CssClass="form-control" /></h3>
-                                    </div>
-                                    <div class="col-lg-10" style="text-align: right;">
-                                        <h3>
-                                            <asp:Label ID="CurrentPageLabelAdmin" runat="server" CssClass="label label-success" /></h3>
-                                    </div>
-                                </div>
-                            </PagerTemplate>
-                        </asp:GridView>
+                            CssClass="form-control"
 
+                            AutoPostBack="true"
+
+                            Width="90"
+
+                            OnSelectedIndexChanged="PageDropDownListAdmin_SelectedIndexChanged" />
 
                     </div>
+
+                    <div class="col">
+
+                        <asp:Label
+
+                            ID="CurrentPageLabelAdmin"
+
+                            runat="server"
+
+                            CssClass="text-muted" />
+
+                    </div>
+
                 </div>
-            </div>
 
+            </PagerTemplate>
+
+        </asp:GridView>
+
+    </div>
+
+</div>
+                
+            </div>
+            </div>
         </ContentTemplate>
 
         <Triggers>
@@ -281,14 +474,14 @@
 
 
     <div class="modal fade bd-example-modal-lg" id="exampleModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" style="width: 100% !important" role="document">
+        <div class="modal-dialog modal-lg"  role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Ubicación geografica</h5>
                 </div>
                 <div class="modal-body">
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzKpx_jKJbeh1oiuY7p4pdfspnIcbmxco&callback=initMap" defer=""></script>
-                    <div id="map" style="width: 100%; height: 600px;"></div>
+                    <div id="map"></div>
                     <script type="text/javascript">
                         var opcion = 0;
                         var map;
@@ -368,7 +561,7 @@
                                         ' <div class="col-lg-4"></div>' +
                                         ' <div class="col-lg-4">' +
                                         '<div class="card-avatar">' +
-                                        //' <i class="fas fa-scroll" style="font-size: 2.3em;"></i>' +
+                                        
                                         ' </div>' +
                                         '</div>' +
                                         ' <div class="col-lg-4"></div>' +
@@ -493,7 +686,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabelConsultaiMG" style="text-align: center">EVIDENCIA FOTOGRAFICA.</h4>
+                    <h4 class="modal-title" id="myModalLabelConsultaiMG" >Evidencia fotográfica</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -561,7 +754,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
-                                <h3 style="text-align: center"><span class="fa fa-exclamation-triangle" aria-hidden="true" style="font-size: 2.4em; color: orange"></span></h3>
+                                <h3 ><span class="fa fa-exclamation-triangle" aria-hidden="true" ></span></h3>
                             </div>
                         </div>
                         <div class="row">

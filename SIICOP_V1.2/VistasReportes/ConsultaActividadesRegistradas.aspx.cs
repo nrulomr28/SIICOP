@@ -15,7 +15,7 @@ using System.Web.UI.WebControls;
 
 namespace SIICOP_V1._2.VistasReportes
 {
-    public partial class VistaAdmiReportes : System.Web.UI.Page
+    public partial class ConsultaActividadesRegistradas: System.Web.UI.Page
     {
         SIICOPEntities ctx = new SIICOPEntities();
 
@@ -54,9 +54,7 @@ namespace SIICOP_V1._2.VistasReportes
                 validadottxt.Text = textoValidacion;
 
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "AbrirModalValidador", "AbrirModalValidador();", true);
-
             }
-
             else
             {
                 DateTime result = new DateTime();
@@ -69,19 +67,10 @@ namespace SIICOP_V1._2.VistasReportes
                 {
                     this.Session["fFinalC"] = (object)result.ToShortDateString();
                 }
-
-
             }
             CargarDatosReporte();
         }
-
-
-        #region ####  CONTEO DE ACTIVIDADES
-
-
-
-        #endregion
-
+        
         #region****************METODO EXPORTACIÓN DE EXCEL GENERAL DE ACTIVIDADES
         protected void lkbtnexcel_Click(object sender, EventArgs e)
         {
@@ -180,8 +169,6 @@ namespace SIICOP_V1._2.VistasReportes
                 }
             }
         }        
-
-
         public DataTable ConvertToDataTable<T>(IList<T> data)
         {
             PropertyDescriptorCollection properties =
@@ -352,8 +339,7 @@ namespace SIICOP_V1._2.VistasReportes
                                 ImagenEvidencia2.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(fotoVer);
 
                             }
-
-                            //ImagenEvidencia2.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(bytes);
+                            
                             foto2.Visible = true;
                             fotodos.Visible = true;
 
@@ -380,9 +366,7 @@ namespace SIICOP_V1._2.VistasReportes
 
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "AbrirModalFotos", "AbrirModalFotos();", true);
                     }
-
                 }
-
 
             }
 
@@ -394,9 +378,6 @@ namespace SIICOP_V1._2.VistasReportes
                 var a = ctx.Personales.Where(x => x.login == sUsuarioActual).FirstOrDefault();
                 string area = a.AreaTrabajo;
                 var Eliminardatos = ctx.sp_Elimninar_Actividades(idExped, sUsuarioActual, area).ToString();
-
-
-
 
                 if (Eliminardatos == "1")
                 {
@@ -425,12 +406,8 @@ namespace SIICOP_V1._2.VistasReportes
                     ScriptManager.RegisterClientScriptBlock((Page)this, this.GetType(), "alertMessage", "alert('ERROR AL ELIMINAR LA ACTIVIDAD.');", true);
 
                 }
-
             }
-
-
         }
-
         protected void PageDropDownListAdmin_SelectedIndexChanged(object sender, EventArgs e)
         {
             {
@@ -443,9 +420,6 @@ namespace SIICOP_V1._2.VistasReportes
                 //lblInfo.Text = "";
             }
         }
-
-
-
         protected void lkmapa_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(this.txtFInicialC.Text) || string.IsNullOrEmpty(this.txtfechafin.Text))
@@ -458,32 +432,24 @@ namespace SIICOP_V1._2.VistasReportes
                 textoValidacion += "</ul>";
                 validadottxt.Text = textoValidacion;
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "AbrirModalValidador", "AbrirModalValidador();", true);
-
             }
             else
             {
-
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal();", true);
-                //ScriptManager.RegisterStartupScript(this, this.GetType(), "initMap", "initMap();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal();", true);                
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "MostrarPlanteles", "MostrarPlanteles();", true);
             }
         }
-
         protected void GvPCAdmin_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-
 
             try
             {
                 if (e.Row.RowType == DataControlRowType.DataRow)
                 {
 
-
                     int valor;
                     valor = (int)DataBinder.Eval(e.Row.DataItem, "programasID");
                     Image img = (Image)e.Row.FindControl("imgpato");
-
-
 
 
                     if (valor == 7)
@@ -560,10 +526,7 @@ namespace SIICOP_V1._2.VistasReportes
             }
         }
 
-
         #region****************METODO EXPORTACIÓN DE EXCEL CEDULAS
-
-
         protected void lnBtnExpCedula_Click1(object sender, EventArgs e)
         {
 
@@ -622,8 +585,6 @@ namespace SIICOP_V1._2.VistasReportes
             Response.Flush();
 
         }
-
-
         private void LlenaHojaBeni(OfficeOpenXml.ExcelWorksheet XlworkSheet)
         {
             try
@@ -660,7 +621,6 @@ namespace SIICOP_V1._2.VistasReportes
                 //lblError.Text = exe.Message;
             }
         }
-
         private void LlenaHojaAC_FF(OfficeOpenXml.ExcelWorksheet XlworkSheetFF)
         {
             try
@@ -696,7 +656,6 @@ namespace SIICOP_V1._2.VistasReportes
                 //lblError.Text = exe.Message;
             }
         }
-
         private void LlenaHojaAC_Redes(OfficeOpenXml.ExcelWorksheet XlworkSheetredes)
         {
             try
@@ -732,7 +691,6 @@ namespace SIICOP_V1._2.VistasReportes
                 //lblError.Text = exe.Message;
             }
         }
-
         private void LlenaHojaAC_Escolar(OfficeOpenXml.ExcelWorksheet XlworkSheetEscolar)
         {
             try
@@ -768,7 +726,6 @@ namespace SIICOP_V1._2.VistasReportes
                 //lblError.Text = exe.Message;
             }
         }
-
         private void LlenaHojaAC_Deporte(OfficeOpenXml.ExcelWorksheet XlworkSheetDeporte)
         {
             try
@@ -804,7 +761,6 @@ namespace SIICOP_V1._2.VistasReportes
                 //lblError.Text = exe.Message;
             }
         }
-
         private void LlenaHojaAC_Genero(OfficeOpenXml.ExcelWorksheet XlworkSheetGenero)
         {
             try
@@ -840,7 +796,6 @@ namespace SIICOP_V1._2.VistasReportes
                 //lblError.Text = exe.Message;
             }
         }
-
         private void LlenaHojaAC_Empresarial(OfficeOpenXml.ExcelWorksheet XlworkSheetEmpresarial)
         {
             try
@@ -876,7 +831,6 @@ namespace SIICOP_V1._2.VistasReportes
                 //lblError.Text = exe.Message;
             }
         }
-
         private void LlenaHojaAC_Convenios(OfficeOpenXml.ExcelWorksheet XlworkSheetConvenios)
         {
             try
@@ -912,7 +866,6 @@ namespace SIICOP_V1._2.VistasReportes
                 
             }
         }
-
         private void LlenaHojaAC_Inclusion(OfficeOpenXml.ExcelWorksheet XlworkSheetInclusion)
         {
             try
@@ -949,10 +902,7 @@ namespace SIICOP_V1._2.VistasReportes
             }
         }
 
-
         #endregion
-
-
 
         protected void GvPCAdmin_RowCreated(object sender, GridViewRowEventArgs e)
         {
@@ -978,7 +928,6 @@ namespace SIICOP_V1._2.VistasReportes
             }
         }
 
-
         private void CargarProgramas()
         {
             try
@@ -999,8 +948,6 @@ namespace SIICOP_V1._2.VistasReportes
             }
 
         }
-
-
         private void CargarZonas()
         {
             try
@@ -1040,8 +987,6 @@ namespace SIICOP_V1._2.VistasReportes
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }
         }
-
-
         protected void CargarDatosReporte()
         {
             try
@@ -1272,8 +1217,6 @@ namespace SIICOP_V1._2.VistasReportes
             }
 
 
-
-
         }
 
         protected void lnkbtnZip_Click(object sender, EventArgs e)
@@ -1311,8 +1254,6 @@ namespace SIICOP_V1._2.VistasReportes
                 ddlLocalidad.Items.Insert(0, new ListItem("-- Selecciona localidad --", "0"));
             }
         }
-
-
         private void CargarLocalidades(int municipioId)
         {
             try
@@ -1336,7 +1277,6 @@ namespace SIICOP_V1._2.VistasReportes
             }
 
         }
-
         protected void ddlZona_SelectedIndexChanged(object sender, EventArgs e)
         {
             int zonaId = int.Parse(ddlZona.SelectedValue);

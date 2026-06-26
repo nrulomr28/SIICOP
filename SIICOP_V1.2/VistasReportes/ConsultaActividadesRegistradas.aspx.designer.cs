@@ -11,7 +11,7 @@ namespace SIICOP_V1._2.VistasReportes
 {
 
 
-    public partial class VistaAdmiReportes
+    public partial class ConsultaActividadesRegistradas
     {
 
         /// <summary>
