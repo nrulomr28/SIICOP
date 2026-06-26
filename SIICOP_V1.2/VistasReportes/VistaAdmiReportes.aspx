@@ -190,8 +190,7 @@
                         <asp:GridView ID="GvPCAdmin" runat="server" EmptyDataText="Sin Registros"
                             CssClass="table table-striped  table-bordered table-hover  table-sm table-responsive"
                             CellPadding="3" AllowPaging="True" PageSize="10"
-                            AutoGenerateColumns="False" DataKeyNames="idResumenDiario,programasID"
-                            OnDataBound="GvPCAdmin_DataBound"
+                            AutoGenerateColumns="False" DataKeyNames="idResumenDiario,programasID"                            
                             OnRowCommand="GvPCAdmin_RowCommand"
                             OnRowDataBound="GvPCAdmin_RowDataBound"
                             OnRowCreated="GvPCAdmin_RowCreated" AllowSorting="True">

@@ -31,13 +31,7 @@ namespace SIICOP_V1._2.VistasReportes
                 {
 
                     CargarProgramas();
-                    CargarZonas();
-                    //CargarMunicipios();
-                   // CargarDatosReporte();
-
-                    //conteoactividadesAdmin();
-
-                    //GvPCAdmin.Rows[0].Visible = false;
+                    CargarZonas();                    
                 }
                 else
                 {
@@ -159,18 +153,7 @@ namespace SIICOP_V1._2.VistasReportes
                    }).ToList();
                 #endregion
                 var workSheet = excel.Workbook.Worksheets.Add("Hoja1");
-                workSheet.Cells[1, 1].LoadFromCollection(informe, true);
-
-                //using (var memoryStream = new MemoryStream())
-                //{
-                //    Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                //    Response.AddHeader("content-disposition", "attachment;  filename=Total_Activides.xlsx");
-                //    excel.SaveAs(memoryStream);
-                //    memoryStream.WriteTo(Response.OutputStream);
-                //    Response.Flush();
-                //    Response.End();
-                //}
-
+                workSheet.Cells[1, 1].LoadFromCollection(informe, true);                
 
 
                 using (var memoryStream = new MemoryStream())
@@ -196,80 +179,7 @@ namespace SIICOP_V1._2.VistasReportes
                     HttpContext.Current.ApplicationInstance.CompleteRequest();
                 }
             }
-        }
-
-        private void LlenaHoja(OfficeOpenXml.ExcelWorksheet xlWorkSheetGral)
-        {
-            try
-            {
-                dtPrincipal = null;
-                int Renglon;
-                if (Session["dtPrincipal"] == null)
-                {
-                    bool convertidoFI = false;
-                    bool convertidoFF = false;
-                    DateTime fechaInicial = new DateTime();
-                    convertidoFI = DateTime.TryParse(txtFInicialC.Text, out fechaInicial);
-                    DateTime fechaFinal = new DateTime();
-                    convertidoFF = DateTime.TryParse(txtfechafin.Text, out fechaFinal);
-                    int tiprograma = Convert.ToInt32(ddlProgramas.SelectedValue);
-
-                    if (tiprograma == 0)
-                    {
-                        List<Wv_DatosReportesHistorico> listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF) && (R.Dependencia == "SSP DVI"))).ToList();
-                        dtPrincipal = ConvertToDataTable(listaReportes);
-                    }
-                    else
-                    {
-                        List<Wv_DatosReportesHistorico> listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF) && (R.Dependencia == "SSP DVI") && R.programasID == tiprograma)).ToList();
-                        dtPrincipal = ConvertToDataTable(listaReportes);
-                    }
-
-
-                    for (Renglon = 0; Renglon < dtPrincipal.Rows.Count; Renglon++)
-                    {
-                        xlWorkSheetGral.Cells[Renglon + 2, 1].Value = dtPrincipal.Rows[Renglon]["fecha"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 2].Value = dtPrincipal.Rows[Renglon]["Nombre_capturista"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 3].Value = dtPrincipal.Rows[Renglon]["RegionNombre"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 4].Value = dtPrincipal.Rows[Renglon]["DelegacionNombre"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 5].Value = dtPrincipal.Rows[Renglon]["MUNICIPIO"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 6].Value = dtPrincipal.Rows[Renglon]["calveMuni"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 7].Value = dtPrincipal.Rows[Renglon]["Localidad"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 8].Value = dtPrincipal.Rows[Renglon]["clavelocali"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 9].Value = dtPrincipal.Rows[Renglon]["NombrePrograma"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 10].Value = dtPrincipal.Rows[Renglon]["NombreSubPrograma"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 11].Value = dtPrincipal.Rows[Renglon]["AccionesNombre"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 12].Value = dtPrincipal.Rows[Renglon]["niños"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 13].Value = dtPrincipal.Rows[Renglon]["niñas"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 14].Value = dtPrincipal.Rows[Renglon]["hombres"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 15].Value = dtPrincipal.Rows[Renglon]["mujeres"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 16].Value = dtPrincipal.Rows[Renglon]["docentesH"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 17].Value = dtPrincipal.Rows[Renglon]["docentesM"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 18].Value = dtPrincipal.Rows[Renglon]["TotalHombresAtendidos"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 19].Value = dtPrincipal.Rows[Renglon]["TotalMujeresAtendidas"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 20].Value = dtPrincipal.Rows[Renglon]["total_atendidos"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 21].Value = dtPrincipal.Rows[Renglon]["calle"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 22].Value = dtPrincipal.Rows[Renglon]["coloni"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 23].Value = dtPrincipal.Rows[Renglon]["NombreLugar_Escuela"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 24].Value = dtPrincipal.Rows[Renglon]["ClavePlantel"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 25].Value = dtPrincipal.Rows[Renglon]["Turno"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 26].Value = dtPrincipal.Rows[Renglon]["Nivel"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 27].Value = dtPrincipal.Rows[Renglon]["NombreContacto"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 28].Value = dtPrincipal.Rows[Renglon]["telcel"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 29].Value = dtPrincipal.Rows[Renglon]["Latitud"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 30].Value = dtPrincipal.Rows[Renglon]["Longitud"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 31].Value = dtPrincipal.Rows[Renglon]["FolioActividad"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 32].Value = dtPrincipal.Rows[Renglon]["idResumenDiario"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 33].Value = dtPrincipal.Rows[Renglon]["DelegacionOcoonurbacion"];
-                    }
-                }
-            }
-            catch (Exception exe)
-            {
-                //lblError.Text = exe.Message;
-            }
-
-        }
+        }        
 
 
         public DataTable ConvertToDataTable<T>(IList<T> data)
@@ -298,55 +208,7 @@ namespace SIICOP_V1._2.VistasReportes
             Session["dtPrincipal"] = listado;
 
 
-        }
-
-
-
-
-        //#endregion
-
-
-        protected void GvPCAdmin_DataBound(object sender, EventArgs e)
-        {
-            //try
-            //{
-            //    // Recupera la el PagerRow...
-            //    GridViewRow pagerRow = GvPCAdmin.BottomPagerRow;
-            //    // Recupera los controles DropDownList y label...
-            //    DropDownList pageList = (DropDownList)pagerRow.FindControl("PageDropDownListAdmin");
-            //    Label pageLabel = (Label)pagerRow.FindControl("CurrentPageLabelAdmin");
-            //    if ((pageList != null))
-            //    {
-            //        // Se crean los valores del DropDownList tomando el número total de páginas... 
-            //        int i = 0;
-            //        for (i = 0; i <= GvPCAdmin.PageCount - 1; i++)
-            //        {
-            //            // Se crea un objeto ListItem para representar la �gina...
-            //            int pageNumber = i + 1;
-            //            ListItem item = new ListItem(pageNumber.ToString());
-            //            if (i == GvPCAdmin.PageIndex)
-            //            {
-            //                item.Selected = true;
-            //            }
-            //            // Se añade el ListItem a la colección de Items del DropDownList...
-            //            pageList.Items.Add(item);
-            //        }
-            //    }
-            //    if ((pageLabel != null))
-            //    {
-            //        // Calcula el nº de �gina actual...
-            //        int currentPage = GvPCAdmin.PageIndex + 1;
-            //        // Actualiza el Label control con la �gina actual.
-            //        pageLabel.Text = "Página " + currentPage.ToString() + " de " + GvPCAdmin.PageCount.ToString();
-
-            //    }
-            //}
-            //catch
-            //{
-
-            //}
-
-        }
+        }        
 
         protected void GvPCAdmin_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -688,12 +550,7 @@ namespace SIICOP_V1._2.VistasReportes
                     {
                         e.Row.Cells[5].Text = "Conurbación Xalapa";
                     }
-
-
-                    //if (e.Row.Cells[0].Text != null)
-                    //{
-                    //    e.Row.Cells[0].Text = "Aun no se genera el folio";
-                    //}
+                    
 
                 }
             }
@@ -763,7 +620,6 @@ namespace SIICOP_V1._2.VistasReportes
             Response.AddHeader("Content-disposition", "attachment;filename=T_Avance_de_indicadores_DVI.xlsx" + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Millisecond.ToString() + ".xlsx");
             Response.WriteFile(ArchivoPath);
             Response.Flush();
-
 
         }
 
@@ -1053,7 +909,7 @@ namespace SIICOP_V1._2.VistasReportes
             }
             catch (Exception exe)
             {
-                //lblError.Text = exe.Message;
+                
             }
         }
 
@@ -1089,7 +945,7 @@ namespace SIICOP_V1._2.VistasReportes
             }
             catch (Exception exe)
             {
-                //lblError.Text = exe.Message;
+                
             }
         }
 
@@ -1186,8 +1042,6 @@ namespace SIICOP_V1._2.VistasReportes
         }
 
 
-
-
         protected void CargarDatosReporte()
         {
             try
@@ -1265,7 +1119,7 @@ namespace SIICOP_V1._2.VistasReportes
             Response.ContentType = "application/zip";
             Response.Cookies.Add(new HttpCookie("downloadStarted", "1") { Expires = DateTime.Now.AddSeconds(40) });
             string nombreArchivo = "";
-            //List<tb_fotografia> foto = ctx.tb_fotografia.Where(x => x.idResumenDiario == idExped).ToList();
+            
             int programa = Convert.ToInt32(ddlProgramas.SelectedValue);
 
 
@@ -1327,8 +1181,7 @@ namespace SIICOP_V1._2.VistasReportes
                                 nombreArchivo = $"{fol1}.{x[x.Length - 1]}";
 
                             }
-
-                            //nombreArchivo = FOlio;
+                            
                             var fileEntry = new ZipEntry(nombreArchivo)
                             {
 
