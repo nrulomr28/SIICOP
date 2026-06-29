@@ -73,6 +73,13 @@
     </div>
 
 
+    <asp:LinkButton ID="lkbtnexcel" 
+    runat="server"  
+    Text="excel" 
+    title="Exportar" 
+    OnClick="lkbtnexcel_Click">Actividades&nbsp;<span class="far fa-file-excel" ></span>
+
+</asp:LinkButton>
 
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
@@ -172,7 +179,7 @@
                                     <a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><b>Descargar</b> <b class="caret"></b>&nbsp;<span class="fa fa-download" aria-hidden="true"></span></a>
                                     <ul class="dropdown-menu">
                                         <li runat="server">
-                                            <asp:LinkButton ID="lkbtnexcel" runat="server"  Text="excel" title="Exportar" OnClick="lkbtnexcel_Click">Actividades&nbsp;<span class="far fa-file-excel" ></span></asp:LinkButton>
+                                            <%--Aquí va el botón--%>
                                         </li>
                                         <li runat="server">
                                             <asp:LinkButton ID="lnBtnExpCedula" runat="server"  Text="excel" title="Exportar" OnClick="lnBtnExpCedula_Click1">Cedulas &nbsp;<span ></span></asp:LinkButton>
@@ -685,17 +692,24 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button
+                        type="button"
+                        class="close"
+                        onclick="$('#myModalConsultariMG').modal('hide');">
+
+                        ×
+
+                    </button>
                     <h4 class="modal-title" id="myModalLabelConsultaiMG" >Evidencia fotográfica</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <asp:UpdatePanel ID="updPanel" runat="server">
+                        <asp:UpdatePanel ID="updPanel" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
                                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                                     <!-- Indicators -->
                                     <ol class="carousel-indicators">
-                                        <%--<li data-target="#myCarousel" data-slide-to="0" class="active" id="foto11" visible="false"></li>--%>
+                                        
                                         <li data-target="#myCarousel" data-slide-to="1" runat="server" id="foto1" visible="false"></li>
                                         <li data-target="#myCarousel" data-slide-to="2" runat="server" id="foto2" visible="false"></li>
                                         <li data-target="#myCarousel" data-slide-to="3" runat="server" id="foto3" visible="false"></li>
@@ -712,11 +726,7 @@
 
                                         <div class="item" runat="server" id="fototres" visible="false">
                                             <asp:Image ID="ImagenEvidencia3" runat="server" CssClass="tamañoImgCarru" />
-                                        </div>
-                                        <%--  <div class="item" runat="server" id="fotocuatro" visible="false">
-                                            <asp:Image ID="ImagenEvidencia4" runat="server" CssClass="tamañoImgCarru" />
-
-                                        </div>--%>
+                                        </div>                                        
                                     </div>
 
                                     <!-- Left and right controls -->
@@ -737,9 +747,15 @@
                 </div>
 
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                </div>
+                <button
+                        type="button"
+                        class="btn btn-danger"
+                        onclick="$('#myModalConsultariMG').modal('hide');">
+
+                        Cerrar
+    
+                </button>
+
             </div>
         </div>
     </div>
@@ -786,8 +802,19 @@
         }
 
         function AbrirModalFotos() {
-            $('#myModalConsultariMG').modal();
-            return false;
+
+            var modal = $('#myModalConsultariMG');
+
+            if (!modal.length)
+                return;
+
+            modal.modal('show');
+
+            var carousel = $('#myCarousel');
+
+            if (carousel.length) {
+                carousel.carousel(0);
+            }
         }
 
     </script>

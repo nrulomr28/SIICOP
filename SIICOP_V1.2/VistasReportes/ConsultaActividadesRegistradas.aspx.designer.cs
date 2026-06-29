@@ -15,6 +15,15 @@ namespace SIICOP_V1._2.VistasReportes
     {
 
         /// <summary>
+        /// Control lkbtnexcel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lkbtnexcel;
+
+        /// <summary>
         /// Control UpdatePanel1.
         /// </summary>
         /// <remarks>
@@ -184,15 +193,6 @@ namespace SIICOP_V1._2.VistasReportes
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnBuscar;
-
-        /// <summary>
-        /// Control lkbtnexcel.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lkbtnexcel;
 
         /// <summary>
         /// Control lnBtnExpCedula.

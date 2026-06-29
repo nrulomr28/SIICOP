@@ -225,3 +225,134 @@
 .report-actions .btn {
     min-width: 120px;
 }
+
+/* ==========================================================
+   MODAL DE EVIDENCIAS
+   ----------------------------------------------------------
+   Aprovecho para modernizar el modal sin modificar su
+   funcionamiento. Solamente mejoro la presentación.
+   ========================================================== */
+
+.modal-dialog {
+    max-width: 900px;
+    width: 90%;
+    margin: 40px auto;
+}
+
+.modal-content {
+    border: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .25);
+}
+
+.modal-header {
+    background: #611232;
+    color: #ffffff;
+    border-bottom: 0;
+    padding: 16px 20px;
+}
+
+    .modal-header h4 {
+        margin: 0;
+        font-weight: 600;
+    }
+
+    .modal-header .close {
+        color: #ffffff;
+        opacity: 1;
+        text-shadow: none;
+    }
+
+        .modal-header .close:hover {
+            opacity: .8;
+        }
+
+.modal-body {
+    padding: 20px;
+    background: #f8f9fa;
+}
+
+.modal-footer {
+    border-top: 0;
+    background: #ffffff;
+    padding: 16px 20px;
+}
+
+
+/* ==========================================================
+   CARRUSEL DE EVIDENCIAS
+   ----------------------------------------------------------
+   Centro las imágenes y hago que aprovechen mejor el espacio
+   disponible sin deformarlas.
+   ========================================================== */
+
+.carousel-inner {
+    background: #202020;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+}
+
+    .carousel-inner .item {
+        min-height: 600px;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+    }
+
+.tamañoImgCarru {
+    max-width: 100%;
+    max-height: 70vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+
+/* ==========================================================
+   CONTROLES DEL CARRUSEL
+   ----------------------------------------------------------
+   Modernizo ligeramente las flechas para que no oculten la
+   imagen y se integren mejor con el diseño.
+   ========================================================== */
+
+.carousel-control {
+    background: transparent !important;
+    opacity: .75;
+    transition: opacity .2s ease;
+}
+
+    .carousel-control:hover {
+        opacity: 1;
+    }
+
+    .carousel-control .glyphicon {
+        font-size: 28px;
+    }
+
+
+/* ==========================================================
+   BOTÓN DE CERRAR
+   ----------------------------------------------------------
+   Mantengo el mismo color institucional utilizado en el resto
+   del sistema.
+   ========================================================== */
+
+.modal-footer .btn-danger {
+    background: #611232;
+    border-color: #611232;
+}
+
+    .modal-footer .btn-danger:hover {
+        background: #7d1f41;
+        border-color: #7d1f41;
+    }
+
+
+@media (min-width: 1200px) {
+
+    .modal-dialog {
+        width: 1000px;
+    }
+}

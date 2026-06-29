@@ -136,5 +136,12 @@
 
 </form>
 
+    <!-- Librerías base -->
+<script src="<%= ResolveUrl("~/Scripts/jquery-3.7.1.min.js") %>"></script>
+
+<!-- Bootstrap -->
+<script src="<%= ResolveUrl("~/Scripts/bootstrap.bundle.min.js") %>"></script>
+
 </body>
 </html>
+

@@ -15,7 +15,7 @@ using System.Web.UI.WebControls;
 
 namespace SIICOP_V1._2.VistasReportes
 {
-    public partial class ConsultaActividadesRegistradas: System.Web.UI.Page
+    public partial class ConsultaActividadesRegistradas : System.Web.UI.Page
     {
         SIICOPEntities ctx = new SIICOPEntities();
 
@@ -31,13 +31,52 @@ namespace SIICOP_V1._2.VistasReportes
                 {
 
                     CargarProgramas();
-                    CargarZonas();                    
+                    CargarZonas();
                 }
                 else
                 {
                     this.Response.Redirect("~/TotalAccionesBeneficiados.aspx");
                 }
             }
+        }
+
+        private (DateTime? FechaInicial,
+         DateTime? FechaFinal,
+         int? Zona,
+         int? Programa,
+         string Institucion) ObtenerFiltrosReporte()
+        {
+            DateTime? fechaInicial = null;
+            DateTime? fechaFinal = null;
+
+            if (DateTime.TryParse(txtFInicialC.Text, out DateTime fi))
+                fechaInicial = fi;
+
+            if (DateTime.TryParse(txtfechafin.Text, out DateTime ff))
+                fechaFinal = ff;
+
+            int? programa = null;
+
+            if (ddlProgramas.SelectedValue != "0")
+                programa = Convert.ToInt32(ddlProgramas.SelectedValue);
+
+            int? zona = null;
+
+            if (ddlZona.SelectedValue != "0")
+                zona = Convert.ToInt32(ddlZona.SelectedValue);
+
+            string institucion = null;
+
+            if (!string.IsNullOrWhiteSpace(txtInstitucionesParticipantes.Text))
+                institucion = txtInstitucionesParticipantes.Text.Trim();
+
+            return (
+                fechaInicial,
+                fechaFinal,
+                zona,
+                programa,
+                institucion);
+
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
@@ -70,7 +109,7 @@ namespace SIICOP_V1._2.VistasReportes
             }
             CargarDatosReporte();
         }
-        
+
         #region****************METODO EXPORTACIÓN DE EXCEL GENERAL DE ACTIVIDADES
         protected void lkbtnexcel_Click(object sender, EventArgs e)
         {
@@ -98,51 +137,64 @@ namespace SIICOP_V1._2.VistasReportes
                 int tiprograma = Convert.ToInt32(ddlProgramas.SelectedValue);
                 int regionid = Convert.ToInt32(ddlZona.SelectedValue);
 
-                
+
+                ExcelPackage.License.SetNonCommercialOrganization("SSP");
+
                 ExcelPackage excel = new ExcelPackage(); ;
 
                 #region *** descrgar excel por medio de fechas
-                //                var informe = ctx.GetConsulActividades(fechainicial, fechaFinal, "SSP DVI", regionid, tiprograma)
-                var informe = ctx.GetConsulActividades(fechaObjIni, fechaObjFin, null, null, null, null, null, null)
-                                    .Select(a =>
-                   new
-                   {
-                       Fecha = a.fecha,
-                       Nombre_capturista = a.nombrecompleto,
-                       Zona = a.RegionNombre,
-                       Delegación = a.DelegacionNombre,
-                       Municipio = a.MUNICIPIO,
-                       Clave_Municipio = a.calveMuni,
-                       Localidad = a.Localidad,
-                       Clave_Localidad = a.clavelocali,
-                       Nombre_Programa = a.NombrePrograma,
-                       Nombre_Subprograma = a.NombreSubPrograma,
-                       Nombre_Acciones = a.AccionesNombre,
-                       Niños_Beneficiados = a.niños,
-                       Niñas_Beneficiadas = a.niñas,
-                       Hombres_Beneficiados = a.hombres,
-                       Mujeres_Beneficiadas = a.mujeres,
-                       Docentes_Hombres_Beneficiados = a.docentesH,
-                       Docentes_Mujeres_Beneficiadas = a.docentesM,
-                       Total_Hombres_Beneficiados = a.TotalHombresAtendidos,
-                       Total_Mujeres_Beneficiadas = a.TotalMujeresAtendidas,
-                       Total_Beficiados = a.total_atendidos,
-                       Nombre_Contacto = a.NombreContacto,
-                       Teléfono = a.telcel,
-                       Nombre_Lugar_o_Escuela = a.NombreLugar_Escuela,
-                       Clave_Plantel = a.ClavePlantel,
+                var filtros = ObtenerFiltrosReporte();
+
+                var repository = new ReporteRepository();
+
+                var informe = repository
+                    .ObtenerDatosReporte(
+                        filtros.FechaInicial,
+                        filtros.FechaFinal,
+                        null,
+                        filtros.Zona,
+                        filtros.Programa,
+                        null,
+                        null,
+                        filtros.Institucion).Select(a =>
+                            new
+                            {
+                                Fecha = a.fecha,
+                                Nombre_capturista = a.nombrecompleto,
+                                Zona = a.RegionNombre,
+                                Delegación = a.DelegacionNombre,
+                                Municipio = a.MUNICIPIO,
+                                Clave_Municipio = a.calveMuni,
+                                Localidad = a.Localidad,
+                                Clave_Localidad = a.clavelocali,
+                                Nombre_Programa = a.NombrePrograma,
+                                Nombre_Subprograma = a.NombreSubPrograma,
+                                Nombre_Acciones = a.AccionesNombre,
+                                Niños_Beneficiados = a.niños,
+                                Niñas_Beneficiadas = a.niñas,
+                                Hombres_Beneficiados = a.hombres,
+                                Mujeres_Beneficiadas = a.mujeres,
+                                Docentes_Hombres_Beneficiados = a.docentesH,
+                                Docentes_Mujeres_Beneficiadas = a.docentesM,
+                                Total_Hombres_Beneficiados = a.TotalHombresAtendidos,
+                                Total_Mujeres_Beneficiadas = a.TotalMujeresAtendidas,
+                                Total_Beficiados = a.total_atendidos,
+                                Nombre_Contacto = a.NombreContacto,
+                                Teléfono = a.telcel,
+                                Nombre_Lugar_o_Escuela = a.NombreLugar_Escuela,
+                                Clave_Plantel = a.ClavePlantel,
                        //      Turno = a.Turno,
-                       Nivel_Educativo = a.Nivel,
-                       Dirección = "Calle:" + " " + a.calle + "Colonia:" + " " + a.coloni,
-                       Latitud = a.Latitud,
-                       Longitud = a.Longitud,
-                       Folio_Actividad = a.FolioActividad,
-                       Folio_Alternativo = a.idResumenDiario,
-                       Coordinación = a.DelegacionOcoonurbacion
-                   }).ToList();
+                                Nivel_Educativo = a.Nivel,
+                                Dirección = "Calle:" + " " + a.calle + "Colonia:" + " " + a.coloni,
+                                Latitud = a.Latitud,
+                                Longitud = a.Longitud,
+                                Folio_Actividad = a.FolioActividad,
+                                Folio_Alternativo = a.idResumenDiario,
+                                Coordinación = a.DelegacionOcoonurbacion
+                            }).ToList();
                 #endregion
                 var workSheet = excel.Workbook.Worksheets.Add("Hoja1");
-                workSheet.Cells[1, 1].LoadFromCollection(informe, true);                
+                workSheet.Cells[1, 1].LoadFromCollection(informe, true);
 
 
                 using (var memoryStream = new MemoryStream())
@@ -168,7 +220,7 @@ namespace SIICOP_V1._2.VistasReportes
                     HttpContext.Current.ApplicationInstance.CompleteRequest();
                 }
             }
-        }        
+        }
         public DataTable ConvertToDataTable<T>(IList<T> data)
         {
             PropertyDescriptorCollection properties =
@@ -195,7 +247,7 @@ namespace SIICOP_V1._2.VistasReportes
             Session["dtPrincipal"] = listado;
 
 
-        }        
+        }
 
         protected void GvPCAdmin_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -339,7 +391,7 @@ namespace SIICOP_V1._2.VistasReportes
                                 ImagenEvidencia2.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(fotoVer);
 
                             }
-                            
+
                             foto2.Visible = true;
                             fotodos.Visible = true;
 
@@ -363,8 +415,14 @@ namespace SIICOP_V1._2.VistasReportes
 
                         }
 
+                        updPanel.Update();
 
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "AbrirModalFotos", "AbrirModalFotos();", true);
+                        ScriptManager.RegisterStartupScript(
+                                        Page,
+                                        Page.GetType(),
+                                        Guid.NewGuid().ToString(),
+                                        "setTimeout(function(){ AbrirModalFotos(); }, 50);",
+                                        true);
                     }
                 }
 
@@ -435,95 +493,125 @@ namespace SIICOP_V1._2.VistasReportes
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal();", true);                
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal();", true);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "MostrarPlanteles", "MostrarPlanteles();", true);
             }
         }
-        protected void GvPCAdmin_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void GvPCAdmin_RowDataBound(
+                    object sender,
+                    GridViewRowEventArgs e)
         {
-
-            try
+            if (e.Row.RowType != DataControlRowType.DataRow)
             {
-                if (e.Row.RowType == DataControlRowType.DataRow)
+                return;
+            }
+
+            #region Programa
+
+            var programa = DataBinder.Eval(
+                e.Row.DataItem,
+                "programasID");
+
+            var imgPrograma =
+                e.Row.FindControl("imgpato") as Image;
+
+            if (programa != null &&
+                programa != DBNull.Value &&
+                imgPrograma != null)
+            {
+                switch (Convert.ToInt32(programa))
                 {
+                    case 7:
+                        imgPrograma.ImageUrl =
+                            "~/Imagenes/PinesReporte/ConstrucionCultura.png";
+                        break;
 
-                    int valor;
-                    valor = (int)DataBinder.Eval(e.Row.DataItem, "programasID");
-                    Image img = (Image)e.Row.FindControl("imgpato");
+                    case 8:
+                        imgPrograma.ImageUrl =
+                            "~/Imagenes/PinesReporte/RedesVecinales.png";
+                        break;
 
+                    case 9:
+                        imgPrograma.ImageUrl =
+                            "~/Imagenes/PinesReporte/Escolar.png";
+                        break;
 
-                    if (valor == 7)
-                    {
-                        img.ImageUrl = "~/Imagenes/PinesReporte/ConstrucionCultura.png";
-                    }
-                    if (valor == 8)
-                    {
-                        img.ImageUrl = "~/Imagenes/PinesReporte/RedesVecinales.png";
-                    }
-                    if (valor == 9)
-                    {
-                        img.ImageUrl = "~/Imagenes/PinesReporte/Escolar.png";
-                    }
-                    if (valor == 10)
-                    {
-                        img.ImageUrl = "~/Imagenes/PinesReporte/ViolenciaGenero.png";
-                    }
-                    if (valor == 11)
-                    {
-                        img.ImageUrl = "~/Imagenes/PinesReporte/EncuentroCiudadano.png";
-                    }
-                    if (valor == 12)
-                    {
-                        img.ImageUrl = "~/Imagenes/PinesReporte/DeporteYcultura.png";
-                    }
-                    if (valor == 13)
-                    {
-                        img.ImageUrl = "~/Imagenes/PinesReporte/Empresarial.png";
-                    }
-                    if (valor == 14)
-                    {
-                        img.ImageUrl = "~/Imagenes/PinesReporte/RedesVerPorLaPaz.png";
-                    }
+                    case 10:
+                        imgPrograma.ImageUrl =
+                            "~/Imagenes/PinesReporte/ViolenciaGenero.png";
+                        break;
 
-                    int valorft;
-                    valorft = (int)DataBinder.Eval(e.Row.DataItem, "fotos");
-                    Image imgft = (Image)e.Row.FindControl("imgfoto");
-                    if (valorft == 1)
-                    {
-                        imgft.ImageUrl = "~/Imagenes/PinesReporte/check.png";
-                    }
-                    if (valorft == 0)
-                    {
-                        imgft.ImageUrl = "~/Imagenes/PinesReporte/cross.png";
-                    }
+                    case 11:
+                        imgPrograma.ImageUrl =
+                            "~/Imagenes/PinesReporte/EncuentroCiudadano.png";
+                        break;
 
-                    if (User.IsInRole("SysAdmin") || User.IsInRole("Administrador") || User.IsInRole("Visualizador"))
-                    {
-                        e.Row.Cells[15].Visible = true;
-                    }
-                    else
-                    {
-                        e.Row.Cells[15].Visible = false;
-                    }
+                    case 12:
+                        imgPrograma.ImageUrl =
+                            "~/Imagenes/PinesReporte/DeporteYcultura.png";
+                        break;
 
+                    case 13:
+                        imgPrograma.ImageUrl =
+                            "~/Imagenes/PinesReporte/Empresarial.png";
+                        break;
 
-                    if (e.Row.Cells[5].Text.Equals("Sector Empresarial")
-                        || e.Row.Cells[5].Text.Equals("Sector Escolar")
-                        || e.Row.Cells[5].Text.Equals("Violencia contra la Mujer")
-                        || e.Row.Cells[5].Text.Equals("Departamento de Redes Vecinales")
-                        || e.Row.Cells[5].Text.Equals("Departamento de Deporte y Cultura")
-                        || e.Row.Cells[5].Text.Equals("Inclusión de personas en situación de vunerabilidad"))
-                    {
-                        e.Row.Cells[5].Text = "Conurbación Xalapa";
-                    }
-                    
-
+                    case 14:
+                        imgPrograma.ImageUrl =
+                            "~/Imagenes/PinesReporte/RedesVerPorLaPaz.png";
+                        break;
                 }
             }
-            catch (Exception ex)
-            {
 
+            #endregion
+
+            #region Fotografías
+
+            var fotos = DataBinder.Eval(
+                e.Row.DataItem,
+                "fotos");
+
+            var imgFotos =
+                e.Row.FindControl("imgfoto") as Image;
+
+            if (fotos != null &&
+                fotos != DBNull.Value &&
+                imgFotos != null)
+            {
+                imgFotos.ImageUrl =
+                    Convert.ToInt32(fotos) == 1
+                        ? "~/Imagenes/PinesReporte/check.png"
+                        : "~/Imagenes/PinesReporte/cross.png";
             }
+
+            #endregion
+
+            #region Seguridad
+
+            e.Row.Cells[15].Visible =
+                User.IsInRole("SysAdmin")
+                || User.IsInRole("Administrador")
+                || User.IsInRole("Visualizador");
+
+            #endregion
+
+            #region Correcciones de Delegación
+
+            switch (e.Row.Cells[5].Text)
+            {
+                case "Sector Empresarial":
+                case "Sector Escolar":
+                case "Violencia contra la Mujer":
+                case "Departamento de Redes Vecinales":
+                case "Departamento de Deporte y Cultura":
+                case "Inclusión de personas en situación de vunerabilidad":
+
+                    e.Row.Cells[5].Text =
+                        "Conurbación Xalapa";
+                    break;
+            }
+
+            #endregion
         }
 
         #region****************METODO EXPORTACIÓN DE EXCEL CEDULAS
@@ -863,7 +951,7 @@ namespace SIICOP_V1._2.VistasReportes
             }
             catch (Exception exe)
             {
-                
+
             }
         }
         private void LlenaHojaAC_Inclusion(OfficeOpenXml.ExcelWorksheet XlworkSheetInclusion)
@@ -898,7 +986,7 @@ namespace SIICOP_V1._2.VistasReportes
             }
             catch (Exception exe)
             {
-                
+
             }
         }
 
@@ -994,59 +1082,28 @@ namespace SIICOP_V1._2.VistasReportes
                 GvPCAdmin.DataSource = null;
                 GvPCAdmin.DataBind();
 
-                DateTime? fechaInicial = null;
-                DateTime? fechaFinal = null;
+                var filtros = ObtenerFiltrosReporte();
 
-                if (!string.IsNullOrEmpty(txtFInicialC.Text))
-                {
-                    if (DateTime.TryParse(txtFInicialC.Text, out DateTime fecha))
-                    {
-                        fechaInicial = fecha;
-                    }
-                }
+                var repository = new ReporteRepository();
 
-                if (!string.IsNullOrEmpty(txtfechafin.Text))
-                {
-                    if (DateTime.TryParse(txtfechafin.Text, out DateTime fechaf))
-                    {
-                        fechaFinal = fechaf;
-                    }
-
-                }
-
-                int? tiprograma = null;
-                if (ddlProgramas.SelectedValue != "0")
-                {
-                    tiprograma = ddlProgramas.SelectedValue == "0" ? 0 : Convert.ToInt32(this.ddlProgramas.SelectedValue);
-                }
-
-                int? zona = null;
-
-                if (ddlZona.SelectedValue != "0")
-                {
-                    zona = ddlZona.SelectedValue == "0" ? 0 : Convert.ToInt32(this.ddlZona.SelectedValue);
-                }
-
-                string institucion = null;
-                if (!string.IsNullOrEmpty(txtInstitucionesParticipantes.Text))
-                {
-                    institucion = txtInstitucionesParticipantes.Text;
-                }
-
-
-
-                var query = new ReporteRepository();
-                var datos = query.ObtenerDatosReporte(fechaInicial, fechaFinal, null, zona, tiprograma, null, null, institucion);
+                var datos = repository.ObtenerDatosReporte(
+                    filtros.FechaInicial,
+                    filtros.FechaFinal,
+                    null,
+                    filtros.Zona,
+                    filtros.Programa,
+                    null,
+                    null,
+                    filtros.Institucion);
 
                 GvPCAdmin.DataSource = datos;
                 GvPCAdmin.DataBind();
 
-                lblTotalRegistros.Text = $"Total de registros: {datos.Count}";
-
+                lblTotalRegistros.Text =
+                    $"Total de registros: {datos.Count}";
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -1064,7 +1121,7 @@ namespace SIICOP_V1._2.VistasReportes
             Response.ContentType = "application/zip";
             Response.Cookies.Add(new HttpCookie("downloadStarted", "1") { Expires = DateTime.Now.AddSeconds(40) });
             string nombreArchivo = "";
-            
+
             int programa = Convert.ToInt32(ddlProgramas.SelectedValue);
 
 
@@ -1126,7 +1183,7 @@ namespace SIICOP_V1._2.VistasReportes
                                 nombreArchivo = $"{fol1}.{x[x.Length - 1]}";
 
                             }
-                            
+
                             var fileEntry = new ZipEntry(nombreArchivo)
                             {
 
@@ -1298,4 +1355,8 @@ namespace SIICOP_V1._2.VistasReportes
 
     }
 }
+    
+    
 #endregion
+
+
