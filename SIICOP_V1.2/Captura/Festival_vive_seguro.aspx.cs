@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace SIICOP_V1._2.Captura
 {
-    public partial class Atencion_Empresarial : System.Web.UI.Page
+    public partial class Festival_vive_seguro : System.Web.UI.Page
     {
         int personalID;
         int nino;

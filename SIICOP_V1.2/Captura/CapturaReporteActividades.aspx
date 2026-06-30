@@ -1,49 +1,43 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteV2.Master" AutoEventWireup="true" CodeBehind="CapturaReporteActividades.aspx.cs" Inherits="SIICOP_V1._2.Captura.CapturaReporteActividades" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CapturaReporteActividades.aspx.cs" Inherits="SIICOP_V1._2.Captura.CapturaReporteActividades" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <script src="../Scripts/sweetalert2.all.min.js"></script>
     <script src="../Scripts/Alert_Gral.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/locales/es.min.js"></script>
-    
+
+    <br />
+    <br />
     <link href="../Content/styleFormularios.css" rel="stylesheet" />
     <asp:HiddenField ID="HiddenField1cn" runat="server" Value="0" />
     <div class="container-fluid" id="main" style="padding-top: 3%">
-        
+        <%--<div class="row">--%>
         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
             <div id="sidebar">
                 <div class="sosmed">
-                    <div class="panel panel-default">
+                    <div class="user">
+                        <div class="text-center">
+                            <img src="../Imagenes/data-entry.png" width="60%" class="img-circle">
+                        </div>
+                        <div class="user-head">
 
-    <div class="panel-body">
+                            <h1>REPORTE DE ACTIVIDADES</h1>
+                            <div class="hr-center"></div>
+                            <%-- <h5 style="color: #feff00">ATENCION INTEGRAL   
+                                <br>
+                                DE PREVENCIÓN ESCOLAR
+                            </h5>--%>
+                            <h5>
+                                <asp:Label ID="lblPrograma" runat="server" Text="tesh" Style="color: #feff00"></asp:Label>
+                            </h5>
 
-        <div class="row">
+                        </div>
 
-            <div class="col-sm-1 text-center">
 
-                <img src="../Imagenes/data-entry.png"
-                     style="width:48px;height:48px;" />
-
-            </div>
-
-            <div class="col-sm-11">
-
-                <h3 style="margin-top:0;">
-                    REPORTE DE ACTIVIDADES
-                </h3>
-
-                <asp:Label ID="lblPrograma"
-                    runat="server"
-                    CssClass="label label-warning">
-                </asp:Label>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
+                        <div class="link-me">
+                            <div class="hr-center"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -66,8 +60,11 @@
                             <div class="timeline-panel">
                                 <h4 style="text-align: center">
                                     <asp:Label ID="lblfecha" runat="server" Text=""></asp:Label>
-                                </h4>                                
+                                </h4>
+                                <br />
                                 <div class="hr-left"></div>
+
+
 
                                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                     <ContentTemplate>
@@ -112,6 +109,7 @@
 
                                             </div>
 
+
                                             <div id="PanelCoordinacion" runat="server">
 
                                                 <div class="row gy-3 gx-4">
@@ -132,7 +130,7 @@
 
 
                                                     <div class="col-md-4">
-                                                        <label class="control-label">Región estrategia</label>
+                                                        <label class="control-label">Región Estrategia</label>
                                                         <asp:DropDownList runat="server" ID="ddlCoordinacion" CssClass="form-control">
                                                         </asp:DropDownList>
                                                     </div>
@@ -269,8 +267,13 @@
 
                                                     infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
                                                     infowindow.open(map, marker);
-                                                    
-                                                    $("[id*='" + 'txtdireccomple' + "']").removeAttr('disabled');                                                    
+
+                                                    //document.getElementById('txtdireccomple').value = dir;
+                                                    //alert(document.getElementById('txtdireccomple').value);
+                                                    //$("[id*='" + 'txtdireccomple' + "']").val(dir);
+                                                    $("[id*='" + 'txtdireccomple' + "']").removeAttr('disabled');
+                                                    //console.log("--primer ENCUENTRO = " + 'txtdireccomple' + dir);
+
 
                                                     var array = dir.split(',');
                                                     document.getElementById('route').value = array[0];
@@ -496,7 +499,12 @@
 
                                                 <div class="col-md-3">
                                                     <div class="form-group form-group-sm">
-                                                        <label class="col-md-3 control-label">Municipio</label>                                                        
+                                                        <label class="col-md-3 control-label">Municipio</label>
+                                                        <%--  <asp:DropDownList runat="server" ID="ddlMuNICIPIO" CssClass="form-control" DataSourceID="edsMunicipios" DataTextField="MUNICIPIO" DataValueField="MunicipioID" AutoPostBack="true"
+                                                            OnDataBound="ddlMuNICIPIO_DataBound">
+                                                        </asp:DropDownList>--%>
+                                                        <%--  <asp:EntityDataSource runat="server" ID="edsMunicipios" DefaultContainerName="SIICOPEntities" ConnectionString="name=SIICOPEntities" EnableFlattening="False" EntitySetName="Municipios">
+                                                        </asp:EntityDataSource>--%>
 
                                                         <asp:DropDownList runat="server" ID="ddlMuNICIPIO" CssClass="form-control" DataTextField="MUNICIPIO" DataValueField="MunicipioID" AutoPostBack="true" OnSelectedIndexChanged="ddlMunicipio_SelectedIndexChanged">
                                                         </asp:DropDownList>
@@ -569,8 +577,18 @@
                                                             <asp:ListItem Value="False">No</asp:ListItem>
                                                         </asp:DropDownList>
                                                     </div>
+
+
+
+
                                                 </div>
+
+
                                             </div>
+
+
+
+
 
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
@@ -615,6 +633,14 @@
                                                         <div class="form-group form-group-sm col-md-4">
                                                             <label for="exampleInputEmail1">Acción implementada</label>
                                                             <div class='input-group ' id='date4'>
+                                                                <%--  <asp:DropDownList ID="ddlAcciones" runat="server" CssClass="form-control" DataSourceID="edsAcciones" DataTextField="AccionesNombre" DataValueField="AccionesID" AutoPostBack="true"
+                                                                    OnDataBound="ddlAcciones_DataBound">
+                                                                </asp:DropDownList>--%>
+                                                                <%--    <asp:EntityDataSource runat="server" ID="edsAcciones" DefaultContainerName="SIICOPEntities" ConnectionString="name=SIICOPEntities" EnableFlattening="False" EntitySetName="Cat_Acciones" AutoGenerateWhereClause="true">
+                                                                    <WhereParameters>
+                                                                        <asp:ControlParameter ControlID="ddlsubprograma" DbType="Int32" Name="subprogramaId" PropertyName="SelectedValue" DefaultValue="" />
+                                                                    </WhereParameters>
+                                                                </asp:EntityDataSource>--%>
 
                                                                 <asp:DropDownList ID="ddlAcciones" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlAcciones_SelectedIndexChanged">
                                                                 </asp:DropDownList>
@@ -628,6 +654,15 @@
                                                         <div class="form-group form-group-sm col-md-4">
                                                             <label for="exampleInputEmail1">Sub acción implementada</label>
                                                             <div class='input-group ' id='date42'>
+                                                                <%-- <asp:DropDownList ID="ddlSubAcciones" runat="server" CssClass="form-control" DataSourceID="edsSubAccion" DataTextField="SubAccion" DataValueField="SubAccionesId" AutoPostBack="true"
+                                                                    OnDataBound="ddlSubAcciones_DataBound">
+                                                                </asp:DropDownList>--%>
+                                                                <%--    <asp:EntityDataSource runat="server" ID="edsSubAccion" DefaultContainerName="SIICOPEntities" ConnectionString="name=SIICOPEntities" EnableFlattening="False" EntitySetName="Cat_SubAcciones"
+                                                                    AutoGenerateWhereClause="true">
+                                                                    <WhereParameters>
+                                                                        <asp:ControlParameter ControlID="ddlAcciones" DbType="Int32" Name="AccionesID" PropertyName="SelectedValue" DefaultValue="" />
+                                                                    </WhereParameters>
+                                                                </asp:EntityDataSource>--%>
 
                                                                 <asp:DropDownList ID="ddlSubAcciones" runat="server" CssClass="form-control" AutoPostBack="true">
                                                                 </asp:DropDownList>
@@ -868,7 +903,7 @@
                                                         </div>
 
                                                         <div class="col-md-4">
-                                                            <label for="txtGiroComercio">Giro</label>
+                                                            <label for="txtGiroComercio">Giro de comercios</label>
                                                             <asp:TextBox ID="txtGiroComercio" CssClass="form-control" runat="server" TextMode="MultiLine"></asp:TextBox>
                                                         </div>
 
@@ -1005,7 +1040,7 @@
                                                         </div>
 
                                                         <div class="col-md-2">
-                                                            <label for="ddlOfrecioSegurichat">¿Se ofreció segurichat?</label>
+                                                            <label for="ddlOfrecioSegurichat">se ofreció segurichat</label>
                                                             <asp:DropDownList runat="server" ID="ddlOfrecioSegurichat" CssClass="form-control" AutoPostBack="true">
                                                                 <asp:ListItem Value="">--Seleccione--</asp:ListItem>
                                                                 <asp:ListItem Value="1">Sí</asp:ListItem>

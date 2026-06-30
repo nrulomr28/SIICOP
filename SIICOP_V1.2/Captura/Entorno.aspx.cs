@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace SIICOP_V1._2.Captura
 {
@@ -11,7 +16,6 @@ namespace SIICOP_V1._2.Captura
 
         protected void btnEscolar_Click(object sender, EventArgs e)
         {
-            Session["programasID"] = 1; // temporal
             EnviarDatos(2);
         }
 
@@ -24,8 +28,7 @@ namespace SIICOP_V1._2.Captura
 
         protected void EnviarDatos(int valor)
         {
-            Response.Redirect(
-            $"~/Captura/CapturaReporteActividades.aspx?ValorEntorno={valor}");
+            Response.Redirect("CapturaReporteActividades?ValorEntorno=" + valor);
         }
 
     }

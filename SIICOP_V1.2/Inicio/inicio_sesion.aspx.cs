@@ -21,62 +21,51 @@ namespace SIICOP_V1._2.Inicio
         {
 
         }
-        protected void Login_Authenticate(
-    object sender,
-    AuthenticateEventArgs e)
+
+        protected void Login_Authenticate(object sender, AuthenticateEventArgs e)
         {
             try
             {
-                if (!Membership.ValidateUser(
-                        Login.UserName,
-                        Login.Password))
+                if (System.Web.Security.Membership.ValidateUser(Login.UserName, Login.Password))
                 {
-                    e.Authenticated = false;
-                    return;
+                    FormsAuthentication.SetAuthCookie(Login.UserName, true);
+                    var a = ctx.Personales.Where(x => x.login == Login.UserName).FirstOrDefault();
+                    var depen = a.Dependencia;
+
+                    if (depen == "C4")
+                    {
+                        Response.Redirect("~/Bienvenido_C4.aspx");
+                    }
+                    if (depen == "SSP DVI")
+                    {
+                        Response.Redirect("~/TotalAccionesBeneficiados.aspx");
+                    }
+                    if (depen == "DGTSV")
+                    {
+                        Response.Redirect("~/Bienvenido_DGTSV.aspx");
+                    }
+
+                    if (depen == "CEPREVIDE")
+                    {
+                        Response.Redirect("~/Bienvenido_CEPREVIDE.aspx");
+                    }
+
+                    if (depen == "SESCESP")
+                    {
+                        Response.Redirect("~/Bienvenido_CVcMyCPC.aspx");
+                    }
+                    if (depen == "DGPRS")
+                    {
+                        Response.Redirect("~/Bienvenido_DGPRS.aspx");
+                    }
                 }
-
-                FormsAuthentication.SetAuthCookie(
-                    Login.UserName,
-                    true);
-
-                //var usuario =
-                //    ctx.Personales
-                //       .FirstOrDefault(
-                //            x => x.login == Login.UserName);
-
-                //if (usuario == null)
-                //{
-                //    e.Authenticated = false;
-                //    return;
-                //}
-
-                //var rutas =
-                //    new Dictionary<string, string>
-                //    {
-                //{ "C4", "~/Bienvenido_C4.aspx" },
-                //{ "SSP DVI", "~/TotalAccionesBeneficiados.aspx" },
-                //{ "DGTSV", "~/Bienvenido_DGTSV.aspx" },
-                //{ "CEPREVIDE", "~/Bienvenido_CEPREVIDE.aspx" },
-                //{ "SESCESP", "~/Bienvenido_CVcMyCPC.aspx" },
-                //{ "DGRS", "~/Bienvenido_DGRS.aspx" }
-                //    };
-
-                //if (rutas.TryGetValue(
-                //        usuario.Dependencia,
-                //        out string url))
-                //{
-                //    Response.Redirect(url);
-                //}
-
-                Response.Redirect(
-                    "~/Inicio/Launcher.aspx");
             }
             catch (Exception ex)
             {
-                // aquí podemos meter ErrorLogger después
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "error", "error()", true);
 
-                e.Authenticated = false;
             }
+
         }
     }
 }

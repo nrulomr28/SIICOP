@@ -68,12 +68,12 @@
         }
 
         /*LOGIN*/
-        .login-container {
-    min-height: 80vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        .card-login {
+            position: absolute;
+            top: 23%;
+            left: 20%;
+            right: 20%;
+        }
 
 
         /* Simple CSS3 Fade-in-down Animation */
@@ -156,7 +156,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="container login-container">
+        <div class="container">
             <div class="row justify-content-center card-login ">
                 <div class="col-8">
                     <div class="shadow p-3 mb-5 bg-body-tertiary rounded fadeInDown">

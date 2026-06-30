@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace SIICOP_V1._2.Captura
 {
-    public partial class Atencion_Empresarial : System.Web.UI.Page
+    public partial class Atencion_Integral : System.Web.UI.Page
     {
         int personalID;
         int nino;
@@ -798,5 +798,10 @@ namespace SIICOP_V1._2.Captura
             }
         }
         #endregion
+
+        protected void ddlSubAcciones_DataBound(object sender, EventArgs e)
+        {
+            this.ddlSubAcciones.Items.Insert(0, new ListItem("--Seleccione una sub-acción--", "0"));
+        }
     }
 }

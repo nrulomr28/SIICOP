@@ -184,36 +184,39 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\vista-reportes.css" />
-    <Content Include="Legacy\Bienvenidas\Bienvenido_C4.aspx" />
-    <Content Include="Legacy\Bienvenidas\Bienvenido_CEPREVIDE.aspx" />
-    <Content Include="Legacy\Bienvenidas\Bienvenido_CVcMyCPC.aspx" />
-    <Content Include="Legacy\Bienvenidas\Bienvenido_DGRS.aspx" />
-    <Content Include="Legacy\Bienvenidas\Bienvenido_DGTSV.aspx" />
+    <Content Include="About.aspx" />
+    <Content Include="Bienvenido_C4.aspx" />
+    <Content Include="Bienvenido_CEPREVIDE.aspx" />
+    <Content Include="Bienvenido_CVcMyCPC.aspx" />
+    <Content Include="Bienvenido_DGPRS.aspx" />
+    <Content Include="Bienvenido_DGTSV.aspx" />
     <Content Include="Captura\Atencion_Empresarial.aspx" />
+    <Content Include="Captura\Atencion_Integral.aspx" />
+    <Content Include="Captura\C4\Ficha_promocion_difusion.aspx" />
     <Content Include="Captura\CapturaReporteActividades.aspx" />
-    <Content Include="Captura\Entorno.aspx" />
-    <Content Include="Legacy\Captura\Fortalecimiento_Emocional.aspx" />
-    <Content Include="Legacy\Captura\Festival_vive_seguro.aspx" />
-    <Content Include="Legacy\Captura\Violencia_Genero.aspx" />
-    <Content Include="Legacy\Captura\Redes_Atencion_vecinal.aspx" />
-    <Content Include="Legacy\Captura\Protectores_Vida.aspx" />
-    <Content Include="Legacy\Captura\Prevencion_Atencion.aspx" />
-    <Content Include="Legacy\Captura\C4\Ficha_promocion_difusion.aspx" />
     <Content Include="Captura\Captura_Dependencias.aspx" />
-    <Content Include="Legacy\Captura\Construccion_Cultura_Incluyente.aspx" />
-    <Content Include="Legacy\Captura\CVcMyCPC\Reporte_Actividades_SESCESP.aspx" />
-    <Content Include="Legacy\Captura\DGRS\Actividades_DGRS.aspx" />
-    <Content Include="Legacy\Captura\DGTSV\Ficha_idetificacion_diaria.aspx" />
-    <Content Include="Legacy\Captura\Atencion_Integral.aspx" />
-    <Content Include="Legacy\Captura\Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx" />
-    <Content Include="Legacy\Captura\CEPREVIDE\Reporte_CEPREVIDE.aspx" />
-    <Content Include="Legacy\Captura\Seguridad_social_paz_social_entorno_educativo.aspx" />
-    <Content Include="Legacy\Captura\Encuentros_Ciudadanos_por_la_Seguridad.aspx" />
-    <Content Include="Legacy\Captura\Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx" />
-    <Content Include="Legacy\Captura\Redes_vecinales.aspx" />
-    <Content Include="Legacy\Captura\Prevención_de_la_Violencia_por_Razones_de_Género.aspx" />
-    <Content Include="Legacy\Captura\Enlace_con_el_Sector_Empresarial.aspx" />
+    <Content Include="Captura\CEPREVIDE\Reporte_CEPREVIDE.aspx" />
+    <Content Include="Captura\Construccion_Cultura_Incluyente.aspx" />
+    <Content Include="Captura\CVcMyCPC\Reporte_Actividades_SESCESP.aspx" />
+    <Content Include="Captura\DGPRS\Actividades_DGPRS.aspx" />
+    <Content Include="Captura\DGPRS\Registro_de_poblacion_asistida.aspx" />
+    <Content Include="Captura\DGTSV\Ficha_idetificacion_diaria.aspx" />
+    <Content Include="Captura\Encuentros_Ciudadanos_por_la_Seguridad.aspx" />
+    <Content Include="Captura\Enlace_con_el_Sector_Empresarial.aspx" />
+    <Content Include="Captura\Entorno.aspx" />
+    <Content Include="Captura\Festival_vive_seguro.aspx" />
+    <Content Include="Captura\Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx" />
+    <Content Include="Captura\Fortalecimiento_Emocional.aspx" />
+    <Content Include="Captura\Prevencion_Atencion.aspx" />
+    <Content Include="Captura\Prevención_de_la_Violencia_por_Razones_de_Género.aspx" />
+    <Content Include="Captura\Protectores_Vida.aspx" />
+    <Content Include="Captura\Redes_Atencion_vecinal.aspx" />
+    <Content Include="Captura\Redes_vecinales.aspx" />
+    <Content Include="Captura\Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx" />
+    <Content Include="Captura\Seguridad_social_paz_social_entorno_educativo.aspx" />
+    <Content Include="Captura\Violencia_Genero.aspx" />
+    <Content Include="Contact.aspx" />
+    <Content Include="Content\vista-reportes.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -2030,17 +2033,15 @@
     <Content Include="Inicio\Countter.xml" />
     <Content Include="Inicio\Inicio.aspx" />
     <Content Include="Inicio\inicio_sesion.aspx" />
-    <Content Include="Inicio\Launcher.aspx" />
     <Content Include="Inicio\Reporte.aspx" />
     <Content Include="MenuProgramas\C4\Programas_C4.aspx" />
     <Content Include="MenuProgramas\CREPREVIDE\Programa_CEPREVIDE.aspx" />
-    <Content Include="MenuProgramas\DGRS\Programas_DGRS.aspx" />
-    <Content Include="Legacy\meenu2019.aspx" />
-    <Content Include="Legacy\Menu.aspx" />
-    <Content Include="Legacy\Menu2026.aspx" />
-    <Content Include="MenuProgramas\MenuDependencias.aspx" />
-    <Content Include="Legacy\Principal.aspx" />
-    <Content Include="MenuProgramas\SeleccionPrograma.aspx" />
+    <Content Include="MenuProgramas\DGPRS\Programas_DGPRS.aspx" />
+    <Content Include="MenuProgramas\meenu2019.aspx" />
+    <Content Include="MenuProgramas\Menu.aspx" />
+    <Content Include="MenuProgramas\Menu_2026.aspx" />
+    <Content Include="MenuProgramas\Menu_Dependencias.aspx" />
+    <Content Include="MenuProgramas\Principal.aspx" />
     <Content Include="MenuProgramas\SESCESP\Programas_SESCESP.aspx" />
     <Content Include="Policia_en_tu_colonia\Reporte_Seguimiento.aspx" />
     <Content Include="Scripts\Alert_Gral.js" />
@@ -2061,6 +2062,10 @@
     <Content Include="Documentacion\inventario-modulos.md" />
     <Content Include="Clases\Config\ConnectionStrings.config" />
     <Content Include="Documentacion\admin-usuarios.md" />
+    <Content Include="libman.json" />
+    <Content Include="MenuProgramas\.editorconfig" />
+    <Content Include="Inicio\Web.config" />
+    <Content Include="Captura\Web.config" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -2093,30 +2098,28 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="SqlServerTypes\readme.htm" />
-    <Content Include="sysadmin\Administracion.aspx" />
-    <Content Include="sysadmin\Calendar.aspx" />
-    <Content Include="sysadmin\ControlRoles.aspx" />
-    <Content Include="sysadmin\ControlUser.aspx" />
-    <Content Include="sysadmin\ErrorLog.aspx" />
-    <Content Include="sysadmin\Nuevo_Usuario.aspx" />
-    <Content Include="sysadmin\Cambiar_Contrasena.aspx" />
+    <Content Include="SysAdmin\Calendar.aspx" />
+    <Content Include="SysAdmin\Cambiar_Contrasena.aspx" />
+    <Content Include="SysAdmin\ControlRoles.aspx" />
+    <Content Include="SysAdmin\ControlUser.aspx" />
+    <Content Include="SysAdmin\Nuevo_Usuario.aspx" />
     <Content Include="TotalAccionesBeneficiados.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="VistasReportes\C4\Vista_de_datos_de_actividades_C4.aspx" />
     <Content Include="VistasReportes\CEPREVIDE\Vista_de_datos_de_actividades_CEPREVIDE.aspx" />
     <Content Include="VistasReportes\CVcMyCPC\Vista_de_datos_SESCESP.aspx" />
-    <Content Include="VistasReportes\DGRS\Vista_de_datos_DGRS.aspx" />
+    <Content Include="VistasReportes\DGPRS\Vista_de_datos_DGPRS.aspx" />
     <Content Include="VistasReportes\DGTSV\Vista_de_datos_de_actividades_DGTSV.aspx" />
+    <Content Include="VistasReportes\Informe_Construccion_Cultura_Incluyente.aspx" />
+    <Content Include="VistasReportes\Informe_Seguridad_social_paz_social_entorno_educativo.aspx" />
     <Content Include="VistasReportes\Info_Enlace_con_el_Sector_Empresarial.aspx" />
     <Content Include="VistasReportes\Info_Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx" />
-    <Content Include="VistasReportes\Informe_Seguridad_social_paz_social_entorno_educativo.aspx" />
-    <Content Include="VistasReportes\Informe_Construccion_Cultura_Incluyente.aspx" />
-    <Content Include="VistasReportes\ConsultaActividadesRegistradas.aspx" />
+    <Content Include="VistasReportes\VistaAdmiReportes.aspx" />
     <Content Include="VistasReportes\VistaEncuentros_Ciudadanos_por_la_Seguridad.aspx" />
     <Content Include="VistasReportes\vistaInforme_Redes_vecinales.aspx" />
+    <Content Include="VistasReportes\Vista_Datos_Foraneo.aspx" />
     <Content Include="VistasReportes\Vista_de_reportes_dependencia.aspx" />
     <Content Include="VistasReportes\Vista_Prevencion_de_la_Violencia_por_Razones_de_Genero.aspx" />
-    <Content Include="VistasReportes\Vista_Datos_Foraneo.aspx" />
     <Content Include="VistasReportes\vista_Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -2124,45 +2127,48 @@
     <Content Include="Bundle.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Clases\DTOs\UsuarioDto.cs" />
-    <Compile Include="Clases\Helpers\DependenciaHelper.cs" />
-    <Compile Include="Clases\Services\UsuarioService.cs" />
-    <Compile Include="Clases\Repositories\UsuarioRepository.cs" />
-    <Compile Include="Legacy\Bienvenidas\Bienvenido_C4.aspx.cs">
+    <Compile Include="Bienvenido_C4.aspx.cs">
       <DependentUpon>Bienvenido_C4.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Legacy\Bienvenidas\Bienvenido_C4.aspx.designer.cs">
+    <Compile Include="Bienvenido_C4.aspx.designer.cs">
       <DependentUpon>Bienvenido_C4.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Legacy\Bienvenidas\Bienvenido_CEPREVIDE.aspx.cs">
+    <Compile Include="Bienvenido_CEPREVIDE.aspx.cs">
       <DependentUpon>Bienvenido_CEPREVIDE.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Legacy\Bienvenidas\Bienvenido_CEPREVIDE.aspx.designer.cs">
+    <Compile Include="Bienvenido_CEPREVIDE.aspx.designer.cs">
       <DependentUpon>Bienvenido_CEPREVIDE.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Legacy\Bienvenidas\Bienvenido_CVcMyCPC.aspx.cs">
+    <Compile Include="Bienvenido_CVcMyCPC.aspx.cs">
       <DependentUpon>Bienvenido_CVcMyCPC.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Legacy\Bienvenidas\Bienvenido_CVcMyCPC.aspx.designer.cs">
+    <Compile Include="Bienvenido_CVcMyCPC.aspx.designer.cs">
       <DependentUpon>Bienvenido_CVcMyCPC.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Legacy\Bienvenidas\Bienvenido_DGRS.aspx.cs">
-      <DependentUpon>Bienvenido_DGRS.aspx</DependentUpon>
+    <Compile Include="Bienvenido_DGPRS.aspx.cs">
+      <DependentUpon>Bienvenido_DGPRS.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Legacy\Bienvenidas\Bienvenido_DGRS.aspx.designer.cs">
-      <DependentUpon>Bienvenido_DGRS.aspx</DependentUpon>
+    <Compile Include="Bienvenido_DGPRS.aspx.designer.cs">
+      <DependentUpon>Bienvenido_DGPRS.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Legacy\Bienvenidas\Bienvenido_DGTSV.aspx.cs">
+    <Compile Include="Bienvenido_DGTSV.aspx.cs">
       <DependentUpon>Bienvenido_DGTSV.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Legacy\Bienvenidas\Bienvenido_DGTSV.aspx.designer.cs">
+    <Compile Include="Bienvenido_DGTSV.aspx.designer.cs">
       <DependentUpon>Bienvenido_DGTSV.aspx</DependentUpon>
     </Compile>
     <Compile Include="Captura\Atencion_Empresarial.aspx.cs">
@@ -2172,68 +2178,26 @@
     <Compile Include="Captura\Atencion_Empresarial.aspx.designer.cs">
       <DependentUpon>Atencion_Empresarial.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Captura\Atencion_Integral.aspx.cs">
+      <DependentUpon>Atencion_Integral.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Captura\Atencion_Integral.aspx.designer.cs">
+      <DependentUpon>Atencion_Integral.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Captura\C4\Ficha_promocion_difusion.aspx.cs">
+      <DependentUpon>Ficha_promocion_difusion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Captura\C4\Ficha_promocion_difusion.aspx.designer.cs">
+      <DependentUpon>Ficha_promocion_difusion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Captura\CapturaReporteActividades.aspx.cs">
       <DependentUpon>CapturaReporteActividades.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Captura\CapturaReporteActividades.aspx.designer.cs">
       <DependentUpon>CapturaReporteActividades.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Captura\Entorno.aspx.cs">
-      <DependentUpon>Entorno.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Captura\Entorno.aspx.designer.cs">
-      <DependentUpon>Entorno.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Legacy\Captura\Fortalecimiento_Emocional.aspx.cs">
-      <DependentUpon>Fortalecimiento_Emocional.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Legacy\Captura\Fortalecimiento_Emocional.aspx.designer.cs">
-      <DependentUpon>Fortalecimiento_Emocional.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Legacy\Captura\Festival_vive_seguro.aspx.cs">
-      <DependentUpon>Festival_vive_seguro.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Legacy\Captura\Festival_vive_seguro.aspx.designer.cs">
-      <DependentUpon>Festival_vive_seguro.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Legacy\Captura\Violencia_Genero.aspx.cs">
-      <DependentUpon>Violencia_Genero.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Legacy\Captura\Violencia_Genero.aspx.designer.cs">
-      <DependentUpon>Violencia_Genero.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Legacy\Captura\Redes_Atencion_vecinal.aspx.cs">
-      <DependentUpon>Redes_Atencion_vecinal.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Legacy\Captura\Redes_Atencion_vecinal.aspx.designer.cs">
-      <DependentUpon>Redes_Atencion_vecinal.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Legacy\Captura\Protectores_Vida.aspx.cs">
-      <DependentUpon>Protectores_Vida.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Legacy\Captura\Protectores_Vida.aspx.designer.cs">
-      <DependentUpon>Protectores_Vida.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Legacy\Captura\Prevencion_Atencion.aspx.cs">
-      <DependentUpon>Prevencion_Atencion.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Legacy\Captura\Prevencion_Atencion.aspx.designer.cs">
-      <DependentUpon>Prevencion_Atencion.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Legacy\Captura\C4\Ficha_promocion_difusion.aspx.cs">
-      <DependentUpon>Ficha_promocion_difusion.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Legacy\Captura\C4\Ficha_promocion_difusion.aspx.designer.cs">
-      <DependentUpon>Ficha_promocion_difusion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Captura\Captura_Dependencias.aspx.cs">
       <DependentUpon>Captura_Dependencias.aspx</DependentUpon>
@@ -2242,96 +2206,156 @@
     <Compile Include="Captura\Captura_Dependencias.aspx.designer.cs">
       <DependentUpon>Captura_Dependencias.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Legacy\Captura\Construccion_Cultura_Incluyente.aspx.cs">
-      <DependentUpon>Construccion_Cultura_Incluyente.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Legacy\Captura\Construccion_Cultura_Incluyente.aspx.designer.cs">
-      <DependentUpon>Construccion_Cultura_Incluyente.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Legacy\Captura\CVcMyCPC\Reporte_Actividades_SESCESP.aspx.cs">
-      <DependentUpon>Reporte_Actividades_SESCESP.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Legacy\Captura\CVcMyCPC\Reporte_Actividades_SESCESP.aspx.designer.cs">
-      <DependentUpon>Reporte_Actividades_SESCESP.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Legacy\Captura\DGRS\Actividades_DGRS.aspx.cs">
-      <DependentUpon>Actividades_DGRS.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Legacy\Captura\DGRS\Actividades_DGRS.aspx.designer.cs">
-      <DependentUpon>Actividades_DGRS.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Legacy\Captura\DGTSV\Ficha_idetificacion_diaria.aspx.cs">
-      <DependentUpon>Ficha_idetificacion_diaria.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Legacy\Captura\DGTSV\Ficha_idetificacion_diaria.aspx.designer.cs">
-      <DependentUpon>Ficha_idetificacion_diaria.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Legacy\Captura\Atencion_Integral.aspx.cs">
-      <DependentUpon>Atencion_Integral.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Legacy\Captura\Atencion_Integral.aspx.designer.cs">
-      <DependentUpon>Atencion_Integral.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Legacy\Captura\Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx.cs">
-      <DependentUpon>Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Legacy\Captura\Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx.designer.cs">
-      <DependentUpon>Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Legacy\Captura\CEPREVIDE\Reporte_CEPREVIDE.aspx.cs">
+    <Compile Include="Captura\CEPREVIDE\Reporte_CEPREVIDE.aspx.cs">
       <DependentUpon>Reporte_CEPREVIDE.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Legacy\Captura\CEPREVIDE\Reporte_CEPREVIDE.aspx.designer.cs">
+    <Compile Include="Captura\CEPREVIDE\Reporte_CEPREVIDE.aspx.designer.cs">
       <DependentUpon>Reporte_CEPREVIDE.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Legacy\Captura\Seguridad_social_paz_social_entorno_educativo.aspx.cs">
-      <DependentUpon>Seguridad_social_paz_social_entorno_educativo.aspx</DependentUpon>
+    <Compile Include="Captura\Construccion_Cultura_Incluyente.aspx.cs">
+      <DependentUpon>Construccion_Cultura_Incluyente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Legacy\Captura\Seguridad_social_paz_social_entorno_educativo.aspx.designer.cs">
-      <DependentUpon>Seguridad_social_paz_social_entorno_educativo.aspx</DependentUpon>
+    <Compile Include="Captura\Construccion_Cultura_Incluyente.aspx.designer.cs">
+      <DependentUpon>Construccion_Cultura_Incluyente.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Legacy\Captura\Encuentros_Ciudadanos_por_la_Seguridad.aspx.cs">
+    <Compile Include="Captura\CVcMyCPC\Reporte_Actividades_SESCESP.aspx.cs">
+      <DependentUpon>Reporte_Actividades_SESCESP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Captura\CVcMyCPC\Reporte_Actividades_SESCESP.aspx.designer.cs">
+      <DependentUpon>Reporte_Actividades_SESCESP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Captura\DGPRS\Actividades_DGPRS.aspx.cs">
+      <DependentUpon>Actividades_DGPRS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Captura\DGPRS\Actividades_DGPRS.aspx.designer.cs">
+      <DependentUpon>Actividades_DGPRS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Captura\DGPRS\Registro_de_poblacion_asistida.aspx.cs">
+      <DependentUpon>Registro_de_poblacion_asistida.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Captura\DGPRS\Registro_de_poblacion_asistida.aspx.designer.cs">
+      <DependentUpon>Registro_de_poblacion_asistida.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Captura\DGTSV\Ficha_idetificacion_diaria.aspx.cs">
+      <DependentUpon>Ficha_idetificacion_diaria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Captura\DGTSV\Ficha_idetificacion_diaria.aspx.designer.cs">
+      <DependentUpon>Ficha_idetificacion_diaria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Captura\Encuentros_Ciudadanos_por_la_Seguridad.aspx.cs">
       <DependentUpon>Encuentros_Ciudadanos_por_la_Seguridad.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Legacy\Captura\Encuentros_Ciudadanos_por_la_Seguridad.aspx.designer.cs">
+    <Compile Include="Captura\Encuentros_Ciudadanos_por_la_Seguridad.aspx.designer.cs">
       <DependentUpon>Encuentros_Ciudadanos_por_la_Seguridad.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Legacy\Captura\Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx.cs">
-      <DependentUpon>Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Legacy\Captura\Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx.designer.cs">
-      <DependentUpon>Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Legacy\Captura\Redes_vecinales.aspx.cs">
-      <DependentUpon>Redes_vecinales.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Legacy\Captura\Redes_vecinales.aspx.designer.cs">
-      <DependentUpon>Redes_vecinales.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Legacy\Captura\Prevención_de_la_Violencia_por_Razones_de_Género.aspx.cs">
-      <DependentUpon>Prevención_de_la_Violencia_por_Razones_de_Género.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Legacy\Captura\Prevención_de_la_Violencia_por_Razones_de_Género.aspx.designer.cs">
-      <DependentUpon>Prevención_de_la_Violencia_por_Razones_de_Género.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Legacy\Captura\Enlace_con_el_Sector_Empresarial.aspx.cs">
+    <Compile Include="Captura\Enlace_con_el_Sector_Empresarial.aspx.cs">
       <DependentUpon>Enlace_con_el_Sector_Empresarial.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Legacy\Captura\Enlace_con_el_Sector_Empresarial.aspx.designer.cs">
+    <Compile Include="Captura\Enlace_con_el_Sector_Empresarial.aspx.designer.cs">
       <DependentUpon>Enlace_con_el_Sector_Empresarial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Captura\Entorno.aspx.cs">
+      <DependentUpon>Entorno.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Captura\Entorno.aspx.designer.cs">
+      <DependentUpon>Entorno.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Captura\Festival_vive_seguro.aspx.cs">
+      <DependentUpon>Festival_vive_seguro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Captura\Festival_vive_seguro.aspx.designer.cs">
+      <DependentUpon>Festival_vive_seguro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Captura\Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx.cs">
+      <DependentUpon>Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Captura\Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx.designer.cs">
+      <DependentUpon>Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Captura\Fortalecimiento_Emocional.aspx.cs">
+      <DependentUpon>Fortalecimiento_Emocional.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Captura\Fortalecimiento_Emocional.aspx.designer.cs">
+      <DependentUpon>Fortalecimiento_Emocional.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Captura\Prevencion_Atencion.aspx.cs">
+      <DependentUpon>Prevencion_Atencion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Captura\Prevencion_Atencion.aspx.designer.cs">
+      <DependentUpon>Prevencion_Atencion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Captura\Prevención_de_la_Violencia_por_Razones_de_Género.aspx.cs">
+      <DependentUpon>Prevención_de_la_Violencia_por_Razones_de_Género.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Captura\Prevención_de_la_Violencia_por_Razones_de_Género.aspx.designer.cs">
+      <DependentUpon>Prevención_de_la_Violencia_por_Razones_de_Género.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Captura\Protectores_Vida.aspx.cs">
+      <DependentUpon>Protectores_Vida.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Captura\Protectores_Vida.aspx.designer.cs">
+      <DependentUpon>Protectores_Vida.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Captura\Redes_Atencion_vecinal.aspx.cs">
+      <DependentUpon>Redes_Atencion_vecinal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Captura\Redes_Atencion_vecinal.aspx.designer.cs">
+      <DependentUpon>Redes_Atencion_vecinal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Captura\Redes_vecinales.aspx.cs">
+      <DependentUpon>Redes_vecinales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Captura\Redes_vecinales.aspx.designer.cs">
+      <DependentUpon>Redes_vecinales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Captura\Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx.cs">
+      <DependentUpon>Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Captura\Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx.designer.cs">
+      <DependentUpon>Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Captura\Seguridad_social_paz_social_entorno_educativo.aspx.cs">
+      <DependentUpon>Seguridad_social_paz_social_entorno_educativo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Captura\Seguridad_social_paz_social_entorno_educativo.aspx.designer.cs">
+      <DependentUpon>Seguridad_social_paz_social_entorno_educativo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Captura\Violencia_Genero.aspx.cs">
+      <DependentUpon>Violencia_Genero.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Captura\Violencia_Genero.aspx.designer.cs">
+      <DependentUpon>Violencia_Genero.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clases\DTOs\UsuarioDto.cs" />
+    <Compile Include="Clases\Helpers\DependenciaHelper.cs" />
+    <Compile Include="Clases\Services\UsuarioService.cs" />
+    <Compile Include="Clases\Repositories\UsuarioRepository.cs" />
+    <Compile Include="Contact.aspx.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contact.aspx.designer.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="Clases\DTOs\ComboItemDTO.cs" />
     <Compile Include="Clases\Models\MenuCardDto.cs" />
@@ -2632,13 +2656,6 @@
     <Compile Include="Inicio\inicio_sesion.aspx.designer.cs">
       <DependentUpon>inicio_sesion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Inicio\Launcher.aspx.cs">
-      <DependentUpon>Launcher.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Inicio\Launcher.aspx.designer.cs">
-      <DependentUpon>Launcher.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Inicio\Reporte.aspx.cs">
       <DependentUpon>Reporte.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2666,54 +2683,47 @@
     <Compile Include="MenuProgramas\CREPREVIDE\Programa_CEPREVIDE.aspx.designer.cs">
       <DependentUpon>Programa_CEPREVIDE.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MenuProgramas\DGRS\Programas_DGRS.aspx.cs">
-      <DependentUpon>Programas_DGRS.aspx</DependentUpon>
+    <Compile Include="MenuProgramas\DGPRS\Programas_DGPRS.aspx.cs">
+      <DependentUpon>Programas_DGPRS.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MenuProgramas\DGRS\Programas_DGRS.aspx.designer.cs">
-      <DependentUpon>Programas_DGRS.aspx</DependentUpon>
+    <Compile Include="MenuProgramas\DGPRS\Programas_DGPRS.aspx.designer.cs">
+      <DependentUpon>Programas_DGPRS.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Legacy\meenu2019.aspx.cs">
+    <Compile Include="MenuProgramas\meenu2019.aspx.cs">
       <DependentUpon>meenu2019.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Legacy\meenu2019.aspx.designer.cs">
+    <Compile Include="MenuProgramas\meenu2019.aspx.designer.cs">
       <DependentUpon>meenu2019.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Legacy\Menu.aspx.cs">
+    <Compile Include="MenuProgramas\Menu.aspx.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Legacy\Menu.aspx.designer.cs">
+    <Compile Include="MenuProgramas\Menu.aspx.designer.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Legacy\Menu2026.aspx.cs">
-      <DependentUpon>Menu2026.aspx</DependentUpon>
+    <Compile Include="MenuProgramas\Menu_2026.aspx.cs">
+      <DependentUpon>Menu_2026.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Legacy\Menu2026.aspx.designer.cs">
-      <DependentUpon>Menu2026.aspx</DependentUpon>
+    <Compile Include="MenuProgramas\Menu_2026.aspx.designer.cs">
+      <DependentUpon>Menu_2026.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MenuProgramas\MenuDependencias.aspx.cs">
-      <DependentUpon>MenuDependencias.aspx</DependentUpon>
+    <Compile Include="MenuProgramas\Menu_Dependencias.aspx.cs">
+      <DependentUpon>Menu_Dependencias.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MenuProgramas\MenuDependencias.aspx.designer.cs">
-      <DependentUpon>MenuDependencias.aspx</DependentUpon>
+    <Compile Include="MenuProgramas\Menu_Dependencias.aspx.designer.cs">
+      <DependentUpon>Menu_Dependencias.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Legacy\Principal.aspx.cs">
+    <Compile Include="MenuProgramas\Principal.aspx.cs">
       <DependentUpon>Principal.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Legacy\Principal.aspx.designer.cs">
+    <Compile Include="MenuProgramas\Principal.aspx.designer.cs">
       <DependentUpon>Principal.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="MenuProgramas\SeleccionPrograma.aspx.cs">
-      <DependentUpon>SeleccionPrograma.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MenuProgramas\SeleccionPrograma.aspx.designer.cs">
-      <DependentUpon>SeleccionPrograma.aspx</DependentUpon>
     </Compile>
     <Compile Include="MenuProgramas\SESCESP\Programas_SESCESP.aspx.cs">
       <DependentUpon>Programas_SESCESP.aspx</DependentUpon>
@@ -2751,54 +2761,40 @@
     <Compile Include="SiteV2.Master.designer.cs">
       <DependentUpon>SiteV2.Master</DependentUpon>
     </Compile>
-    <Compile Include="sysadmin\Administracion.aspx.cs">
-      <DependentUpon>Administracion.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="sysadmin\Administracion.aspx.designer.cs">
-      <DependentUpon>Administracion.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="sysadmin\Calendar.aspx.cs">
+    <Compile Include="SysAdmin\Calendar.aspx.cs">
       <DependentUpon>Calendar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="sysadmin\Calendar.aspx.designer.cs">
+    <Compile Include="SysAdmin\Calendar.aspx.designer.cs">
       <DependentUpon>Calendar.aspx</DependentUpon>
     </Compile>
-    <Compile Include="sysadmin\ControlRoles.aspx.cs">
-      <DependentUpon>ControlRoles.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="sysadmin\ControlRoles.aspx.designer.cs">
-      <DependentUpon>ControlRoles.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="sysadmin\ControlUser.aspx.cs">
-      <DependentUpon>ControlUser.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="sysadmin\ControlUser.aspx.designer.cs">
-      <DependentUpon>ControlUser.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="sysadmin\ErrorLog.aspx.cs">
-      <DependentUpon>ErrorLog.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="sysadmin\ErrorLog.aspx.designer.cs">
-      <DependentUpon>ErrorLog.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="sysadmin\Nuevo_Usuario.aspx.cs">
-      <DependentUpon>Nuevo_Usuario.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="sysadmin\Nuevo_Usuario.aspx.designer.cs">
-      <DependentUpon>Nuevo_Usuario.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="sysadmin\Cambiar_Contrasena.aspx.cs">
+    <Compile Include="SysAdmin\Cambiar_Contrasena.aspx.cs">
       <DependentUpon>Cambiar_Contrasena.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="sysadmin\Cambiar_Contrasena.aspx.designer.cs">
+    <Compile Include="SysAdmin\Cambiar_Contrasena.aspx.designer.cs">
       <DependentUpon>Cambiar_Contrasena.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysAdmin\ControlRoles.aspx.cs">
+      <DependentUpon>ControlRoles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysAdmin\ControlRoles.aspx.designer.cs">
+      <DependentUpon>ControlRoles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysAdmin\ControlUser.aspx.cs">
+      <DependentUpon>ControlUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysAdmin\ControlUser.aspx.designer.cs">
+      <DependentUpon>ControlUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SysAdmin\Nuevo_Usuario.aspx.cs">
+      <DependentUpon>Nuevo_Usuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SysAdmin\Nuevo_Usuario.aspx.designer.cs">
+      <DependentUpon>Nuevo_Usuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="TotalAccionesBeneficiados.aspx.cs">
       <DependentUpon>TotalAccionesBeneficiados.aspx</DependentUpon>
@@ -2817,112 +2813,96 @@
     </Compile>
     <Compile Include="VistasReportes\C4\Vista_de_datos_de_actividades_C4.aspx.cs">
       <DependentUpon>Vista_de_datos_de_actividades_C4.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="VistasReportes\C4\Vista_de_datos_de_actividades_C4.aspx.designer.cs">
       <DependentUpon>Vista_de_datos_de_actividades_C4.aspx</DependentUpon>
     </Compile>
     <Compile Include="VistasReportes\CEPREVIDE\Vista_de_datos_de_actividades_CEPREVIDE.aspx.cs">
       <DependentUpon>Vista_de_datos_de_actividades_CEPREVIDE.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="VistasReportes\CEPREVIDE\Vista_de_datos_de_actividades_CEPREVIDE.aspx.designer.cs">
       <DependentUpon>Vista_de_datos_de_actividades_CEPREVIDE.aspx</DependentUpon>
     </Compile>
     <Compile Include="VistasReportes\CVcMyCPC\Vista_de_datos_SESCESP.aspx.cs">
       <DependentUpon>Vista_de_datos_SESCESP.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="VistasReportes\CVcMyCPC\Vista_de_datos_SESCESP.aspx.designer.cs">
       <DependentUpon>Vista_de_datos_SESCESP.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\DGRS\Vista_de_datos_DGRS.aspx.cs">
-      <DependentUpon>Vista_de_datos_DGRS.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
+    <Compile Include="VistasReportes\DGPRS\Vista_de_datos_DGPRS.aspx.cs">
+      <DependentUpon>Vista_de_datos_DGPRS.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\DGRS\Vista_de_datos_DGRS.aspx.designer.cs">
-      <DependentUpon>Vista_de_datos_DGRS.aspx</DependentUpon>
+    <Compile Include="VistasReportes\DGPRS\Vista_de_datos_DGPRS.aspx.designer.cs">
+      <DependentUpon>Vista_de_datos_DGPRS.aspx</DependentUpon>
     </Compile>
     <Compile Include="VistasReportes\DGTSV\Vista_de_datos_de_actividades_DGTSV.aspx.cs">
       <DependentUpon>Vista_de_datos_de_actividades_DGTSV.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="VistasReportes\DGTSV\Vista_de_datos_de_actividades_DGTSV.aspx.designer.cs">
       <DependentUpon>Vista_de_datos_de_actividades_DGTSV.aspx</DependentUpon>
     </Compile>
+    <Compile Include="VistasReportes\Informe_Construccion_Cultura_Incluyente.aspx.cs">
+      <DependentUpon>Informe_Construccion_Cultura_Incluyente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VistasReportes\Informe_Construccion_Cultura_Incluyente.aspx.designer.cs">
+      <DependentUpon>Informe_Construccion_Cultura_Incluyente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VistasReportes\Informe_Seguridad_social_paz_social_entorno_educativo.aspx.cs">
+      <DependentUpon>Informe_Seguridad_social_paz_social_entorno_educativo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VistasReportes\Informe_Seguridad_social_paz_social_entorno_educativo.aspx.designer.cs">
+      <DependentUpon>Informe_Seguridad_social_paz_social_entorno_educativo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="VistasReportes\Info_Enlace_con_el_Sector_Empresarial.aspx.cs">
       <DependentUpon>Info_Enlace_con_el_Sector_Empresarial.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="VistasReportes\Info_Enlace_con_el_Sector_Empresarial.aspx.designer.cs">
       <DependentUpon>Info_Enlace_con_el_Sector_Empresarial.aspx</DependentUpon>
     </Compile>
     <Compile Include="VistasReportes\Info_Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx.cs">
       <DependentUpon>Info_Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="VistasReportes\Info_Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx.designer.cs">
       <DependentUpon>Info_Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\Informe_Seguridad_social_paz_social_entorno_educativo.aspx.cs">
-      <DependentUpon>Informe_Seguridad_social_paz_social_entorno_educativo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
+    <Compile Include="VistasReportes\VistaAdmiReportes.aspx.cs">
+      <DependentUpon>VistaAdmiReportes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\Informe_Seguridad_social_paz_social_entorno_educativo.aspx.designer.cs">
-      <DependentUpon>Informe_Seguridad_social_paz_social_entorno_educativo.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="VistasReportes\Informe_Construccion_Cultura_Incluyente.aspx.cs">
-      <DependentUpon>Informe_Construccion_Cultura_Incluyente.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="VistasReportes\Informe_Construccion_Cultura_Incluyente.aspx.designer.cs">
-      <DependentUpon>Informe_Construccion_Cultura_Incluyente.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="VistasReportes\ConsultaActividadesRegistradas.aspx.cs">
-      <DependentUpon>ConsultaActividadesRegistradas.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="VistasReportes\ConsultaActividadesRegistradas.aspx.designer.cs">
-      <DependentUpon>ConsultaActividadesRegistradas.aspx</DependentUpon>
+    <Compile Include="VistasReportes\VistaAdmiReportes.aspx.designer.cs">
+      <DependentUpon>VistaAdmiReportes.aspx</DependentUpon>
     </Compile>
     <Compile Include="VistasReportes\VistaEncuentros_Ciudadanos_por_la_Seguridad.aspx.cs">
       <DependentUpon>VistaEncuentros_Ciudadanos_por_la_Seguridad.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="VistasReportes\VistaEncuentros_Ciudadanos_por_la_Seguridad.aspx.designer.cs">
       <DependentUpon>VistaEncuentros_Ciudadanos_por_la_Seguridad.aspx</DependentUpon>
     </Compile>
     <Compile Include="VistasReportes\vistaInforme_Redes_vecinales.aspx.cs">
       <DependentUpon>vistaInforme_Redes_vecinales.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="VistasReportes\vistaInforme_Redes_vecinales.aspx.designer.cs">
       <DependentUpon>vistaInforme_Redes_vecinales.aspx</DependentUpon>
     </Compile>
+    <Compile Include="VistasReportes\Vista_Datos_Foraneo.aspx.cs">
+      <DependentUpon>Vista_Datos_Foraneo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VistasReportes\Vista_Datos_Foraneo.aspx.designer.cs">
+      <DependentUpon>Vista_Datos_Foraneo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="VistasReportes\Vista_de_reportes_dependencia.aspx.cs">
       <DependentUpon>Vista_de_reportes_dependencia.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="VistasReportes\Vista_de_reportes_dependencia.aspx.designer.cs">
       <DependentUpon>Vista_de_reportes_dependencia.aspx</DependentUpon>
     </Compile>
     <Compile Include="VistasReportes\Vista_Prevencion_de_la_Violencia_por_Razones_de_Genero.aspx.cs">
       <DependentUpon>Vista_Prevencion_de_la_Violencia_por_Razones_de_Genero.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="VistasReportes\Vista_Prevencion_de_la_Violencia_por_Razones_de_Genero.aspx.designer.cs">
       <DependentUpon>Vista_Prevencion_de_la_Violencia_por_Razones_de_Genero.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\Vista_Datos_Foraneo.aspx.cs">
-      <DependentUpon>Vista_Datos_Foraneo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="VistasReportes\Vista_Datos_Foraneo.aspx.designer.cs">
-      <DependentUpon>Vista_Datos_Foraneo.aspx</DependentUpon>
-    </Compile>
     <Compile Include="VistasReportes\vista_Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx.cs">
       <DependentUpon>vista_Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="VistasReportes\vista_Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx.designer.cs">
       <DependentUpon>vista_Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx</DependentUpon>
@@ -2942,9 +2922,6 @@
     <Content Include="json\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Captura\Web.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Formatos\Formulario_Seguimeinto_PoliciaProximidad.xlsx" />
     <Content Include="Formatos\T_Formulario_Seguimeinto_PoliciaProximidad.xlsx" />
     <Content Include="Formatos\Actividades_Redes_Veracruzanas_SIICOP.xlsx" />
@@ -2954,9 +2931,6 @@
     <Content Include="Formatos\Actividades_Total.xlsx" />
     <Content Include="Formatos\Total_Actividess.xlsx" />
     <Content Include="json\ActividadesGeoDependencias.ashx" />
-    <Content Include="Inicio\Web.config">
-      <SubType>Designer</SubType>
-    </Content>
     <EntityDeploy Include="Datos\SIICOB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SIICOB.Designer.cs</LastGenOutput>
@@ -2986,10 +2960,6 @@
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Scripts\Web.config" />
-    <Content Include="sysadmin\Web.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="VistasReportes\Web.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.esm.min.js.map" />
@@ -3000,6 +2970,8 @@
     <Content Include="Scripts\jquery-3.7.1.min.map" />
     <Content Include="Site.Mobile.Master" />
     <Content Include="SiteV2.Master" />
+    <Content Include="SysAdmin\Web.config" />
+    <Content Include="VistasReportes\Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
