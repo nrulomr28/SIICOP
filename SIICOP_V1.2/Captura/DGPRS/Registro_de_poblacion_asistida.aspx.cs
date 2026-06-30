@@ -12,7 +12,7 @@ namespace SIICOP_V1._2.Captura.DGPRS
 {
     public partial class Registro_de_poblacion_asistida : System.Web.UI.Page
     {
-            SIICOBEntities ctx = new SIICOBEntities();
+            SIICOPEntities ctx = new SIICOPEntities();
             public enum AccionReporte { Creacion, Edicion, Visualizacion }
             string sUsuarioActual;
             #region ### BENEFICIADOS

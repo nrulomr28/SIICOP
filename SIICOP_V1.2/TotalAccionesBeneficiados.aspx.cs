@@ -1,4 +1,5 @@
-﻿using SIICOP_V1._2.Datos;
+﻿using SIICOP_V1._2.Clases.Repositories;
+using SIICOP_V1._2.Datos;
 using SIICOP_V1._2.Datos.Repositorio;
 using System;
 using System.Collections.Generic;
