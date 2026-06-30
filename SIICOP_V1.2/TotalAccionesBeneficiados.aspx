@@ -38,13 +38,17 @@
         }
     </style>
 
+
+
     <div class="container mt-4">
+
 
         <div class="text-center mb-4">
             <h3 class="fw-bold text-dark" style="letter-spacing: 1px;">ACCIONES Y BENEFICIADOS
             </h3>
             <span class="text-muted">Resumen del mes actual</span>
         </div>
+        <br />
 
         <div class="card shadow-sm border-0 rounded-4">
             <div class="card-body p-4">
@@ -110,6 +114,10 @@
                             </asp:TemplateField>
 
 
+
+
+
+
                         </Columns>
 
                     </asp:GridView>
@@ -120,5 +128,9 @@
         </div>
 
     </div>
+
+
+    <br />
+    <br />
 
 </asp:Content>

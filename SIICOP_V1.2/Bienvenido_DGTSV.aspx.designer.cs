@@ -7,29 +7,18 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SIICOP_V1._2.sysadmin
-{
-
-
-    public partial class Administracion
-    {
-
+namespace SIICOP_V1._2 {
+    
+    
+    public partial class Bienvenido_DGTSV {
+        
         /// <summary>
-        /// Control gvUsuarios.
+        /// Control img2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvUsuarios;
-
-        /// <summary>
-        /// Control lblUsuariosActivos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUsuariosActivos;
+        protected global::System.Web.UI.HtmlControls.HtmlImage img2;
     }
 }

@@ -8,7 +8,7 @@
         function Correcto() {
             swal({
                 title: "Correcto!",
-                text: "El usuario se creó con exito",
+                text: "El usuario se creo con exito",
                 icon: "success",
                 button: "Aceptar",
 
@@ -53,7 +53,22 @@
                             <ItemStyle HorizontalAlign="Center"></ItemStyle>
 
                         </asp:TemplateField>
-                    </Columns>                    
+                    </Columns>
+                    <%--<PagerTemplate>
+                        <div class="row" style="margin-top: 20px;">
+                            <div class="col-lg-1" style="text-align: right;">
+                                <h5>
+                                    <asp:Label ID="MessageLabel" Text="Pág." runat="server" /></h5>
+                            </div>
+                            <div class="col-lg-2 col-md-3" style="text-align: left;">
+                                <asp:DropDownList ID="PageDropDownListAdmin" Width="60%" AutoPostBack="true" OnSelectedIndexChanged="PageDropDownListAdmin_SelectedIndexChanged" runat="server" CssClass="form-control" /></h3>
+                            </div>
+                            <div class="col-lg-10" style="text-align: right;">
+                                <h3>
+                                    <asp:Label ID="CurrentPageLabelt" runat="server" CssClass="label label-info" /></h3>
+                            </div>
+                        </div>
+                    </PagerTemplate>--%>
                 </asp:GridView>
                 <asp:EntityDataSource runat="server" ID="edsUser" DefaultContainerName="SIICOPEntities" ConnectionString="name=SIICOPEntities" EnableFlattening="False" EntitySetName="Personales" OrderBy="it.fechacrecion desc"></asp:EntityDataSource>
             </div>

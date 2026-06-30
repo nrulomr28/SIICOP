@@ -4,9 +4,6 @@ using System.Linq;
 using System.Web.Security;
 using System.Web.UI;
 
-using SIICOP_V1._2.Clases.Services;
-
-
 namespace SIICOP_V1._2
 {
     public partial class _Default : Page
@@ -21,13 +18,9 @@ namespace SIICOP_V1._2
         //int año = 2020;
         int año = DateTime.Now.Year;
         protected void Page_Load(object sender, EventArgs e)
-        {            
-
+        {
             if (!IsPostBack)
             {
-
-                
-
                 string sUsuarioActual = System.Web.Security.Membership.GetUser().UserName;
                 var a = ctx.Personales.Where(x => x.login == sUsuarioActual).FirstOrDefault();
                 var area = a.cat_areaidarea;

@@ -1,7 +1,6 @@
 ﻿using SIICOP_V1._2.Captura.DGTSV;
 using System;
 using System.Web;
-using System.Web.Providers.Entities;
 using System.Web.Security;
 using System.Web.UI;
 
@@ -58,7 +57,7 @@ namespace SIICOP_V1._2
                 {
                     MembershipUser myObject = System.Web.Security.Membership.GetUser();
                     string UserID = myObject.ProviderUserKey.ToString();
-                    
+                    //lblRol.Text = " ROL: " + System.Web.Security.Roles.GetRolesForUser(Context.User.Identity.Name)[0];
                 }
                 catch (Exception ex) { ex.GetBaseException(); }
 
@@ -76,7 +75,8 @@ namespace SIICOP_V1._2
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
+
         }
 
         protected void btnLogout_Click(object sender, EventArgs e)

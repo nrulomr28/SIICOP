@@ -11,7 +11,7 @@ namespace SIICOP_V1._2.SysAdmin
 {
     public partial class ControlUser : System.Web.UI.Page
     {
-        SIICOPEntities ctx /*= new SIICOPEntities()*/;
+        SIICOPEntities ctx = new SIICOPEntities();
         int iduser;
 
         private string SortDirection
@@ -21,10 +21,7 @@ namespace SIICOP_V1._2.SysAdmin
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                ctx = new SIICOPEntities();
-            }
+
         }
 
 
@@ -266,7 +263,7 @@ namespace SIICOP_V1._2.SysAdmin
                 }
                 if (iddepen == 6)
                 {
-                    iNUevoregistro.Dependencia = "DPRS";
+                    iNUevoregistro.Dependencia = "DGPRS";
                 }
 
                 iNUevoregistro.login = txtUsuarioLogin.Text;
@@ -304,7 +301,7 @@ namespace SIICOP_V1._2.SysAdmin
             {
 
 
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "alertMessage", "alert('El usuario no se ha podido crear')", true);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "alertMessage", "alert('El usuario no se a podido crear')", true);
 
             }
         }
