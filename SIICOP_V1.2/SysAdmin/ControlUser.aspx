@@ -1,9 +1,11 @@
 ﻿<%@ Page Title="Administración de usuarios" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ControlUser.aspx.cs" Inherits="SIICOP_V1._2.SysAdmin.ControlUser" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager> 
     <br />
     <br />
-    <script src="<%= ResolveUrl("~/Scripts/sweetalert2.all.js") %>" type="text/javascript"></script>
+    <script src="<%= ResolveUrl("~/Scripts/sweetalert2.all.js") %>" type="text/javascript"></script>    
+
     <script type="text/javascript">
         function Correcto() {
             swal({
@@ -15,21 +17,36 @@
             });
             return false
         }
-
     </script>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 ">
                 <h3 style="text-align: center"><span>Administración y control de usuarios</span></h3>
-                <asp:LinkButton runat="server" ID="lnkbtnAgregarUser" CssClass="btn btn-success pull-right" OnClick="lnkbtnAgregarUser_Click">Agregar usuario <i class="fas fa-user-plus"></i></asp:LinkButton>
-                <br />
-                <asp:GridView runat="server" CssClass="table table-bordered" ID="gvuser" AutoGenerateColumns="False" DataKeyNames="Personalid, guidUsuario"
+                <asp:LinkButton runat="server" ID="lnkbtnAgregarUser" CssClass="btn btn-success pull-right" 
+                    OnClick="lnkbtnAgregarUser_Click">Agregar usuario <i class="fas fa-user-plus"></i></asp:LinkButton>
+                <br />  
+                <asp:GridView runat="server" CssClass="table table-bordered" ID="gvuser" AutoGenerateColumns="False" 
+                    DataKeyNames="Personalid, guidUsuario"
                     CellPadding="3" AllowPaging="True"
                     OnDataBound="gvuser_DataBound"
                     OnRowCommand="gvuser_RowCommand"
-                    DataSourceID="edsUser"
+                    OnPageIndexChanging="gvuser_PageIndexChanging" EnableViewState="false"
                     PagerSettings-PageButtonCount="5" PageSize="10">
                     <PagerStyle HorizontalAlign="Center" CssClass="GridPager" />
+                    <PagerTemplate>
+                    <div class="row" style="width:100%; padding:10px;">
+                        <div class="col-md-6 text-right">
+                            <asp:Label ID="CurrentPageLabelt" runat="server" CssClass="fw-bold"></asp:Label>
+                        </div>
+                        <div class="col-md-6 text-left">
+                            Ir a página: 
+                            <asp:DropDownList ID="PageDropDownListAdmin" AutoPostBack="true" 
+                                OnSelectedIndexChanged="PageDropDownListAdmin_SelectedIndexChanged" 
+                                runat="server" 
+                                CssClass="form-control d-inline-block w-auto" />
+                        </div>
+                    </div>
+                    </PagerTemplate>
                     <Columns>
                         <asp:TemplateField HeaderText="Nombre" SortExpression="Nombre">
                             <ItemTemplate>
@@ -48,19 +65,14 @@
                                 <asp:LinkButton runat="server" Text="Editaruser" CommandName="EditarUser" class="btn btn-warning" CausesValidation="False" ID="lnkbtnEdirUser" ToolTip="Editar usuarios" CommandArgument='<%# Eval("Personalid") %>'>
                                     <i class="fas fa-user-edit"></i>
                                 </asp:LinkButton>
-
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center"></ItemStyle>
-
                         </asp:TemplateField>
                     </Columns>                    
                 </asp:GridView>
-                <asp:EntityDataSource runat="server" ID="edsUser" DefaultContainerName="SIICOPEntities" ConnectionString="name=SIICOPEntities" EnableFlattening="False" EntitySetName="Personales" OrderBy="it.fechacrecion desc"></asp:EntityDataSource>
-            </div>
+               </div>
         </div>
     </div>
-
-
     <div class="modal fade" id="myModalPassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
@@ -88,7 +100,6 @@
             </div>
         </div>
     </div>
-
     <div class="modal fade" id="myModalEditUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
@@ -109,16 +120,12 @@
 
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fas fa-briefcase"></i></span>
-                        <asp:DropDownList runat="server" ID="ddlArea" DataSourceID="edsArea" CssClass="form-control" DataTextField="area_nombre" DataValueField="idarea"></asp:DropDownList>
-                        <asp:EntityDataSource runat="server" ID="edsArea" DefaultContainerName="SIICOPEntities" ConnectionString="name=SIICOPEntities" EnableFlattening="False" EntitySetName="Cat_area"></asp:EntityDataSource>
-                    </div>
+                       </div>
                     <br />
                      <br />
                      <div class="input-group">
                         <span class="input-group-addon"><i class="fas fa-briefcase" style="color: RED"></i></span>
-                        <asp:DropDownList runat="server" CssClass="form-control" ID="ddldepen_edit" DataSourceID="edsDependencia2" DataTextField="DependenciaNombre" DataValueField="DependenciaId" OnDataBound="ddldepen_edit_DataBound"></asp:DropDownList>
-                        <asp:EntityDataSource runat="server" ID="edsDependencia2" DefaultContainerName="SIICOPEntities" ConnectionString="name=SIICOPEntities" EnableFlattening="False" EntitySetName="Cat_Dependencias"></asp:EntityDataSource>
-                    </div>
+                       </div>
                     <br />
                 </div>
                 <div class="modal-footer">
@@ -130,8 +137,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="modal fade" id="ModalCrearUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
@@ -151,15 +156,11 @@
                     <br />
                      <div class="input-group">
                         <span class="input-group-addon"><i class="fas fa-briefcase" style="color: RED"></i></span>
-                        <asp:DropDownList runat="server" CssClass="form-control" ID="ddldepndencia" DataSourceID="edsDependencia" DataTextField="DependenciaNombre" DataValueField="DependenciaId"></asp:DropDownList>
-                        <asp:EntityDataSource runat="server" ID="edsDependencia" DefaultContainerName="SIICOPEntities" ConnectionString="name=SIICOPEntities" EnableFlattening="False" EntitySetName="Cat_Dependencias"></asp:EntityDataSource>
-                    </div>
+                         </div>
                     <br />
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fas fa-briefcase" style="color: RED"></i></span>
-                        <asp:DropDownList runat="server" CssClass="form-control" ID="ddlAreaNuevo" DataSourceID="edsarea" DataTextField="area_nombre" DataValueField="idarea"></asp:DropDownList>
-                        <asp:EntityDataSource runat="server" ID="EntityDataSource1" DefaultContainerName="SIICOPEntities" ConnectionString="name=SIICOPEntities" EnableFlattening="False" EntitySetName="Cat_area"></asp:EntityDataSource>
-                    </div>
+                          </div>
                     <br />
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fas fa-user-secret" style="color: RED"></i></span>
@@ -191,17 +192,19 @@
             </div>
         </div>
     </div>
-
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         function openModalNuevoUser() {
-            $('#ModalCrearUser').modal();
+            // Se añade 'show' para forzar la apertura en todas las versiones de Bootstrap
+            $('#ModalCrearUser').modal('show');
         }
         function openModalpassword() {
-            $('#myModalPassword').modal();
+            $('#myModalPassword').modal('show');
         }
         function openModalEditUser() {
-            $('#myModalEditUser').modal();
+            $('#myModalEditUser').modal('show');
         }
     </script>
 </asp:Content>
+

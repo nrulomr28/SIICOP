@@ -16,7 +16,7 @@ namespace SIICOP_V1._2.SysAdmin
         protected void btnCrearUsuario_Click(object sender, EventArgs e)
         {
 
-            try
+          /*  try
             {
                 MembershipCreateStatus status;
                 SIICOPEntities ctx = new SIICOPEntities();
@@ -44,8 +44,7 @@ namespace SIICOP_V1._2.SysAdmin
                     idNuevoUsuario = Guid.Parse(usuarioCreado.ProviderUserKey.ToString());
                     iNUevoregistro.guidUsuario = Guid.Parse(usuarioCreado.ProviderUserKey.ToString());
                     iNUevoregistro.login = usuario;
-
-                }
+                                    }
 
 
                 ctx.Personales.Add(iNUevoregistro);
@@ -67,7 +66,7 @@ namespace SIICOP_V1._2.SysAdmin
 
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "alertMessage", "alert('El usuario no se a podido crear')", true);
 
-            }
+            }*/
         }
     }
 }

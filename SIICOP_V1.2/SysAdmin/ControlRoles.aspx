@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ControlRoles.aspx.cs" Inherits="SIICOP_V1._2.SysAdmin.ControlRoles" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+   <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>      
     <section>
         <div>
             <!-- MAIN CONTENT CONTAINER -->

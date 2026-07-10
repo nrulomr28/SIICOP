@@ -7,11 +7,22 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SIICOP_V1._2.SysAdmin {
-    
-    
-    public partial class Nuevo_Usuario {
-        
+namespace SIICOP_V1._2.SysAdmin
+{
+
+
+    public partial class Nuevo_Usuario
+    {
+
+        /// <summary>
+        /// Control ScriptManager1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+
         /// <summary>
         /// Control UpdatePanel1.
         /// </summary>
@@ -20,7 +31,7 @@ namespace SIICOP_V1._2.SysAdmin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
+
         /// <summary>
         /// Control txtnombre.
         /// </summary>
@@ -29,7 +40,7 @@ namespace SIICOP_V1._2.SysAdmin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtnombre;
-        
+
         /// <summary>
         /// Control txtpaterno.
         /// </summary>
@@ -38,7 +49,7 @@ namespace SIICOP_V1._2.SysAdmin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtpaterno;
-        
+
         /// <summary>
         /// Control txtxmaterno.
         /// </summary>
@@ -47,7 +58,7 @@ namespace SIICOP_V1._2.SysAdmin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtxmaterno;
-        
+
         /// <summary>
         /// Control ddlarea.
         /// </summary>
@@ -56,16 +67,7 @@ namespace SIICOP_V1._2.SysAdmin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlarea;
-        
-        /// <summary>
-        /// Control edsarea.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.EntityDataSource edsarea;
-        
+
         /// <summary>
         /// Control txtUsuario.
         /// </summary>
@@ -74,7 +76,7 @@ namespace SIICOP_V1._2.SysAdmin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtUsuario;
-        
+
         /// <summary>
         /// Control txtPassword.
         /// </summary>
@@ -83,7 +85,7 @@ namespace SIICOP_V1._2.SysAdmin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
-        
+
         /// <summary>
         /// Control txtConfirmaPassword.
         /// </summary>
@@ -92,7 +94,7 @@ namespace SIICOP_V1._2.SysAdmin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtConfirmaPassword;
-        
+
         /// <summary>
         /// Control btnCrearUsuario.
         /// </summary>
@@ -101,7 +103,7 @@ namespace SIICOP_V1._2.SysAdmin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCrearUsuario;
-        
+
         /// <summary>
         /// Control updPanel_Usuarios.
         /// </summary>
@@ -110,7 +112,7 @@ namespace SIICOP_V1._2.SysAdmin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updPanel_Usuarios;
-        
+
         /// <summary>
         /// Control mpe_msj.
         /// </summary>
@@ -119,7 +121,7 @@ namespace SIICOP_V1._2.SysAdmin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.ModalPopupExtender mpe_msj;
-        
+
         /// <summary>
         /// Control pnl_msj.
         /// </summary>
@@ -128,7 +130,7 @@ namespace SIICOP_V1._2.SysAdmin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnl_msj;
-        
+
         /// <summary>
         /// Control lbl_msj.
         /// </summary>
@@ -137,7 +139,7 @@ namespace SIICOP_V1._2.SysAdmin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbl_msj;
-        
+
         /// <summary>
         /// Control btn_Ok.
         /// </summary>
@@ -146,7 +148,7 @@ namespace SIICOP_V1._2.SysAdmin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_Ok;
-        
+
         /// <summary>
         /// Control btn_dummy.
         /// </summary>

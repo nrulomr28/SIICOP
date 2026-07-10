@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Nuevo_Usuario.aspx.cs" Inherits="SIICOP_V1._2.SysAdmin.Nuevo_Usuario" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager> 
     <script src="<%= ResolveUrl("~/Scripts/sweetalert2.all.js") %>" type="text/javascript"></script>
     <script type="text/javascript">
         function Correcto() {
@@ -76,9 +77,8 @@
                                 </div>
                             </div>
                             <div class="form-group form-primary">
-                                <asp:DropDownList runat="server" CssClass="form-control" ID="ddlarea" DataSourceID="edsarea" DataTextField="area_nombre" DataValueField="idarea"></asp:DropDownList>
-                                <asp:EntityDataSource runat="server" ID="edsarea" DefaultContainerName="SIICOPEntities" ConnectionString="name=SIICOPEntities" EnableFlattening="False" EntitySetName="Cat_area"></asp:EntityDataSource>
-                                <span class="form-bar"></span>
+                                <asp:DropDownList runat="server" CssClass="form-control" ID="ddlarea" DataTextField="area_nombre" DataValueField="idarea"></asp:DropDownList>
+                                  <span class="form-bar"></span>
                                 <label class="float-label">Area</label>
                             </div>
                             <div class="form-group form-primary">

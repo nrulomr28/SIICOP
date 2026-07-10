@@ -24,18 +24,39 @@ namespace SIICOP_V1._2.SysAdmin
             }
         }
 
-        private void BindRolesToList()
-        {
-            // Get all of the roles
-            string[] roles = Roles.GetAllRoles();
-            UsersRoleList.DataSource = roles;
-            UsersRoleList.DataBind();
+ /*   private void BindRolesToList()
+            {
+                // Get all of the roles
+                string[] roles = Roles.GetAllRoles();
+                UsersRoleList.DataSource = roles;
+                UsersRoleList.DataBind();
 
-            RoleList.DataSource = roles;
-            RoleList.DataBind();
+                RoleList.DataSource = roles;
+                RoleList.DataBind();
+            }
+  */
+
+      private void BindRolesToList()
+        {
+            try
+            {
+                string[] allRoles = Roles.GetAllRoles();
+
+                var filteredRoles = allRoles.Where(role => role == "SysAdmin" || role == "Visualizador"  || role== "CapEjeAtencion" || role == "Administrador").ToArray();
+
+                UsersRoleList.DataSource = filteredRoles;
+                UsersRoleList.DataBind();
+
+                RoleList.DataSource = filteredRoles;
+                RoleList.DataBind();
+            }
+            catch (Exception ex)
+            {
+               
+            }
         }
 
-        #region 'By User' Interface-Specific Methods
+        #region 
         private void BindUsersToUserList()
         {
             // Get all of the user accounts

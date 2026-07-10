@@ -1,8 +1,10 @@
-﻿using SIICOP_V1._2.Datos;
+﻿using AjaxControlToolkit.Bundling;
+using SIICOP_V1._2.Datos;
 using System;
 using System.Data;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -19,75 +21,81 @@ namespace SIICOP_V1._2.SysAdmin
             get { return ViewState["SortDirection"] != null ? ViewState["SortDirection"].ToString() : "ASC"; }
             set { ViewState["SortDirection"] = value; }
         }
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                ctx = new SIICOPEntities();
-            }
+         
+            ctx = new SIICOPEntities();
+
+         
+            CargarGrid();
         }
 
-
-           /// con estos datos se llena la tabla del grid 
+        private void CargarGrid()
+        {
+            try
+            {
+                var usuarios = ctx.Personales.OrderByDescending(u => u.fechacrecion).ToList();
+                gvuser.DataSource = usuarios;
+                gvuser.DataBind();
+            }
+            catch (Exception ex)
+            {
+             
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+        }
+    
+        protected void PageDropDownListAdmin_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow pagerRow = gvuser.BottomPagerRow;         
+            DropDownList pageList = (DropDownList)pagerRow.FindControl("PageDropDownListAdmin");           
+            gvuser.PageIndex = pageList.SelectedIndex;           
+        }
         protected void gvuser_DataBound(object sender, EventArgs e)
         {
             try
             {
-
-                // Recupera la el PagerRow...
                 GridViewRow pagerRow = gvuser.BottomPagerRow;
-                // Recupera los controles DropDownList y label...
+                if (pagerRow == null) return;
                 DropDownList pageList = (DropDownList)pagerRow.FindControl("PageDropDownListAdmin");
                 Label pageLabel = (Label)pagerRow.FindControl("CurrentPageLabelt");
-                if ((pageList != null))
+                if (pageList != null)
                 {
-                    // Se crean los valores del DropDownList tomando el número total de páginas... 
-                    int i = 0;
-                    for (i = 0; i <= gvuser.PageCount - 1; i++)
+                    pageList.Items.Clear();
+                    for (int i = 0; i < gvuser.PageCount; i++)
                     {
-                        // Se crea un objeto ListItem para representar la �gina...
                         int pageNumber = i + 1;
-                        ListItem item = new ListItem(pageNumber.ToString());
+                        ListItem item = new ListItem(pageNumber.ToString(), i.ToString());
                         if (i == gvuser.PageIndex)
                         {
                             item.Selected = true;
                         }
-                        // Se añade el ListItem a la colección de Items del DropDownList...
                         pageList.Items.Add(item);
                     }
                 }
-                if ((pageLabel != null))
+                if (pageLabel != null)
                 {
-                    // Calcula el nº de �gina actual...
                     int currentPage = gvuser.PageIndex + 1;
-                    // Actualiza el Label control con la �gina actual.
                     pageLabel.Text = "Página " + currentPage.ToString() + " de " + gvuser.PageCount.ToString();
-
                 }
-
-
             }
-            catch
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine("Error en DataBound: " + ex.Message);
             }
         }
-
-        protected void PageDropDownListAdmin_SelectedIndexChanged(object sender, EventArgs e)
+        protected void gvuser_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-
-            GridViewRow pagerRow = gvuser.BottomPagerRow;
-            // Recupera el control DropDownList...
-            DropDownList pageList = (DropDownList)pagerRow.FindControl("PageDropDownListAdmin");
-            // Se Establece la propiedad PageIndex para visualizar la página seleccionada...
-            gvuser.PageIndex = pageList.SelectedIndex;
-            //Quita el mensaje de información si lo hubiera...
-            //lblInfo.Text = "";
+            gvuser.PageIndex = e.NewPageIndex;
+            CargarGrid();
         }
 
         protected void gvuser_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "ResetPassword")
-            {
+            {               
                 Guid numFila;
                 if (Guid.TryParse(e.CommandArgument.ToString(), out numFila))
                 {
@@ -96,9 +104,6 @@ namespace SIICOP_V1._2.SysAdmin
                     var login = ctx.Personales.Where(t => t.guidUsuario == idusermember).FirstOrDefault();
                     txtLogin.Text = login.login;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "openModalpassword", "openModalpassword();", true);
-
-
-
                 }
             }
             if (e.CommandName == "EditarUser")
@@ -113,15 +118,12 @@ namespace SIICOP_V1._2.SysAdmin
                     txtNombreEdit.Text = user.Nombre;
                     txtApaterno.Text = user.paterno;
                     txtAmaterno.Text = user.materno;
-                    ddlArea.SelectedValue = Convert.ToInt32(user.cat_areaidarea).ToString();
-                    ddlArea.SelectedValue = Convert.ToInt32(user.cat_areaidarea).ToString();
-                    ddldepen_edit.SelectedValue = user.DependenciaId != null ? user.DependenciaId.ToString() : "0"; ;
+              //   ddlArea.SelectedValue = Convert.ToInt32(user.cat_areaidarea).ToString();
+              //   ddlArea.SelectedValue = Convert.ToInt32(user.cat_areaidarea).ToString();
+              //   ddldepen_edit.SelectedValue = user.DependenciaId != null ? user.DependenciaId.ToString() : "0"; ;
                     Session["iduser"] = idusermember;
 
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "openModalEditUser", "openModalEditUser();", true);
-
-
-
                 }
             }
         }
@@ -153,7 +155,7 @@ namespace SIICOP_V1._2.SysAdmin
             }
 
         }
-
+      
         protected void lnkbEditUser_Click(object sender, EventArgs e)
         {
 
@@ -166,10 +168,10 @@ namespace SIICOP_V1._2.SysAdmin
                     useredit.Nombre = txtNombreEdit.Text;
                     useredit.paterno = txtApaterno.Text;
                     useredit.materno = txtAmaterno.Text;
-                    useredit.cat_areaidarea = Convert.ToInt32(ddlArea.SelectedValue);
-                    useredit.AreaTrabajo = ddlArea.SelectedItem.Text;
+               //     useredit.cat_areaidarea = Convert.ToInt32(ddlArea.SelectedValue);
+                //    useredit.AreaTrabajo = ddlArea.SelectedItem.Text;
                    
-                    int iddepen = Convert.ToInt32(ddldepen_edit.SelectedValue.ToString());
+                   /* int iddepen = Convert.ToInt32(ddldepen_edit.SelectedValue.ToString());
                     useredit.DependenciaId = iddepen;
                     if (iddepen == 1)
                     {
@@ -201,7 +203,7 @@ namespace SIICOP_V1._2.SysAdmin
                     }
 
                     useredit.DependenciaId = iddepen;
-
+                   */
                     ctx.SaveChanges();
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Correcto", "Correcto()", true);
                     gvuser.DataBind();
@@ -224,8 +226,8 @@ namespace SIICOP_V1._2.SysAdmin
 
         protected void lnkCrearUser_Click(object sender, EventArgs e)
         {
-
-            try
+         
+          /*  try
             {
                 SIICOPEntities ctx = new SIICOPEntities();
 
@@ -236,8 +238,8 @@ namespace SIICOP_V1._2.SysAdmin
                 iNUevoregistro.Nombre = txtNombreNuevo.Text;
                 iNUevoregistro.paterno = txtapellidopaternoNuevo.Text;
                 iNUevoregistro.materno = txtapellidomaternoNuevo.Text;
-                iNUevoregistro.AreaTrabajo = ddlAreaNuevo.SelectedItem.Text;
-                iNUevoregistro.cat_areaidarea = Convert.ToInt32(ddlAreaNuevo.SelectedValue.ToString());
+             //   iNUevoregistro.AreaTrabajo = ddlAreaNuevo.SelectedItem.Text;
+             //   iNUevoregistro.cat_areaidarea = Convert.ToInt32(ddlAreaNuevo.SelectedValue.ToString());
                
                 int iddepen  = Convert.ToInt32(ddldepndencia.SelectedValue.ToString());
                 iNUevoregistro.DependenciaId = iddepen;
@@ -306,12 +308,14 @@ namespace SIICOP_V1._2.SysAdmin
 
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "alertMessage", "alert('El usuario no se ha podido crear')", true);
 
-            }
+            }*/
+            
         }
+
 
         protected void ddldepen_edit_DataBound(object sender, EventArgs e)
         {
-            this.ddldepen_edit.Items.Insert(0, new ListItem("--Seleccione--", "0"));
+          //  this.ddldepen_edit.Items.Insert(0, new ListItem("--Seleccione--", "0"));
         }
     }
 }
