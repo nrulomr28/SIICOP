@@ -84,6 +84,8 @@
         <AssociationConnector Association="SIICOPModel.FK_tb_fotografia_tb_Reporte_Diario" />
         <AssociationConnector Association="SIICOPModel.FK_tb_Resumen_Diario_tb_programa" />
         <AssociationConnector Association="SIICOPModel.FK_tb_Resumen_Diario_TB_subprograma" />
+        <EntityTypeShape EntityType="SIICOPModel.Cat_Coordinador" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SIICOPModel.Cat_Ravi" Width="1.5" PointX="3.375" PointY="4.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

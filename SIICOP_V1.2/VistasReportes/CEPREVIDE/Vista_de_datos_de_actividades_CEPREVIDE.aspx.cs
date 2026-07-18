@@ -389,13 +389,13 @@ namespace SIICOP_V1._2.VistasReportes.CEPREVIDE
                 package.SaveAs(fileStream);
 
                 fileStream.Position = 0;
-                File.WriteAllBytes(Server.MapPath("~/Formatos/") + "Total_Activides.xlsx", fileStream.ToArray());
+                File.WriteAllBytes(Server.MapPath("~/Formatos/") + "Total_Actividades.xlsx", fileStream.ToArray());
                 Response.ContentType = "Application/x-msexcel";
-                string FilePath = Server.MapPath("~/Formatos/") + "Total_Activides.xlsx";
+                string FilePath = Server.MapPath("~/Formatos/") + "Total_Actividades.xlsx";
                 Response.ClearContent();
                 Response.ClearHeaders();
                 Response.ContentType = ContentType;
-                Response.AddHeader("Content-disposition", "attachment;filename=Total_Activides.xlsx" + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Millisecond.ToString() + ".xlsx");
+                Response.AddHeader("Content-disposition", "attachment;filename=Total_Actividades.xlsx" + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Millisecond.ToString() + ".xlsx");
                 Response.WriteFile(FilePath);
                 Response.Flush();
                 fileStream.Close();

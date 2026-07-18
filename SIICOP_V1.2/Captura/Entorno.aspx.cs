@@ -11,12 +11,13 @@ namespace SIICOP_V1._2.Captura
 
         protected void btnEscolar_Click(object sender, EventArgs e)
         {
-            Session["programasID"] = 1; // temporal
+            Session["programasID"] = 0; // temporal
             EnviarDatos(2);
         }
 
         protected void btnComunitario_Click(object sender, EventArgs e)
         {
+            Session["programasID"] = 0; // temporal
             EnviarDatos(1);
         }
 

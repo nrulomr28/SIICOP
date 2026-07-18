@@ -31,7 +31,7 @@ namespace SIICOP_V1._2.Captura
 
         private readonly CatalogoService _catalogoService = new CatalogoService();
 
-        protected void Page_Load(object sender, EventArgs e)
+      /*  protected void Page_Load(object sender, EventArgs e)
         {
 
 
@@ -41,15 +41,21 @@ namespace SIICOP_V1._2.Captura
                 return;
             }
 
-            if (!SesionValida())
+            programasID = Convert.ToInt32(Session["programasID"]);
+
+            if (programasID == 0)
             {
-                Response.Redirect("~/Captura/Entorno.aspx");
-                return;
+                PanelCoordinacion.Visible = false;
+                PanelMunicipiosPrioritarios.Visible = false;
+                PanelRAVI.Visible = false;
+
             }
-
-            programasID = (int)Session["programasID"];
-
-            ConfigurarPanelesPrograma();
+            else
+            {
+                PanelCoordinacion.Visible = true;
+                PanelMunicipiosPrioritarios.Visible = true;
+                PanelRAVI.Visible = true;
+            }
 
 
             if (!IsPostBack)
@@ -84,6 +90,66 @@ namespace SIICOP_V1._2.Captura
             }
 
             ConfigurarPaneles();
+
+        } 
+      */
+    protected void Page_Load(object sender, EventArgs e)
+        {
+
+
+            if (!UsuarioTieneAcceso())
+            {
+                RedirigirInicio();
+                return;
+            }
+
+            if (!SesionValida())
+            {
+                Response.Redirect("~/Captura/Entorno.aspx");
+                return;
+            }
+
+            programasID = (int)Session["programasID"];
+
+            ConfigurarPanelesPrograma();
+
+
+            if (!IsPostBack)
+            {
+                InicializarPagina();
+                CargarZonas();
+                CargarCordinador();
+               
+                CargarProgramas();
+                ConfigurarPaneles();
+                CargarRavis();
+                string valor = Request.QueryString["ValorEntorno"];
+
+                if (!string.IsNullOrEmpty(valor))
+                {
+                    int entornoId = Convert.ToInt32(valor);
+                    if (entornoId == 1)
+                   
+                    {
+                        CargarEntorno(entornoId);
+                          CargarMunicipios();
+                        //CargarEje(entornoId);
+                    }
+                    else if (entornoId == 2)
+                    {
+                        CargarEntorno(entornoId);
+                        CargarMunicipiosP();
+                        //CargarEje(entornoId);
+                    }
+                }
+                else
+                {
+                    Response.Redirect("Entorno.aspx");
+                }
+
+            }
+
+           
 
         }
 
@@ -240,23 +306,72 @@ namespace SIICOP_V1._2.Captura
 
         #region *** BOTON PARA GUARDAR LA ACTIVIDAD
 
-        protected void lnkbtnGuardar_Click(
-    object sender,
-    EventArgs e)
+        /*   protected void lnkbtnGuardar_Click(
+           object sender,
+           EventArgs e)
+               {
+               programasID = Session["programasID"] as int?;
+
+               string errores;
+
+               if (!ValidarFormulario(out errores))
+               {
+                   MostrarErrores(errores);
+                   return;
+               }
+
+               GuardarReporte();
+           }*/
+
+        protected void lnkbtnGuardar_Click(object sender, EventArgs e)
         {
             programasID = Session["programasID"] as int?;
-
             string errores;
 
             if (!ValidarFormulario(out errores))
             {
-                MostrarErrores(errores);
+                // 1. Asigna el texto de errores al Label dentro del modal
+                lblValidacionesTxt.Text = errores;
+
+               
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ModalError", "openModalvalidador();", true);
+
                 return;
             }
 
             GuardarReporte();
+
+            // 3. Si todo salió bien, inyecta el script para el modal de éxito
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ModalExito", "openGuardadoExito();", true);
         }
 
+       /* protected void lnkbtnGuardar_Click(object sender, EventArgs e)
+        {
+            programasID = Session["programasID"] as int?;
+            string errores;
+
+            if (!ValidarFormulario(out errores))
+            {
+                // 1. Asigna el texto de errores al Label dentro del modal
+                lblValidacionesTxt.Text = errores;
+
+                // 2. Inyecta el script para mostrar el modal de errores
+            //    ScriptManager.RegisterStartupScript(this, this.GetType(), "exampleModal",
+           //         "openModalvalidador();", true);
+             //   return;
+
+                ScriptManager.RegisterStartupScript(this,this.GetType(),   "Pop",
+                    "Sys.Application.add_load(function() { openModalvalidador(); });",
+                    true);
+                return;
+            }
+
+            GuardarReporte();
+
+            // 3. Si todo salió bien, inyecta el script para el modal de éxito
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "abrirModalExito",
+                "openGuardadoExito();", true);
+        }*/
         private void GuardarReporte()
         {
             ReiniciarBeneficiarios();
@@ -275,18 +390,14 @@ namespace SIICOP_V1._2.Captura
             try
             {
                 Guid idResumen = Guid.NewGuid();
-
                 Session["idresumen"] = idResumen;
-
                 var reporte =
                     CrearReporteDiario(
                         idResumen,
                         coordinacion);
-
                 var direccion =
                     CrearDireccionReporte(
                         idResumen);
-
                 var datosGenerales =
                     CrearDatosGenerales(
                         idResumen);
@@ -337,8 +448,8 @@ namespace SIICOP_V1._2.Captura
         }
 
         private tb_Reporte_Diario CrearReporteDiario(
-    Guid idResumen,
-    string coordinacion)
+        Guid idResumen,
+        string coordinacion)
         {
             var reporte =
                 new tb_Reporte_Diario();
@@ -457,7 +568,7 @@ namespace SIICOP_V1._2.Captura
         }
 
         private TB_DatosGralReporte CrearDatosGenerales(
-    Guid idResumen)
+            Guid idResumen)
         {
             return new TB_DatosGralReporte
             {
@@ -831,24 +942,82 @@ namespace SIICOP_V1._2.Captura
         }
 
 
-        private void MostrarErrores(string mensaje)
+         private void MostrarErrores(string mensaje)
+          {
+              lblValidacionesTxt.Text = mensaje;
+
+              ScriptManager.RegisterStartupScript(
+                  this,
+                  GetType(),
+                  "openModalvalidador",
+                  "openModalvalidador();",
+                  true);
+
+              ScriptManager.RegisterStartupScript(
+                  this,
+                  GetType(),
+                  "sumar",
+                  "sumar();",
+                  true);
+          }
+     
+       /* private void MostrarErrores(string mensaje)
         {
             lblValidacionesTxt.Text = mensaje;
 
-            ScriptManager.RegisterStartupScript(
-                this,
-                GetType(),
-                "openModalvalidador",
-                "openModalvalidador();",
-                true);
+            string scriptCliente = @"
+        $('#exampleModal').removeAttr('aria-hidden'); // Quitamos el atributo conflictivo
+        $('#exampleModal').modal('show');             // Abrimos el modal";
 
             ScriptManager.RegisterStartupScript(
                 this,
-                GetType(),
-                "sumar",
-                "sumar();",
+                this.GetType(),
+                "AbrirValidacion",
+                scriptCliente,
                 true);
         }
+       */
+       /* private void MostrarErrores(string mensaje)
+        {
+            // 1. Asignamos el mensaje al Label
+            lblValidacionesTxt.Text = mensaje;
+
+            // 2. Construimos el script garantizando que se ejecute AL FINAL de la carga
+            string scriptCliente = @"
+        Sys.Application.add_load(function() {
+            // Mostramos el modal directamente de forma segura
+            $('#exampleModal').modal('show');
+            
+            // Recalculamos los totales para que no se pierdan
+            if (typeof sumarH === 'function') sumarH();
+            if (typeof sumarM === 'function') sumarM();
+        });";
+
+            // 3. Registramos el script
+            ScriptManager.RegisterStartupScript(
+                this,
+                this.GetType(),
+                "PopValidacionSeguro",
+                scriptCliente,
+                true);
+        }*/
+
+
+    /*    private void MostrarErrores(string mensaje)
+        {
+            // 1. Asignar el mensaje al Label
+            lblValidacionesTxt.Text = mensaje;
+
+            // 2. Ejecutar los scripts en el cliente (abrir modal y recalcular sumas reales)
+            string scriptCliente = "openModalvalidador(); sumarH(); sumarM();";
+
+            ScriptManager.RegisterStartupScript(
+                this.Page,
+                this.GetType(),
+                "ScriptValidacion",
+                scriptCliente,
+                true);
+        }*/
 
         private Personales ObtenerUsuarioActual()
         {
@@ -916,76 +1085,76 @@ namespace SIICOP_V1._2.Captura
 
         #region *** BOTON PARA EDITAR ACTIVIDAD
         protected void btnGuardarEdicion_Click(
-    object sender,
-    EventArgs e)
-        {
-            Guid idExpediente =
-                Guid.Parse(
-                    HiddenField1cn.Value);
-
-            string fileName = "";
-            string contentType = "";
-
-            nino = 0;
-            nina = 0;
-            padresH = 0;
-            padresM = 0;
-            TotalA = 0;
-
-            int MODE = 0;
-
-            try
+        object sender,
+        EventArgs e)
             {
-                MODE =
-                    ActualizarReporteDiario(
-                        idExpediente,
-                        MODE);
+                Guid idExpediente =
+                    Guid.Parse(
+                        HiddenField1cn.Value);
 
-                var direccionReporte =
-                    ActualizarDireccionReporte(
+                string fileName = "";
+                string contentType = "";
+
+                nino = 0;
+                nina = 0;
+                padresH = 0;
+                padresM = 0;
+                TotalA = 0;
+
+                int MODE = 0;
+
+                try
+                {
+                    MODE =
+                        ActualizarReporteDiario(
+                            idExpediente,
+                            MODE);
+
+                    var direccionReporte =
+                        ActualizarDireccionReporte(
+                            idExpediente);
+
+                    MODE =
+                        ActualizarDatosGenerales(
+                            idExpediente,
+                            MODE,
+                            direccionReporte);
+
+                    string extension =
+                        GuardarFotografiasEdicion(
+                            idExpediente,
+                            ref fileName,
+                            ref contentType);
+
+                    ctx.SaveChanges();
+
+                    string claveF = "RVCPZ-DVI";
+
+                    ctx.sp_folio_actividad(
+                        idExpediente,
+                        claveF,
+                        extension);
+
+                    RegistrarAuditoriaEdicion(
                         idExpediente);
 
-                MODE =
-                    ActualizarDatosGenerales(
-                        idExpediente,
-                        MODE,
-                        direccionReporte);
+                    ctx.SaveChanges();
 
-                string extension =
-                    GuardarFotografiasEdicion(
-                        idExpediente,
-                        ref fileName,
-                        ref contentType);
+                    FinalizarEdicion();
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(
+                        ex.ToString());
 
-                ctx.SaveChanges();
-
-                string claveF = "RVCPZ-DVI";
-
-                ctx.sp_folio_actividad(
-                    idExpediente,
-                    claveF,
-                    extension);
-
-                RegistrarAuditoriaEdicion(
-                    idExpediente);
-
-                ctx.SaveChanges();
-
-                FinalizarEdicion();
+                    ScriptManager.RegisterClientScriptBlock(
+                        this,
+                        GetType(),
+                        "alertMessage",
+                        "alert('¡Error al guardar los datos!')",
+                        true);
+                }
             }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(
-                    ex.ToString());
-
-                ScriptManager.RegisterClientScriptBlock(
-                    this,
-                    GetType(),
-                    "alertMessage",
-                    "alert('¡Error al guardar los datos!')",
-                    true);
-            }
-        }
         private void ReiniciarBeneficiarios()
         {
             nino = 0;
@@ -1404,6 +1573,65 @@ namespace SIICOP_V1._2.Captura
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }
         }
+        private void CargarMunicipiosP()
+        {
+            try
+            {
+                var repo = new UbicacionRepository();
+
+                ddlMuNICIPIO.DataSource = repo.ObtenerMunicipiosPrioridadTodos();
+                ddlMuNICIPIO.DataTextField = "MUNICIPIO";   // campo que se muestra
+                ddlMuNICIPIO.DataValueField = "MunicipioID";      // campo valor
+                ddlMuNICIPIO.DataBind();
+
+                ddlMuNICIPIO.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+        }
+
+
+
+        private void CargarRavis()
+        {
+            try
+            {
+                var repo = new UbicacionRepository();
+
+                txtNoCasosRavi.DataSource = repo.ObtenerRavis();
+                txtNoCasosRavi.DataTextField = "Num";
+                txtNoCasosRavi.DataValueField = "RaviId";
+                txtNoCasosRavi.DataBind();
+
+                txtNoCasosRavi.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
+
+
+                ddlNoaccionesDGPVI.DataSource = repo.ObtenerRavis();
+                ddlNoaccionesDGPVI.DataTextField = "Num";
+                ddlNoaccionesDGPVI.DataValueField = "RaviId";
+                ddlNoaccionesDGPVI.DataBind();
+
+                ddlNoaccionesDGPVI.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
+
+
+                ddlNoAccionesInstitucionales.DataSource = repo.ObtenerRavis();
+                ddlNoAccionesInstitucionales.DataTextField = "Num";
+                ddlNoAccionesInstitucionales.DataValueField = "RaviId";
+                ddlNoAccionesInstitucionales.DataBind();
+
+                ddlNoAccionesInstitucionales.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
+
+
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+        }
+
 
 
         private void CargarZonas()
@@ -1426,12 +1654,35 @@ namespace SIICOP_V1._2.Captura
             }
 
         }
+        private void CargarCordinador()
+        {
+            try
+            {
+                var repo = new UbicacionRepository();
 
+                var listaCoordinadores = repo.ObtenerCoord();
+
+                   var datosFormateados = listaCoordinadores.Select(c => new
+                {
+                    ID = c.CoordinadorId,
+                    NombreCompleto = $"{c.Nombre} {c.Paterno} {c.Materno}"
+                }).ToList();              
+                txtCoordinador.DataSource = datosFormateados;
+                txtCoordinador.DataTextField = "NombreCompleto"; 
+                txtCoordinador.DataValueField = "NombreCompleto"; 
+                txtCoordinador.DataBind();
+
+                txtCoordinador.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
+            }
+            catch (Exception ex)
+            {
+            }
+        }
 
         protected void ddlMunicipio_SelectedIndexChanged(
-    object sender,
-    EventArgs e)
-        {
+        object sender,
+        EventArgs e)
+            {
             int municipioId =
                 int.Parse(
                     ddlMuNICIPIO.SelectedValue);
@@ -1465,7 +1716,7 @@ namespace SIICOP_V1._2.Captura
         }
 
         protected void MostrarMunicipiosPrioridad(
-    int municipioId)
+        int municipioId)
         {
             var repo = new UbicacionRepository();
 
@@ -1477,16 +1728,16 @@ namespace SIICOP_V1._2.Captura
 
 
         private void AsignarValorBooleano(
-    DropDownList ddl,
-    bool? valor)
-        {
-            if (valor == true)
-                ddl.SelectedValue = "True";
-            else if (valor == false)
-                ddl.SelectedValue = "False";
-            else
-                ddl.SelectedValue = "-1";
-        }
+            DropDownList ddl,
+            bool? valor)
+                {
+                    if (valor == true)
+                        ddl.SelectedValue = "True";
+                    else if (valor == false)
+                        ddl.SelectedValue = "False";
+                    else
+                        ddl.SelectedValue = "-1";
+                }
 
         protected void MostrarPoblacionIndigena(
     int municipioId)
@@ -1625,7 +1876,7 @@ namespace SIICOP_V1._2.Captura
             if (ddlCasosRavi.SelectedValue == "1")
             {
 
-                ddlCasosRavi.SelectedValue = "";
+                ddlCasosRavi.SelectedValue = "1";
             }
             else if (ddlCasosRavi.SelectedValue == "0")
             {

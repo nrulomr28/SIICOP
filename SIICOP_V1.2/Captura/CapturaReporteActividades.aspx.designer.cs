@@ -102,7 +102,7 @@ namespace SIICOP_V1._2.Captura
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCoordinador;
+        protected global::System.Web.UI.WebControls.DropDownList txtCoordinador;
 
         /// <summary>
         /// Control ddlZona.

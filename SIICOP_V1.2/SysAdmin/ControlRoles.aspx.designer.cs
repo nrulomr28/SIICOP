@@ -15,15 +15,6 @@ namespace SIICOP_V1._2.SysAdmin
     {
 
         /// <summary>
-        /// Control ScriptManager1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
-
-        /// <summary>
         /// Control ActionStatus.
         /// </summary>
         /// <remarks>
@@ -51,51 +42,6 @@ namespace SIICOP_V1._2.SysAdmin
         protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
-        /// Control Accordion1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.Accordion Accordion1;
-
-        /// <summary>
-        /// Control AccordionPane1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.AccordionPane AccordionPane1;
-
-        /// <summary>
-        /// Control AccordionPane2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.AccordionPane AccordionPane2;
-
-        /// <summary>
-        /// Control TabContainer1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TabContainer TabContainer1;
-
-        /// <summary>
-        /// Control TabPanel1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TabPanel TabPanel1;
-
-        /// <summary>
         /// Control UserList.
         /// </summary>
         /// <remarks>
@@ -112,15 +58,6 @@ namespace SIICOP_V1._2.SysAdmin
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater UsersRoleList;
-
-        /// <summary>
-        /// Control TabPanel2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.TabPanel TabPanel2;
 
         /// <summary>
         /// Control RoleList.

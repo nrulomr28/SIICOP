@@ -24,24 +24,25 @@ namespace SIICOP_V1._2.SysAdmin
             }
         }
 
- /*   private void BindRolesToList()
-            {
-                // Get all of the roles
-                string[] roles = Roles.GetAllRoles();
-                UsersRoleList.DataSource = roles;
-                UsersRoleList.DataBind();
+        /*    private void BindRolesToList()
+              {
+                      // Get all of the roles
+                      string[] roles = Roles.GetAllRoles();
+                      UsersRoleList.DataSource = roles;
+                      UsersRoleList.DataBind();
 
-                RoleList.DataSource = roles;
-                RoleList.DataBind();
-            }
-  */
+                      RoleList.DataSource = roles;
+                      RoleList.DataBind();
+                  }
 
-      private void BindRolesToList()
+       */
+
+        private void BindRolesToList()
         {
             try
             {
                 string[] allRoles = Roles.GetAllRoles();
-
+                /// solo 4 roles ///
                 var filteredRoles = allRoles.Where(role => role == "SysAdmin" || role == "Visualizador"  || role== "CapEjeAtencion" || role == "Administrador").ToArray();
 
                 UsersRoleList.DataSource = filteredRoles;
@@ -92,28 +93,21 @@ namespace SIICOP_V1._2.SysAdmin
 
         protected void RoleCheckBox_CheckChanged(object sender, EventArgs e)
         {
-            // Reference the CheckBox that raised this event
             CheckBox RoleCheckBox = sender as CheckBox;
 
-            // Get the currently selected user and role
             string selectedUserName = UserList.SelectedValue;
             string roleName = RoleCheckBox.Text;
 
-            // Determine if we need to add or remove the user from this role
             if (RoleCheckBox.Checked)
             {
-                // Add the user to the role
                 Roles.AddUserToRole(selectedUserName, roleName);
 
-                // Display a status message
                 ActionStatus.Text = string.Format("El usuario {0} fue agregado al rol {1}.", selectedUserName, roleName);
             }
             else
             {
-                // Remove the user from the role
                 Roles.RemoveUserFromRole(selectedUserName, roleName);
 
-                // Display a status message
                 ActionStatus.Text = string.Format("El usuario {0} fue removido del rol {1}.", selectedUserName, roleName);
             }
 
@@ -147,6 +141,15 @@ namespace SIICOP_V1._2.SysAdmin
                         $"Error al consultar usuarios: {ex.Message}";
             }
         }
+        protected void RolesUserList_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                Label lbl = (Label)e.Row.FindControl("UserNameLabel");
+                // Asignas el valor aquí, fuera de la vista
+                lbl.Text = e.Row.DataItem.ToString();
+            }
+        }
 
         protected void RolesUserList_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
@@ -167,6 +170,16 @@ namespace SIICOP_V1._2.SysAdmin
 
             // Refresh the "by user" interface
             CheckRolesForSelectedUser();
+        }
+
+
+        protected void UsersRoleList_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                CheckBox cb = (CheckBox)e.Item.FindControl("RoleCheckBox");
+                cb.Text = e.Item.DataItem.ToString();
+            }
         }
 
         protected void AddUserToRoleButton_Click(object sender, EventArgs e)
@@ -214,6 +227,8 @@ namespace SIICOP_V1._2.SysAdmin
         }
         #endregion
 
+ 
+    
         protected void Button1_Click(object sender, EventArgs e)
         {
             string nuevoRol = TextBox1.Text.Trim();

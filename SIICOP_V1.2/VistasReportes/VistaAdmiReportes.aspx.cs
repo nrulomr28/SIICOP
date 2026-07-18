@@ -1,4 +1,7 @@
-﻿using ICSharpCode.SharpZipLib.Zip;
+﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
+using ICSharpCode.SharpZipLib.Zip;
+using Microsoft.Reporting.Map.WebForms.BingMaps;
 using OfficeOpenXml;
 using SIICOP_V1._2.Captura;
 using SIICOP_V1._2.Datos;
@@ -7,11 +10,15 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static SIICOP_V1._2.Datos.Repositorio.ReporteRepository;
+
 
 namespace SIICOP_V1._2.VistasReportes
 {
@@ -32,8 +39,10 @@ namespace SIICOP_V1._2.VistasReportes
 
                     CargarProgramas();
                     CargarZonas();
+                    CargarEje();
+           
                     //CargarMunicipios();
-                   // CargarDatosReporte();
+                    CargarDatosReporte();
 
                     //conteoactividadesAdmin();
 
@@ -45,41 +54,75 @@ namespace SIICOP_V1._2.VistasReportes
                 }
             }
         }
+      
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
+            bool valido = true;
+            string textoValidacion = "<ul>"; 
             if (string.IsNullOrEmpty(this.txtFInicialC.Text) || string.IsNullOrEmpty(this.txtfechafin.Text))
             {
-                textoValidacion += "<li> Es necesario ingresar las fechas para poder generar el reporte. </ li>";
+                textoValidacion += "<li> Es necesario ingresar ambas fechas para generar el reporte. </li>";
                 valido = false;
-
             }
+
+           
             if (!valido)
             {
                 textoValidacion += "</ul>";
                 validadottxt.Text = textoValidacion;
-
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "AbrirModalValidador", "AbrirModalValidador();", true);
-
+                return;
             }
 
-            else
+            if (DateTime.TryParse(this.txtFInicialC.Text, out DateTime fechaIncialParsed))
             {
-                DateTime result = new DateTime();
-                if (DateTime.TryParse(this.txtFInicialC.Text, out result))
-                {
-                    this.Session["fInicialC"] = (object)result.ToShortDateString();
-                }
-
-                if (DateTime.TryParse(this.txtfechafin.Text, out result))
-                {
-                    this.Session["fFinalC"] = (object)result.ToShortDateString();
-                }
-
-
+                this.Session["fInicialC"] = fechaIncialParsed.ToShortDateString();
             }
+
+            if (DateTime.TryParse(this.txtfechafin.Text, out DateTime fechaFinalParsed))
+            {
+                this.Session["fFinalC"] = fechaFinalParsed.ToShortDateString();
+            }
+
+         
             CargarDatosReporte();
         }
+
+        /*  protected void btnBuscar_Click(object sender, EventArgs e)
+          {
+              if (string.IsNullOrEmpty(this.txtFInicialC.Text) || string.IsNullOrEmpty(this.txtfechafin.Text))
+              {
+                  textoValidacion += "<li> Es necesario ingresar las fechas para poder generar el reporte. </ li>";
+                  valido = false;
+
+              }
+              if (!valido)
+              {
+                  textoValidacion += "</ul>";
+                  validadottxt.Text = textoValidacion;
+
+                  ScriptManager.RegisterStartupScript(this, this.GetType(), "AbrirModalValidador", "AbrirModalValidador();", true);
+
+              }
+
+              else
+              {
+                  DateTime result = new DateTime();
+                  if (DateTime.TryParse(this.txtFInicialC.Text, out result))
+                  {
+                      this.Session["fInicialC"] = (object)result.ToShortDateString();
+                  }
+
+                  if (DateTime.TryParse(this.txtfechafin.Text, out result))
+                  {
+                      this.Session["fFinalC"] = (object)result.ToShortDateString();
+                  }
+
+
+              }
+              CargarDatosReporte();
+          }*/
 
 
         #region ####  CONTEO DE ACTIVIDADES
@@ -89,189 +132,690 @@ namespace SIICOP_V1._2.VistasReportes
         #endregion
 
         #region****************METODO EXPORTACIÓN DE EXCEL GENERAL DE ACTIVIDADES
+
         protected void lkbtnexcel_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(this.txtFInicialC.Text) || string.IsNullOrEmpty(this.txtfechafin.Text))
             {
-                textoValidacion += "<li> Es necesario ingresar las fechas para poder generar el reporte. </ li>";
-                valido = false;
+                string textoValidacion = "";
+                bool valido = true;
 
-            }
-            if (!valido)
-            {
-                textoValidacion += "</ul>";
-                validadottxt.Text = textoValidacion;
-
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "AbrirModalValidador", "AbrirModalValidador();", true);
-
-            }
-            else
-            {
-                DateTime fechaObjIni = Convert.ToDateTime(this.txtFInicialC.Text).Date;
-                DateTime fechaObjFin = Convert.ToDateTime(this.txtfechafin.Text).Date;
-
-                string fechainicial = fechaObjIni.ToString("yyyy-MM-dd");
-                string fechaFinal = fechaObjFin.ToString("yyyy-MM-dd");
-                int tiprograma = Convert.ToInt32(ddlProgramas.SelectedValue);
-                int regionid = Convert.ToInt32(ddlZona.SelectedValue);
-
-                
-                ExcelPackage excel = new ExcelPackage(); ;
-
-                #region *** descrgar excel por medio de fechas
-                //                var informe = ctx.GetConsulActividades(fechainicial, fechaFinal, "SSP DVI", regionid, tiprograma)
-                var informe = ctx.GetConsulActividades(fechaObjIni, fechaObjFin, null, null, null, null, null, null)
-                                    .Select(a =>
-                   new
-                   {
-                       Fecha = a.fecha,
-                       Nombre_capturista = a.nombrecompleto,
-                       Zona = a.RegionNombre,
-                       Delegación = a.DelegacionNombre,
-                       Municipio = a.MUNICIPIO,
-                       Clave_Municipio = a.calveMuni,
-                       Localidad = a.Localidad,
-                       Clave_Localidad = a.clavelocali,
-                       Nombre_Programa = a.NombrePrograma,
-                       Nombre_Subprograma = a.NombreSubPrograma,
-                       Nombre_Acciones = a.AccionesNombre,
-                       Niños_Beneficiados = a.niños,
-                       Niñas_Beneficiadas = a.niñas,
-                       Hombres_Beneficiados = a.hombres,
-                       Mujeres_Beneficiadas = a.mujeres,
-                       Docentes_Hombres_Beneficiados = a.docentesH,
-                       Docentes_Mujeres_Beneficiadas = a.docentesM,
-                       Total_Hombres_Beneficiados = a.TotalHombresAtendidos,
-                       Total_Mujeres_Beneficiadas = a.TotalMujeresAtendidas,
-                       Total_Beficiados = a.total_atendidos,
-                       Nombre_Contacto = a.NombreContacto,
-                       Teléfono = a.telcel,
-                       Nombre_Lugar_o_Escuela = a.NombreLugar_Escuela,
-                       Clave_Plantel = a.ClavePlantel,
-                       //      Turno = a.Turno,
-                       Nivel_Educativo = a.Nivel,
-                       Dirección = "Calle:" + " " + a.calle + "Colonia:" + " " + a.coloni,
-                       Latitud = a.Latitud,
-                       Longitud = a.Longitud,
-                       Folio_Actividad = a.FolioActividad,
-                       Folio_Alternativo = a.idResumenDiario,
-                       Coordinación = a.DelegacionOcoonurbacion
-                   }).ToList();
-                #endregion
-                var workSheet = excel.Workbook.Worksheets.Add("Hoja1");
-                workSheet.Cells[1, 1].LoadFromCollection(informe, true);
-
-                //using (var memoryStream = new MemoryStream())
-                //{
-                //    Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                //    Response.AddHeader("content-disposition", "attachment;  filename=Total_Activides.xlsx");
-                //    excel.SaveAs(memoryStream);
-                //    memoryStream.WriteTo(Response.OutputStream);
-                //    Response.Flush();
-                //    Response.End();
-                //}
-
-
-
-                using (var memoryStream = new MemoryStream())
+                if (string.IsNullOrEmpty(this.txtFInicialC.Text) || string.IsNullOrEmpty(this.txtfechafin.Text))
                 {
-                    excel.SaveAs(memoryStream);
+                    textoValidacion += "<li> Es necesario ingresar las fechas para poder generar el reporte. </li>";
+                    valido = false;
+                }
 
-                    Response.Clear();
-                    Response.Buffer = true;
+                if (!valido)
+                {
+                    textoValidacion += "</ul>";
+                    validadottxt.Text = textoValidacion;
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "AbrirModalValidador", "AbrirModalValidador();", true);
+                }
+                else
+                {
+                    // 1. Iniciamos el libro de trabajo de ClosedXML (Totalmente libre)
+                    using (var workbook = new XLWorkbook())
+                    {
+                        // 2. Creamos la hoja
+                        var worksheet = workbook.Worksheets.Add("Reporte de Actividades");
 
-                    Response.ContentType =
-                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                        // 3. Llenamos los datos llamando a nuestra función
+                        LlenaHojaClosedXML(worksheet);
 
-                    Response.AddHeader(
-                        "content-disposition",
-                        "attachment; filename=Total_Activides.xlsx");
+                        // 4. Preparamos el archivo para enviarlo al navegador
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            workbook.SaveAs(memoryStream); // Guardamos en memoria
 
-                    Response.BinaryWrite(memoryStream.ToArray());
+                            Response.Clear();
+                            Response.Buffer = true;
+                            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                            Response.AddHeader("content-disposition", "attachment; filename=Total_Actividades_" + DateTime.Now.ToString("ddMMyyyy") + ".xlsx");
 
-                    Response.Flush();
-
-                    Response.SuppressContent = true;
-
-                    HttpContext.Current.ApplicationInstance.CompleteRequest();
+                            Response.BinaryWrite(memoryStream.ToArray());
+                            Response.Flush();
+                            Response.SuppressContent = true;
+                            HttpContext.Current.ApplicationInstance.CompleteRequest();
+                        }
+                    }
                 }
             }
-        }
 
-        private void LlenaHoja(OfficeOpenXml.ExcelWorksheet xlWorkSheetGral)
+
+        private void LlenaHojaClosedXML(IXLWorksheet xlWorkSheetGral)
         {
             try
             {
-                dtPrincipal = null;
-                int Renglon;
-                if (Session["dtPrincipal"] == null)
+                string[] encabezados = { "Fecha", "Capturista", "Zona", "Delegación", "Municipio", "Clave Municipio", "Localidad", "Clave Localidad", "Programa",  "SubPrograma", "Acciónes", "Niños", "Niñas", "Hombres", "Mujeres", "Docentes H", "Docentes M", "Total Hombres", "Total Mujeres", "Total Atendidos",  "Calle", "Colonia", "Lugar/Escuela", "Clave Plantel", "Turno","Nivel Educativo", "Contacto", "Teléfono", "Latitud", "Longitud", "Folio Actividad", "Folio Alternativo", "Coordinación", "Eje" };
+                for (int i = 0; i < encabezados.Length; i++)
                 {
-                    bool convertidoFI = false;
-                    bool convertidoFF = false;
-                    DateTime fechaInicial = new DateTime();
-                    convertidoFI = DateTime.TryParse(txtFInicialC.Text, out fechaInicial);
-                    DateTime fechaFinal = new DateTime();
-                    convertidoFF = DateTime.TryParse(txtfechafin.Text, out fechaFinal);
-                    int tiprograma = Convert.ToInt32(ddlProgramas.SelectedValue);
-
-                    if (tiprograma == 0)
-                    {
-                        List<Wv_DatosReportesHistorico> listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF) && (R.Dependencia == "SSP DVI"))).ToList();
-                        dtPrincipal = ConvertToDataTable(listaReportes);
-                    }
-                    else
-                    {
-                        List<Wv_DatosReportesHistorico> listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF) && (R.Dependencia == "SSP DVI") && R.programasID == tiprograma)).ToList();
-                        dtPrincipal = ConvertToDataTable(listaReportes);
-                    }
-
-
-                    for (Renglon = 0; Renglon < dtPrincipal.Rows.Count; Renglon++)
-                    {
-                        xlWorkSheetGral.Cells[Renglon + 2, 1].Value = dtPrincipal.Rows[Renglon]["fecha"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 2].Value = dtPrincipal.Rows[Renglon]["Nombre_capturista"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 3].Value = dtPrincipal.Rows[Renglon]["RegionNombre"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 4].Value = dtPrincipal.Rows[Renglon]["DelegacionNombre"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 5].Value = dtPrincipal.Rows[Renglon]["MUNICIPIO"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 6].Value = dtPrincipal.Rows[Renglon]["calveMuni"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 7].Value = dtPrincipal.Rows[Renglon]["Localidad"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 8].Value = dtPrincipal.Rows[Renglon]["clavelocali"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 9].Value = dtPrincipal.Rows[Renglon]["NombrePrograma"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 10].Value = dtPrincipal.Rows[Renglon]["NombreSubPrograma"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 11].Value = dtPrincipal.Rows[Renglon]["AccionesNombre"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 12].Value = dtPrincipal.Rows[Renglon]["niños"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 13].Value = dtPrincipal.Rows[Renglon]["niñas"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 14].Value = dtPrincipal.Rows[Renglon]["hombres"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 15].Value = dtPrincipal.Rows[Renglon]["mujeres"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 16].Value = dtPrincipal.Rows[Renglon]["docentesH"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 17].Value = dtPrincipal.Rows[Renglon]["docentesM"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 18].Value = dtPrincipal.Rows[Renglon]["TotalHombresAtendidos"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 19].Value = dtPrincipal.Rows[Renglon]["TotalMujeresAtendidas"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 20].Value = dtPrincipal.Rows[Renglon]["total_atendidos"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 21].Value = dtPrincipal.Rows[Renglon]["calle"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 22].Value = dtPrincipal.Rows[Renglon]["coloni"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 23].Value = dtPrincipal.Rows[Renglon]["NombreLugar_Escuela"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 24].Value = dtPrincipal.Rows[Renglon]["ClavePlantel"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 25].Value = dtPrincipal.Rows[Renglon]["Turno"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 26].Value = dtPrincipal.Rows[Renglon]["Nivel"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 27].Value = dtPrincipal.Rows[Renglon]["NombreContacto"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 28].Value = dtPrincipal.Rows[Renglon]["telcel"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 29].Value = dtPrincipal.Rows[Renglon]["Latitud"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 30].Value = dtPrincipal.Rows[Renglon]["Longitud"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 31].Value = dtPrincipal.Rows[Renglon]["FolioActividad"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 32].Value = dtPrincipal.Rows[Renglon]["idResumenDiario"];
-                        xlWorkSheetGral.Cells[Renglon + 2, 33].Value = dtPrincipal.Rows[Renglon]["DelegacionOcoonurbacion"];
-                    }
+                    xlWorkSheetGral.Cell(1, i + 1).Value = encabezados[i];
+                    xlWorkSheetGral.Cell(1, i + 1).Style.Font.Bold = true; // Negritas
                 }
+
+    
+                bool convertidoFI = DateTime.TryParse(txtFInicialC.Text, out DateTime fechaInicial);
+                bool convertidoFF = DateTime.TryParse(txtfechafin.Text, out DateTime fechaFinal);
+                int tiprograma = Convert.ToInt32(ddlProgramas.SelectedValue);
+
+                List<Wv_DatosReportesHistorico> listaReportes;
+
+                if (tiprograma == 0)
+                {
+                    listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF) )).ToList();
+                   }
+                else
+                {
+                    listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF)  && R.programasID == tiprograma)).ToList();
+                }
+
+        
+                int Renglon = 2;
+                foreach (var item in listaReportes)
+                {
+     
+                    xlWorkSheetGral.Cell(Renglon, 1).Value = item.fecha.HasValue ? item.fecha.Value.ToString("dd/MM/yyyy") : "";
+                    xlWorkSheetGral.Cell(Renglon, 2).Value = item.nombrecompleto; 
+                    xlWorkSheetGral.Cell(Renglon, 3).Value = item.RegionNombre;
+                    xlWorkSheetGral.Cell(Renglon, 4).Value = item.DelegacionNombre; 
+                    xlWorkSheetGral.Cell(Renglon, 5).Value = item.MUNICIPIO; 
+                    xlWorkSheetGral.Cell(Renglon, 6).Value = item.calveMuni; 
+                    xlWorkSheetGral.Cell(Renglon, 7).Value = item.Localidad; 
+                    xlWorkSheetGral.Cell(Renglon, 8).Value = item.clavelocali;
+                    xlWorkSheetGral.Cell(Renglon, 9).Value = item.NombrePrograma; 
+                    xlWorkSheetGral.Cell(Renglon, 10).Value = item.NombreSubPrograma; 
+                    xlWorkSheetGral.Cell(Renglon, 11).Value = item.AccionesNombre; 
+                    xlWorkSheetGral.Cell(Renglon, 12).Value = item.niños;  
+                    xlWorkSheetGral.Cell(Renglon, 13).Value = item.niñas; 
+                    xlWorkSheetGral.Cell(Renglon, 14).Value = item.hombres; 
+                    xlWorkSheetGral.Cell(Renglon, 15).Value = item.mujeres; 
+                    xlWorkSheetGral.Cell(Renglon, 16).Value = item.docentesH;
+                    xlWorkSheetGral.Cell(Renglon, 17).Value = item.docentesM; 
+                    xlWorkSheetGral.Cell(Renglon, 18).Value = item.TotalHombresAtendidos; 
+                    xlWorkSheetGral.Cell(Renglon, 19).Value = item.TotalMujeresAtendidas; 
+                    xlWorkSheetGral.Cell(Renglon, 20).Value = item.total_atendidos; 
+                    xlWorkSheetGral.Cell(Renglon, 21).Value = item.calle;
+                    xlWorkSheetGral.Cell(Renglon, 22).Value = item.coloni;
+                    xlWorkSheetGral.Cell(Renglon, 23).Value = item.NombreLugar_Escuela;
+                    xlWorkSheetGral.Cell(Renglon, 24).Value = item.ClavePlantel;
+                    xlWorkSheetGral.Cell(Renglon, 25).Value = item.Turno;
+                    xlWorkSheetGral.Cell(Renglon, 26).Value = item.Nivel;
+                    xlWorkSheetGral.Cell(Renglon, 27).Value = item.NombreContacto;
+                    xlWorkSheetGral.Cell(Renglon, 28).Value = item.telcel;
+                    xlWorkSheetGral.Cell(Renglon, 29).Value = item.Latitud;
+                    xlWorkSheetGral.Cell(Renglon, 30).Value = item.Longitud;
+                    xlWorkSheetGral.Cell(Renglon, 31).Value = item.FolioActividad;                 
+                    xlWorkSheetGral.Cell(Renglon, 32).Value = item.idResumenDiario.ToString();  
+                    xlWorkSheetGral.Cell(Renglon, 33).Value = item.DelegacionOcoonurbacion;
+                    xlWorkSheetGral.Cell(Renglon, 34).Value = item.Eje;
+                    Renglon++;
+                }
+
+                xlWorkSheetGral.Columns().AdjustToContents();
             }
             catch (Exception exe)
             {
-                //lblError.Text = exe.Message;
+                System.Diagnostics.Debug.WriteLine(exe.Message);
             }
-
         }
 
 
+        /*
+      protected void lkbtnexcel_Click(object sender, EventArgs e)
+            {
+                if (string.IsNullOrEmpty(this.txtFInicialC.Text) || string.IsNullOrEmpty(this.txtfechafin.Text))
+                {
+                    textoValidacion += "<li> Es necesario ingresar las fechas para poder generar el reporte. </ li>";
+                    valido = false;
+
+                }
+                if (!valido)
+                {
+                    textoValidacion += "</ul>";
+                    validadottxt.Text = textoValidacion;
+
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "AbrirModalValidador", "AbrirModalValidador();", true);
+
+                }
+                else
+                {
+                    DateTime fechaObjIni = Convert.ToDateTime(this.txtFInicialC.Text).Date;
+                    DateTime fechaObjFin = Convert.ToDateTime(this.txtfechafin.Text).Date;
+
+                    string fechainicial = fechaObjIni.ToString("yyyy-MM-dd");
+                    string fechaFinal = fechaObjFin.ToString("yyyy-MM-dd");
+                    int tiprograma = Convert.ToInt32(ddlProgramas.SelectedValue);
+                    int regionid = Convert.ToInt32(ddlZona.SelectedValue);
+
+
+                    ExcelPackage excel = new ExcelPackage(); ;
+
+                    #region *** descrgar excel por medio de fechas
+                    //                var informe = ctx.GetConsulActividades(fechainicial, fechaFinal, "SSP DVI", regionid, tiprograma)
+                    var informe = ctx.GetConsulActividades(fechaObjIni, fechaObjFin, null, null, null, null, null, null)
+                                        .Select(a =>
+                       new
+                       {
+                           Fecha = a.fecha,
+                           Nombre_capturista = a.nombrecompleto,
+                           Zona = a.RegionNombre,
+                           Delegación = a.DelegacionNombre,
+                           Municipio = a.MUNICIPIO,
+                           Clave_Municipio = a.calveMuni,
+                           Localidad = a.Localidad,
+                           Clave_Localidad = a.clavelocali,
+                           Nombre_Programa = a.NombrePrograma,
+                           Nombre_Subprograma = a.NombreSubPrograma,
+                           Nombre_Acciones = a.AccionesNombre,
+                           Niños_Beneficiados = a.niños,
+                           Niñas_Beneficiadas = a.niñas,
+                           Hombres_Beneficiados = a.hombres,
+                           Mujeres_Beneficiadas = a.mujeres,
+                           Docentes_Hombres_Beneficiados = a.docentesH,
+                           Docentes_Mujeres_Beneficiadas = a.docentesM,
+                           Total_Hombres_Beneficiados = a.TotalHombresAtendidos,
+                           Total_Mujeres_Beneficiadas = a.TotalMujeresAtendidas,
+                           Total_Beficiados = a.total_atendidos,
+                           Nombre_Contacto = a.NombreContacto,
+                           Teléfono = a.telcel,
+                           Nombre_Lugar_o_Escuela = a.NombreLugar_Escuela,
+                           Clave_Plantel = a.ClavePlantel,
+                           //      Turno = a.Turno,
+                           Nivel_Educativo = a.Nivel,
+                           Dirección = "Calle:" + " " + a.calle + "Colonia:" + " " + a.coloni,
+                           Latitud = a.Latitud,
+                           Longitud = a.Longitud,
+                           Folio_Actividad = a.FolioActividad,
+                           Folio_Alternativo = a.idResumenDiario,
+                           Coordinación = a.DelegacionOcoonurbacion
+                       }).ToList();
+                    #endregion
+                    var workSheet = excel.Workbook.Worksheets.Add("Hoja1");
+                    workSheet.Cells[1, 1].LoadFromCollection(informe, true);
+
+                    //using (var memoryStream = new MemoryStream())
+                    //{
+                    //    Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                    //    Response.AddHeader("content-disposition", "attachment;  filename=Total_Activides.xlsx");
+                    //    excel.SaveAs(memoryStream);
+                    //    memoryStream.WriteTo(Response.OutputStream);
+                    //    Response.Flush();
+                    //    Response.End();
+                    //}
+
+
+
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        excel.SaveAs(memoryStream);
+
+                        Response.Clear();
+                        Response.Buffer = true;
+
+                        Response.ContentType =
+                            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+                        Response.AddHeader(
+                            "content-disposition",
+                            "attachment; filename=Total_Activides.xlsx");
+
+                        Response.BinaryWrite(memoryStream.ToArray());
+
+                        Response.Flush();
+
+                        Response.SuppressContent = true;
+
+                        HttpContext.Current.ApplicationInstance.CompleteRequest();
+                    }
+                }
+            }
+        */
+
+        /*
+            private void LlenaHoja(OfficeOpenXml.ExcelWorksheet xlWorkSheetGral)
+            {
+                try
+                {
+                    dtPrincipal = null;
+                    int Renglon;
+                    if (Session["dtPrincipal"] == null)
+                    {
+                        bool convertidoFI = false;
+                        bool convertidoFF = false;
+                        DateTime fechaInicial = new DateTime();
+                        convertidoFI = DateTime.TryParse(txtFInicialC.Text, out fechaInicial);
+                        DateTime fechaFinal = new DateTime();
+                        convertidoFF = DateTime.TryParse(txtfechafin.Text, out fechaFinal);
+                        int tiprograma = Convert.ToInt32(ddlProgramas.SelectedValue);
+
+                        if (tiprograma == 0)
+                        {
+                            List<Wv_DatosReportesHistorico> listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF) && (R.Dependencia == "SSP DVI"))).ToList();
+                            dtPrincipal = ConvertToDataTable(listaReportes);
+                        }
+                        else
+                        {
+                            List<Wv_DatosReportesHistorico> listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF) && (R.Dependencia == "SSP DVI") && R.programasID == tiprograma)).ToList();
+                            dtPrincipal = ConvertToDataTable(listaReportes);
+                        }
+
+
+                        for (Renglon = 0; Renglon < dtPrincipal.Rows.Count; Renglon++)
+                        {
+                            xlWorkSheetGral.Cells[Renglon + 2, 1].Value = dtPrincipal.Rows[Renglon]["fecha"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 2].Value = dtPrincipal.Rows[Renglon]["Nombre_capturista"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 3].Value = dtPrincipal.Rows[Renglon]["RegionNombre"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 4].Value = dtPrincipal.Rows[Renglon]["DelegacionNombre"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 5].Value = dtPrincipal.Rows[Renglon]["MUNICIPIO"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 6].Value = dtPrincipal.Rows[Renglon]["calveMuni"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 7].Value = dtPrincipal.Rows[Renglon]["Localidad"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 8].Value = dtPrincipal.Rows[Renglon]["clavelocali"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 9].Value = dtPrincipal.Rows[Renglon]["NombrePrograma"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 10].Value = dtPrincipal.Rows[Renglon]["NombreSubPrograma"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 11].Value = dtPrincipal.Rows[Renglon]["AccionesNombre"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 12].Value = dtPrincipal.Rows[Renglon]["niños"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 13].Value = dtPrincipal.Rows[Renglon]["niñas"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 14].Value = dtPrincipal.Rows[Renglon]["hombres"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 15].Value = dtPrincipal.Rows[Renglon]["mujeres"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 16].Value = dtPrincipal.Rows[Renglon]["docentesH"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 17].Value = dtPrincipal.Rows[Renglon]["docentesM"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 18].Value = dtPrincipal.Rows[Renglon]["TotalHombresAtendidos"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 19].Value = dtPrincipal.Rows[Renglon]["TotalMujeresAtendidas"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 20].Value = dtPrincipal.Rows[Renglon]["total_atendidos"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 21].Value = dtPrincipal.Rows[Renglon]["calle"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 22].Value = dtPrincipal.Rows[Renglon]["coloni"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 23].Value = dtPrincipal.Rows[Renglon]["NombreLugar_Escuela"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 24].Value = dtPrincipal.Rows[Renglon]["ClavePlantel"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 25].Value = dtPrincipal.Rows[Renglon]["Turno"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 26].Value = dtPrincipal.Rows[Renglon]["Nivel"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 27].Value = dtPrincipal.Rows[Renglon]["NombreContacto"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 28].Value = dtPrincipal.Rows[Renglon]["telcel"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 29].Value = dtPrincipal.Rows[Renglon]["Latitud"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 30].Value = dtPrincipal.Rows[Renglon]["Longitud"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 31].Value = dtPrincipal.Rows[Renglon]["FolioActividad"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 32].Value = dtPrincipal.Rows[Renglon]["idResumenDiario"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 33].Value = dtPrincipal.Rows[Renglon]["DelegacionOcoonurbacion"];
+                        }
+                    }
+                }
+                catch (Exception exe)
+                {
+                    //lblError.Text = exe.Message;
+                }
+
+            }
+
+        */
+
+
+        /*    protected void lkbtnexcel_Click(object sender, EventArgs e)
+            {
+                if (string.IsNullOrEmpty(this.txtFInicialC.Text) || string.IsNullOrEmpty(this.txtfechafin.Text))
+                {
+                    textoValidacion += "<li> Es necesario ingresar las fechas para poder generar el reporte. </ li>";
+                    valido = false;
+
+                }
+                if (!valido)
+                {
+                    textoValidacion += "</ul>";
+                    validadottxt.Text = textoValidacion;
+
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "AbrirModalValidador", "AbrirModalValidador();", true);
+
+                }
+                else
+                {
+                    DateTime fechaObjIni = Convert.ToDateTime(this.txtFInicialC.Text).Date;
+                    DateTime fechaObjFin = Convert.ToDateTime(this.txtfechafin.Text).Date;
+
+                    string fechainicial = fechaObjIni.ToString("yyyy-MM-dd");
+                    string fechaFinal = fechaObjFin.ToString("yyyy-MM-dd");
+                    int tiprograma = Convert.ToInt32(ddlProgramas.SelectedValue);
+                    int regionid = Convert.ToInt32(ddlZona.SelectedValue);
+
+
+                    ExcelPackage excel = new ExcelPackage(); ;
+
+                    #region *** descrgar excel por medio de fechas
+                    //                var informe = ctx.GetConsulActividades(fechainicial, fechaFinal, "SSP DVI", regionid, tiprograma)
+                    var informe = ctx.GetConsulActividades(fechaObjIni, fechaObjFin, null, null, null, null, null, null)
+                                        .Select(a =>
+                       new
+                       {
+                           Fecha = a.fecha,
+                           Nombre_capturista = a.nombrecompleto,
+                           Zona = a.RegionNombre,
+                           Delegación = a.DelegacionNombre,
+                           Municipio = a.MUNICIPIO,
+                           Clave_Municipio = a.calveMuni,
+                           Localidad = a.Localidad,
+                           Clave_Localidad = a.clavelocali,
+                           Nombre_Programa = a.NombrePrograma,
+                           Nombre_Subprograma = a.NombreSubPrograma,
+                           Nombre_Acciones = a.AccionesNombre,
+                           Niños_Beneficiados = a.niños,
+                           Niñas_Beneficiadas = a.niñas,
+                           Hombres_Beneficiados = a.hombres,
+                           Mujeres_Beneficiadas = a.mujeres,
+                           Docentes_Hombres_Beneficiados = a.docentesH,
+                           Docentes_Mujeres_Beneficiadas = a.docentesM,
+                           Total_Hombres_Beneficiados = a.TotalHombresAtendidos,
+                           Total_Mujeres_Beneficiadas = a.TotalMujeresAtendidas,
+                           Total_Beficiados = a.total_atendidos,
+                           Nombre_Contacto = a.NombreContacto,
+                           Teléfono = a.telcel,
+                           Nombre_Lugar_o_Escuela = a.NombreLugar_Escuela,
+                           Clave_Plantel = a.ClavePlantel,
+                           //      Turno = a.Turno,
+                           Nivel_Educativo = a.Nivel,
+                           Dirección = "Calle:" + " " + a.calle + "Colonia:" + " " + a.coloni,
+                           Latitud = a.Latitud,
+                           Longitud = a.Longitud,
+                           Folio_Actividad = a.FolioActividad,
+                           Folio_Alternativo = a.idResumenDiario,
+                           Coordinación = a.DelegacionOcoonurbacion
+                       }).ToList();
+                    #endregion
+                    var workSheet = excel.Workbook.Worksheets.Add("Hoja1");
+                    workSheet.Cells[1, 1].LoadFromCollection(informe, true);
+
+                    //using (var memoryStream = new MemoryStream())
+                    //{
+                    //    Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                    //    Response.AddHeader("content-disposition", "attachment;  filename=Total_Activides.xlsx");
+                    //    excel.SaveAs(memoryStream);
+                    //    memoryStream.WriteTo(Response.OutputStream);
+                    //    Response.Flush();
+                    //    Response.End();
+                    //}
+
+
+
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        excel.SaveAs(memoryStream);
+
+                        Response.Clear();
+                        Response.Buffer = true;
+
+                        Response.ContentType =
+                            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+                        Response.AddHeader(
+                            "content-disposition",
+                            "attachment; filename=Total_Activides.xlsx");
+
+                        Response.BinaryWrite(memoryStream.ToArray());
+
+                        Response.Flush();
+
+                        Response.SuppressContent = true;
+
+                        HttpContext.Current.ApplicationInstance.CompleteRequest();
+                    }
+                }
+            }
+
+            private void LlenaHoja(OfficeOpenXml.ExcelWorksheet xlWorkSheetGral)
+            {
+                try
+                {
+                    dtPrincipal = null;
+                    int Renglon;
+                    if (Session["dtPrincipal"] == null)
+                    {
+                        bool convertidoFI = false;
+                        bool convertidoFF = false;
+                        DateTime fechaInicial = new DateTime();
+                        convertidoFI = DateTime.TryParse(txtFInicialC.Text, out fechaInicial);
+                        DateTime fechaFinal = new DateTime();
+                        convertidoFF = DateTime.TryParse(txtfechafin.Text, out fechaFinal);
+                        int tiprograma = Convert.ToInt32(ddlProgramas.SelectedValue);
+
+                        if (tiprograma == 0)
+                        {
+                            List<Wv_DatosReportesHistorico> listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF) && (R.Dependencia == "SSP DVI"))).ToList();
+                            dtPrincipal = ConvertToDataTable(listaReportes);
+                        }
+                        else
+                        {
+                            List<Wv_DatosReportesHistorico> listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF) && (R.Dependencia == "SSP DVI") && R.programasID == tiprograma)).ToList();
+                            dtPrincipal = ConvertToDataTable(listaReportes);
+                        }
+
+
+                        for (Renglon = 0; Renglon < dtPrincipal.Rows.Count; Renglon++)
+                        {
+                            xlWorkSheetGral.Cells[Renglon + 2, 1].Value = dtPrincipal.Rows[Renglon]["fecha"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 2].Value = dtPrincipal.Rows[Renglon]["Nombre_capturista"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 3].Value = dtPrincipal.Rows[Renglon]["RegionNombre"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 4].Value = dtPrincipal.Rows[Renglon]["DelegacionNombre"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 5].Value = dtPrincipal.Rows[Renglon]["MUNICIPIO"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 6].Value = dtPrincipal.Rows[Renglon]["calveMuni"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 7].Value = dtPrincipal.Rows[Renglon]["Localidad"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 8].Value = dtPrincipal.Rows[Renglon]["clavelocali"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 9].Value = dtPrincipal.Rows[Renglon]["NombrePrograma"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 10].Value = dtPrincipal.Rows[Renglon]["NombreSubPrograma"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 11].Value = dtPrincipal.Rows[Renglon]["AccionesNombre"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 12].Value = dtPrincipal.Rows[Renglon]["niños"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 13].Value = dtPrincipal.Rows[Renglon]["niñas"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 14].Value = dtPrincipal.Rows[Renglon]["hombres"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 15].Value = dtPrincipal.Rows[Renglon]["mujeres"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 16].Value = dtPrincipal.Rows[Renglon]["docentesH"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 17].Value = dtPrincipal.Rows[Renglon]["docentesM"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 18].Value = dtPrincipal.Rows[Renglon]["TotalHombresAtendidos"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 19].Value = dtPrincipal.Rows[Renglon]["TotalMujeresAtendidas"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 20].Value = dtPrincipal.Rows[Renglon]["total_atendidos"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 21].Value = dtPrincipal.Rows[Renglon]["calle"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 22].Value = dtPrincipal.Rows[Renglon]["coloni"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 23].Value = dtPrincipal.Rows[Renglon]["NombreLugar_Escuela"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 24].Value = dtPrincipal.Rows[Renglon]["ClavePlantel"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 25].Value = dtPrincipal.Rows[Renglon]["Turno"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 26].Value = dtPrincipal.Rows[Renglon]["Nivel"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 27].Value = dtPrincipal.Rows[Renglon]["NombreContacto"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 28].Value = dtPrincipal.Rows[Renglon]["telcel"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 29].Value = dtPrincipal.Rows[Renglon]["Latitud"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 30].Value = dtPrincipal.Rows[Renglon]["Longitud"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 31].Value = dtPrincipal.Rows[Renglon]["FolioActividad"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 32].Value = dtPrincipal.Rows[Renglon]["idResumenDiario"];
+                            xlWorkSheetGral.Cells[Renglon + 2, 33].Value = dtPrincipal.Rows[Renglon]["DelegacionOcoonurbacion"];
+                        }
+                    }
+                }
+                catch (Exception exe)
+                {
+                    //lblError.Text = exe.Message;
+                }
+
+            }*/
+
+        /*   protected void lkbtnexcel_Click(object sender, EventArgs e)
+           {
+               if (string.IsNullOrEmpty(this.txtFInicialC.Text) || string.IsNullOrEmpty(this.txtfechafin.Text))
+               {
+                   textoValidacion += "<li> Es necesario ingresar las fechas para poder generar el reporte. </ li>";
+                   valido = false;
+
+               }
+               if (!valido)
+               {
+                   textoValidacion += "</ul>";
+                   validadottxt.Text = textoValidacion;
+
+                   ScriptManager.RegisterStartupScript(this, this.GetType(), "AbrirModalValidador", "AbrirModalValidador();", true);
+
+               }
+               else
+               {
+                   DateTime fechaObjIni = Convert.ToDateTime(this.txtFInicialC.Text).Date;
+                   DateTime fechaObjFin = Convert.ToDateTime(this.txtfechafin.Text).Date;
+
+                   string fechainicial = fechaObjIni.ToString("yyyy-MM-dd");
+                   string fechaFinal = fechaObjFin.ToString("yyyy-MM-dd");
+                   int tiprograma = Convert.ToInt32(ddlProgramas.SelectedValue);
+                   int regionid = Convert.ToInt32(ddlZona.SelectedValue);
+
+                   Workbook workbook = new Workbook();
+                   Worksheet worksheet = new Worksheet("First Sheet");
+
+                //   ExcelPackage excel = new ExcelPackage(); 
+
+                   #region *** descrgar excel por medio de fechas
+                   //                var informe = ctx.GetConsulActividades(fechainicial, fechaFinal, "SSP DVI", regionid, tiprograma)
+                   var informe = ctx.GetConsulActividades(fechaObjIni, fechaObjFin, null, null, null, null, null, null)
+                                       .Select(a =>
+                      new
+                      {
+                          Fecha = a.fecha,
+                          Nombre_capturista = a.nombrecompleto,
+                          Zona = a.RegionNombre,
+                          Delegación = a.DelegacionNombre,
+                          Municipio = a.MUNICIPIO,
+                          Clave_Municipio = a.calveMuni,
+                          Localidad = a.Localidad,
+                          Clave_Localidad = a.clavelocali,
+                          Nombre_Programa = a.NombrePrograma,
+                          Nombre_Subprograma = a.NombreSubPrograma,
+                          Nombre_Acciones = a.AccionesNombre,
+                          Niños_Beneficiados = a.niños,
+                          Niñas_Beneficiadas = a.niñas,
+                          Hombres_Beneficiados = a.hombres,
+                          Mujeres_Beneficiadas = a.mujeres,
+                          Docentes_Hombres_Beneficiados = a.docentesH,
+                          Docentes_Mujeres_Beneficiadas = a.docentesM,
+                          Total_Hombres_Beneficiados = a.TotalHombresAtendidos,
+                          Total_Mujeres_Beneficiadas = a.TotalMujeresAtendidas,
+                          Total_Beficiados = a.total_atendidos,
+                          Nombre_Contacto = a.NombreContacto,
+                          Teléfono = a.telcel,
+                          Nombre_Lugar_o_Escuela = a.NombreLugar_Escuela,
+                          Clave_Plantel = a.ClavePlantel,
+                          //      Turno = a.Turno,
+                          Nivel_Educativo = a.Nivel,
+                          Dirección = "Calle:" + " " + a.calle + "Colonia:" + " " + a.coloni,
+                          Latitud = a.Latitud,
+                          Longitud = a.Longitud,
+                          Folio_Actividad = a.FolioActividad,
+                          Folio_Alternativo = a.idResumenDiario,
+                          Coordinación = a.DelegacionOcoonurbacion
+                      }).ToList();
+                   #endregion
+                   // var workSheet = workbook.Workbook.Worksheets.Add("Hoja1");
+                   worksheet.Cells[1, 1] = new Cell (informe);
+
+                   //using (var memoryStream = new MemoryStream())
+                   //{
+                   //    Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                   //    Response.AddHeader("content-disposition", "attachment;  filename=Total_Activides.xlsx");
+                   //    excel.SaveAs(memoryStream);
+                   //    memoryStream.WriteTo(Response.OutputStream);
+                   //    Response.Flush();
+                   //    Response.End();
+                   //}
+
+
+
+                   using (var memoryStream = new MemoryStream())
+                   {
+                       workbook.Save(memoryStream);
+
+                       Response.Clear();
+                       Response.Buffer = true;
+
+                       Response.ContentType =
+                           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+                       Response.AddHeader(
+                           "content-disposition",
+                           "attachment; filename=Total_Actividades.xlsx");
+
+                       Response.BinaryWrite(memoryStream.ToArray());
+
+                       Response.Flush();
+
+                       Response.SuppressContent = true;
+
+                       HttpContext.Current.ApplicationInstance.CompleteRequest();
+                   }
+               }
+           }
+
+
+
+           private void LlenaHoja(OfficeOpenXml.ExcelWorksheet xlWorkSheetGral)
+           {
+               try
+               {
+                   dtPrincipal = null;
+                   int Renglon;
+                   if (Session["dtPrincipal"] == null)
+                   {
+                       bool convertidoFI = false;
+                       bool convertidoFF = false;
+                       DateTime fechaInicial = new DateTime();
+                       convertidoFI = DateTime.TryParse(txtFInicialC.Text, out fechaInicial);
+                       DateTime fechaFinal = new DateTime();
+                       convertidoFF = DateTime.TryParse(txtfechafin.Text, out fechaFinal);
+                       int tiprograma = Convert.ToInt32(ddlProgramas.SelectedValue);
+
+                       if (tiprograma == 0)
+                       {
+                           List<Wv_DatosReportesHistorico> listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF) && (R.Dependencia == "SSP DVI"))).ToList();
+                           dtPrincipal = ConvertToDataTable(listaReportes);
+                       }
+                       else
+                       {
+                           List<Wv_DatosReportesHistorico> listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF) && (R.Dependencia == "SSP DVI") && R.programasID == tiprograma)).ToList();
+                           dtPrincipal = ConvertToDataTable(listaReportes);
+                       }
+
+
+                       for (Renglon = 0; Renglon < dtPrincipal.Rows.Count; Renglon++)
+                       {
+                           xlWorkSheetGral.Cells[Renglon + 2, 1].Value = dtPrincipal.Rows[Renglon]["fecha"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 2].Value = dtPrincipal.Rows[Renglon]["Nombre_capturista"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 3].Value = dtPrincipal.Rows[Renglon]["RegionNombre"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 4].Value = dtPrincipal.Rows[Renglon]["DelegacionNombre"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 5].Value = dtPrincipal.Rows[Renglon]["MUNICIPIO"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 6].Value = dtPrincipal.Rows[Renglon]["calveMuni"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 7].Value = dtPrincipal.Rows[Renglon]["Localidad"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 8].Value = dtPrincipal.Rows[Renglon]["clavelocali"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 9].Value = dtPrincipal.Rows[Renglon]["NombrePrograma"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 10].Value = dtPrincipal.Rows[Renglon]["NombreSubPrograma"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 11].Value = dtPrincipal.Rows[Renglon]["AccionesNombre"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 12].Value = dtPrincipal.Rows[Renglon]["niños"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 13].Value = dtPrincipal.Rows[Renglon]["niñas"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 14].Value = dtPrincipal.Rows[Renglon]["hombres"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 15].Value = dtPrincipal.Rows[Renglon]["mujeres"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 16].Value = dtPrincipal.Rows[Renglon]["docentesH"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 17].Value = dtPrincipal.Rows[Renglon]["docentesM"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 18].Value = dtPrincipal.Rows[Renglon]["TotalHombresAtendidos"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 19].Value = dtPrincipal.Rows[Renglon]["TotalMujeresAtendidas"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 20].Value = dtPrincipal.Rows[Renglon]["total_atendidos"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 21].Value = dtPrincipal.Rows[Renglon]["calle"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 22].Value = dtPrincipal.Rows[Renglon]["coloni"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 23].Value = dtPrincipal.Rows[Renglon]["NombreLugar_Escuela"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 24].Value = dtPrincipal.Rows[Renglon]["ClavePlantel"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 25].Value = dtPrincipal.Rows[Renglon]["Turno"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 26].Value = dtPrincipal.Rows[Renglon]["Nivel"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 27].Value = dtPrincipal.Rows[Renglon]["NombreContacto"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 28].Value = dtPrincipal.Rows[Renglon]["telcel"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 29].Value = dtPrincipal.Rows[Renglon]["Latitud"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 30].Value = dtPrincipal.Rows[Renglon]["Longitud"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 31].Value = dtPrincipal.Rows[Renglon]["FolioActividad"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 32].Value = dtPrincipal.Rows[Renglon]["idResumenDiario"];
+                           xlWorkSheetGral.Cells[Renglon + 2, 33].Value = dtPrincipal.Rows[Renglon]["DelegacionOcoonurbacion"];
+                       }
+                   }
+               }
+               catch (Exception exe)
+               {
+                   //lblError.Text = exe.Message;
+               }
+
+           }
+
+           */
         public DataTable ConvertToDataTable<T>(IList<T> data)
         {
             PropertyDescriptorCollection properties =
@@ -304,50 +848,6 @@ namespace SIICOP_V1._2.VistasReportes
 
 
         //#endregion
-
-
-        protected void GvPCAdmin_DataBound(object sender, EventArgs e)
-        {
-            //try
-            //{
-            //    // Recupera la el PagerRow...
-            //    GridViewRow pagerRow = GvPCAdmin.BottomPagerRow;
-            //    // Recupera los controles DropDownList y label...
-            //    DropDownList pageList = (DropDownList)pagerRow.FindControl("PageDropDownListAdmin");
-            //    Label pageLabel = (Label)pagerRow.FindControl("CurrentPageLabelAdmin");
-            //    if ((pageList != null))
-            //    {
-            //        // Se crean los valores del DropDownList tomando el número total de páginas... 
-            //        int i = 0;
-            //        for (i = 0; i <= GvPCAdmin.PageCount - 1; i++)
-            //        {
-            //            // Se crea un objeto ListItem para representar la �gina...
-            //            int pageNumber = i + 1;
-            //            ListItem item = new ListItem(pageNumber.ToString());
-            //            if (i == GvPCAdmin.PageIndex)
-            //            {
-            //                item.Selected = true;
-            //            }
-            //            // Se añade el ListItem a la colección de Items del DropDownList...
-            //            pageList.Items.Add(item);
-            //        }
-            //    }
-            //    if ((pageLabel != null))
-            //    {
-            //        // Calcula el nº de �gina actual...
-            //        int currentPage = GvPCAdmin.PageIndex + 1;
-            //        // Actualiza el Label control con la �gina actual.
-            //        pageLabel.Text = "Página " + currentPage.ToString() + " de " + GvPCAdmin.PageCount.ToString();
-
-            //    }
-            //}
-            //catch
-            //{
-
-            //}
-
-        }
-
         protected void GvPCAdmin_RowCommand(object sender, GridViewCommandEventArgs e)
         {
 
@@ -569,16 +1069,588 @@ namespace SIICOP_V1._2.VistasReportes
 
         }
 
+        protected void GvPCAdmin_DataBound(object sender, EventArgs e)
+        {
+            // Obtenemos la fila del paginador
+            GridViewRow pagerRow = GvPCAdmin.BottomPagerRow;
+
+            // Si el GridView tiene suficientes datos para paginar (más de 10), el pagerRow existirá
+            if (pagerRow != null)
+            {
+                // Buscamos los controles dentro del PagerTemplate
+                DropDownList pageList = (DropDownList)pagerRow.FindControl("PageDropDownListAdmin");
+                Label pageLabel = (Label)pagerRow.FindControl("CurrentPageLabelAdmin");
+
+                if (pageList != null)
+                {
+                    // Limpiamos los items por si hay un PostBack
+                    pageList.Items.Clear();
+
+                    // Creamos un número en la lista por cada página que exista
+                    for (int i = 0; i < GvPCAdmin.PageCount; i++)
+                    {
+                        int pageNumber = i + 1;
+                        ListItem item = new ListItem(pageNumber.ToString());
+
+                        // Seleccionamos la página actual en el DropDownList
+                        if (i == GvPCAdmin.PageIndex)
+                        {
+                            item.Selected = true;
+                        }
+                        pageList.Items.Add(item);
+                    }
+                }
+
+                if (pageLabel != null)
+                {
+                    // Actualizamos el texto informativo (ej. "Página 1 de 5")
+                    int currentPage = GvPCAdmin.PageIndex + 1;
+                    pageLabel.Text = "Página " + currentPage + " de " + GvPCAdmin.PageCount;
+                }
+            }
+        }
+
+
+        //  protected void GvPCAdmin_DataBound(object sender, EventArgs e)
+        //  {
+        //try
+        //{
+        //    // Recupera la el PagerRow...
+        //    GridViewRow pagerRow = GvPCAdmin.BottomPagerRow;
+        //    // Recupera los controles DropDownList y label...
+        //    DropDownList pageList = (DropDownList)pagerRow.FindControl("PageDropDownListAdmin");
+        //    Label pageLabel = (Label)pagerRow.FindControl("CurrentPageLabelAdmin");
+        //    if ((pageList != null))
+        //    {
+        //        // Se crean los valores del DropDownList tomando el número total de páginas... 
+        //        int i = 0;
+        //        for (i = 0; i <= GvPCAdmin.PageCount - 1; i++)
+        //        {
+        //            // Se crea un objeto ListItem para representar la �gina...
+        //            int pageNumber = i + 1;
+        //            ListItem item = new ListItem(pageNumber.ToString());
+        //            if (i == GvPCAdmin.PageIndex)
+        //            {
+        //                item.Selected = true;
+        //            }
+        //            // Se añade el ListItem a la colección de Items del DropDownList...
+        //            pageList.Items.Add(item);
+        //        }
+        //    }
+        //    if ((pageLabel != null))
+        //    {
+        //        // Calcula el nº de �gina actual...
+        //        int currentPage = GvPCAdmin.PageIndex + 1;
+        //        // Actualiza el Label control con la �gina actual.
+        //        pageLabel.Text = "Página " + currentPage.ToString() + " de " + GvPCAdmin.PageCount.ToString();
+
+        //    }
+        //}
+        //catch
+        //{
+
+        //}
+
+        //  }
+        /*     protected void GvPCAdmin_DataBound(object sender, EventArgs e)
+             {
+                 try
+                 {
+                     // recupera la el pagerrow...
+                     gridviewrow pagerrow = gvpcadmin.bottompagerrow;
+                     // recupera los controles dropdownlist y label...
+                     dropdownlist pagelist = (dropdownlist)pagerrow.findcontrol("pagedropdownlistadmin");
+                     label pagelabel = (label)pagerrow.findcontrol("currentpagelabeladmin");
+                     if ((pagelist != null))
+                     {
+                         // se crean los valores del dropdownlist tomando el número total de páginas... 
+                         int i = 0;
+                         for (i = 0; i <= gvpcadmin.pagecount - 1; i++)
+                         {
+                             // se crea un objeto listitem para representar la �gina...
+                             int pagenumber = i + 1;
+                             listitem item = new listitem(pagenumber.tostring());
+                             if (i == gvpcadmin.pageindex)
+                             {
+                                 item.selected = true;
+                             }
+                             // se añade el listitem a la colección de items del dropdownlist...
+                             pagelist.items.add(item);
+                         }
+                     }
+                     if ((pagelabel != null))
+                     {
+                         // calcula el nº de �gina actual...
+                         int currentpage = gvpcadmin.pageindex + 1;
+                         // actualiza el label control con la �gina actual.
+                         pagelabel.text = "página " + currentpage.tostring() + " de " + gvpcadmin.pagecount.tostring();
+
+                     }
+                 }
+                 catch
+                 {
+
+                 }
+
+             }*/
+
+        /*
+        protected void GvPCAdmin_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
+            int empresarialv = 1;
+            int PART_CIUDAv = 2;
+            int ESCUELAv = 3;
+            int VCMv = 4;
+            int FFv = 5;
+            int ic = 6;
+
+            int inclusionpersonas = 7;
+            int Redesvecinales = 8;
+            int ESCUELA = 9;
+            int VCM = 10;
+            int encuentrociudadano = 11;
+            int fomentodeporte = 12;
+            int empresarial = 13;
+            int resdesXpaz = 14;
+
+            if (e.CommandName == "Editar")
+            {
+                Guid idExped = Guid.Parse(e.CommandArgument.ToString());
+
+                tb_Reporte_Diario Reporte = ctx.tb_Reporte_Diario.Where(t => t.idResumenDiario == idExped).FirstOrDefault();
+
+                if (Reporte != null)
+                {
+                    int Progrmaid = Convert.ToInt32(Reporte.programasID);
+                    if (inclusionpersonas == Progrmaid)
+                    {
+                        this.Session["AccionExpediente"] = SectorEmpresarial.AccionExpediente.Edicion;
+                        this.Session["idExpediente_Accion"] = (object)idExped;
+                        this.Response.Redirect("~/Captura/Construccion_Cultura_Incluyente.aspx");
+                    }
+
+                    if (empresarial == Progrmaid)
+                    {
+                        this.Session["AccionExpediente"] = SectorEmpresarial.AccionExpediente.Edicion;
+                        this.Session["idExpediente_Accion"] = (object)idExped;
+                        this.Response.Redirect("~/Captura/Enlace_con_el_Sector_Empresarial.aspx");
+                    }
+                    if (Redesvecinales == Progrmaid)
+                    {
+                        this.Session["AccionExpediente"] = PrevencionVecinal.AccionExpediente.Edicion;
+                        this.Session["idExpediente_Accion"] = (object)idExped;
+                        this.Response.Redirect("~/Captura/Redes_vecinales.aspx");
+                    }
+                    if (ESCUELA == Progrmaid)
+                    {
+                        this.Session["AccionExpediente"] = EscuelaSegura.AccionExpediente.Edicion;
+                        this.Session["idExpediente_Accion"] = (object)idExped;
+                        this.Response.Redirect("~/Captura/Seguridad_social_paz_social_entorno_educativo.aspx");
+                    }
+                    if (VCM == Progrmaid)
+                    {
+                        this.Session["AccionExpediente"] = PrevenciondelaVM.AccionExpediente.Edicion;
+                        this.Session["idExpediente_Accion"] = (object)idExped;
+                        this.Response.Redirect("~/Captura/Prevención_de_la_Violencia_por_Razones_de_Género.aspx");
+                    }
+                    if (encuentrociudadano == Progrmaid)
+                    {
+                        this.Session["AccionExpediente"] = ForosFerias.AccionExpediente.Edicion;
+                        this.Session["idExpediente_Accion"] = (object)idExped;
+                        this.Response.Redirect("~/Captura/Encuentros_Ciudadanos_por_la_Seguridad.aspx");
+                    }
+                    if (fomentodeporte == Progrmaid)
+                    {
+                        this.Session["AccionExpediente"] = Prevencion_traves_Deporte_Cultura.AccionExpediente.Edicion;
+                        this.Session["idExpediente_Accion"] = (object)idExped;
+                        this.Response.Redirect("~/Captura/Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx");
+                    }
+
+                    if (empresarialv == Progrmaid || PART_CIUDAv == Progrmaid || ESCUELAv == Progrmaid || VCMv == Progrmaid || FFv == Progrmaid || ic == Progrmaid)
+                    {
+                        ScriptManager.RegisterClientScriptBlock((Page)this, this.GetType(), "alertMessage", "alert('No se puede mostrar la información por el cambio de programas.');", true);
+
+                    }
+
+                }
+
+            }
+
+            if (e.CommandName == "VERFOTO")
+            {
+                Guid numFila;
+                bool f1 = false;
+                bool f2 = false;
+                if (Guid.TryParse(e.CommandArgument.ToString(), out numFila))
+                {
+                    Guid idExped = Guid.Parse(numFila.ToString());
+                    Session["idExpediente_Accion"] = idExped;
+
+                    ImagenEvidencia1.ImageUrl = "";
+                    ImagenEvidencia2.ImageUrl = "";
+                    ImagenEvidencia3.ImageUrl = "";
+                    List<tb_fotografia> foto = ctx.tb_fotografia.Where(x => x.idResumenDiario == idExped).ToList();
+
+                    foreach (var fotografia in foto)
+                    {
+                        Byte[] bytes = fotografia.image;
+                        var numero = foto.ToArray().Count();
+                        foreach (var r in numero.ToString())
+                        {
+
+                        }
+
+                        if (ImagenEvidencia1.ImageUrl == "")
+                        {
+                            if (bytes == null)
+                            {
+                                string base64String = fotografia.ImgBase64;
+                                ImagenEvidencia1.ImageUrl = "data:image/png;base64," + base64String;
+
+
+                            }
+                            else
+                            {
+                                Byte[] fotoVer = fotografia.image;
+                                ImagenEvidencia1.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(fotoVer);
+                                f1 = true;
+                            }
+
+
+                            foto1.Visible = true;
+                            fotouno.Visible = true;
+
+
+                        }
+
+                        if (f1 == true)
+                        {
+                            if (bytes == null)
+                            {
+                                string base64String = fotografia.ImgBase64;
+                                ImagenEvidencia2.ImageUrl = "data:image/png;base64," + base64String;
+                            }
+                            else
+                            {
+                                Byte[] fotoVer = fotografia.image;
+                                ImagenEvidencia2.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(fotoVer);
+
+                            }
+
+                            //ImagenEvidencia2.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(bytes);
+                            foto2.Visible = true;
+                            fotodos.Visible = true;
+
+                        }
+                        if (f2 == true)
+                        {
+                            if (bytes == null)
+                            {
+                                string base64String = fotografia.ImgBase64;
+                                ImagenEvidencia3.ImageUrl = "data:image/png;base64," + base64String;
+                            }
+                            else
+                            {
+                                Byte[] fotoVer = fotografia.image;
+                                ImagenEvidencia3.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(fotoVer);
+
+                            }
+
+                            foto3.Visible = true;
+                            fototres.Visible = true;
+
+                        }
+
+
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "AbrirModalFotos", "AbrirModalFotos();", true);
+                    }
+
+                }
+
+
+            }
+
+
+            if (e.CommandName == "Eliminar")
+            {
+                Guid idExped = Guid.Parse(e.CommandArgument.ToString());
+                string sUsuarioActual = System.Web.Security.Membership.GetUser().UserName;
+                var a = ctx.Personales.Where(x => x.login == sUsuarioActual).FirstOrDefault();
+                string area = a.AreaTrabajo;
+                var Eliminardatos = ctx.sp_Elimninar_Actividades(idExped, sUsuarioActual, area).ToString();
+
+
+
+
+                if (Eliminardatos == "1")
+                {
+                    //entro
+                    tbAuditoria entity = new tbAuditoria()
+                    {
+                        auditoriaGuid = new Guid?(Guid.NewGuid()),
+                        fecha = new DateTime?(DateTime.Now),
+                        area = area,
+                        idTipomodificacion = new int?(4),
+                        PagModificacion = this.Page.Title,
+                        Descripcion = "Se elimino la actividad por el usuario: " + sUsuarioActual,
+                        usuario = sUsuarioActual,
+                        IdABC = Convert.ToString((object)idExped)
+                    };
+                    ctx.tbAuditoria.Add(entity);
+                    ctx.SaveChanges();
+                    ScriptManager.RegisterClientScriptBlock((Page)this, this.GetType(), "alertMessage", "alert('SE ELIMINO CON ÉXITO LA ACTIVIDAD.');", true);
+                    GvPCAdmin.DataBind();
+                    CargarDatosReporte();
+
+
+                }
+                else
+                { //no entro
+                    ScriptManager.RegisterClientScriptBlock((Page)this, this.GetType(), "alertMessage", "alert('ERROR AL ELIMINAR LA ACTIVIDAD.');", true);
+
+                }
+
+            }
+
+
+        }
+
+        */
+
+        /*
+               protected void GvPCAdmin_RowCommand(object sender, GridViewCommandEventArgs e)
+                {
+
+                    int empresarialv = 1;
+                    int PART_CIUDAv = 2;
+                    int ESCUELAv = 3;
+                    int VCMv = 4;
+                    int FFv = 5;
+                    int ic = 6;
+
+                    int inclusionpersonas = 7;
+                    int Redesvecinales = 8;
+                    int ESCUELA = 9;
+                    int VCM = 10;
+                    int encuentrociudadano = 11;
+                    int fomentodeporte = 12;
+                    int empresarial = 13;
+                    int resdesXpaz = 14;
+
+                    if (e.CommandName == "Editar")
+                    {
+                        Guid idExped = Guid.Parse(e.CommandArgument.ToString());
+
+                        tb_Reporte_Diario Reporte = ctx.tb_Reporte_Diario.Where(t => t.idResumenDiario == idExped).FirstOrDefault();
+
+                        if (Reporte != null)
+                        {
+                            int Progrmaid = Convert.ToInt32(Reporte.programasID);
+                            if (inclusionpersonas == Progrmaid)
+                            {
+                                this.Session["AccionExpediente"] = SectorEmpresarial.AccionExpediente.Edicion;
+                                this.Session["idExpediente_Accion"] = (object)idExped;
+                                this.Response.Redirect("~/Captura/Construccion_Cultura_Incluyente.aspx");
+                            }
+
+                            if (empresarial == Progrmaid)
+                            {
+                                this.Session["AccionExpediente"] = SectorEmpresarial.AccionExpediente.Edicion;
+                                this.Session["idExpediente_Accion"] = (object)idExped;
+                                this.Response.Redirect("~/Captura/Enlace_con_el_Sector_Empresarial.aspx");
+                            }
+                            if (Redesvecinales == Progrmaid)
+                            {
+                                this.Session["AccionExpediente"] = PrevencionVecinal.AccionExpediente.Edicion;
+                                this.Session["idExpediente_Accion"] = (object)idExped;
+                                this.Response.Redirect("~/Captura/Redes_vecinales.aspx");
+                            }
+                            if (ESCUELA == Progrmaid)
+                            {
+                                this.Session["AccionExpediente"] = EscuelaSegura.AccionExpediente.Edicion;
+                                this.Session["idExpediente_Accion"] = (object)idExped;
+                                this.Response.Redirect("~/Captura/Seguridad_social_paz_social_entorno_educativo.aspx");
+                            }
+                            if (VCM == Progrmaid)
+                            {
+                                this.Session["AccionExpediente"] = PrevenciondelaVM.AccionExpediente.Edicion;
+                                this.Session["idExpediente_Accion"] = (object)idExped;
+                                this.Response.Redirect("~/Captura/Prevención_de_la_Violencia_por_Razones_de_Género.aspx");
+                            }
+                            if (encuentrociudadano == Progrmaid)
+                            {
+                                this.Session["AccionExpediente"] = ForosFerias.AccionExpediente.Edicion;
+                                this.Session["idExpediente_Accion"] = (object)idExped;
+                                this.Response.Redirect("~/Captura/Encuentros_Ciudadanos_por_la_Seguridad.aspx");
+                            }
+                            if (fomentodeporte == Progrmaid)
+                            {
+                                this.Session["AccionExpediente"] = Prevencion_traves_Deporte_Cultura.AccionExpediente.Edicion;
+                                this.Session["idExpediente_Accion"] = (object)idExped;
+                                this.Response.Redirect("~/Captura/Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx");
+                            }
+
+                            if (empresarialv == Progrmaid || PART_CIUDAv == Progrmaid || ESCUELAv == Progrmaid || VCMv == Progrmaid || FFv == Progrmaid || ic == Progrmaid)
+                            {
+                                ScriptManager.RegisterClientScriptBlock((Page)this, this.GetType(), "alertMessage", "alert('No se puede mostrar la información por el cambio de programas.');", true);
+
+                            }
+
+                        }
+
+                    }
+
+                    if (e.CommandName == "VERFOTO")
+                    {
+                        Guid numFila;
+                        bool f1 = false;
+                        bool f2 = false;
+                        if (Guid.TryParse(e.CommandArgument.ToString(), out numFila))
+                        {
+                            Guid idExped = Guid.Parse(numFila.ToString());
+                            Session["idExpediente_Accion"] = idExped;
+
+                            ImagenEvidencia1.ImageUrl = "";
+                            ImagenEvidencia2.ImageUrl = "";
+                            ImagenEvidencia3.ImageUrl = "";
+                            List<tb_fotografia> foto = ctx.tb_fotografia.Where(x => x.idResumenDiario == idExped).ToList();
+
+                            foreach (var fotografia in foto)
+                            {
+                                Byte[] bytes = fotografia.image;
+                                var numero = foto.ToArray().Count();
+                                foreach (var r in numero.ToString())
+                                {
+
+                                }
+
+                                if (ImagenEvidencia1.ImageUrl == "")
+                                {
+                                    if (bytes == null)
+                                    {
+                                        string base64String = fotografia.ImgBase64;
+                                        ImagenEvidencia1.ImageUrl = "data:image/png;base64," + base64String;
+
+
+                                    }
+                                    else
+                                    {
+                                        Byte[] fotoVer = fotografia.image;
+                                        ImagenEvidencia1.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(fotoVer);
+                                        f1 = true;
+                                    }
+
+
+                                    foto1.Visible = true;
+                                    fotouno.Visible = true;
+
+
+                                }
+
+                                if (f1 == true)
+                                {
+                                    if (bytes == null)
+                                    {
+                                        string base64String = fotografia.ImgBase64;
+                                        ImagenEvidencia2.ImageUrl = "data:image/png;base64," + base64String;
+                                    }
+                                    else
+                                    {
+                                        Byte[] fotoVer = fotografia.image;
+                                        ImagenEvidencia2.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(fotoVer);
+
+                                    }
+
+                                    //ImagenEvidencia2.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(bytes);
+                                    foto2.Visible = true;
+                                    fotodos.Visible = true;
+
+                                }
+                                if (f2 == true)
+                                {
+                                    if (bytes == null)
+                                    {
+                                        string base64String = fotografia.ImgBase64;
+                                        ImagenEvidencia3.ImageUrl = "data:image/png;base64," + base64String;
+                                    }
+                                    else
+                                    {
+                                        Byte[] fotoVer = fotografia.image;
+                                        ImagenEvidencia3.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(fotoVer);
+
+                                    }
+
+                                    foto3.Visible = true;
+                                    fototres.Visible = true;
+
+                                }
+
+
+                                ScriptManager.RegisterStartupScript(this, this.GetType(), "AbrirModalFotos", "AbrirModalFotos();", true);
+                            }
+
+                        }
+
+
+                    }
+
+
+                    if (e.CommandName == "Eliminar")
+                    {
+                        Guid idExped = Guid.Parse(e.CommandArgument.ToString());
+                        string sUsuarioActual = System.Web.Security.Membership.GetUser().UserName;
+                        var a = ctx.Personales.Where(x => x.login == sUsuarioActual).FirstOrDefault();
+                        string area = a.AreaTrabajo;
+                        var Eliminardatos = ctx.sp_Elimninar_Actividades(idExped, sUsuarioActual, area).ToString();
+
+
+
+
+                        if (Eliminardatos == "1")
+                        {
+                            //entro
+                            tbAuditoria entity = new tbAuditoria()
+                            {
+                                auditoriaGuid = new Guid?(Guid.NewGuid()),
+                                fecha = new DateTime?(DateTime.Now),
+                                area = area,
+                                idTipomodificacion = new int?(4),
+                                PagModificacion = this.Page.Title,
+                                Descripcion = "Se elimino la actividad por el usuario: " + sUsuarioActual,
+                                usuario = sUsuarioActual,
+                                IdABC = Convert.ToString((object)idExped)
+                            };
+                            ctx.tbAuditoria.Add(entity);
+                            ctx.SaveChanges();
+                            ScriptManager.RegisterClientScriptBlock((Page)this, this.GetType(), "alertMessage", "alert('SE ELIMINO CON ÉXITO LA ACTIVIDAD.');", true);
+                            GvPCAdmin.DataBind();
+                            CargarDatosReporte();
+
+
+                        }
+                        else
+                        { //no entro
+                            ScriptManager.RegisterClientScriptBlock((Page)this, this.GetType(), "alertMessage", "alert('ERROR AL ELIMINAR LA ACTIVIDAD.');", true);
+
+                        }
+
+                    }
+
+
+                }
+        */
+
         protected void PageDropDownListAdmin_SelectedIndexChanged(object sender, EventArgs e)
         {
             {
                 GridViewRow pagerRow = GvPCAdmin.BottomPagerRow;
-                // Recupera el control DropDownList...
                 DropDownList pageList = (DropDownList)pagerRow.FindControl("PageDropDownListAdmin");
                 // Se Establece la propiedad PageIndex para visualizar la página seleccionada...
                 GvPCAdmin.PageIndex = pageList.SelectedIndex;
                 //Quita el mensaje de información si lo hubiera...
                 //lblInfo.Text = "";
+                CargarDatosReporte();
             }
         }
 
@@ -595,6 +1667,7 @@ namespace SIICOP_V1._2.VistasReportes
             {
                 textoValidacion += "</ul>";
                 validadottxt.Text = textoValidacion;
+
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "AbrirModalValidador", "AbrirModalValidador();", true);
 
             }
@@ -607,7 +1680,74 @@ namespace SIICOP_V1._2.VistasReportes
             }
         }
 
+
+
         protected void GvPCAdmin_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            try
+            {
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+                    object objProgramasID = DataBinder.Eval(e.Row.DataItem, "programasID");
+
+                    if (objProgramasID != null && objProgramasID != DBNull.Value)
+                    {
+                        int valor = Convert.ToInt32(objProgramasID);
+                        Image img = (Image)e.Row.FindControl("imgpato");
+
+                        if (img != null)
+                        {
+                            switch (valor)
+                            {
+                                case 7: img.ImageUrl = "~/Imagenes/PinesReporte/ConstrucionCultura.png"; break;
+                                case 8: img.ImageUrl = "~/Imagenes/PinesReporte/RedesVecinales.png"; break;
+                                case 9: img.ImageUrl = "~/Imagenes/PinesReporte/Escolar.png"; break;
+                                case 10: img.ImageUrl = "~/Imagenes/PinesReporte/ViolenciaGenero.png"; break;
+                                case 11: img.ImageUrl = "~/Imagenes/PinesReporte/EncuentroCiudadano.png"; break;
+                                case 12: img.ImageUrl = "~/Imagenes/PinesReporte/DeporteYcultura.png"; break;
+                                case 13: img.ImageUrl = "~/Imagenes/PinesReporte/Empresarial.png"; break;
+                                case 14: img.ImageUrl = "~/Imagenes/PinesReporte/RedesVerPorLaPaz.png"; break;
+                            }
+                        }
+                    }
+
+                   
+                    object objFotos = DataBinder.Eval(e.Row.DataItem, "fotos");
+                    if (objFotos != null && objFotos != DBNull.Value)
+                    {
+                        int valorft = Convert.ToInt32(objFotos);
+                        Image imgft = (Image)e.Row.FindControl("imgfoto");
+
+                        if (imgft != null)
+                        {
+                            if (valorft == 1) imgft.ImageUrl = "~/Imagenes/PinesReporte/check.png";
+                            else if (valorft == 0) imgft.ImageUrl = "~/Imagenes/PinesReporte/cross.png";
+                        }
+                    }
+           bool canView = User.IsInRole("SysAdmin") || User.IsInRole("Administrador") || User.IsInRole("Visualizador");
+                    e.Row.Cells[15].Visible = canView;
+
+                   
+                    string cellText = e.Row.Cells[5].Text;
+                    if (cellText == "Sector Empresarial" ||
+                        cellText == "Sector Escolar" ||
+                        cellText == "Violencia contra la Mujer" ||
+                        cellText == "Departamento de Redes Vecinales" ||
+                        cellText == "Departamento de Deporte y Cultura" ||
+                        cellText == "Inclusión de personas en situación de vunerabilidad")
+                    {
+                        e.Row.Cells[5].Text = "Conurbación Xalapa";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Avoid leaving this catch block entirely empty.
+                // It hides other errors making them impossible to debug.
+                // System.Diagnostics.Debug.WriteLine("Error in RowDataBound: " + ex.Message);
+            }
+        }
+      /*  protected void GvPCAdmin_RowDataBound(object sender, GridViewRowEventArgs e)
         {
 
 
@@ -615,15 +1755,9 @@ namespace SIICOP_V1._2.VistasReportes
             {
                 if (e.Row.RowType == DataControlRowType.DataRow)
                 {
-
-
                     int valor;
                     valor = (int)DataBinder.Eval(e.Row.DataItem, "programasID");
                     Image img = (Image)e.Row.FindControl("imgpato");
-
-
-
-
                     if (valor == 7)
                     {
                         img.ImageUrl = "~/Imagenes/PinesReporte/ConstrucionCultura.png";
@@ -702,7 +1836,7 @@ namespace SIICOP_V1._2.VistasReportes
 
             }
         }
-
+     */
 
         #region****************METODO EXPORTACIÓN DE EXCEL CEDULAS
 
@@ -763,8 +1897,6 @@ namespace SIICOP_V1._2.VistasReportes
             Response.AddHeader("Content-disposition", "attachment;filename=T_Avance_de_indicadores_DVI.xlsx" + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Millisecond.ToString() + ".xlsx");
             Response.WriteFile(ArchivoPath);
             Response.Flush();
-
-
         }
 
 
@@ -1100,7 +2232,7 @@ namespace SIICOP_V1._2.VistasReportes
 
         protected void GvPCAdmin_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.Header)
+          if (e.Row.RowType == DataControlRowType.Header)
             {
                 foreach (TableCell tc in e.Row.Cells)
                 {
@@ -1109,17 +2241,18 @@ namespace SIICOP_V1._2.VistasReportes
                         LinkButton lb = (LinkButton)tc.Controls[0];
                         if (lb != null)
                         {
-                            Image icon = new Image();
-                            icon.ImageUrl = "~/Imagenes/sort-" + (GvPCAdmin.SortDirection == SortDirection.Ascending ? "asc" : "desc") + ".png";
-                            if (GvPCAdmin.SortExpression == lb.CommandArgument)
-                            {
-                                tc.Controls.Add(new LiteralControl(" "));
-                                tc.Controls.Add(icon);
-                            }
+                             Image icon = new Image();
+                              icon.ImageUrl = "~/Imagenes/sort-" + (GvPCAdmin.SortDirection == SortDirection.Ascending ? "asc" : "desc") + ".png";
+                              if (GvPCAdmin.SortExpression == lb.CommandArgument)
+                              {
+                                  tc.Controls.Add(new LiteralControl(" "));
+                                  tc.Controls.Add(icon);
+                              }
                         }
                     }
                 }
             }
+           
         }
 
 
@@ -1166,6 +2299,32 @@ namespace SIICOP_V1._2.VistasReportes
 
         }
 
+
+        private void CargarEje()
+        {
+            try
+            {
+                var repo = new UbicacionRepository();
+
+                ddlEjeAtencion.DataSource = repo.ObtenerCatalogoEjes();
+                ddlEjeAtencion.DataTextField = "Eje";
+                ddlEjeAtencion.DataValueField = "EjeId";
+                ddlEjeAtencion.DataBind();
+
+                ddlEjeAtencion.Items.Insert(0, new ListItem("-- Selecciona --", "0"));
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+
+
+
+
+        }
+
+
         private void CargarMunicipiosPorZona(int idZona)
         {
             try
@@ -1184,8 +2343,6 @@ namespace SIICOP_V1._2.VistasReportes
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }
         }
-
-
 
 
         protected void CargarDatosReporte()
@@ -1251,7 +2408,71 @@ namespace SIICOP_V1._2.VistasReportes
                 throw;
             }
         }
+        /*
+        protected void CargarDatosReporte()
+        {
+            try
+            {
+                GvPCAdmin.DataSource = null;
+                GvPCAdmin.DataBind();
 
+                DateTime? fechaInicial = null;
+                DateTime? fechaFinal = null;
+
+                if (!string.IsNullOrEmpty(txtFInicialC.Text))
+                {
+                    if (DateTime.TryParse(txtFInicialC.Text, out DateTime fecha))
+                    {
+                        fechaInicial = fecha;
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(txtfechafin.Text))
+                {
+                    if (DateTime.TryParse(txtfechafin.Text, out DateTime fechaf))
+                    {
+                        fechaFinal = fechaf;
+                    }
+
+                }
+
+                int? tiprograma = null;
+                if (ddlProgramas.SelectedValue != "0")
+                {
+                    tiprograma = ddlProgramas.SelectedValue == "0" ? 0 : Convert.ToInt32(this.ddlProgramas.SelectedValue);
+                }
+
+                int? zona = null;
+
+                if (ddlZona.SelectedValue != "0")
+                {
+                    zona = ddlZona.SelectedValue == "0" ? 0 : Convert.ToInt32(this.ddlZona.SelectedValue);
+                }
+
+                string institucion = null;
+                if (!string.IsNullOrEmpty(txtInstitucionesParticipantes.Text))
+                {
+                    institucion = txtInstitucionesParticipantes.Text;
+                }
+
+
+
+                var query = new ReporteRepository();
+                var datos = query.ObtenerDatosReporte(fechaInicial, fechaFinal, null, zona, tiprograma, null, null, institucion);
+
+                GvPCAdmin.DataSource = datos;
+                GvPCAdmin.DataBind();
+
+                lblTotalRegistros.Text = $"Total de registros: {datos.Count}";
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        */
 
         #region ## FORMATO DE EXPORTACION DE IMAGENES A ZIP
         public void ExportaImagenesZip()
@@ -1482,6 +2703,12 @@ namespace SIICOP_V1._2.VistasReportes
                 //lblError.Visible = true;
             }
 
+        }
+
+        protected void GvPCAdmin_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GvPCAdmin.PageIndex = e.NewPageIndex;
+            CargarDatosReporte(); 
         }
 
         protected void ddlZona_SelectedIndexChanged(object sender, EventArgs e)

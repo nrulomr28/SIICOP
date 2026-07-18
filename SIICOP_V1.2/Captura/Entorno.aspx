@@ -4,13 +4,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
     <br />
-
     <div class="container text-center">
 
         <h2>Entorno</h2>
 
         <div class="d-flex justify-content-center mt-5">
-
             <asp:Button
                 ID="btnEscolar"
                 runat="server"

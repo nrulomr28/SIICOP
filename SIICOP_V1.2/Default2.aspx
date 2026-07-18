@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Bienvenido" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default2.aspx.cs" Inherits="SIICOP_V1._2._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server" >
-    <script src="<%= ResolveUrl("~/Scripts/sweetalert2.all.js") %>" type="text/javascript"></script>
+    <script src="<%= ResolveUrl("~/Scripts/sweetalert2.all.min.js") %>" type="text/javascript"></script>
     <link href="Content/BotonoesCargaTrabajo.css" rel="stylesheet" />
         <script type="text/javascript">
             function error() {

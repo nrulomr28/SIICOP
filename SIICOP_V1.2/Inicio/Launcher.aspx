@@ -1,21 +1,16 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Launcher.aspx.cs" Inherits="SIICOP_V1._2.Inicio.Launcher" %>
-
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Launcher.aspx.cs" Inherits="SIICOP_V1._2.Inicio.Launcher" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
       rel="stylesheet" />
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+
     <style runat="server" id="styleLauncher">
 
 .dashboard-card
 {
     border-radius: 18px;
-    min-height: 260px;
+    min-height: 260px; 
     transition: all .25s ease;
     cursor: pointer;
     border: none;
@@ -64,11 +59,9 @@
 }
 
     </style>
-</head>
-<body>
-    <form id="form1" runat="server">
+ 
        <!-- HERO -->
-<div class="container-fluid py-5 text-center"
+<%--<div class="container-fluid py-5 text-center"
      style="background: linear-gradient(135deg,#611232,#7a1838); color:white;">
 
     <img src="<%= ResolveUrl("~/Imagenes/SIICOP_2.png") %>"
@@ -87,7 +80,7 @@
         Usuario: <%: User.Identity.Name %>
     </div>
 
-</div>
+</div>--%>
 
 <!-- CONTENIDO -->
 <div class="container py-5">
@@ -147,7 +140,5 @@
     </div>
 
 </div>
+</asp:Content>
 
-    </form>
-</body>
-</html>

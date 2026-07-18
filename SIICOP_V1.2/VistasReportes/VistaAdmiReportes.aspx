@@ -3,8 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
     <link href="../Content/styleFormularios.css" rel="stylesheet" />
-
-
     <div class="container" style="padding-top: 3%">
         <div class="row">
             <div id="sidebar">
@@ -13,7 +11,6 @@
                         <div class="user-head">
                             <h1>VISTA DE RESÚMENES</h1>
                             <div class="hr-center"></div>
-
                         </div>
                         <div class="link-me">
                         </div>
@@ -22,8 +19,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="container-fluid">
         <div class="col-md-12">
             <div class="row">
@@ -61,20 +56,13 @@
             </div>
         </div>
     </div>
-
-
-
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-
-
             <div class="container-fluid">
                 <div class="well" style="background-color: white">
-
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group has-feedback">
-
                                 <asp:Label ID="lblFInicialC" runat="server" Text="Fecha Inicial:" CssClass="control-label"></asp:Label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
@@ -83,7 +71,6 @@
                                     <asp:TextBox ID="txtFInicialC" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
                                     <ajaxToolkit:CalendarExtender ID="ceFIC" runat="server" TargetControlID="txtFInicialC" Format="dd/MM/yyyy"></ajaxToolkit:CalendarExtender>
                                 </div>
-
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -130,11 +117,17 @@
                             </div>
                         </div>
 
+                         <div class="col-md-2">
+                             <asp:Label ID="Label8" runat="server" Text="Eje atención:" CssClass="control-label"></asp:Label>
+                             <div class="form-group">
+                                 <asp:DropDownList runat="server" ID="ddlEjeAtencion" CssClass="form-control"></asp:DropDownList>
+                             </div>
+                         </div>
+
                     </div>
 
 
                     <div class="row">
-
                         <div class="col-md-4">
                             <asp:Label ID="Label7" runat="server" Text="Instituciones participantes:" CssClass="control-label"></asp:Label>
                             <div class="form-group">
@@ -142,29 +135,22 @@
                             </div>
                         </div>
                     </div>
-
-
                     <div class="row">
                         <div id="RESPONSA" runat="server">
-
                             <div class="col-md-1">
-
                                 <asp:LinkButton ID="btnBuscar" runat="server" CssClass="btn btn-info" Text="Buscar" OnClick="btnBuscar_Click"><span class="glyphicon glyphicon-search"></span>&nbsp;Buscar</asp:LinkButton>
-
+                                <asp:LinkButton ID="lkbtnexcel" runat="server" Style="font-size: 1.5em" Text="excel" title="Exportar" OnClick="lkbtnexcel_Click">Actividades&nbsp;<span class="far fa-file-excel" style="color:green"></span></asp:LinkButton>
+                               
                             </div>
-
                             <div class="col-md-2">
-
                                 <div class="dropdown">
                                     <a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><b>Descargar</b> <b class="caret"></b>&nbsp;<span class="fa fa-download" aria-hidden="true"></span></a>
                                     <ul class="dropdown-menu" style="font-size: 11px;">
                                         <li runat="server">
-                                            <asp:LinkButton ID="lkbtnexcel" runat="server" Style="font-size: 1.5em" Text="excel" title="Exportar" OnClick="lkbtnexcel_Click">Actividades&nbsp;<span class="far fa-file-excel" style="color:green"></span></asp:LinkButton>
-                                        </li>
+                                         </li>
                                         <li runat="server">
                                             <asp:LinkButton ID="lnBtnExpCedula" runat="server" Style="font-size: 1.5em" Text="excel" title="Exportar" OnClick="lnBtnExpCedula_Click1">Cedulas &nbsp;<span style="color:blue" class="fas fa-chart-line"></span></asp:LinkButton>
                                         </li>
-
                                         <li runat="server">
                                             <asp:LinkButton ID="lnkbtnZip" runat="server" Style="font-size: 1.5em" Text="Foto" title="Exportar" OnClick="lnkbtnZip_Click">Imagenes &nbsp;<span style="color:RED" class="fa fa-file-archive"></span></asp:LinkButton>
                                         </li>
@@ -186,13 +172,13 @@
                         </div>
                     </div>
                     <div class="row">
-
                         <asp:GridView ID="GvPCAdmin" runat="server" EmptyDataText="Sin Registros"
                             CssClass="table table-striped  table-bordered table-hover  table-sm table-responsive"
                             CellPadding="3" AllowPaging="True" PageSize="10"
                             AutoGenerateColumns="False" DataKeyNames="idResumenDiario,programasID"
                             OnDataBound="GvPCAdmin_DataBound"
                             OnRowCommand="GvPCAdmin_RowCommand"
+                            OnPageIndexChanging="GvPCAdmin_PageIndexChanging"
                             OnRowDataBound="GvPCAdmin_RowDataBound"
                             OnRowCreated="GvPCAdmin_RowCreated" AllowSorting="True">
                             <Columns>
@@ -260,27 +246,22 @@
                                     </div>
                                     <div class="col-lg-10" style="text-align: right;">
                                         <h3>
-                                            <asp:Label ID="CurrentPageLabelAdmin" runat="server" CssClass="label label-success" /></h3>
+                                            <asp:Label ID="CurrentPageLabelAdmin" runat="server" CssClass="label label-success" />
+                                        </h3>
                                     </div>
                                 </div>
                             </PagerTemplate>
                         </asp:GridView>
-
-
                     </div>
                 </div>
             </div>
-
         </ContentTemplate>
-
         <Triggers>
             <asp:PostBackTrigger ControlID="lkbtnexcel" />
-        </Triggers>
-
+            <asp:PostBackTrigger ControlID="lnBtnExpCedula" />
+            <asp:PostBackTrigger ControlID="lnkbtnZip" />
+        </Triggers> 
     </asp:UpdatePanel>
-
-
-
     <div class="modal fade bd-example-modal-lg" id="exampleModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" style="width: 100% !important" role="document">
             <div class="modal-content">
@@ -288,13 +269,13 @@
                     <h5 class="modal-title" id="exampleModalLabel">Ubicación geografica</h5>
                 </div>
                 <div class="modal-body">
-                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzKpx_jKJbeh1oiuY7p4pdfspnIcbmxco&callback=initMap" defer=""></script>
+                    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzKpx_jKJbeh1oiuY7p4pdfspnIcbmxco&callback=initMap"></script>
+                  <%--  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzKpx_jKJbeh1oiuY7p4pdfspnIcbmxco&callback=initMap" defer=""></script>--%>
                     <div id="map" style="width: 100%; height: 600px;"></div>
                     <script type="text/javascript">
                         var opcion = 0;
                         var map;
                         var markersArray = [];
-
                         function initMap() {
                             map = new google.maps.Map(document.getElementById('map'), {
                                 zoom: 6,
@@ -318,7 +299,6 @@
                         }
 
                         function MostrarPlanteles() {
-
                             var fechaInicial = document.getElementById('<%=txtFInicialC.ClientID %>').value;
                             var fechafinal = document.getElementById('<%=txtfechafin.ClientID %>').value;
                             var Tipoconsulta = 0;
@@ -584,19 +564,45 @@
 
 
     <script type="text/javascript">
-        function AbrirModalValidador() {
-            $('#exampleModalValidador').modal();
+ 
+            window.AbrirModalValidador = function () {
+                $('#exampleModalValidador').modal('show');
             return false;
-        }
-        function openModal() {
-            $('#exampleModal').modal();
-            return false;
-        }
+             };
 
-        function AbrirModalFotos() {
-            $('#myModalConsultariMG').modal();
+            window.openModal = function () {
+                $('#exampleModal').modal('show');
             return false;
-        }
+            };
 
+            window.AbrirModalFotos = function () {
+                $('#myModalConsultariMG').modal('show');
+            return false;
+             };
+ 
+
+            function ReactivarDropdown() {
+                $('.dropdown-toggle').off('click').on('click', function (e) {
+                    e.preventDefault();
+                    $(this).parent('.dropdown').toggleClass('open');
+                });
+
+                $(document).on('click', function (e) {
+                   if (!$(e.target).closest('.dropdown').length) {
+                   $('.dropdown').removeClass('open');
+                        }
+                    });
+                }
+
+       
+            $(document).ready(function () {
+                ReactivarDropdown();
+    });
+
+            var prm = Sys.WebForms.PageRequestManager.getInstance();
+            prm.add_endRequest(function () {
+                ReactivarDropdown();
+    });
     </script>
+
 </asp:Content>

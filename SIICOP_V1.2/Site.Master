@@ -3,18 +3,26 @@
     Inherits="SIICOP_V1._2.SiteMaster" %>
 <!DOCTYPE html>
 <html>
-<head runat="server">
+    <head runat="server">
     <title>SIICOP</title>
-   
-    <link href="Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="Content/Site.css" rel="stylesheet" />
-
+    <asp:PlaceHolder runat="server">
+    <link href="<%= ResolveUrl("~/Content/bootstrap.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%= ResolveUrl("~/Content/Site.css") %>" rel="stylesheet" type="text/css" />
+    <script src="<%= ResolveUrl("~/Scripts/sweetalert2.all.min.js") %>" type="text/javascript"></script>
+    </asp:PlaceHolder>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
 </head>
-
 <body>
 
 <form runat="server">
-
+ <asp:ScriptManager runat="server" ID="ScriptManagerGlobal">
+    <Scripts>
+       <asp:ScriptReference Name="jquery" />
+        <asp:ScriptReference Name="bootstrap" />
+    </Scripts>
+</asp:ScriptManager>
 <div class="d-flex flex-column min-vh-100">
 
     <header class="shadow-sm"
@@ -22,12 +30,9 @@
 
 
 <div class="container-fluid">
-
     <div class="d-flex justify-content-between align-items-center py-3">
-
         <!-- LOGO + TITULO -->
         <div class="d-flex align-items-center">
-
             <img src="<%= ResolveUrl("~/Imagenes/SIICOP_2.png") %>"
                  alt="SIICOP"
                  style="height:85px;" />
@@ -49,13 +54,10 @@
 
         <!-- USUARIO + ACCIONES -->
         <div class="text-end">
-
             <div class="text-white mb-2">
-
                 <small>
                     👤 <%: Context.User.Identity.Name %>
                 </small>
-
             </div>
 
             <a runat="server"
@@ -64,11 +66,11 @@
                 Inicio
             </a>
 
-            <a runat="server"
+           <%-- <a runat="server"
                href="~/TotalAccionesBeneficiados.aspx"
                class="btn btn-outline-light btn-sm me-1">
                 Pendiente...
-            </a>
+            </a>--%>
 
             <asp:LinkButton
                 ID="btnLogout"
@@ -95,7 +97,8 @@
 
             <asp:ContentPlaceHolder
                 ID="MainContent"
-                runat="server" />
+                runat="server" >
+            </asp:ContentPlaceHolder>
 
         </div>
 

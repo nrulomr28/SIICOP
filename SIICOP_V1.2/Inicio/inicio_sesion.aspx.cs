@@ -21,7 +21,42 @@ namespace SIICOP_V1._2.Inicio
         {
 
         }
-        protected void Login_Authenticate(
+
+        protected void Login_Authenticate(object sender, AuthenticateEventArgs e)
+        {
+            try
+            {
+                // 1. Limpiamos cualquier error previo
+                Login.FailureText = string.Empty;
+
+                // 2. Validación de credenciales
+                if (!Membership.ValidateUser(Login.UserName, Login.Password))
+                {
+                    e.Authenticated = false;
+                    // Asignamos el mensaje de error para el usuario
+                    Login.FailureText = "Usuario o contraseña incorrectos. Verifique sus datos e intente de nuevo.";
+                    return;
+                }
+
+                // 3. Autenticación exitosa
+                FormsAuthentication.SetAuthCookie(Login.UserName, true);
+                Response.Redirect("~/Inicio/Launcher.aspx");
+            }
+            catch (Exception ex)
+            {
+                e.Authenticated = false;
+
+                // 4. Manejo de excepciones (Errores de BD, red, etc.)
+                // En producción, muestra un mensaje amigable:
+                Login.FailureText = "Ocurrió un error en el servidor al intentar iniciar sesión. Intente más tarde.";
+
+                // Para depuración (DEBUG), puedes descomentar la siguiente línea para ver el error real en pantalla:
+                // Login.FailureText = "Error del sistema: " + ex.Message;
+
+                System.Diagnostics.Debug.WriteLine("Error crítico en Login: " + ex.Message);
+            }
+        }
+      /*  protected void Login_Authenticate(
     object sender,
     AuthenticateEventArgs e)
         {
@@ -77,6 +112,6 @@ namespace SIICOP_V1._2.Inicio
 
                 e.Authenticated = false;
             }
-        }
+        }*/
     }
 }

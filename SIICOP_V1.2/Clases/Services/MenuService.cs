@@ -31,6 +31,11 @@ namespace SIICOP_V1._2.Servicios
                 cards.AddRange(MenuCapEjeAtencion.Obtener());
             }
 
+            if (roles.Contains(RolesSistema.Administrador))
+            {
+                cards.AddRange(MenuSysAdmin.Obtener());
+            }
+
             return cards;
         }
     }

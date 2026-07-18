@@ -22,9 +22,7 @@ namespace SIICOP_V1._2.Datos.Repositorio
             {                
                 throw new Exception("Error al obtener municipios", ex);
             }
-
         }
-
 
         public List<TB_subprograma> ObtenerSubPrograma(int? programasId)
         {

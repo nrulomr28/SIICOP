@@ -150,6 +150,24 @@ namespace SIICOP_V1._2.VistasReportes
         protected global::System.Web.UI.WebControls.DropDownList ddlProgramas;
 
         /// <summary>
+        /// Control Label8.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label8;
+
+        /// <summary>
+        /// Control ddlEjeAtencion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlEjeAtencion;
+
+        /// <summary>
         /// Control Label7.
         /// </summary>
         /// <remarks>

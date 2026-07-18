@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Office2010.ExcelAc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -24,6 +25,58 @@ namespace SIICOP_V1._2.Datos.Repositorio
                 throw new Exception("Error al obtener zonas", ex);
             }
 
+        }
+        public List<Cat_Coordinador> ObtenerCoord()
+        {
+      
+            try
+            {
+                using (var ctx = new SIICOPEntities())
+                {
+                    return ctx.Cat_Coordinador.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                // aquí puedes loguear
+                throw new Exception("Error", ex);
+            }
+
+        }
+
+        public List<Cat_Ravi> ObtenerRavis()
+        {
+
+            try
+            {
+                using (var ctx = new SIICOPEntities())
+                {
+                    return ctx.Cat_Ravi.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                // aquí puedes loguear
+                throw new Exception("Error", ex);
+            }
+
+        }
+
+        public List<Cat_Eje> ObtenerCatalogoEjes()
+        {
+            try
+            {
+                using (var ctx = new SIICOPEntities())
+                {
+                    return ctx.Cat_Eje.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                // aquí puedes loguear
+                throw new Exception("Error al obtener zonas", ex);
+            }
+           
         }
 
         public List<Municipios> ObtenerMunicipiosByZona(int idZona)
@@ -93,7 +146,24 @@ namespace SIICOP_V1._2.Datos.Repositorio
                 throw new Exception("Error al obtener la prioridad del municipio", ex);
             }
         }
-
+      
+        public List<Municipios> ObtenerMunicipiosPrioridadTodos()
+        {
+            try
+            {
+                using (var ctx = new SIICOPEntities())
+                {
+                    return ctx.Municipios
+                              .Where(x => x.prioritario == true)
+                              .OrderBy(x => x.MunicipioID)
+                              .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error", ex);
+            }
+        }
 
         public bool? ObtenerPoblacionIndigena(int municipioId)
         {

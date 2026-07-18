@@ -21,6 +21,23 @@
           <Property Name="idarea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="area_nombre" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SIICOP.dbo.Cat_Coordinador' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Cat_Coordinador">
+          <Key>
+            <PropertyRef Name="CoordinadorId" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Paterno" />
+            <PropertyRef Name="Materno" />
+            <PropertyRef Name="Activo" />
+          </Key>
+          <Property Name="CoordinadorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Paterno" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Materno" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="ZonaId" Type="int" />
+        </EntityType>
         <EntityType Name="Cat_Delegacion">
           <Key>
             <PropertyRef Name="DelegacionID" />
@@ -51,6 +68,15 @@
           </Key>
           <Property Name="EntornoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Entorno" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SIICOP.dbo.Cat_Ravi' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Cat_Ravi">
+          <Key>
+            <PropertyRef Name="RaviId" />
+          </Key>
+          <Property Name="RaviId" Type="int" Nullable="false" />
+          <Property Name="Num" Type="int" />
         </EntityType>
         <EntityType Name="Cat_Region">
           <Key>
@@ -758,6 +784,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_DatosReportesHistorico' no tie
           <Key>
             <PropertyRef Name="idResumenDiario" />
             <PropertyRef Name="Personalid" />
+            <PropertyRef Name="Eje" />
           </Key>
           <Property Name="idResumenDiario" Type="uniqueidentifier" Nullable="false" />
           <Property Name="fecha" Type="date" />
@@ -789,6 +816,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_DatosReportesHistorico' no tie
           <Property Name="MUNICIPIO" Type="nvarchar" MaxLength="255" />
           <Property Name="MunicipioID" Type="int" />
           <Property Name="calveMuni" Type="nvarchar" MaxLength="255" />
+          <Property Name="Eje" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="Localidad" Type="nvarchar" MaxLength="255" />
           <Property Name="LocalidadID" Type="int" />
           <Property Name="clavelocali" Type="nvarchar" MaxLength="255" />
@@ -1607,6 +1635,22 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <EntitySet Name="tcProblematicaMunicipal" EntityType="Self.tcProblematicaMunicipal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tcProblematicaSeguridad" EntityType="Self.tcProblematicaSeguridad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tcProblematicaVialidad" EntityType="Self.tcProblematicaVialidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cat_Coordinador" EntityType="Self.Cat_Coordinador" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Cat_Coordinador].[CoordinadorId] AS [CoordinadorId], 
+    [Cat_Coordinador].[Nombre] AS [Nombre], 
+    [Cat_Coordinador].[Paterno] AS [Paterno], 
+    [Cat_Coordinador].[Materno] AS [Materno], 
+    [Cat_Coordinador].[Activo] AS [Activo], 
+    [Cat_Coordinador].[ZonaId] AS [ZonaId]
+    FROM [dbo].[Cat_Coordinador] AS [Cat_Coordinador]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Cat_Ravi" EntityType="Self.Cat_Ravi" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Cat_Ravi].[RaviId] AS [RaviId], 
+    [Cat_Ravi].[Num] AS [Num]
+    FROM [dbo].[Cat_Ravi] AS [Cat_Ravi]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vw_Indicadores_Acciones" EntityType="Self.vw_Indicadores_Acciones" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vw_Indicadores_Acciones].[programasID] AS [programasID], 
@@ -1706,6 +1750,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
     [Wv_DatosReportesHistorico].[MUNICIPIO] AS [MUNICIPIO], 
     [Wv_DatosReportesHistorico].[MunicipioID] AS [MunicipioID], 
     [Wv_DatosReportesHistorico].[calveMuni] AS [calveMuni], 
+    [Wv_DatosReportesHistorico].[Eje] AS [Eje], 
     [Wv_DatosReportesHistorico].[Localidad] AS [Localidad], 
     [Wv_DatosReportesHistorico].[LocalidadID] AS [LocalidadID], 
     [Wv_DatosReportesHistorico].[clavelocali] AS [clavelocali], 
@@ -2038,7 +2083,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
             <End Role="tc_PoliciaenTucolonia" EntitySet="tc_PoliciaenTucolonia" />
             <End Role="tcProblematicaVialidad" EntitySet="tcProblematicaVialidad" />
           </AssociationSet>
-          </EntityContainer>
+        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -2691,6 +2736,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <Key>
             <PropertyRef Name="idResumenDiario" />
             <PropertyRef Name="Personalid" />
+            <PropertyRef Name="Eje" />
           </Key>
           <Property Name="idResumenDiario" Type="Guid" Nullable="false" />
           <Property Name="fecha" Type="DateTime" Precision="0" />
@@ -2745,6 +2791,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <Property Name="idzona" Type="Int32" />
           <Property Name="zona" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="inst_participantes" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Eje" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="WV_Datosrepote_app">
           <Key>
@@ -3491,6 +3538,8 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
             <End Role="TB_subprograma" EntitySet="TB_subprograma" />
             <End Role="tb_Reporte_Diario" EntitySet="tb_Reporte_Diario" />
           </AssociationSet>
+          <EntitySet Name="Cat_Coordinador" EntityType="SIICOPModel.Cat_Coordinador" />
+          <EntitySet Name="Cat_Ravi" EntityType="SIICOPModel.Cat_Ravi" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -3868,6 +3917,28 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Cat_Coordinador">
+          <Key>
+            <PropertyRef Name="CoordinadorId" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Paterno" />
+            <PropertyRef Name="Materno" />
+            <PropertyRef Name="Activo" />
+          </Key>
+          <Property Name="CoordinadorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Paterno" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Materno" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="ZonaId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Cat_Ravi">
+          <Key>
+            <PropertyRef Name="RaviId" />
+          </Key>
+          <Property Name="RaviId" Type="Int32" Nullable="false" />
+          <Property Name="Num" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4511,6 +4582,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <EntitySetMapping Name="Wv_DatosReportesHistorico">
             <EntityTypeMapping TypeName="SIICOPModel.Wv_DatosReportesHistorico">
               <MappingFragment StoreEntitySet="Wv_DatosReportesHistorico">
+                <ScalarProperty Name="Eje" ColumnName="Eje" />
                 <ScalarProperty Name="inst_participantes" ColumnName="inst_participantes" />
                 <ScalarProperty Name="zona" ColumnName="zona" />
                 <ScalarProperty Name="idzona" ColumnName="idzona" />
@@ -4993,6 +5065,26 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
                 <ScalarProperty Name="personal_atendio_actividad" ColumnName="personal_atendio_actividad" />
                 <ScalarProperty Name="descripcion_actividad" ColumnName="descripcion_actividad" />
                 <ScalarProperty Name="idResumenDiario" ColumnName="idResumenDiario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_Coordinador">
+            <EntityTypeMapping TypeName="SIICOPModel.Cat_Coordinador">
+              <MappingFragment StoreEntitySet="Cat_Coordinador">
+                <ScalarProperty Name="ZonaId" ColumnName="ZonaId" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Materno" ColumnName="Materno" />
+                <ScalarProperty Name="Paterno" ColumnName="Paterno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="CoordinadorId" ColumnName="CoordinadorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cat_Ravi">
+            <EntityTypeMapping TypeName="SIICOPModel.Cat_Ravi">
+              <MappingFragment StoreEntitySet="Cat_Ravi">
+                <ScalarProperty Name="Num" ColumnName="Num" />
+                <ScalarProperty Name="RaviId" ColumnName="RaviId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

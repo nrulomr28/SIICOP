@@ -67,5 +67,6 @@ namespace SIICOP_V1._2.Datos
         public Nullable<int> idzona { get; set; }
         public string zona { get; set; }
         public string inst_participantes { get; set; }
+        public string Eje { get; set; }
     }
 }

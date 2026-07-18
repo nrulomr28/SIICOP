@@ -15,15 +15,6 @@ namespace SIICOP_V1._2.SysAdmin
     {
 
         /// <summary>
-        /// Control ScriptManager1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
-
-        /// <summary>
         /// Control lnkbtnAgregarUser.
         /// </summary>
         /// <remarks>
@@ -31,6 +22,15 @@ namespace SIICOP_V1._2.SysAdmin
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkbtnAgregarUser;
+
+        /// <summary>
+        /// Control UpdatePanel1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
         /// Control gvuser.
@@ -42,6 +42,15 @@ namespace SIICOP_V1._2.SysAdmin
         protected global::System.Web.UI.WebControls.GridView gvuser;
 
         /// <summary>
+        /// Control updModalPassword.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updModalPassword;
+
+        /// <summary>
         /// Control txtLogin.
         /// </summary>
         /// <remarks>
@@ -49,6 +58,15 @@ namespace SIICOP_V1._2.SysAdmin
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtLogin;
+
+        /// <summary>
+        /// Control hfUsuarioSeleccionado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfUsuarioSeleccionado;
 
         /// <summary>
         /// Control txtpassword.
@@ -69,6 +87,15 @@ namespace SIICOP_V1._2.SysAdmin
         protected global::System.Web.UI.WebControls.LinkButton lkbGuardarContraseña;
 
         /// <summary>
+        /// Control updModaleditaruserm.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updModaleditaruserm;
+
+        /// <summary>
         /// Control txtNombreEdit.
         /// </summary>
         /// <remarks>
@@ -76,6 +103,15 @@ namespace SIICOP_V1._2.SysAdmin
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNombreEdit;
+
+        /// <summary>
+        /// Control hfNombreUser.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfNombreUser;
 
         /// <summary>
         /// Control txtApaterno.
@@ -87,6 +123,15 @@ namespace SIICOP_V1._2.SysAdmin
         protected global::System.Web.UI.WebControls.TextBox txtApaterno;
 
         /// <summary>
+        /// Control hfApaterno.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfApaterno;
+
+        /// <summary>
         /// Control txtAmaterno.
         /// </summary>
         /// <remarks>
@@ -94,6 +139,33 @@ namespace SIICOP_V1._2.SysAdmin
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAmaterno;
+
+        /// <summary>
+        /// Control hfAMaterno.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfAMaterno;
+
+        /// <summary>
+        /// Control ddlArea.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlArea;
+
+        /// <summary>
+        /// Control ddldepen_edit.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddldepen_edit;
 
         /// <summary>
         /// Control lnkbEditUser.
@@ -132,6 +204,24 @@ namespace SIICOP_V1._2.SysAdmin
         protected global::System.Web.UI.WebControls.TextBox txtapellidomaternoNuevo;
 
         /// <summary>
+        /// Control ddlAreaNuevo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAreaNuevo;
+
+        /// <summary>
+        /// Control ddldepndencia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddldepndencia;
+
+        /// <summary>
         /// Control txtUsuarioLogin.
         /// </summary>
         /// <remarks>
@@ -159,12 +249,12 @@ namespace SIICOP_V1._2.SysAdmin
         protected global::System.Web.UI.WebControls.TextBox txtConfirmaPassword;
 
         /// <summary>
-        /// Control lnkCrearUser.
+        /// Control LinkButton1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkCrearUser;
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
     }
 }

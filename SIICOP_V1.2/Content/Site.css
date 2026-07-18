@@ -92,3 +92,41 @@ textarea {
     .card:hover {
         box-shadow: 0 1rem 3rem rgba(0,0,0,.10);
     }
+    /* Espaciado para los paneles de Bootstrap */
+    .tab-content {
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-top: none;
+        background-color: #fff;
+        border-radius: 0 0 4px 4px;
+    }
+
+    /* Mejora la apariencia de los links de las pestañas */
+    .nav-tabs > li > a {
+        color: #555;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-bottom-color: transparent;
+    }
+
+    /* Estado activo de la pestaña */
+    .nav-tabs > li.active > a,
+    .nav-tabs > li.active > a:focus,
+    .nav-tabs > li.active > a:hover {
+        color: #d9534f; /* Un toque de color de tu marca */
+        cursor: default;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-bottom-color: transparent;
+        font-weight: bold;
+    }
+
+    /* Obligamos al fondo oscuro a quedarse atrás */
+    .modal-backdrop {
+        z-index: 1040 !important;
+    }
+
+    /* Obligamos a la ventana del modal a estar siempre al frente */
+    .modal {
+        z-index: 1050 !important;
+    }

@@ -40,13 +40,13 @@ namespace SIICOP_V1._2.MenuProgramas
 
         }
 
-        protected void lnkbtnDGTVS_Click(object sender, EventArgs e)
+       /* protected void lnkbtnDGTVS_Click(object sender, EventArgs e)
         {
             this.Session["AccionReporte"] = Ficha_idetificacion_diaria.AccionReporte.Creacion;
             this.Session["idPrograma_Accion"] = 21;
             this.Session["idReporte_Accion"] = 1;
             this.Response.Redirect("~/Captura/DGTSV/Ficha_idetificacion_diaria.aspx");
-        }
+        }*/
 
         protected void Imagen_Click(object sender, CommandEventArgs e)
         {
@@ -63,18 +63,23 @@ namespace SIICOP_V1._2.MenuProgramas
 
                 return;
             }
-            if (opcion == "DGPVI")
+            else
             {
-                Session["ImagenSeleccionada"] = true;
-                Session["programasID"] = null;
-
-                Response.Redirect(
-                    "~/MenuProgramas/Principal.aspx",
-                    true);
-
-                return;
+                Session["ImagenSeleccionada"] = null;
+                Response.Redirect("~/MenuProgramas/SeleccionPrograma.aspx", true);
             }
-            
+            /*   if (opcion == "DGPVI")
+               {
+                   Session["ImagenSeleccionada"] = true;
+                   Session["programasID"] = null;
+
+                   Response.Redirect(
+                       "~/MenuProgramas/Principal.aspx",
+                       true);
+
+                   return;
+               }*/
+
             Session["ImagenSeleccionada"] = null;
 
             Response.Redirect(

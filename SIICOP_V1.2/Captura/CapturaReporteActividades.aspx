@@ -1,55 +1,35 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteV2.Master" AutoEventWireup="true" CodeBehind="CapturaReporteActividades.aspx.cs" Inherits="SIICOP_V1._2.Captura.CapturaReporteActividades" %>
-
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CapturaReporteActividades.aspx.cs" Inherits="SIICOP_V1._2.Captura.CapturaReporteActividades" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <script src="../Scripts/sweetalert2.all.min.js"></script>
-    <script src="../Scripts/Alert_Gral.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.2/js/locales/es.min.js"></script>
-    
-    <link href="../Content/styleFormularios.css" rel="stylesheet" />
+   <%-- <script src="../Scripts/Alert_Gral.js"></script>     --%>
+    <link href="~/Content/styleFormularios.css" rel="stylesheet" />
     <asp:HiddenField ID="HiddenField1cn" runat="server" Value="0" />
-    <div class="container-fluid" id="main" style="padding-top: 3%">
-        
+
+    <div class="container-fluid" id="main" style="padding-top: 3%">        
         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
             <div id="sidebar">
                 <div class="sosmed">
                     <div class="panel panel-default">
-
-    <div class="panel-body">
-
-        <div class="row">
-
-            <div class="col-sm-1 text-center">
-
-                <img src="../Imagenes/data-entry.png"
-                     style="width:48px;height:48px;" />
-
-            </div>
-
-            <div class="col-sm-11">
-
-                <h3 style="margin-top:0;">
-                    REPORTE DE ACTIVIDADES
-                </h3>
-
-                <asp:Label ID="lblPrograma"
-                    runat="server"
-                    CssClass="label label-warning">
-                </asp:Label>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-1 text-center">
+                                        <img src="../Imagenes/data-entry.png"
+                                             style="width:48px;height:48px;" />
+                                    </div>
+                                    <div class="col-sm-11">
+                                        <h3 style="margin-top:0;">
+                                            REPORTE DE ACTIVIDADES
+                                        </h3>
+                                        <asp:Label ID="lblPrograma"
+                                            runat="server"
+                                            CssClass="label label-warning">
+                                        </asp:Label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>
-
-
-
 
         <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
             <div id="content">
@@ -76,7 +56,6 @@
 
                                             <div class="row gy-3 gx-4">
                                                 <!-- gy agrega espacio vertical, gx horizontal -->
-
                                                 <!-- Responsable -->
                                                 <div class="col-md-5">
                                                     <label class="control-label">Responsable</label>
@@ -109,38 +88,29 @@
                                                         </ContentTemplate>
                                                     </asp:UpdatePanel>
                                                 </div>
-
                                             </div>
 
                                             <div id="PanelCoordinacion" runat="server">
-
                                                 <div class="row gy-3 gx-4">
-
-
                                                     <div class="col-md-4">
                                                         <label class="control-label">Coordinador</label>
-                                                        <asp:TextBox ID="txtCoordinador" MaxLength="200" CssClass="form-control" runat="server"></asp:TextBox>
-                                                    </div>
-
-
+                                                         <asp:DropDownList runat="server" ID="txtCoordinador" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="ddlZona_SelectedIndexChanged">
+                                                          </asp:DropDownList>
+                                            <%-- <asp:TextBox ID="txtCoordinador" MaxLength="200" CssClass="form-control" runat="server"></asp:TextBox>  --%>
+                                                  </div>
                                                     <div class="col-md-4">
                                                         <label class="control-label">Región</label>
                                                         <asp:DropDownList runat="server" ID="ddlZona" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="ddlZona_SelectedIndexChanged">
                                                         </asp:DropDownList>
                                                     </div>
-
-
-
                                                     <div class="col-md-4">
                                                         <label class="control-label">Región estrategia</label>
                                                         <asp:DropDownList runat="server" ID="ddlCoordinacion" CssClass="form-control">
                                                         </asp:DropDownList>
                                                     </div>
-
-
                                                 </div>
-
                                             </div>
+
 
                                         </div>
 
@@ -269,8 +239,8 @@
 
                                                     infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
                                                     infowindow.open(map, marker);
-                                                    
-                                                    $("[id*='" + 'txtdireccomple' + "']").removeAttr('disabled');                                                    
+
+                                                    $("[id*='" + 'txtdireccomple' + "']").removeAttr('disabled');
 
                                                     var array = dir.split(',');
                                                     document.getElementById('route').value = array[0];
@@ -804,61 +774,8 @@
                                                         </div>
 
                                                         <div class="col-md-2">
-                                                            <label for="txtNoCasosRavi">No. casos RAVI</label>
+                                                            <label for="txtNoCasosRavi">No. casos RAVI</label>                                                     
                                                             <asp:DropDownList runat="server" ID="txtNoCasosRavi" CssClass="form-control" AutoPostBack="true">
-                                                                <asp:ListItem Value="">--Seleccione--</asp:ListItem>
-                                                                <asp:ListItem Value="0">0</asp:ListItem>
-                                                                <asp:ListItem Value="1">1</asp:ListItem>
-                                                                <asp:ListItem Value="2">2</asp:ListItem>
-                                                                <asp:ListItem Value="3">3</asp:ListItem>
-                                                                <asp:ListItem Value="4">4</asp:ListItem>
-                                                                <asp:ListItem Value="5">5</asp:ListItem>
-                                                                <asp:ListItem Value="6">6</asp:ListItem>
-                                                                <asp:ListItem Value="7">7</asp:ListItem>
-                                                                <asp:ListItem Value="8">8</asp:ListItem>
-                                                                <asp:ListItem Value="9">9</asp:ListItem>
-                                                                <asp:ListItem Value="10">10</asp:ListItem>
-                                                                <asp:ListItem Value="11">11</asp:ListItem>
-                                                                <asp:ListItem Value="12">12</asp:ListItem>
-                                                                <asp:ListItem Value="13">13</asp:ListItem>
-                                                                <asp:ListItem Value="14">14</asp:ListItem>
-                                                                <asp:ListItem Value="15">15</asp:ListItem>
-                                                                <asp:ListItem Value="16">16</asp:ListItem>
-                                                                <asp:ListItem Value="17">17</asp:ListItem>
-                                                                <asp:ListItem Value="18">18</asp:ListItem>
-                                                                <asp:ListItem Value="19">19</asp:ListItem>
-                                                                <asp:ListItem Value="20">20</asp:ListItem>
-                                                                <asp:ListItem Value="21">21</asp:ListItem>
-                                                                <asp:ListItem Value="22">22</asp:ListItem>
-                                                                <asp:ListItem Value="23">23</asp:ListItem>
-                                                                <asp:ListItem Value="24">24</asp:ListItem>
-                                                                <asp:ListItem Value="25">25</asp:ListItem>
-                                                                <asp:ListItem Value="26">26</asp:ListItem>
-                                                                <asp:ListItem Value="27">27</asp:ListItem>
-                                                                <asp:ListItem Value="28">28</asp:ListItem>
-                                                                <asp:ListItem Value="29">29</asp:ListItem>
-                                                                <asp:ListItem Value="30">30</asp:ListItem>
-                                                                <asp:ListItem Value="31">31</asp:ListItem>
-                                                                <asp:ListItem Value="32">32</asp:ListItem>
-                                                                <asp:ListItem Value="33">33</asp:ListItem>
-                                                                <asp:ListItem Value="34">34</asp:ListItem>
-                                                                <asp:ListItem Value="35">35</asp:ListItem>
-                                                                <asp:ListItem Value="36">36</asp:ListItem>
-                                                                <asp:ListItem Value="37">37</asp:ListItem>
-                                                                <asp:ListItem Value="38">38</asp:ListItem>
-                                                                <asp:ListItem Value="39">39</asp:ListItem>
-                                                                <asp:ListItem Value="40">40</asp:ListItem>
-                                                                <asp:ListItem Value="41">41</asp:ListItem>
-                                                                <asp:ListItem Value="42">42</asp:ListItem>
-                                                                <asp:ListItem Value="43">43</asp:ListItem>
-                                                                <asp:ListItem Value="44">44</asp:ListItem>
-                                                                <asp:ListItem Value="45">45</asp:ListItem>
-                                                                <asp:ListItem Value="46">46</asp:ListItem>
-                                                                <asp:ListItem Value="47">47</asp:ListItem>
-                                                                <asp:ListItem Value="48">48</asp:ListItem>
-                                                                <asp:ListItem Value="49">49</asp:ListItem>
-                                                                <asp:ListItem Value="50">50</asp:ListItem>
-
                                                             </asp:DropDownList>
                                                         </div>
 
@@ -881,126 +798,19 @@
 
                                                             <label for="ddlNoaccionesDGPVI">No.acciones DGPVI</label>
                                                             <asp:DropDownList runat="server" ID="ddlNoaccionesDGPVI" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlNoaccionesDGPVI_SelectedIndexChanged">
-                                                                <asp:ListItem Value="">--Seleccione--</asp:ListItem>
-                                                                <asp:ListItem Value="0">0</asp:ListItem>
-                                                                <asp:ListItem Value="1">1</asp:ListItem>
-                                                                <asp:ListItem Value="2">2</asp:ListItem>
-                                                                <asp:ListItem Value="3">3</asp:ListItem>
-                                                                <asp:ListItem Value="4">4</asp:ListItem>
-                                                                <asp:ListItem Value="5">5</asp:ListItem>
-                                                                <asp:ListItem Value="6">6</asp:ListItem>
-                                                                <asp:ListItem Value="7">7</asp:ListItem>
-                                                                <asp:ListItem Value="8">8</asp:ListItem>
-                                                                <asp:ListItem Value="9">9</asp:ListItem>
-                                                                <asp:ListItem Value="10">10</asp:ListItem>
-                                                                <asp:ListItem Value="11">11</asp:ListItem>
-                                                                <asp:ListItem Value="12">12</asp:ListItem>
-                                                                <asp:ListItem Value="13">13</asp:ListItem>
-                                                                <asp:ListItem Value="14">14</asp:ListItem>
-                                                                <asp:ListItem Value="15">15</asp:ListItem>
-                                                                <asp:ListItem Value="16">16</asp:ListItem>
-                                                                <asp:ListItem Value="17">17</asp:ListItem>
-                                                                <asp:ListItem Value="18">18</asp:ListItem>
-                                                                <asp:ListItem Value="19">19</asp:ListItem>
-                                                                <asp:ListItem Value="20">20</asp:ListItem>
-                                                                <asp:ListItem Value="21">21</asp:ListItem>
-                                                                <asp:ListItem Value="22">22</asp:ListItem>
-                                                                <asp:ListItem Value="23">23</asp:ListItem>
-                                                                <asp:ListItem Value="24">24</asp:ListItem>
-                                                                <asp:ListItem Value="25">25</asp:ListItem>
-                                                                <asp:ListItem Value="26">26</asp:ListItem>
-                                                                <asp:ListItem Value="27">27</asp:ListItem>
-                                                                <asp:ListItem Value="28">28</asp:ListItem>
-                                                                <asp:ListItem Value="29">29</asp:ListItem>
-                                                                <asp:ListItem Value="30">30</asp:ListItem>
-                                                                <asp:ListItem Value="31">31</asp:ListItem>
-                                                                <asp:ListItem Value="32">32</asp:ListItem>
-                                                                <asp:ListItem Value="33">33</asp:ListItem>
-                                                                <asp:ListItem Value="34">34</asp:ListItem>
-                                                                <asp:ListItem Value="35">35</asp:ListItem>
-                                                                <asp:ListItem Value="36">36</asp:ListItem>
-                                                                <asp:ListItem Value="37">37</asp:ListItem>
-                                                                <asp:ListItem Value="38">38</asp:ListItem>
-                                                                <asp:ListItem Value="39">39</asp:ListItem>
-                                                                <asp:ListItem Value="40">40</asp:ListItem>
-                                                                <asp:ListItem Value="41">41</asp:ListItem>
-                                                                <asp:ListItem Value="42">42</asp:ListItem>
-                                                                <asp:ListItem Value="43">43</asp:ListItem>
-                                                                <asp:ListItem Value="44">44</asp:ListItem>
-                                                                <asp:ListItem Value="45">45</asp:ListItem>
-                                                                <asp:ListItem Value="46">46</asp:ListItem>
-                                                                <asp:ListItem Value="47">47</asp:ListItem>
-                                                                <asp:ListItem Value="48">48</asp:ListItem>
-                                                                <asp:ListItem Value="49">49</asp:ListItem>
-                                                                <asp:ListItem Value="50">50</asp:ListItem>
-
+                                                                
                                                             </asp:DropDownList>
-
                                                         </div>
 
                                                         <div class="col-md-3">
 
                                                             <label for="ddlNoAccionesInstitucionales">No. acciones Institucionales</label>
                                                             <asp:DropDownList runat="server" ID="ddlNoAccionesInstitucionales" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlNoaccionesDGPVI_SelectedIndexChanged">
-                                                                <asp:ListItem Value="">--Seleccione--</asp:ListItem>
-                                                                <asp:ListItem Value="0">0</asp:ListItem>
-                                                                <asp:ListItem Value="1">1</asp:ListItem>
-                                                                <asp:ListItem Value="2">2</asp:ListItem>
-                                                                <asp:ListItem Value="3">3</asp:ListItem>
-                                                                <asp:ListItem Value="4">4</asp:ListItem>
-                                                                <asp:ListItem Value="5">5</asp:ListItem>
-                                                                <asp:ListItem Value="6">6</asp:ListItem>
-                                                                <asp:ListItem Value="7">7</asp:ListItem>
-                                                                <asp:ListItem Value="8">8</asp:ListItem>
-                                                                <asp:ListItem Value="9">9</asp:ListItem>
-                                                                <asp:ListItem Value="10">10</asp:ListItem>
-                                                                <asp:ListItem Value="11">11</asp:ListItem>
-                                                                <asp:ListItem Value="12">12</asp:ListItem>
-                                                                <asp:ListItem Value="13">13</asp:ListItem>
-                                                                <asp:ListItem Value="14">14</asp:ListItem>
-                                                                <asp:ListItem Value="15">15</asp:ListItem>
-                                                                <asp:ListItem Value="16">16</asp:ListItem>
-                                                                <asp:ListItem Value="17">17</asp:ListItem>
-                                                                <asp:ListItem Value="18">18</asp:ListItem>
-                                                                <asp:ListItem Value="19">19</asp:ListItem>
-                                                                <asp:ListItem Value="20">20</asp:ListItem>
-                                                                <asp:ListItem Value="21">21</asp:ListItem>
-                                                                <asp:ListItem Value="22">22</asp:ListItem>
-                                                                <asp:ListItem Value="23">23</asp:ListItem>
-                                                                <asp:ListItem Value="24">24</asp:ListItem>
-                                                                <asp:ListItem Value="25">25</asp:ListItem>
-                                                                <asp:ListItem Value="26">26</asp:ListItem>
-                                                                <asp:ListItem Value="27">27</asp:ListItem>
-                                                                <asp:ListItem Value="28">28</asp:ListItem>
-                                                                <asp:ListItem Value="29">29</asp:ListItem>
-                                                                <asp:ListItem Value="30">30</asp:ListItem>
-                                                                <asp:ListItem Value="31">31</asp:ListItem>
-                                                                <asp:ListItem Value="32">32</asp:ListItem>
-                                                                <asp:ListItem Value="33">33</asp:ListItem>
-                                                                <asp:ListItem Value="34">34</asp:ListItem>
-                                                                <asp:ListItem Value="35">35</asp:ListItem>
-                                                                <asp:ListItem Value="36">36</asp:ListItem>
-                                                                <asp:ListItem Value="37">37</asp:ListItem>
-                                                                <asp:ListItem Value="38">38</asp:ListItem>
-                                                                <asp:ListItem Value="39">39</asp:ListItem>
-                                                                <asp:ListItem Value="40">40</asp:ListItem>
-                                                                <asp:ListItem Value="41">41</asp:ListItem>
-                                                                <asp:ListItem Value="42">42</asp:ListItem>
-                                                                <asp:ListItem Value="43">43</asp:ListItem>
-                                                                <asp:ListItem Value="44">44</asp:ListItem>
-                                                                <asp:ListItem Value="45">45</asp:ListItem>
-                                                                <asp:ListItem Value="46">46</asp:ListItem>
-                                                                <asp:ListItem Value="47">47</asp:ListItem>
-                                                                <asp:ListItem Value="48">48</asp:ListItem>
-                                                                <asp:ListItem Value="49">49</asp:ListItem>
-                                                                <asp:ListItem Value="50">50</asp:ListItem>
-
+                                                                
                                                             </asp:DropDownList>
-
                                                         </div>
-
                                                         <div class="col-md-2">
-                                                            <label for="txtTotalAccionesRAVI">Total acciones RAVI</label>
+                                                            <label for="txtTotalAccionesRAVI">Total acciones </label>
                                                             <asp:TextBox ID="txtTotalAccionesRAVI" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                                                         </div>
 
@@ -1017,16 +827,9 @@
                                                             <label for="txtSegurichat">Segurichat</label>
                                                             <asp:TextBox ID="txtSegurichat" CssClass="form-control" runat="server"></asp:TextBox>
                                                         </div>
-
                                                     </div>
-
                                                 </div>
-
-
-
                                                 <br />
-
-
                                                 <h3>Descripción/Observación</h3>
 
                                                 <div class="row">
@@ -1219,6 +1022,7 @@
                 <!-- end:main content -->
             </div>
         </div>
+
     </div>
 
 
@@ -1231,8 +1035,39 @@
     <%-- **************************** --%>
 
 
+    <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h4 style="text-align: center">¿Estas seguro que deseas guardar?</h4>
+            </div>
+            
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 style="text-align: center">Favor de verificar los campos que faltan:</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-horizontal">
+                            <asp:Label ID="lblValidacionesTxt" runat="server"></asp:Label>
+                        </div>
+                    </div>
+                </div>
+            </div> <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>
+                    Cancelar
+                </button>
+            </div>
+            
+        </div>
+    </div>
+</div>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <%-- <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1263,9 +1098,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--%>
 
-    <div class="modal fade" id="ModalGuardarexito" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal" id="ModalGuardarexito" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1310,95 +1145,117 @@
         </div>
     </div>
 
-    <script type="text/javascript">
-
+    <script type="text/javascript">    
+        
         function openModalvalidador() {
-            $('#exampleModal').modal();
-            return false;
+            // 1. Limpiamos fondos oscuros fantasma atorados en la memoria
+            $('.modal-backdrop').remove();
 
+            if (typeof $.fn.modal !== 'function') {
+                $.getScript("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", function () {
+                    // 2. Movemos el modal al frente y lo abrimos
+                    $('#exampleModal').appendTo("form:first").modal('show');
+                });
+            } else {
+                // 2. Movemos el modal al frente y lo abrimos
+                $('#exampleModal').appendTo("form:first").modal('show');
+            }
+            return false;
         }
 
-        function openGuardadoExito() {
-            $('#ModalGuardarexito').modal();
+      /*  function openModalvalidador() {
+            if (typeof $.fn.modal !== 'function') {
+                $.getScript("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", function () {
+                    // Removemos el atributo antes de abrir
+                    $('#exampleModal').removeAttr('aria-hidden').modal('show');
+                });
+            } else {
+                $('#exampleModal').removeAttr('aria-hidden').modal('show');
+            }
             return false;
-
+        }*/
+ 
+        function openGuardadoExito() {
+            if (typeof $.fn.modal !== 'function') {
+                $.getScript("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", function () {
+                    $('#ModalGuardarexito').removeAttr('aria-hidden').modal('show');
+                });
+            } else {
+                $('#ModalGuardarexito').removeAttr('aria-hidden').modal('show');
+            }
+            return false;
         }
 
         function openFolio() {
-            $('#modalFOlio').modal();
+            if (typeof $.fn.modal !== 'function') {
+                $.getScript("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", function () {
+                    $('#modalFOlio').removeAttr('aria-hidden').modal('show');
+                });
+            } else {
+                $('#modalFOlio').removeAttr('aria-hidden').modal('show');
+            }
             return false;
-
         }
 
+
+       
         function sumarH(valor) {
             var total = 0;
             $(".montoH").each(function () {
-
-                if (isNaN(parseFloat($(this).val()))) {
-
-                    total += 0;
-
-                } else {
-
-                    total += parseFloat($(this).val());
-
+                var val = parseFloat($(this).val());
+                if (!isNaN(val)) {
+                    total += val;
                 }
-
             });
-
-            //alert(total);
-            //document.getElementById('spTotal').value = total;
             document.getElementById('<%= txtatendiosH.ClientID %>').value = total;
         }
 
         function sumarM(valor) {
             var total = 0;
             $(".montoM").each(function () {
-
-                if (isNaN(parseFloat($(this).val()))) {
-
-                    total += 0;
-
-                } else {
-
-                    total += parseFloat($(this).val());
-
+                var val = parseFloat($(this).val());
+                if (!isNaN(val)) {
+                    total += val;
                 }
-
             });
-
-            //alert(total);
-            //document.getElementById('spTotal').value = total;
             document.getElementById('<%= txtatendiosM.ClientID %>').value = total;
-        }
+    }
 
 
-        var limite = 300; // El mismo valor que tu MaxLength
+    // 2. ENVOLVEMOS LA LÓGICA DEL CONTADOR EN pageLoad()
+    // En Web Forms, pageLoad() se ejecuta al cargar la página Y después de cada UpdatePanel
+    function pageLoad() {
+        var limite = 300; 
         var txtBox = $("#<%= txtDescripcionActividad.ClientID %>");
-        var contador = $("#charsLeft");
+            var contador = $("#charsLeft");
 
-        // Inicializar
-        actualizarContador();
+            // Validamos que el TextBox realmente exista en el HTML en este momento
+            if (txtBox.length > 0) {
 
-        // Evento al escribir
-        txtBox.on("input propertychange", function () {
-            actualizarContador();
-        });
+                actualizarContador();
 
-        function actualizarContador() {
-            var actual = txtBox.val().length;
-            var restantes = limite - actual;
+                // Usamos .off().on() para evitar que el evento se registre múltiples veces 
+                // tras un refresco parcial de ASP.NET
+                txtBox.off("input propertychange").on("input propertychange", function () {
+                    actualizarContador();
+                });
+            }
 
-            // Evitar negativos visualmente (aunque maxlength lo bloquea)
-            if (restantes < 0) restantes = 0;
+            function actualizarContador() {
+                // EVITAMOS EL ERROR CRÍTICO: Si val() es undefined, usamos un string vacío ""
+                var texto = txtBox.val() || "";
+                var actual = texto.length;
+                var restantes = limite - actual;
 
-            contador.text(restantes);
+                if (restantes < 0) restantes = 0;
 
-            // Opcional: poner en rojo si llega a 0
-            if (restantes == 0) {
-                contador.css("color", "red");
-            } else {
-                contador.css("color", "inherit");
+                contador.text(restantes);
+
+                if (restantes === 0) {
+                    contador.css("color", "red");
+                } else {
+                    contador.css("color", "inherit");
+                }
             }
         }
     </script>
@@ -1410,4 +1267,3 @@
         Visible="false"></asp:Label>
 
 </asp:Content>
-

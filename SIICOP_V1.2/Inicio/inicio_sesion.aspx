@@ -169,6 +169,9 @@
                                     <h4 class="text-titulo">INICIAR SESIÓN</h4>
                                     <asp:Login ID="Login" runat="server" OnLoggedIn="Login_LoggedIn" OnAuthenticate="Login_Authenticate">
                                         <LayoutTemplate>
+                                            <span style="color:red; font-weight:bold;">
+                                                <asp:Literal ID="FailureText" runat="server"></asp:Literal>
+                                            </span>
                                             <!-- Login Form -->
                                             <div class="input-group flex-nowrap p-2">
                                                 <span class="input-group-text" id="addon-wrapping"><i class="fas fa-user icono-c"></i></span>

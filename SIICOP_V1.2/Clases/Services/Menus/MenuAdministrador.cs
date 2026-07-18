@@ -1,10 +1,14 @@
 ﻿using SIICOP_V1._2.Models;
+using SIICOP_V1._2.Servicios;
+using SIICOP_V1._2.VistasReportes;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-
-namespace SIICOP_V1._2.Servicios.Menus
+namespace SIICOP_V1._2.Clases.Services.Menus
 {
-    public static class MenuSysAdmin
+    public class MenuAdministrador
     {
         public static List<MenuCardDto> Obtener()
         {
@@ -22,8 +26,10 @@ namespace SIICOP_V1._2.Servicios.Menus
                     "Productividad",
                     "Indicadores y métricas",
                     "fas fa-chart-bar",
-                  //  "~/Graficas/Productividad.aspx",
-                     "~/VistasReportes/VistaAdmiReportes.aspx",
+               //     "~/Graficas/Productividad.aspx",
+                      "~/VistasReportes/VistaAdmiReportes.aspx",
+
+
                     "card-success",
                     "#198754"),
 
