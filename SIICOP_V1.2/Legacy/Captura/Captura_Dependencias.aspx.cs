@@ -127,7 +127,7 @@ namespace SIICOP_V1._2.Captura
                 ddlMuNICIPIO.SelectedValue = direccionReporte.MunicipioID.ToString().Trim();
                 ddlMuNICIPIO.DataBind();
                 ddlLocalidad.SelectedValue = direccionReporte.LocalidadID != null ? direccionReporte.LocalidadID.ToString() : "0";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "VerDireccionMapa", "VerDireccionMapa();", true);
+               // ScriptManager.RegisterStartupScript(this, this.GetType(), "VerDireccionMapa", "VerDireccionMapa();", true);
             }
 
             TB_DatosGralReporte datosGralReporte = ctx.TB_DatosGralReporte.Where(t => t.idResumenDiario == idReporte).FirstOrDefault();

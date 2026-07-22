@@ -828,6 +828,9 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_DatosReportesHistorico' no tie
           <Property Name="Nivel" Type="varchar" MaxLength="50" />
           <Property Name="NombreContacto" Type="varchar" MaxLength="100" />
           <Property Name="telcel" Type="varchar" MaxLength="40" />
+          <Property Name="EjeId" Type="int" />
+          <Property Name="tema_impartido" Type="varchar" MaxLength="200" />
+          <Property Name="Ambito" Type="int" />
           <Property Name="Longitud" Type="varchar" MaxLength="400" />
           <Property Name="Latitud" Type="varchar" MaxLength="400" />
           <Property Name="descripcion_actividad" Type="varchar(max)" />
@@ -1762,6 +1765,9 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
     [Wv_DatosReportesHistorico].[Nivel] AS [Nivel], 
     [Wv_DatosReportesHistorico].[NombreContacto] AS [NombreContacto], 
     [Wv_DatosReportesHistorico].[telcel] AS [telcel], 
+    [Wv_DatosReportesHistorico].[EjeId] AS [EjeId], 
+    [Wv_DatosReportesHistorico].[tema_impartido] AS [tema_impartido], 
+    [Wv_DatosReportesHistorico].[Ambito] AS [Ambito], 
     [Wv_DatosReportesHistorico].[Longitud] AS [Longitud], 
     [Wv_DatosReportesHistorico].[Latitud] AS [Latitud], 
     [Wv_DatosReportesHistorico].[descripcion_actividad] AS [descripcion_actividad], 
@@ -2792,6 +2798,9 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <Property Name="zona" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="inst_participantes" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Eje" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="EjeId" Type="Int32" />
+          <Property Name="tema_impartido" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Ambito" Type="Int32" />
         </EntityType>
         <EntityType Name="WV_Datosrepote_app">
           <Key>
@@ -4582,6 +4591,9 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <EntitySetMapping Name="Wv_DatosReportesHistorico">
             <EntityTypeMapping TypeName="SIICOPModel.Wv_DatosReportesHistorico">
               <MappingFragment StoreEntitySet="Wv_DatosReportesHistorico">
+                <ScalarProperty Name="Ambito" ColumnName="Ambito" />
+                <ScalarProperty Name="tema_impartido" ColumnName="tema_impartido" />
+                <ScalarProperty Name="EjeId" ColumnName="EjeId" />
                 <ScalarProperty Name="Eje" ColumnName="Eje" />
                 <ScalarProperty Name="inst_participantes" ColumnName="inst_participantes" />
                 <ScalarProperty Name="zona" ColumnName="zona" />

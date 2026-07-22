@@ -396,7 +396,6 @@ namespace SIICOP_V1._2.VistasReportes
                                 string base64String = fotografia.ImgBase64;
                                 ImagenEvidencia2.ImageUrl = "data:image/png;base64," + base64String;
                             }
-
                             //ImagenEvidencia2.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(bytes);
                             foto2.Visible = true;
                             foto22.Visible = true;
@@ -415,10 +414,8 @@ namespace SIICOP_V1._2.VistasReportes
                                 string base64String = fotografia.ImgBase64;
                                 ImagenEvidencia3.ImageUrl = "data:image/png;base64," + base64String;
                             }
-
                             foto3.Visible = true;
                             foto33.Visible = true;
-
                         }
                         else
                         {

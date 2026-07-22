@@ -37,10 +37,10 @@
                                     <asp:Label ID="ActionStatus" runat="server" CssClass="Important"></asp:Label>
                                 </p>
                                 <!-- HeaderCssClass="accordionHeader" -->
-                                <p>Agregar Rol</p>
+                    <%--            <p>Agregar Rol</p>
                                 <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
                                 <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Agregar Rol" />
-                                <br />
+                                <br />--%>
                                <%-- <ajaxToolkit:Accordion ID="Accordion1" runat="server"
                                     HeaderSelectedCssClass="accordionHeaderSelected" AutoSize="None" FadeTransitions="true"
                                     TransitionDuration="250" FramesPerSecond="40" RequireOpenedPane="false" SuppressHeaderPostbacks="true"
@@ -110,10 +110,10 @@
                                             </Columns>
                                         </asp:GridView>
                                         <br />
-                                        <b>Buscar Usuario:</b>
+                                       <%-- <b>Buscar Usuario:</b>
                                         <asp:TextBox ID="UserNameToAddToRole" runat="server"></asp:TextBox>
                                         <asp:Button ID="AddUserToRoleButton" runat="server" Text="Agregar al rol" 
-                                            OnClick="AddUserToRoleButton_Click" CssClass="boton" />
+                                            OnClick="AddUserToRoleButton_Click" CssClass="boton" />--%>
                                     </div>
                                 </div>
 

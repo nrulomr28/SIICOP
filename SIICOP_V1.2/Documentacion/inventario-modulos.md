@@ -14,8 +14,7 @@
 
 - Completar catálogo de módulos.
 - Identificar responsables.
-- Identificar dependencias entre módulos.
-
+- Identificar dependencias entre módulos.   
 
 # Vigentes
 
@@ -24,16 +23,19 @@ MenuDependencias.aspx
 SeleccionPrograma.aspx
 CapturaReporteActividades.aspx
 ErrorLog.aspx
+TotalAccionesBeneficiados.aspx
+
+Entorno.aspx   
+para seleccionar el tipo si es comunitario o escolar 
 
 # En revisión
-
-Entorno.aspx
+Toda la carpeta legacy, respaldo de todo lo que no se ocupa. 
 
 # Legacy
-
 Bienvenido_*
 Menu.aspx
 Menu2026.aspx
 meenu2019.aspx
 Principal.aspx
 Capturas históricas individuales
+SE MOVIERON A LEGACY LAS CARPETAS Y ARCHIVOS EN DESUSO **

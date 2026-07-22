@@ -24,13 +24,13 @@
       runat="server" />
     <style>
 
-       body
-{
+    body
+    {
     margin:0;
     padding:0;
     font-family:Segoe UI, Arial, sans-serif;
     background-color:#f5f7fa;
-}
+    }
 
 .contenedor
 {

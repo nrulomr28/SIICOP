@@ -214,7 +214,7 @@
     <Content Include="Legacy\Bienvenidas\Bienvenido_CVcMyCPC.aspx" />
     <Content Include="Legacy\Bienvenidas\Bienvenido_DGRS.aspx" />
     <Content Include="Legacy\Bienvenidas\Bienvenido_DGTSV.aspx" />
-    <Content Include="Captura\Atencion_Empresarial.aspx" />
+    <Content Include="Legacy\Captura\Atencion_Empresarial.aspx" />
     <Content Include="Captura\CapturaReporteActividades.aspx" />
     <Content Include="Captura\Entorno.aspx" />
     <Content Include="Legacy\Captura\Fortalecimiento_Emocional.aspx" />
@@ -224,7 +224,7 @@
     <Content Include="Legacy\Captura\Protectores_Vida.aspx" />
     <Content Include="Legacy\Captura\Prevencion_Atencion.aspx" />
     <Content Include="Legacy\Captura\C4\Ficha_promocion_difusion.aspx" />
-    <Content Include="Captura\Captura_Dependencias.aspx" />
+    <Content Include="Legacy\Captura\Captura_Dependencias.aspx" />
     <Content Include="Legacy\Captura\Construccion_Cultura_Incluyente.aspx" />
     <Content Include="Legacy\Captura\CVcMyCPC\Reporte_Actividades_SESCESP.aspx" />
     <Content Include="Legacy\Captura\DGRS\Actividades_DGRS.aspx" />
@@ -1864,7 +1864,7 @@
       <DependentUpon>SIICOB.edmx</DependentUpon>
       <LastGenOutput>SIICOB.cs</LastGenOutput>
     </Content>
-    <Content Include="Default2.aspx" />
+    <Content Include="Legacy\Default2.aspx" />
     <Content Include="Error\Error404.aspx" />
     <Content Include="Error\Error500.aspx" />
     <Content Include="Error\ErrorAcceso.aspx" />
@@ -1931,88 +1931,30 @@
     <Content Include="Graficas\Monitoreo_de_acciones.aspx" />
     <Content Include="Graficas\Productividad.aspx" />
     <Content Include="Graficas\SIAGEE.aspx" />
-    <Content Include="Imagenes\Banner\C4\Empresarial.jpg" />
-    <Content Include="Imagenes\Banner\C4\escolar.jpg" />
-    <Content Include="Imagenes\Banner\C4\eventos.jpg" />
-    <Content Include="Imagenes\Banner\C4\Iconos\Empresarial.png" />
-    <Content Include="Imagenes\Banner\C4\Iconos\Escolar.png" />
-    <Content Include="Imagenes\Banner\C4\Iconos\Eventos.png" />
-    <Content Include="Imagenes\Banner\C4\Iconos\Inst_Pública.png" />
-    <Content Include="Imagenes\Banner\C4\Iconos\RedesVecinales.png" />
-    <Content Include="Imagenes\Banner\C4\institucion_publica.jpg" />
-    <Content Include="Imagenes\Banner\C4\Pines\IP.png" />
-    <Content Include="Imagenes\Banner\C4\Pines\Pin_Empresarial.png" />
-    <Content Include="Imagenes\Banner\C4\Pines\Pin_Escolar.png" />
-    <Content Include="Imagenes\Banner\C4\Pines\Pin_Eventos.png" />
-    <Content Include="Imagenes\Banner\C4\Pines\Pin_RedesVecinales.png" />
-    <Content Include="Imagenes\Banner\C4\redes.jpg" />
-    <Content Include="Imagenes\Banner\CEPREVIDE\CYL.png" />
-    <Content Include="Imagenes\Banner\CEPREVIDE\ESCOLAR.png" />
-    <Content Include="Imagenes\Banner\CEPREVIDE\espacios.png" />
-    <Content Include="Imagenes\Banner\CEPREVIDE\GV.png" />
-    <Content Include="Imagenes\Banner\CEPREVIDE\Iconos\CulturaLegalidadylaDenuncia.png" />
-    <Content Include="Imagenes\Banner\CEPREVIDE\Iconos\Escolar.png" />
-    <Content Include="Imagenes\Banner\CEPREVIDE\Iconos\GruposVulnerables.png" />
-    <Content Include="Imagenes\Banner\CEPREVIDE\Iconos\ParticipaciónCiudadana.png" />
-    <Content Include="Imagenes\Banner\CEPREVIDE\Iconos\recuperacion.png" />
-    <Content Include="Imagenes\Banner\CEPREVIDE\PC.png" />
-    <Content Include="Imagenes\Banner\CEPREVIDE\Pines\Pin_CulturaLegalidadyDenuncia.png" />
-    <Content Include="Imagenes\Banner\CEPREVIDE\Pines\Pin_Escolar.png" />
-    <Content Include="Imagenes\Banner\CEPREVIDE\Pines\Pin_Espacios.png" />
-    <Content Include="Imagenes\Banner\CEPREVIDE\Pines\Pin_GruposVulnerables.png" />
-    <Content Include="Imagenes\Banner\CEPREVIDE\Pines\Pin_ParticipaCiudadana.png" />
-    <Content Include="Imagenes\Banner\CVcMyCPC\Banner_Consejo-01.jpg" />
-    <Content Include="Imagenes\Banner\CVcMyCPC\Banner_Consejo-02.jpg" />
-    <Content Include="Imagenes\Banner\CVcMyCPC\Icono\01.png" />
-    <Content Include="Imagenes\Banner\CVcMyCPC\Icono\02.png" />
-    <Content Include="Imagenes\Banner\CVcMyCPC\Pines\Enlace.png" />
-    <Content Include="Imagenes\Banner\CVcMyCPC\Pines\VinculacionI.png" />
-    <Content Include="Imagenes\Banner\Deporte_y_Cultura.jpg" />
-    <Content Include="Imagenes\Banner\DGRS\Iconos\Clases.png" />
-    <Content Include="Imagenes\Banner\DGRS\Iconos\Ejercicios.png" />
-    <Content Include="Imagenes\Banner\DGRS\Iconos\IMotivacionalpx.png" />
-    <Content Include="Imagenes\Banner\DGRS\Impulsando_prevencion_educa.jpg" />
-    <Content Include="Imagenes\Banner\DGRS\Motivando_reinsercion_social.jpg" />
-    <Content Include="Imagenes\Banner\DGRS\Pines\Clases.png" />
-    <Content Include="Imagenes\Banner\DGRS\Pines\Ejercicios.png" />
-    <Content Include="Imagenes\Banner\DGRS\Pines\Motivacional.png" />
-    <Content Include="Imagenes\Banner\DGRS\prevencion_atraves_info.jpg" />
-    <Content Include="Imagenes\Banner\DGTSV\Banner_DGTSV.jpg" />
-    <Content Include="Imagenes\Banner\DGTSV\Icono\Íconos_120px.png" />
-    <Content Include="Imagenes\Banner\DGTSV\Icono\Íconos_64px.png" />
-    <Content Include="Imagenes\Banner\DGTSV\Pin\Pin.png" />
-    <Content Include="Imagenes\Banner\Entornos_Educativos.jpg" />
-    <Content Include="Imagenes\Banner\Inclusion.jpg" />
-    <Content Include="Imagenes\Banner\Redes_Vecinales.jpg" />
-    <Content Include="Imagenes\Banner\Sector_Empresarial.jpg" />
-    <Content Include="Imagenes\Banner\Violencia.jpg" />
     <Content Include="Imagenes\Convivencia_Escudos.png" />
     <Content Include="Imagenes\data-entry.png" />
     <Content Include="Imagenes\EscuelaSegura.png" />
     <Content Include="Imagenes\file_add.png" />
     <Content Include="Imagenes\CintilloFooter.png" />
-    <Content Include="Imagenes\ForosFerias.png" />
+    <Content Include="Legacy\Imagenes\ForosFerias.png" />
     <Content Include="Imagenes\ImgMaster\logo_veracruz.png" />
     <Content Include="Imagenes\ImgMaster\ssp.png" />
-    <Content Include="Imagenes\IntegraciónCiudadana.png" />
     <Content Include="Imagenes\Logo SIICOP.png" />
     <Content Include="Imagenes\LogotipoSIICOP_2.jpg" />
-    <Content Include="Imagenes\Loguin5.jpg" />
-    <Content Include="Imagenes\mapa.png" />
-    <Content Include="Imagenes\Menudependencia\C4.png" />
-    <Content Include="Imagenes\Menudependencia\CEPREVIDE.png" />
-    <Content Include="Imagenes\Menudependencia\DGPRS.png" />
-    <Content Include="Imagenes\Menudependencia\DGTE.png" />
-    <Content Include="Imagenes\Menudependencia\DGTV.png" />
-    <Content Include="Imagenes\Menudependencia\DGPVI.png" />
-    <Content Include="Imagenes\Menudependencia\Estrategia.jpg" />
-    <Content Include="Imagenes\Menudependencia\IMG_ESTRATEGIA.jpg" />
-    <Content Include="Imagenes\Menudependencia\IMG_ATNCAUSAS.png" />
-    <Content Include="Imagenes\Menudependencia\PE_1.png" />
-    <Content Include="Imagenes\Menudependencia\PE_2.png" />
-    <Content Include="Imagenes\Menudependencia\SESCESP.png" />
+    <Content Include="Legacy\Imagenes\mapa.png" />
+    <Content Include="Legacy\Imagenes\Menudependencia\C4.png" />
+    <Content Include="Legacy\Imagenes\Menudependencia\CEPREVIDE.png" />
+    <Content Include="Legacy\Imagenes\Menudependencia\DGPRS.png" />
+    <Content Include="Legacy\Imagenes\Menudependencia\DGTE.png" />
+    <Content Include="Legacy\Imagenes\Menudependencia\DGTV.png" />
+    <Content Include="Legacy\Imagenes\Menudependencia\DGPVI.png" />
+    <Content Include="Legacy\Imagenes\Menudependencia\Estrategia.jpg" />
+    <Content Include="Legacy\Imagenes\Menudependencia\IMG_ESTRATEGIA.jpg" />
+    <Content Include="Legacy\Imagenes\Menudependencia\IMG_ATNCAUSAS.png" />
+    <Content Include="Legacy\Imagenes\Menudependencia\PE_1.png" />
+    <Content Include="Legacy\Imagenes\Menudependencia\PE_2.png" />
+    <Content Include="Legacy\Imagenes\Menudependencia\SESCESP.png" />
     <Content Include="Imagenes\CintilloSSPDTI.png" />
-    <Content Include="Imagenes\PartcipacionCiudadana.png" />
     <Content Include="Imagenes\PinesReporte\check.png" />
     <Content Include="Imagenes\PinesReporte\ConstrucionCultura.png" />
     <Content Include="Imagenes\PinesReporte\ConstrucionCultura_bn.png" />
@@ -2043,10 +1985,7 @@
     <Content Include="Imagenes\PinesReporte\RedesVerPorLaPaz_bn.png" />
     <Content Include="Imagenes\PinesReporte\ViolenciaGenero.png" />
     <Content Include="Imagenes\PinesReporte\ViolenciaGenero_bn.png" />
-    <Content Include="Imagenes\PolicáEnTuColonia.png" />
-    <Content Include="Imagenes\PrevenciónContraLaMujer.png" />
-    <Content Include="Imagenes\PrevenciónVecinal.png" />
-    <Content Include="Imagenes\SectorEmpresarial.png" />
+    <Content Include="Legacy\Imagenes\SectorEmpresarial.png" />
     <Content Include="Imagenes\SIICOP_2.png" />
     <Content Include="Imagenes\sort-asc.png" />
     <Content Include="Imagenes\sort-desc.png" />
@@ -2056,17 +1995,17 @@
     <Content Include="Inicio\inicio_sesion.aspx" />
     <Content Include="Inicio\Launcher.aspx" />
     <Content Include="Inicio\Reporte.aspx" />
-    <Content Include="MenuProgramas\C4\Programas_C4.aspx" />
-    <Content Include="MenuProgramas\CREPREVIDE\Programa_CEPREVIDE.aspx" />
-    <Content Include="MenuProgramas\DGRS\Programas_DGRS.aspx" />
+    <Content Include="Legacy\MenuProgramas\C4\Programas_C4.aspx" />
+    <Content Include="Legacy\MenuProgramas\CREPREVIDE\Programa_CEPREVIDE.aspx" />
+    <Content Include="Legacy\MenuProgramas\DGRS\Programas_DGRS.aspx" />
     <Content Include="Legacy\meenu2019.aspx" />
     <Content Include="Legacy\Menu.aspx" />
     <Content Include="Legacy\Menu2026.aspx" />
     <Content Include="MenuProgramas\MenuDependencias.aspx" />
     <Content Include="Legacy\Principal.aspx" />
     <Content Include="MenuProgramas\SeleccionPrograma.aspx" />
-    <Content Include="MenuProgramas\SESCESP\Programas_SESCESP.aspx" />
-    <Content Include="Policia_en_tu_colonia\Reporte_Seguimiento.aspx" />
+    <Content Include="Legacy\MenuProgramas\SESCESP\Programas_SESCESP.aspx" />
+    <Content Include="Legacy\Policia_en_tu_colonia\Reporte_Seguimiento.aspx" />
     <Content Include="Scripts\Alert_Gral.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -2125,22 +2064,22 @@
     <Content Include="sysadmin\Cambiar_Contrasena.aspx" />
     <Content Include="TotalAccionesBeneficiados.aspx" />
     <Content Include="ViewSwitcher.ascx" />
-    <Content Include="VistasReportes\C4\Vista_de_datos_de_actividades_C4.aspx" />
-    <Content Include="VistasReportes\CEPREVIDE\Vista_de_datos_de_actividades_CEPREVIDE.aspx" />
-    <Content Include="VistasReportes\CVcMyCPC\Vista_de_datos_SESCESP.aspx" />
-    <Content Include="VistasReportes\DGRS\Vista_de_datos_DGRS.aspx" />
-    <Content Include="VistasReportes\DGTSV\Vista_de_datos_de_actividades_DGTSV.aspx" />
-    <Content Include="VistasReportes\Info_Enlace_con_el_Sector_Empresarial.aspx" />
-    <Content Include="VistasReportes\Info_Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx" />
-    <Content Include="VistasReportes\Informe_Seguridad_social_paz_social_entorno_educativo.aspx" />
-    <Content Include="VistasReportes\Informe_Construccion_Cultura_Incluyente.aspx" />
+    <Content Include="Legacy\VistasReportes\C4\Vista_de_datos_de_actividades_C4.aspx" />
+    <Content Include="Legacy\VistasReportes\CEPREVIDE\Vista_de_datos_de_actividades_CEPREVIDE.aspx" />
+    <Content Include="Legacy\VistasReportes\CVcMyCPC\Vista_de_datos_SESCESP.aspx" />
+    <Content Include="Legacy\VistasReportes\DGRS\Vista_de_datos_DGRS.aspx" />
+    <Content Include="Legacy\VistasReportes\DGTSV\Vista_de_datos_de_actividades_DGTSV.aspx" />
+    <Content Include="Legacy\VistasReportes\Info_Enlace_con_el_Sector_Empresarial.aspx" />
+    <Content Include="Legacy\VistasReportes\Info_Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx" />
+    <Content Include="Legacy\VistasReportes\Informe_Seguridad_social_paz_social_entorno_educativo.aspx" />
+    <Content Include="Legacy\VistasReportes\Informe_Construccion_Cultura_Incluyente.aspx" />
     <Content Include="VistasReportes\VistaAdmiReportes.aspx" />
-    <Content Include="VistasReportes\VistaEncuentros_Ciudadanos_por_la_Seguridad.aspx" />
-    <Content Include="VistasReportes\vistaInforme_Redes_vecinales.aspx" />
-    <Content Include="VistasReportes\Vista_de_reportes_dependencia.aspx" />
-    <Content Include="VistasReportes\Vista_Prevencion_de_la_Violencia_por_Razones_de_Genero.aspx" />
-    <Content Include="VistasReportes\Vista_Datos_Foraneo.aspx" />
-    <Content Include="VistasReportes\vista_Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx" />
+    <Content Include="Legacy\VistasReportes\VistaEncuentros_Ciudadanos_por_la_Seguridad.aspx" />
+    <Content Include="Legacy\VistasReportes\vistaInforme_Redes_vecinales.aspx" />
+    <Content Include="Legacy\VistasReportes\Vista_de_reportes_dependencia.aspx" />
+    <Content Include="Legacy\VistasReportes\Vista_Prevencion_de_la_Violencia_por_Razones_de_Genero.aspx" />
+    <Content Include="Legacy\VistasReportes\Vista_Datos_Foraneo.aspx" />
+    <Content Include="Legacy\VistasReportes\vista_Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2193,11 +2132,11 @@
     <Compile Include="Legacy\Bienvenidas\Bienvenido_DGTSV.aspx.designer.cs">
       <DependentUpon>Bienvenido_DGTSV.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Captura\Atencion_Empresarial.aspx.cs">
+    <Compile Include="Legacy\Captura\Atencion_Empresarial.aspx.cs">
       <DependentUpon>Atencion_Empresarial.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Captura\Atencion_Empresarial.aspx.designer.cs">
+    <Compile Include="Legacy\Captura\Atencion_Empresarial.aspx.designer.cs">
       <DependentUpon>Atencion_Empresarial.aspx</DependentUpon>
     </Compile>
     <Compile Include="Captura\CapturaReporteActividades.aspx.cs">
@@ -2263,11 +2202,11 @@
     <Compile Include="Legacy\Captura\C4\Ficha_promocion_difusion.aspx.designer.cs">
       <DependentUpon>Ficha_promocion_difusion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Captura\Captura_Dependencias.aspx.cs">
+    <Compile Include="Legacy\Captura\Captura_Dependencias.aspx.cs">
       <DependentUpon>Captura_Dependencias.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Captura\Captura_Dependencias.aspx.designer.cs">
+    <Compile Include="Legacy\Captura\Captura_Dependencias.aspx.designer.cs">
       <DependentUpon>Captura_Dependencias.aspx</DependentUpon>
     </Compile>
     <Compile Include="Legacy\Captura\Construccion_Cultura_Incluyente.aspx.cs">
@@ -2573,11 +2512,11 @@
     <Compile Include="Datos\Wv_TotalSubprogramas.cs">
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Default2.aspx.cs">
+    <Compile Include="Legacy\Default2.aspx.cs">
       <DependentUpon>Default2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default2.aspx.designer.cs">
+    <Compile Include="Legacy\Default2.aspx.designer.cs">
       <DependentUpon>Default2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Error\Error404.aspx.cs">
@@ -2680,25 +2619,25 @@
     <Compile Include="json\ActividadesGeoDependencias.ashx.cs">
       <DependentUpon>ActividadesGeoDependencias.ashx</DependentUpon>
     </Compile>
-    <Compile Include="MenuProgramas\C4\Programas_C4.aspx.cs">
+    <Compile Include="Legacy\MenuProgramas\C4\Programas_C4.aspx.cs">
       <DependentUpon>Programas_C4.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MenuProgramas\C4\Programas_C4.aspx.designer.cs">
+    <Compile Include="Legacy\MenuProgramas\C4\Programas_C4.aspx.designer.cs">
       <DependentUpon>Programas_C4.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MenuProgramas\CREPREVIDE\Programa_CEPREVIDE.aspx.cs">
+    <Compile Include="Legacy\MenuProgramas\CREPREVIDE\Programa_CEPREVIDE.aspx.cs">
       <DependentUpon>Programa_CEPREVIDE.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MenuProgramas\CREPREVIDE\Programa_CEPREVIDE.aspx.designer.cs">
+    <Compile Include="Legacy\MenuProgramas\CREPREVIDE\Programa_CEPREVIDE.aspx.designer.cs">
       <DependentUpon>Programa_CEPREVIDE.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MenuProgramas\DGRS\Programas_DGRS.aspx.cs">
+    <Compile Include="Legacy\MenuProgramas\DGRS\Programas_DGRS.aspx.cs">
       <DependentUpon>Programas_DGRS.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MenuProgramas\DGRS\Programas_DGRS.aspx.designer.cs">
+    <Compile Include="Legacy\MenuProgramas\DGRS\Programas_DGRS.aspx.designer.cs">
       <DependentUpon>Programas_DGRS.aspx</DependentUpon>
     </Compile>
     <Compile Include="Legacy\meenu2019.aspx.cs">
@@ -2743,18 +2682,18 @@
     <Compile Include="MenuProgramas\SeleccionPrograma.aspx.designer.cs">
       <DependentUpon>SeleccionPrograma.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MenuProgramas\SESCESP\Programas_SESCESP.aspx.cs">
+    <Compile Include="Legacy\MenuProgramas\SESCESP\Programas_SESCESP.aspx.cs">
       <DependentUpon>Programas_SESCESP.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MenuProgramas\SESCESP\Programas_SESCESP.aspx.designer.cs">
+    <Compile Include="Legacy\MenuProgramas\SESCESP\Programas_SESCESP.aspx.designer.cs">
       <DependentUpon>Programas_SESCESP.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Policia_en_tu_colonia\Reporte_Seguimiento.aspx.cs">
+    <Compile Include="Legacy\Policia_en_tu_colonia\Reporte_Seguimiento.aspx.cs">
       <DependentUpon>Reporte_Seguimiento.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Policia_en_tu_colonia\Reporte_Seguimiento.aspx.designer.cs">
+    <Compile Include="Legacy\Policia_en_tu_colonia\Reporte_Seguimiento.aspx.designer.cs">
       <DependentUpon>Reporte_Seguimiento.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -2843,67 +2782,67 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\C4\Vista_de_datos_de_actividades_C4.aspx.cs">
+    <Compile Include="Legacy\VistasReportes\C4\Vista_de_datos_de_actividades_C4.aspx.cs">
       <DependentUpon>Vista_de_datos_de_actividades_C4.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VistasReportes\C4\Vista_de_datos_de_actividades_C4.aspx.designer.cs">
+    <Compile Include="Legacy\VistasReportes\C4\Vista_de_datos_de_actividades_C4.aspx.designer.cs">
       <DependentUpon>Vista_de_datos_de_actividades_C4.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\CEPREVIDE\Vista_de_datos_de_actividades_CEPREVIDE.aspx.cs">
+    <Compile Include="Legacy\VistasReportes\CEPREVIDE\Vista_de_datos_de_actividades_CEPREVIDE.aspx.cs">
       <DependentUpon>Vista_de_datos_de_actividades_CEPREVIDE.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VistasReportes\CEPREVIDE\Vista_de_datos_de_actividades_CEPREVIDE.aspx.designer.cs">
+    <Compile Include="Legacy\VistasReportes\CEPREVIDE\Vista_de_datos_de_actividades_CEPREVIDE.aspx.designer.cs">
       <DependentUpon>Vista_de_datos_de_actividades_CEPREVIDE.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\CVcMyCPC\Vista_de_datos_SESCESP.aspx.cs">
+    <Compile Include="Legacy\VistasReportes\CVcMyCPC\Vista_de_datos_SESCESP.aspx.cs">
       <DependentUpon>Vista_de_datos_SESCESP.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VistasReportes\CVcMyCPC\Vista_de_datos_SESCESP.aspx.designer.cs">
+    <Compile Include="Legacy\VistasReportes\CVcMyCPC\Vista_de_datos_SESCESP.aspx.designer.cs">
       <DependentUpon>Vista_de_datos_SESCESP.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\DGRS\Vista_de_datos_DGRS.aspx.cs">
+    <Compile Include="Legacy\VistasReportes\DGRS\Vista_de_datos_DGRS.aspx.cs">
       <DependentUpon>Vista_de_datos_DGRS.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VistasReportes\DGRS\Vista_de_datos_DGRS.aspx.designer.cs">
+    <Compile Include="Legacy\VistasReportes\DGRS\Vista_de_datos_DGRS.aspx.designer.cs">
       <DependentUpon>Vista_de_datos_DGRS.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\DGTSV\Vista_de_datos_de_actividades_DGTSV.aspx.cs">
+    <Compile Include="Legacy\VistasReportes\DGTSV\Vista_de_datos_de_actividades_DGTSV.aspx.cs">
       <DependentUpon>Vista_de_datos_de_actividades_DGTSV.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VistasReportes\DGTSV\Vista_de_datos_de_actividades_DGTSV.aspx.designer.cs">
+    <Compile Include="Legacy\VistasReportes\DGTSV\Vista_de_datos_de_actividades_DGTSV.aspx.designer.cs">
       <DependentUpon>Vista_de_datos_de_actividades_DGTSV.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\Info_Enlace_con_el_Sector_Empresarial.aspx.cs">
+    <Compile Include="Legacy\VistasReportes\Info_Enlace_con_el_Sector_Empresarial.aspx.cs">
       <DependentUpon>Info_Enlace_con_el_Sector_Empresarial.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VistasReportes\Info_Enlace_con_el_Sector_Empresarial.aspx.designer.cs">
+    <Compile Include="Legacy\VistasReportes\Info_Enlace_con_el_Sector_Empresarial.aspx.designer.cs">
       <DependentUpon>Info_Enlace_con_el_Sector_Empresarial.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\Info_Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx.cs">
+    <Compile Include="Legacy\VistasReportes\Info_Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx.cs">
       <DependentUpon>Info_Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VistasReportes\Info_Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx.designer.cs">
+    <Compile Include="Legacy\VistasReportes\Info_Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx.designer.cs">
       <DependentUpon>Info_Fomento_a_la_Prevyencion_a_traves_del_Deporte_Cultura.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\Informe_Seguridad_social_paz_social_entorno_educativo.aspx.cs">
+    <Compile Include="Legacy\VistasReportes\Informe_Seguridad_social_paz_social_entorno_educativo.aspx.cs">
       <DependentUpon>Informe_Seguridad_social_paz_social_entorno_educativo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VistasReportes\Informe_Seguridad_social_paz_social_entorno_educativo.aspx.designer.cs">
+    <Compile Include="Legacy\VistasReportes\Informe_Seguridad_social_paz_social_entorno_educativo.aspx.designer.cs">
       <DependentUpon>Informe_Seguridad_social_paz_social_entorno_educativo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\Informe_Construccion_Cultura_Incluyente.aspx.cs">
+    <Compile Include="Legacy\VistasReportes\Informe_Construccion_Cultura_Incluyente.aspx.cs">
       <DependentUpon>Informe_Construccion_Cultura_Incluyente.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VistasReportes\Informe_Construccion_Cultura_Incluyente.aspx.designer.cs">
+    <Compile Include="Legacy\VistasReportes\Informe_Construccion_Cultura_Incluyente.aspx.designer.cs">
       <DependentUpon>Informe_Construccion_Cultura_Incluyente.aspx</DependentUpon>
     </Compile>
     <Compile Include="VistasReportes\VistaAdmiReportes.aspx.cs">
@@ -2913,46 +2852,46 @@
     <Compile Include="VistasReportes\VistaAdmiReportes.aspx.designer.cs">
       <DependentUpon>VistaAdmiReportes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\VistaEncuentros_Ciudadanos_por_la_Seguridad.aspx.cs">
+    <Compile Include="Legacy\VistasReportes\VistaEncuentros_Ciudadanos_por_la_Seguridad.aspx.cs">
       <DependentUpon>VistaEncuentros_Ciudadanos_por_la_Seguridad.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VistasReportes\VistaEncuentros_Ciudadanos_por_la_Seguridad.aspx.designer.cs">
+    <Compile Include="Legacy\VistasReportes\VistaEncuentros_Ciudadanos_por_la_Seguridad.aspx.designer.cs">
       <DependentUpon>VistaEncuentros_Ciudadanos_por_la_Seguridad.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\vistaInforme_Redes_vecinales.aspx.cs">
+    <Compile Include="Legacy\VistasReportes\vistaInforme_Redes_vecinales.aspx.cs">
       <DependentUpon>vistaInforme_Redes_vecinales.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VistasReportes\vistaInforme_Redes_vecinales.aspx.designer.cs">
+    <Compile Include="Legacy\VistasReportes\vistaInforme_Redes_vecinales.aspx.designer.cs">
       <DependentUpon>vistaInforme_Redes_vecinales.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\Vista_de_reportes_dependencia.aspx.cs">
+    <Compile Include="Legacy\VistasReportes\Vista_de_reportes_dependencia.aspx.cs">
       <DependentUpon>Vista_de_reportes_dependencia.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VistasReportes\Vista_de_reportes_dependencia.aspx.designer.cs">
+    <Compile Include="Legacy\VistasReportes\Vista_de_reportes_dependencia.aspx.designer.cs">
       <DependentUpon>Vista_de_reportes_dependencia.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\Vista_Prevencion_de_la_Violencia_por_Razones_de_Genero.aspx.cs">
+    <Compile Include="Legacy\VistasReportes\Vista_Prevencion_de_la_Violencia_por_Razones_de_Genero.aspx.cs">
       <DependentUpon>Vista_Prevencion_de_la_Violencia_por_Razones_de_Genero.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VistasReportes\Vista_Prevencion_de_la_Violencia_por_Razones_de_Genero.aspx.designer.cs">
+    <Compile Include="Legacy\VistasReportes\Vista_Prevencion_de_la_Violencia_por_Razones_de_Genero.aspx.designer.cs">
       <DependentUpon>Vista_Prevencion_de_la_Violencia_por_Razones_de_Genero.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\Vista_Datos_Foraneo.aspx.cs">
+    <Compile Include="Legacy\VistasReportes\Vista_Datos_Foraneo.aspx.cs">
       <DependentUpon>Vista_Datos_Foraneo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VistasReportes\Vista_Datos_Foraneo.aspx.designer.cs">
+    <Compile Include="Legacy\VistasReportes\Vista_Datos_Foraneo.aspx.designer.cs">
       <DependentUpon>Vista_Datos_Foraneo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="VistasReportes\vista_Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx.cs">
+    <Compile Include="Legacy\VistasReportes\vista_Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx.cs">
       <DependentUpon>vista_Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VistasReportes\vista_Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx.designer.cs">
+    <Compile Include="Legacy\VistasReportes\vista_Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx.designer.cs">
       <DependentUpon>vista_Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -2961,11 +2900,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Imagenes\Web.config" />
-    <Content Include="Formatos\Actividades_Escuela_Segura.xlsx" />
-    <Content Include="Formatos\Actividades_Programa.xlsx" />
-    <Content Include="Formatos\Total_Actividades_Escuela_Segura.xlsx" />
-    <Content Include="Formatos\Total_Actividades_Programa.xlsx" />
-    <Content Include="Formatos\Web.config" />
+    <Content Include="Legacy\Formatos\Actividades_Escuela_Segura.xlsx" />
+    <Content Include="Legacy\Formatos\Actividades_Programa.xlsx" />
+    <Content Include="Legacy\Formatos\Total_Actividades_Escuela_Segura.xlsx" />
+    <Content Include="Legacy\Formatos\Total_Actividades_Programa.xlsx" />
+    <Content Include="Legacy\Formatos\Web.config" />
     <Content Include="json\ActividadesGeo.ashx" />
     <Content Include="json\Web.config">
       <SubType>Designer</SubType>
@@ -2973,14 +2912,14 @@
     <Content Include="Captura\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Formatos\Formulario_Seguimeinto_PoliciaProximidad.xlsx" />
-    <Content Include="Formatos\T_Formulario_Seguimeinto_PoliciaProximidad.xlsx" />
-    <Content Include="Formatos\Actividades_Redes_Veracruzanas_SIICOP.xlsx" />
-    <Content Include="Formatos\Total_Actividades_Redes_Veracruzanas_SIICOP.xlsx" />
-    <Content Include="Formatos\Avance_de_indicadores_DVI.xlsx" />
-    <Content Include="Formatos\T_Avance_de_indicadores_DVI.xlsx" />
-    <Content Include="Formatos\Actividades_Total.xlsx" />
-    <Content Include="Formatos\Total_Actividess.xlsx" />
+    <Content Include="Legacy\Formatos\Formulario_Seguimeinto_PoliciaProximidad.xlsx" />
+    <Content Include="Legacy\Formatos\T_Formulario_Seguimeinto_PoliciaProximidad.xlsx" />
+    <Content Include="Legacy\Formatos\Actividades_Redes_Veracruzanas_SIICOP.xlsx" />
+    <Content Include="Legacy\Formatos\Total_Actividades_Redes_Veracruzanas_SIICOP.xlsx" />
+    <Content Include="Legacy\Formatos\Avance_de_indicadores_DVI.xlsx" />
+    <Content Include="Legacy\Formatos\T_Avance_de_indicadores_DVI.xlsx" />
+    <Content Include="Legacy\Formatos\Actividades_Total.xlsx" />
+    <Content Include="Legacy\Formatos\Total_Actividess.xlsx" />
     <Content Include="json\ActividadesGeoDependencias.ashx" />
     <Content Include="Inicio\Web.config">
       <SubType>Designer</SubType>
@@ -2993,7 +2932,7 @@
     <Content Include="Datos\SIICOB.edmx.diagram">
       <DependentUpon>SIICOB.edmx</DependentUpon>
     </Content>
-    <Content Include="Policia_en_tu_colonia\Web.config" />
+    <Content Include="Legacy\Policia_en_tu_colonia\Web.config" />
     <Content Include="Content\bootstrap.rtl.min.css.map" />
     <Content Include="Content\bootstrap.rtl.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />

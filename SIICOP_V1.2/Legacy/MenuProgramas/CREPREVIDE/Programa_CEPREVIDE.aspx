@@ -16,10 +16,11 @@
                             <div class="mainflip">
                                 <div class="frontside">
                                     <div class="card">
+                                    <div class="card">
                                         <div class="card-body text-center" style="text-decoration:none !important">
                                             <p>
-                                                <img runat="server" class=" img-fluid" src="~/Imagenes/Banner/CEPREVIDE/Iconos/ParticipaciónCiudadana.png" alt="card image">
-                                            </p>
+                          <%--  <img runat="server" class=" img-fluid" src="~/Imagenes/Banner/CEPREVIDE/Iconos/ParticipacionCiudadana.png" alt="card image">
+                                      --%>      </p>
                                             <h4 class="card-title" style="color: #ed4d11 !important; text-decoration:none !important">Participación Ciudadana </h4>
                                             <p class="card-text" style="color: black; text-decoration:none !important">
                                              Implementar acciones que generen cohesión comunitaria, con la participación de la sociedad y el gobierno, para  prevenir las causas y factores que generan  violencia y delincuencia. 

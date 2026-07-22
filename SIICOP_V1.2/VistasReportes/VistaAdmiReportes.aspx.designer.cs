@@ -150,24 +150,6 @@ namespace SIICOP_V1._2.VistasReportes
         protected global::System.Web.UI.WebControls.DropDownList ddlProgramas;
 
         /// <summary>
-        /// Control Label8.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label8;
-
-        /// <summary>
-        /// Control ddlEjeAtencion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEjeAtencion;
-
-        /// <summary>
         /// Control Label7.
         /// </summary>
         /// <remarks>
@@ -213,22 +195,13 @@ namespace SIICOP_V1._2.VistasReportes
         protected global::System.Web.UI.WebControls.LinkButton lkbtnexcel;
 
         /// <summary>
-        /// Control lnBtnExpCedula.
+        /// Control lkmapa.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnBtnExpCedula;
-
-        /// <summary>
-        /// Control lnkbtnZip.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkbtnZip;
+        protected global::System.Web.UI.WebControls.LinkButton lkmapa;
 
         /// <summary>
         /// Control Div1.
@@ -238,15 +211,6 @@ namespace SIICOP_V1._2.VistasReportes
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div1;
-
-        /// <summary>
-        /// Control lkmapa.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lkmapa;
 
         /// <summary>
         /// Control lblTotalRegistros.

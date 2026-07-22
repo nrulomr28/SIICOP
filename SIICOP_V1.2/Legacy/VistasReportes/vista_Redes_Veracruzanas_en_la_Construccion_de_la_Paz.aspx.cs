@@ -313,16 +313,11 @@ namespace SIICOP_V1._2.VistasReportes
             DateTime fechainicial = Convert.ToDateTime(this.txtFInicialC.Text);
             DateTime fechaFinal = Convert.ToDateTime(this.txtfechafin.Text);
             this.progragr = 14;
-
-
             this.MuniTtoatl.InnerText = (from sp in ctx.tb_Reporte_Diario
                                          join stdr in ctx.tb_DireccionReporte
                                          on sp.idResumenDiario equals stdr.idResumenDiario
                                          where sp.fecha >= fechainicial && sp.fecha <= fechaFinal && sp.programasID == progragr
                                          select stdr.MunicipioID).Distinct().Count().ToString();
-
-
-
             int zonaNorte = 1;
             int ZonaCentroo = 2;
             int ZonaSur = 3;
@@ -350,10 +345,7 @@ namespace SIICOP_V1._2.VistasReportes
         {
             DateTime fechainicial = Convert.ToDateTime(this.txtFInicialC.Text);
             DateTime fechaFinal = Convert.ToDateTime(this.txtfechafin.Text);
-
-
             this.progragr = 14;
-
             //Beneficiados
             this.H2NinasBeneficiadas.InnerText = (from c in ctx.tb_Reporte_Diario
                                                   join d in ctx.tb_DireccionReporte

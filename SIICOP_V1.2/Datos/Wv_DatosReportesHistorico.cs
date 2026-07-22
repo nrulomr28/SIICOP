@@ -68,5 +68,8 @@ namespace SIICOP_V1._2.Datos
         public string zona { get; set; }
         public string inst_participantes { get; set; }
         public string Eje { get; set; }
+        public Nullable<int> EjeId { get; set; }
+        public string tema_impartido { get; set; }
+        public Nullable<int> Ambito { get; set; }
     }
 }

@@ -7,15 +7,14 @@
     <title>SIICOP</title>
     <asp:PlaceHolder runat="server">
     <link href="<%= ResolveUrl("~/Content/bootstrap.min.css") %>" rel="stylesheet" type="text/css" />
-    <link href="<%= ResolveUrl("~/Content/Site.css") %>" rel="stylesheet" type="text/css" />
+  
     <script src="<%= ResolveUrl("~/Scripts/sweetalert2.all.min.js") %>" type="text/javascript"></script>
     </asp:PlaceHolder>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>    
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">    
 </head>
 <body>
-
 <form runat="server">
  <asp:ScriptManager runat="server" ID="ScriptManagerGlobal">
     <Scripts>
@@ -24,11 +23,8 @@
     </Scripts>
 </asp:ScriptManager>
 <div class="d-flex flex-column min-vh-100">
-
     <header class="shadow-sm"
         style="background-color:#611232;">
-
-
 <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-center py-3">
         <!-- LOGO + TITULO -->
@@ -36,22 +32,16 @@
             <img src="<%= ResolveUrl("~/Imagenes/SIICOP_2.png") %>"
                  alt="SIICOP"
                  style="height:85px;" />
-
             <div class="ms-4">
-
                 <h2 class="text-white mb-1 fw-bold">
                     SIICOP
                 </h2>
-
                 <small class="text-light">
                     Sistema Integral de Información,
                     Control Operativo y Productividad
                 </small>
-
             </div>
-
         </div>
-
         <!-- USUARIO + ACCIONES -->
         <div class="text-end">
             <div class="text-white mb-2">
@@ -59,13 +49,11 @@
                     👤 <%: Context.User.Identity.Name %>
                 </small>
             </div>
-
             <a runat="server"
                href="~/Inicio/Launcher.aspx"
                class="btn btn-outline-light btn-sm me-1">
                 Inicio
             </a>
-
            <%-- <a runat="server"
                href="~/TotalAccionesBeneficiados.aspx"
                class="btn btn-outline-light btn-sm me-1">
@@ -79,29 +67,18 @@
                 OnClick="btnLogout_Click">
                 Cerrar sesión
             </asp:LinkButton>
-
         </div>
-
-    </div>
-
+     </div>
 </div>
-
-
 </header>
-
-
     <!-- CONTENIDO -->
     <main class="flex-grow-1">
-
-        <div class="container-fluid py-4">
-
+                <div class="container-fluid py-4">
             <asp:ContentPlaceHolder
                 ID="MainContent"
                 runat="server" >
             </asp:ContentPlaceHolder>
-
         </div>
-
     </main>
 
     <!-- FOOTER -->

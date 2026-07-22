@@ -1,6 +1,32 @@
 ﻿<%@ Page Title="VISTA DE RESÚMEN" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="VistaAdmiReportes.aspx.cs" Inherits="SIICOP_V1._2.VistasReportes.VistaAdmiReportes" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div id="pantallaCarga" class="loader-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <style>
+    .loader-overlay {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 9999;
+        display: none; 
+        justify-content: center;
+        align-items: center;
+    }
+    .spinner {
+        border: 6px solid #f3f3f3;
+        border-top: 6px solid #007bff; 
+        border-radius: 50%;
+        width: 60px; height: 60px;
+        animation: spin 1s linear infinite;
+    }
+    @keyframes spin { 
+        0% { transform: rotate(0deg); } 
+        100% { transform: rotate(360deg); } 
+    }
+</style>
     <br />
     <link href="../Content/styleFormularios.css" rel="stylesheet" />
     <div class="container" style="padding-top: 3%">
@@ -92,7 +118,6 @@
                                 </asp:DropDownList>
                             </div>
                         </div>
-
                         <div class="col-md-2">
                             <asp:Label ID="Label5" runat="server" Text="Municipio:" CssClass="control-label"></asp:Label>
                             <div class="form-group">
@@ -100,7 +125,6 @@
                                 </asp:DropDownList>
                             </div>
                         </div>
-
                         <div class="col-md-2">
                             <asp:Label ID="Label6" runat="server" Text="Localidad:" CssClass="control-label"></asp:Label>
                             <div class="form-group">
@@ -108,25 +132,19 @@
                                 </asp:DropDownList>
                             </div>
                         </div>
-
-
                         <div class="col-md-2">
                             <asp:Label ID="Label4" runat="server" Text="Programa:" CssClass="control-label"></asp:Label>
                             <div class="form-group">
                                 <asp:DropDownList runat="server" ID="ddlProgramas" CssClass="form-control"></asp:DropDownList>
                             </div>
                         </div>
-
-                         <div class="col-md-2">
+                       <%--  <div class="col-md-2">
                              <asp:Label ID="Label8" runat="server" Text="Eje atención:" CssClass="control-label"></asp:Label>
                              <div class="form-group">
                                  <asp:DropDownList runat="server" ID="ddlEjeAtencion" CssClass="form-control"></asp:DropDownList>
                              </div>
-                         </div>
-
+                         </div>--%>
                     </div>
-
-
                     <div class="row">
                         <div class="col-md-4">
                             <asp:Label ID="Label7" runat="server" Text="Instituciones participantes:" CssClass="control-label"></asp:Label>
@@ -137,12 +155,17 @@
                     </div>
                     <div class="row">
                         <div id="RESPONSA" runat="server">
-                            <div class="col-md-1">
-                                <asp:LinkButton ID="btnBuscar" runat="server" CssClass="btn btn-info" Text="Buscar" OnClick="btnBuscar_Click"><span class="glyphicon glyphicon-search"></span>&nbsp;Buscar</asp:LinkButton>
-                                <asp:LinkButton ID="lkbtnexcel" runat="server" Style="font-size: 1.5em" Text="excel" title="Exportar" OnClick="lkbtnexcel_Click">Actividades&nbsp;<span class="far fa-file-excel" style="color:green"></span></asp:LinkButton>
-                               
+                            <div class="col-md-8">
+                         <asp:LinkButton ID="btnBuscar" runat="server" CssClass="btn btn-info" OnClick="btnBuscar_Click" OnClientClick="mostrarLoader();"><span class="glyphicon glyphicon-search"></span>&nbsp;Buscar</asp:LinkButton>     
+                    <%-- <asp:LinkButton ID="lkbtnexcel" runat="server" Style="font-size: 1.5em" Text="excel" title="Exportar" OnClick="lkbtnexcel_Click">Actividades&nbsp;<span class="far fa-file-excel" style="color:green"></span></asp:LinkButton>--%>             
+                         <asp:LinkButton ID="lkbtnexcel" runat="server" CssClass="btn btn-info" Style="font-size: 1em" title="Exportar" OnClick="lkbtnexcel_Click" OnClientClick="mostrarLoaderExcel();">Actividades<span class="far fa-file-excel" style="color:green"></span></asp:LinkButton>
+                         <asp:LinkButton ID="lkmapa" runat="server" CssClass="btn btn-warning" Style="font-size: 1em" Text="excel" title="Ver georeferencia" OnClick="lkmapa_Click"><span class="fas fa-map-marked-alt"></span>Mapas&nbsp;</asp:LinkButton>
+                            
+                                <div class="col-md-4" runat="server" id="Div1">
+                                 </div> 
+                                
                             </div>
-                            <div class="col-md-2">
+                          <%--  <div class="col-md-4">
                                 <div class="dropdown">
                                     <a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><b>Descargar</b> <b class="caret"></b>&nbsp;<span class="fa fa-download" aria-hidden="true"></span></a>
                                     <ul class="dropdown-menu" style="font-size: 11px;">
@@ -156,16 +179,12 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div>--%>
 
                         </div>
-                        <div class="col-md-1" runat="server" id="Div1">
-                            <asp:LinkButton ID="lkmapa" runat="server" CssClass="btn btn-warning" Style="font-size: 1.8em" Text="excel" title="Ver georeferencia" OnClick="lkmapa_Click"><span class="fas fa-map-marked-alt"></span>&nbsp;</asp:LinkButton>
-                        </div>
+                 
                     </div>
-
-
-                    <br />
+                  <br />
                     <div class="col-lg-2 pull-right">
                         <div class="form-group pull-right">
                             <asp:Label ID="lblTotalRegistros" runat="server" CssClass="label label-warning" Font-Size="18px" Font-Bold="true"></asp:Label>
@@ -207,23 +226,39 @@
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center"></ItemStyle>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="¿Fotos cargadas?">
+
+                         <asp:TemplateField HeaderText="¿Fotos cargadas?">
                                     <ItemTemplate>
                                         <asp:ImageButton runat="server" AlternateText='<%# Eval("fotos") %>' ID="imgFoto" Width="25" Height="25" CommandArgument='<%# Eval("idResumenDiario") %>' CommandName="VERFOTO" ToolTip="Ver fotos" />
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center"></ItemStyle>
                                 </asp:TemplateField>
 
-                                <asp:TemplateField ShowHeader="False">
-                                    <ItemTemplate>
+                               <asp:TemplateField ShowHeader="False">
+                                <ItemStyle HorizontalAlign="Center" />
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="lkbEditar" runat="server" 
+                                        CssClass="btn btn-primary btn-sm" 
+                                        CommandName="Editar" 
+                                        CommandArgument='<%# Eval("idResumenDiario") %>' 
+                                        CausesValidation="False" 
+                                        ToolTip="Editar">
+                                        <i class="fas fa-edit"></i> Editar
+                                    </asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
 
+                             <%--   <asp:TemplateField ShowHeader="False">
+                                    <ItemTemplate>
                                         <div class="col-md-7">
                                             <asp:LinkButton runat="server" Text="Editar" class="btn btn-primary btn-sm" CommandName="Editar" CausesValidation="False" ID="lkbEditar" ToolTip="Editar" CommandArgument='<%# Eval("idResumenDiario") %>'>
                                     <i class="fas fa-edit" ></i>
                                             </asp:LinkButton>
                                         </div>
                                     </ItemTemplate>
-                                </asp:TemplateField>
+                                </asp:TemplateField>--%>
+
+
                                 <asp:TemplateField ShowHeader="False">
                                     <ItemTemplate>
                                         <div class="col-md-7">
@@ -235,13 +270,31 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
-                            <PagerTemplate>
+                             <PagerTemplate>
+                                <div class="row" style="margin-top: 20px; align-items: center;">      
+                                    <div class="col-lg-1" style="text-align: right;">
+                                        <h5>
+                                            <asp:Label ID="MessageLabel" Text="Pág." runat="server" />
+                                        </h5>
+                                    </div>       
+                                    <div class="col-lg-2 col-md-3" style="text-align: left;">
+                                        <asp:DropDownList ID="PageDropDownListAdmin" Width="60%" AutoPostBack="true" OnSelectedIndexChanged="PageDropDownListAdmin_SelectedIndexChanged" runat="server" CssClass="form-control" />
+                                    </div>        
+                                    <div class="col-lg-9 col-md-8" style="text-align: right;">
+                                        <h3>
+                                            <asp:Label ID="CurrentPageLabelAdmin" runat="server" CssClass="label label-success" />
+                                        </h3>
+                                    </div>        
+                                </div>
+                            </PagerTemplate>
+            <%--  <PagerTemplate>
                                 <div class="row" style="margin-top: 20px;">
                                     <div class="col-lg-1" style="text-align: right;">
                                         <h5>
                                             <asp:Label ID="MessageLabel" Text="Pág." runat="server" /></h5>
                                     </div>
                                     <div class="col-lg-2 col-md-3" style="text-align: left;">
+                                        <h3>
                                         <asp:DropDownList ID="PageDropDownListAdmin" Width="60%" AutoPostBack="true" OnSelectedIndexChanged="PageDropDownListAdmin_SelectedIndexChanged" runat="server" CssClass="form-control" /></h3>
                                     </div>
                                     <div class="col-lg-10" style="text-align: right;">
@@ -250,17 +303,22 @@
                                         </h3>
                                     </div>
                                 </div>
-                            </PagerTemplate>
+                  </PagerTemplate>
+             --%>
                         </asp:GridView>
                     </div>
                 </div>
             </div>
         </ContentTemplate>
-        <Triggers>
-            <asp:PostBackTrigger ControlID="lkbtnexcel" />
-            <asp:PostBackTrigger ControlID="lnBtnExpCedula" />
-            <asp:PostBackTrigger ControlID="lnkbtnZip" />
-        </Triggers> 
+
+                <%--     
+                    <Triggers>
+                     <asp:PostBackTrigger ControlID="lkbtnexcel" />
+                     <asp:PostBackTrigger ControlID="lnBtnExpCedula" />
+                     <asp:PostBackTrigger ControlID="lnkbtnZip" />
+                    </Triggers>    
+                --%>
+
     </asp:UpdatePanel>
     <div class="modal fade bd-example-modal-lg" id="exampleModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" style="width: 100% !important" role="document">
@@ -467,10 +525,9 @@
             </div>
         </div>
     </div>
-
     <!-- MODAL PARA VER IMAGENES -->
     <div class="modal fade" id="myModalConsultariMG" tabindex="-1" role="dialog" aria-labelledby="myModalLabelConsultaIMG">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -521,23 +578,17 @@
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
-
                 </div>
-
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- Modal -->
-
     <div class="modal fade" id="exampleModalValidador" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
@@ -556,15 +607,11 @@
                     <button type="button" class="btn btn-danger" data-dismiss="modal">
                         <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>
                         Cancelar</button>
-
                 </div>
             </div>
         </div>
     </div>
-
-
-    <script type="text/javascript">
- 
+    <script type="text/javascript"> 
             window.AbrirModalValidador = function () {
                 $('#exampleModalValidador').modal('show');
             return false;
@@ -579,9 +626,7 @@
                 $('#myModalConsultariMG').modal('show');
             return false;
              };
- 
-
-            function ReactivarDropdown() {
+             function ReactivarDropdown() {
                 $('.dropdown-toggle').off('click').on('click', function (e) {
                     e.preventDefault();
                     $(this).parent('.dropdown').toggleClass('open');
@@ -602,7 +647,59 @@
             var prm = Sys.WebForms.PageRequestManager.getInstance();
             prm.add_endRequest(function () {
                 ReactivarDropdown();
-    });
+            });
+
+
+        function mostrarLoader() {
+            if (typeof (Page_ClientValidate) == 'function') {
+                if (!Page_ClientValidate()) {
+                    return false;
+                }
+            }
+
+            document.getElementById('pantallaCarga').style.display = 'flex';
+            return true;
+        }
+
+ 
+        if (typeof Sys !== 'undefined') {
+            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
+                document.getElementById('pantallaCarga').style.display = 'none';
+            });
+        }
+
+
+
+        var temporizadorDescarga;
+
+        function mostrarLoaderExcel() {
+            document.getElementById('pantallaCarga').style.display = 'flex';
+
+            temporizadorDescarga = window.setInterval(revisarCookieDescarga, 500);
+
+            return true;
+        }
+
+        function revisarCookieDescarga() {
+            var cookieValue = obtenerValorCookie("DescargaExcelCompletada");
+
+            if (cookieValue === "true") {
+                document.getElementById('pantallaCarga').style.display = 'none';
+
+                window.clearInterval(temporizadorDescarga);
+
+                document.cookie = "DescargaExcelCompletada=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            }
+        }
+
+        function obtenerValorCookie(nombre) {
+            var partes = document.cookie.split(nombre + "=");
+            if (partes.length === 2) {
+                return partes.pop().split(";").shift();
+            }
+            return null;
+        }
+
     </script>
 
 </asp:Content>

@@ -1,28 +1,30 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CapturaReporteActividades.aspx.cs" Inherits="SIICOP_V1._2.Captura.CapturaReporteActividades" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-   <%-- <script src="../Scripts/Alert_Gral.js"></script>     --%>
-    <link href="~/Content/styleFormularios.css" rel="stylesheet" />
+   <%-- <script src="../Scripts/Alert_Gral.js"></script>    
+    <link href="~/Content/styleFormularios.css" rel="stylesheet" /> --%>
     <asp:HiddenField ID="HiddenField1cn" runat="server" Value="0" />
-
-    <div class="container-fluid" id="main" style="padding-top: 3%">        
-        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+    <div class="container-fluid" id="main" style="padding-top: 3%"> 
+       <div class="row"> 
+       <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
             <div id="sidebar">
                 <div class="sosmed">
                     <div class="panel panel-default">
                             <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-sm-1 text-center">
+                                <div class="row" style="display: flex; align-items: center;">
+                                    <div class="col-sm-3 text-center">
                                         <img src="../Imagenes/data-entry.png"
                                              style="width:48px;height:48px;" />
                                     </div>
-                                    <div class="col-sm-11">
-                                        <h3 style="margin-top:0;">
+                                    <div class="user-head">
+                                        <h3 style="margin-top: 0; margin-bottom: 5px; font-size: 16px; font-weight: bold;">
                                             REPORTE DE ACTIVIDADES
                                         </h3>
+                                        <h5>
                                         <asp:Label ID="lblPrograma"
-                                            runat="server"
-                                            CssClass="label label-warning">
+                                            runat="server"                                            
+                                            CssClass="label label text-warning">
                                         </asp:Label>
+                                        </h5>
                                     </div>
                                 </div>
                             </div>
@@ -30,7 +32,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
             <div id="content">
                 <!-- start:main content -->
@@ -48,26 +49,20 @@
                                     <asp:Label ID="lblfecha" runat="server" Text=""></asp:Label>
                                 </h4>                                
                                 <div class="hr-left"></div>
-
                                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                     <ContentTemplate>
-
                                         <div id="DatosGenerales" class="form-horizontal">
-
                                             <div class="row gy-3 gx-4">
-                                                <!-- gy agrega espacio vertical, gx horizontal -->
                                                 <!-- Responsable -->
                                                 <div class="col-md-5">
                                                     <label class="control-label">Responsable</label>
                                                     <asp:TextBox ID="txtResponsable" CssClass="form-control" runat="server" Enabled="false"></asp:TextBox>
                                                 </div>
-
                                                 <!-- Área/Departamento -->
                                                 <div class="col-md-5">
                                                     <label class="control-label">Área/Departamento</label>
                                                     <asp:TextBox ID="txtArea" CssClass="form-control" runat="server" Enabled="false"></asp:TextBox>
                                                 </div>
-
                                                 <!-- Fecha de la actividad -->
                                                 <div class="col-md-2">
                                                     <asp:UpdatePanel runat="server">
@@ -80,7 +75,6 @@
                                                                 <ajaxToolkit:CalendarExtender ID="DateNacimiento_CalendarExtender" runat="server"
                                                                     BehaviorID="DateNacimiento_CalendarExtender" TargetControlID="txtFecha"
                                                                     Format="dd/MM/yyyy"></ajaxToolkit:CalendarExtender>
-
                                                                 <span class="input-group-addon">
                                                                     <span class="glyphicon glyphicon-calendar" style="color: #820E2E"></span>
                                                                 </span>
@@ -89,7 +83,6 @@
                                                     </asp:UpdatePanel>
                                                 </div>
                                             </div>
-
                                             <div id="PanelCoordinacion" runat="server">
                                                 <div class="row gy-3 gx-4">
                                                     <div class="col-md-4">
@@ -110,25 +103,21 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-
                                         </div>
-
-
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
-
-
-
-
-
                             </div>
                         </li>
                         <!-- start:resume -->
                         <li id="id-resume">
-                            <div class="timeline-badge default"><i class="fa fa-globe" data-original-title="" title=""></i></div>
+                            <!-- CAMBIO: Se cambió "default" por "primary" para que el círculo tome color, y se agregó "fas" a FontAwesome -->
+                            <div class="timeline-badge primary"><i class="fas fa-globe" title="Ubicación"></i></div>
                             <h3 class="timeline-head"><strong style="color: #34495e">Ubicación</strong></h3>
                         </li>
+                  <%--  <li id="id-resume">
+                            <div class="timeline-badge default"><i class="fa fa-globe" data-original-title="" title=""></i></div>
+                            <h3 class="timeline-head"><strong style="color: #34495e">Ubicación</strong></h3>
+                        </li>--%>
                         <li id="resumen">
                             <div class="timeline-badge warning"></div>
                             <div class="timeline-panel">
@@ -153,14 +142,11 @@
                                             };
                                             var marcadorClicMapa;
 
-
                                             function initMap() {
                                                 var map = new google.maps.Map(document.getElementById('map'), {
                                                     center: { lat: 17.9986108, lng: -98.2021055 },
                                                     zoom: 7,
-
                                                 });
-
                                                 var input = /** @type {!HTMLInputElement} */(
                                                     document.getElementById('autocomplete'));
 
@@ -202,15 +188,8 @@
                                                     }));
                                                     marker.setPosition(place.geometry.location);
                                                     marker.setVisible(true);
-
-
-
                                                     document.getElementById('latlng').value = place.geometry.location;
-                                                    var dir = document.getElementById('autocomplete').value;
-
-
-
-                                                    coordenada = place.geometry.location;
+                                                    var dir = document.getElementById('autocomplete').value;                                                    coordenada = place.geometry.location;
                                                     coordenada = coordenada.toString();
                                                     arregloDeSubCadenas = separarCoord(coordenada);
                                                     //se cambio de esta manera por que asi es como le puedes poner un runat server
@@ -466,8 +445,7 @@
 
                                                 <div class="col-md-3">
                                                     <div class="form-group form-group-sm">
-                                                        <label class="col-md-3 control-label">Municipio</label>                                                        
-
+                                                        <label class="col-md-3 control-label">Municipio</label>                                                     
                                                         <asp:DropDownList runat="server" ID="ddlMuNICIPIO" CssClass="form-control" DataTextField="MUNICIPIO" DataValueField="MunicipioID" AutoPostBack="true" OnSelectedIndexChanged="ddlMunicipio_SelectedIndexChanged">
                                                         </asp:DropDownList>
                                                     </div>
@@ -567,8 +545,6 @@
                                     <asp:UpdatePanel runat="server" ID="udpCATALOGOS">
                                         <ContentTemplate>
                                             <fieldset class="group-border form-group-sm">
-
-
                                                 <div id="PanelListados" runat="server" visible="false">
                                                     <div class="row">
                                                         <div class="form-group form-group-sm col-md-4">
@@ -577,7 +553,6 @@
                                                                 <span class="input-group-addon">
                                                                     <span class="glyphicon glyphicon-plus" data-placement="top"></span>
                                                                 </span>
-
                                                                 <asp:DropDownList runat="server" ID="ddlsubprograma" CssClass="form-control" AppendDataBoundItems="False" AutoPostBack="true" OnSelectedIndexChanged="ddlsubprograma_SelectedIndexChanged">
                                                                 </asp:DropDownList>
                                                             </div>
@@ -585,27 +560,17 @@
                                                         <div class="form-group form-group-sm col-md-4">
                                                             <label for="exampleInputEmail1">Acción implementada</label>
                                                             <div class='input-group ' id='date4'>
-
                                                                 <asp:DropDownList ID="ddlAcciones" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlAcciones_SelectedIndexChanged">
                                                                 </asp:DropDownList>
-
-
                                                             </div>
                                                         </div>
-
-
-
                                                         <div class="form-group form-group-sm col-md-4">
                                                             <label for="exampleInputEmail1">Sub acción implementada</label>
                                                             <div class='input-group ' id='date42'>
-
                                                                 <asp:DropDownList ID="ddlSubAcciones" runat="server" CssClass="form-control" AutoPostBack="true">
                                                                 </asp:DropDownList>
-
                                                             </div>
                                                         </div>
-
-
                                                     </div>
                                                 </div>
 
@@ -650,18 +615,12 @@
                                                         <label for="exampleInputEmail1">Nombre del contacto</label>
                                                         <asp:TextBox ID="txtnombrecontacto" CssClass="form-control" runat="server"></asp:TextBox>
                                                     </div>
-
                                                     <div class="col-md-2">
                                                         <label for="exampleInputEmail1">Tel/Cel</label>
                                                         <asp:TextBox ID="txtTelefono" CssClass="form-control" runat="server"></asp:TextBox>
                                                     </div>
-
                                                 </div>
-
-                                                <br />
-
-
-
+                                                 <br />
                                                 <div class="row">
 
                                                     <div class="col-md-2">
@@ -761,9 +720,7 @@
 
 
                                                 <div runat="server" id="PanelRAVI">
-
                                                     <div class="row mt-3">
-
                                                         <div class="col-md-2">
                                                             <label for="ddlCasosRAVI">Casos RAVI</label>
                                                             <asp:DropDownList runat="server" ID="ddlCasosRavi" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlCasosRavi_SelectedIndexChanged">
@@ -772,26 +729,20 @@
                                                                 <asp:ListItem Value="0">No</asp:ListItem>
                                                             </asp:DropDownList>
                                                         </div>
-
                                                         <div class="col-md-2">
                                                             <label for="txtNoCasosRavi">No. casos RAVI</label>                                                     
                                                             <asp:DropDownList runat="server" ID="txtNoCasosRavi" CssClass="form-control" AutoPostBack="true">
                                                             </asp:DropDownList>
                                                         </div>
-
                                                         <div class="col-md-4">
                                                             <label for="txtDirigidoA">Dirigido a</label>
                                                             <asp:TextBox ID="txtDirigidoA" CssClass="form-control" runat="server" TextMode="MultiLine"></asp:TextBox>
                                                         </div>
-
                                                         <div class="col-md-4">
                                                             <label for="txtGiroComercio">Giro</label>
                                                             <asp:TextBox ID="txtGiroComercio" CssClass="form-control" runat="server" TextMode="MultiLine"></asp:TextBox>
                                                         </div>
-
-
                                                     </div>
-
                                                     <div class="row mt-3">
 
                                                         <div class="col-md-2">
@@ -803,17 +754,14 @@
                                                         </div>
 
                                                         <div class="col-md-3">
-
                                                             <label for="ddlNoAccionesInstitucionales">No. acciones Institucionales</label>
-                                                            <asp:DropDownList runat="server" ID="ddlNoAccionesInstitucionales" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlNoaccionesDGPVI_SelectedIndexChanged">
-                                                                
+                                                            <asp:DropDownList runat="server" ID="ddlNoAccionesInstitucionales" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlNoaccionesDGPVI_SelectedIndexChanged">                                                                
                                                             </asp:DropDownList>
                                                         </div>
                                                         <div class="col-md-2">
                                                             <label for="txtTotalAccionesRAVI">Total acciones </label>
                                                             <asp:TextBox ID="txtTotalAccionesRAVI" CssClass="form-control" runat="server" ReadOnly="true"></asp:TextBox>
                                                         </div>
-
                                                         <div class="col-md-2">
                                                             <label for="ddlOfrecioSegurichat">¿Se ofreció segurichat?</label>
                                                             <asp:DropDownList runat="server" ID="ddlOfrecioSegurichat" CssClass="form-control" AutoPostBack="true">
@@ -822,7 +770,6 @@
                                                                 <asp:ListItem Value="0">No</asp:ListItem>
                                                             </asp:DropDownList>
                                                         </div>
-
                                                         <div class="col-md-3">
                                                             <label for="txtSegurichat">Segurichat</label>
                                                             <asp:TextBox ID="txtSegurichat" CssClass="form-control" runat="server"></asp:TextBox>
@@ -831,7 +778,6 @@
                                                 </div>
                                                 <br />
                                                 <h3>Descripción/Observación</h3>
-
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <asp:TextBox ID="txtDescripcionActividad" CssClass="form-control" runat="server" Height="60px" TextMode="MultiLine" MaxLength="300" onpaste="return false;"></asp:TextBox>
@@ -848,7 +794,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <h3>Seguimiento</h3>
@@ -1022,16 +967,10 @@
                 <!-- end:main content -->
             </div>
         </div>
-
+    </div>
     </div>
 
 
-    <!-- Button trigger modal -->
-
-
-
-    <%-- modal de confirmacion de guardado --%>
-    <!-- Modal -->
     <%-- **************************** --%>
 
 
@@ -1067,38 +1006,7 @@
     </div>
 </div>
 
-   <%-- <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 style="text-align: center">¿Estas seguro que deseas guardar?</h4>
-
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3 style="text-align: center">Favor de verificar los campos que faltan:</h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div method="post" class="form-horizontal" action="none">
-                                <asp:Label ID="lblValidacionesTxt" runat="server"></asp:Label>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">
-                            <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>
-                            Cancelar</button>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>--%>
+ 
 
     <div class="modal" id="ModalGuardarexito" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
         <div class="modal-dialog" role="document">
@@ -1129,7 +1037,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">El folio de la actividad es:</h3>
-
                 </div>
                 <div class="modal-body">
                     <div style="text-align: center">
@@ -1144,36 +1051,21 @@
             </div>
         </div>
     </div>
-
-    <script type="text/javascript">    
-        
+    <script type="text/javascript">   
         function openModalvalidador() {
-            // 1. Limpiamos fondos oscuros fantasma atorados en la memoria
             $('.modal-backdrop').remove();
 
             if (typeof $.fn.modal !== 'function') {
                 $.getScript("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", function () {
-                    // 2. Movemos el modal al frente y lo abrimos
                     $('#exampleModal').appendTo("form:first").modal('show');
                 });
             } else {
-                // 2. Movemos el modal al frente y lo abrimos
                 $('#exampleModal').appendTo("form:first").modal('show');
             }
             return false;
         }
 
-      /*  function openModalvalidador() {
-            if (typeof $.fn.modal !== 'function') {
-                $.getScript("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", function () {
-                    // Removemos el atributo antes de abrir
-                    $('#exampleModal').removeAttr('aria-hidden').modal('show');
-                });
-            } else {
-                $('#exampleModal').removeAttr('aria-hidden').modal('show');
-            }
-            return false;
-        }*/
+
  
         function openGuardadoExito() {
             if (typeof $.fn.modal !== 'function') {
@@ -1222,27 +1114,23 @@
     }
 
 
-    // 2. ENVOLVEMOS LA LÓGICA DEL CONTADOR EN pageLoad()
-    // En Web Forms, pageLoad() se ejecuta al cargar la página Y después de cada UpdatePanel
+   
     function pageLoad() {
         var limite = 300; 
         var txtBox = $("#<%= txtDescripcionActividad.ClientID %>");
             var contador = $("#charsLeft");
 
-            // Validamos que el TextBox realmente exista en el HTML en este momento
             if (txtBox.length > 0) {
 
                 actualizarContador();
 
-                // Usamos .off().on() para evitar que el evento se registre múltiples veces 
-                // tras un refresco parcial de ASP.NET
                 txtBox.off("input propertychange").on("input propertychange", function () {
                     actualizarContador();
                 });
             }
 
             function actualizarContador() {
-                // EVITAMOS EL ERROR CRÍTICO: Si val() es undefined, usamos un string vacío ""
+              
                 var texto = txtBox.val() || "";
                 var actual = texto.length;
                 var restantes = limite - actual;
@@ -1259,11 +1147,11 @@
             }
         }
     </script>
-
     <asp:Label
         ID="lblError"
         runat="server"
         ForeColor="Red"
-        Visible="false"></asp:Label>
+        Visible="false">
+    </asp:Label>
 
 </asp:Content>

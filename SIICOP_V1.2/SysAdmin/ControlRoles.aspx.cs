@@ -182,77 +182,79 @@ namespace SIICOP_V1._2.SysAdmin
             }
         }
 
-        protected void AddUserToRoleButton_Click(object sender, EventArgs e)
-        {
-            // Get the selected role and username
-            string selectedRoleName = RoleList.SelectedValue;
-            string userNameToAddToRole = UserNameToAddToRole.Text;
+        /*   protected void AddUserToRoleButton_Click(object sender, EventArgs e)
+           {
+               // Get the selected role and username
+               string selectedRoleName = RoleList.SelectedValue;
+               string userNameToAddToRole = UserNameToAddToRole.Text;
 
-            // Make sure that a value was entered
-            if (userNameToAddToRole.Trim().Length == 0)
-            {
-                ActionStatus.Text = "Escribe el nombre de usuario.";
-                return;
-            }
+               // Make sure that a value was entered
+               if (userNameToAddToRole.Trim().Length == 0)
+               {
+                   ActionStatus.Text = "Escribe el nombre de usuario.";
+                   return;
+               }
 
-            // Make sure that the user exists in the system
-            MembershipUser userInfo = Membership.GetUser(userNameToAddToRole);
-            if (userInfo == null)
-            {
-                ActionStatus.Text = string.Format("El usuario {0} no existe en este sistema.", userNameToAddToRole);
-                return;
-            }
+               // Make sure that the user exists in the system
+               MembershipUser userInfo = Membership.GetUser(userNameToAddToRole);
+               if (userInfo == null)
+               {
+                   ActionStatus.Text = string.Format("El usuario {0} no existe en este sistema.", userNameToAddToRole);
+                   return;
+               }
 
-            // Make sure that the user doesn't already belong to this role
-            if (Roles.IsUserInRole(userNameToAddToRole, selectedRoleName))
-            {
-                ActionStatus.Text = string.Format("El usuario {0} ya pertenece al rol {1}.", userNameToAddToRole, selectedRoleName);
-                return;
-            }
+               // Make sure that the user doesn't already belong to this role
+               if (Roles.IsUserInRole(userNameToAddToRole, selectedRoleName))
+               {
+                   ActionStatus.Text = string.Format("El usuario {0} ya pertenece al rol {1}.", userNameToAddToRole, selectedRoleName);
+                   return;
+               }
 
-            // If we reach here, we need to add the user to the role
-            Roles.AddUserToRole(userNameToAddToRole, selectedRoleName);
+               // If we reach here, we need to add the user to the role
+               Roles.AddUserToRole(userNameToAddToRole, selectedRoleName);
 
-            // Clear out the TextBox
-            UserNameToAddToRole.Text = string.Empty;
+               // Clear out the TextBox
+               UserNameToAddToRole.Text = string.Empty;
 
-            // Refresh the GridView
-            DisplayUsersBelongingToRole();
+               // Refresh the GridView
+               DisplayUsersBelongingToRole();
 
-            // Display a status message
-            ActionStatus.Text = string.Format("El usuario {0} fue agregado al rol {1}.", userNameToAddToRole, selectedRoleName);
+               // Display a status message
+               ActionStatus.Text = string.Format("El usuario {0} fue agregado al rol {1}.", userNameToAddToRole, selectedRoleName);
 
-            // Refresh the "by user" interface
-            CheckRolesForSelectedUser();
-        }
+               // Refresh the "by user" interface
+               CheckRolesForSelectedUser();
+
+           }
+         */
         #endregion
 
- 
-    
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            string nuevoRol = TextBox1.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(nuevoRol))
-            {
-                ActionStatus.Text = "Escribe un nombre de rol.";
-                return;
-            }
 
-            if (Roles.RoleExists(nuevoRol))
-            {
-                ActionStatus.Text =
-                    $"El rol {nuevoRol} ya existe.";
-                return;
-            }
+        /*   protected void Button1_Click(object sender, EventArgs e)
+           {
+               string nuevoRol = TextBox1.Text.Trim();
 
-            Roles.CreateRole(nuevoRol);
+               if (string.IsNullOrWhiteSpace(nuevoRol))
+               {
+                   ActionStatus.Text = "Escribe un nombre de rol.";
+                   return;
+               }
 
-            ActionStatus.Text =
-                $"Rol {nuevoRol} creado correctamente.";
+               if (Roles.RoleExists(nuevoRol))
+               {
+                   ActionStatus.Text =
+                       $"El rol {nuevoRol} ya existe.";
+                   return;
+               }
 
-            BindUsersToUserList();
-            BindRolesToList();
-        }
+               Roles.CreateRole(nuevoRol);
+
+               ActionStatus.Text =
+                   $"Rol {nuevoRol} creado correctamente.";
+
+               BindUsersToUserList();
+               BindRolesToList();
+           }*/
     }
 }

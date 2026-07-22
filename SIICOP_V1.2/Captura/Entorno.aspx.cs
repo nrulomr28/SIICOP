@@ -21,8 +21,6 @@ namespace SIICOP_V1._2.Captura
             EnviarDatos(1);
         }
 
-
-
         protected void EnviarDatos(int valor)
         {
             Response.Redirect(

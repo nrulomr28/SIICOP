@@ -26,10 +26,8 @@ namespace SIICOP_V1._2.Clases.Services.Menus
                     "Productividad",
                     "Indicadores y métricas",
                     "fas fa-chart-bar",
-               //     "~/Graficas/Productividad.aspx",
-                      "~/VistasReportes/VistaAdmiReportes.aspx",
-
-
+               //   "~/Graficas/Productividad.aspx",
+                    "~/VistasReportes/VistaAdmiReportes.aspx",
                     "card-success",
                     "#198754"),
 

@@ -42,11 +42,11 @@ namespace SIICOP_V1._2.MenuProgramas
             switch (e.CommandName)
             {
                 case "Escolar":
-                    entornoId = 1;
+                    entornoId = 2;
                     break;
 
                 case "Comunitario":
-                    entornoId = 2;
+                    entornoId = 1;
                     break;
             }
 
