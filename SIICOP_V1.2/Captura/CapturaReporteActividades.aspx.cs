@@ -313,7 +313,7 @@ namespace SIICOP_V1._2.Captura
 
         private bool UsuarioTieneAcceso()
         {
-            var rolesPermitidos = new[] { "SysAdmin", "Administrador", "Cap_RVCPZ", "Admin_RVCPZ", "CapEjeAtencion" };
+            var rolesPermitidos = new[] { "SysAdmin", "Administrador", "Cap_RVCPZ", "Admin_RVCPZ", "CapEjeAtencion", "CapDGPVI" };
             return rolesPermitidos.Any(User.IsInRole);
         }
 
@@ -522,14 +522,14 @@ namespace SIICOP_V1._2.Captura
                 this.txtArea.Text = reportesHistorico.AreaTrabajo ?? "";
                 this.txtFecha.Text = string.Format("{0:dd/MM/yyyy}", reportesHistorico.fecha);
                 this.txtDescripcionActividad.Text = reportesHistorico.descripcion_actividad ?? "";
-                this.txtpersonal_atendio_actividad.Text = reportesHistorico.personal_atendio_actividad ?? "";
+                //this.txtpersonal_atendio_actividad.Text = reportesHistorico.personal_atendio_actividad ?? "";
                 this.txnino.Value = reportesHistorico.niños != 0 ? reportesHistorico.niños.ToString() : "0";
                 this.txnina.Value = reportesHistorico.niñas != 0 ? reportesHistorico.niñas.ToString() : "0";
                 this.txhombres.Value = reportesHistorico.hombres != 0 ? reportesHistorico.hombres.ToString() : "0";
                 this.txmujeres.Value = reportesHistorico.mujeres != 0 ? reportesHistorico.mujeres.ToString() : "0";                
                 this.txtatendiosH.Text = reportesHistorico.TotalHombresAtendidos != 0 ? reportesHistorico.TotalHombresAtendidos.ToString() : "0";
                 this.txtatendiosM.Text = reportesHistorico.TotalMujeresAtendidas != 0 ? reportesHistorico.TotalMujeresAtendidas.ToString() : "0";
-                this.txtInstitucionesParticipantes.Text = reportesHistorico.inst_participantes ?? "";
+                //this.txtInstitucionesParticipantes.Text = reportesHistorico.inst_participantes ?? "";
 
                 string lugaresc = reportesHistorico.NombreLugar_Escuela != null ? reportesHistorico.NombreLugar_Escuela.Trim() : "";    /// LUGAR DONDE SE REALIZO LA ACTIVDAD
 
@@ -557,7 +557,7 @@ namespace SIICOP_V1._2.Captura
                     ddlEje.SelectedValue = ejeid;
                 }
 
-                this.txtTemaImpartido.Text = reportesHistorico.tema_impartido.ToString();
+                //this.txtTemaImpartido.Text = reportesHistorico.tema_impartido.ToString();
                 
                 string subId = reportesHistorico.subprogramaId != 0 ? reportesHistorico.subprogramaId.ToString() : "0";
                 if (ddlsubprograma.Items.FindByValue(subId) != null) ddlsubprograma.SelectedValue = subId;
@@ -589,8 +589,8 @@ namespace SIICOP_V1._2.Captura
                 if (datosGralReporte != null)
                 {
                     this.txtLugarActividad.Text = datosGralReporte.NombreLugar_Escuela ?? "";
-                    this.txtnombrecontacto.Text = datosGralReporte.NombreContacto ?? "";
-                    this.txtTelefono.Text = datosGralReporte.telcel ?? "";
+                    //this.txtnombrecontacto.Text = datosGralReporte.NombreContacto ?? "";
+                    //this.txtTelefono.Text = datosGralReporte.telcel ?? "";
                 }
 
                // ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Exito", "alert('¡Datos cargados correctamente en pantalla!');", true);
@@ -858,9 +858,9 @@ namespace SIICOP_V1._2.Captura
                 txtDescripcionActividad.Text
                     .ToUpper();
 
-            reporte.personal_atendio_actividad =
-                txtpersonal_atendio_actividad.Text
-                    .ToUpper();
+            //reporte.personal_atendio_actividad =
+            //    txtpersonal_atendio_actividad.Text
+            //        .ToUpper();
 
             reporte.seguimiento =
                 txtSeguimiento.Text
@@ -933,10 +933,10 @@ namespace SIICOP_V1._2.Captura
                 NombreLugar_Escuela =
                     ddlnombreescuela.SelectedValue,
 
-                NombreContacto =
-                    txtnombrecontacto.Text.ToUpper(),
+                //NombreContacto =
+                //    txtnombrecontacto.Text.ToUpper(),
 
-                telcel = txtTelefono.Text,
+                //telcel = txtTelefono.Text,
 
                 ClavePlantel =
                     txtclave.Text.ToUpper(),
@@ -975,11 +975,11 @@ namespace SIICOP_V1._2.Captura
                 plantel_diagnosticado =
                     ddlPlantelDiagnosticado.SelectedValue == "1",
 
-                inst_participantes =
-                    txtInstitucionesParticipantes.Text.ToUpper(),
+                //inst_participantes =
+                //    txtInstitucionesParticipantes.Text.ToUpper(),
 
-                tema_impartido =
-                    txtTemaImpartido.Text.ToUpper(),
+                //tema_impartido =
+                //    txtTemaImpartido.Text.ToUpper(),
 
                 casos_ravi =
                     ddlCasosRavi.SelectedValue == "1",
@@ -1152,9 +1152,9 @@ namespace SIICOP_V1._2.Captura
 
             int tamanoTotalArchivos = 0;
 
-            bool actividadFueraDeFecha =
-                Convert.ToBoolean(
-                    Session["actividades_fuera_tiempo"]);
+            //bool actividadFueraDeFecha =
+            //    Convert.ToBoolean(
+            //        Session["actividades_fuera_tiempo"]);
 
             if (file.HasFile)
             {
@@ -1196,17 +1196,17 @@ namespace SIICOP_V1._2.Captura
                 valido = false;
             }
 
-            if (actividadFueraDeFecha)
-            {
-                textoValidacion +=
-                    "<li>La actividad está fuera de tiempo. Debe registrarse dentro del mes en curso</li>";
+            //if (actividadFueraDeFecha)
+            //{
+            //    textoValidacion +=
+            //        "<li>La actividad está fuera de tiempo. Debe registrarse dentro del mes en curso</li>";
 
-                txtFecha.Focus();
-                txtFecha.BorderColor =
-                    System.Drawing.Color.Red;
+            //    txtFecha.Focus();
+            //    txtFecha.BorderColor =
+            //        System.Drawing.Color.Red;
 
-                valido = false;
-            }
+            //    valido = false;
+            //}
 
             if (string.IsNullOrWhiteSpace(txtFecha.Text))
             {
@@ -1249,23 +1249,23 @@ namespace SIICOP_V1._2.Captura
                 valido = false;
             }
 
-            if (string.IsNullOrWhiteSpace(
-                    txtnombrecontacto.Text))
-            {
-                textoValidacion +=
-                    "<li>Es obligatorio ingresar el nombre del contacto</li>";
+            //if (string.IsNullOrWhiteSpace(
+            //        txtnombrecontacto.Text))
+            //{
+            //    textoValidacion +=
+            //        "<li>Es obligatorio ingresar el nombre del contacto</li>";
 
-                valido = false;
-            }
+            //    valido = false;
+            //}
 
-            if (string.IsNullOrWhiteSpace(
-                    txtTelefono.Text))
-            {
-                textoValidacion +=
-                    "<li>Es obligatorio ingresar el teléfono de contacto</li>";
+            //if (string.IsNullOrWhiteSpace(
+            //        txtTelefono.Text))
+            //{
+            //    textoValidacion +=
+            //        "<li>Es obligatorio ingresar el teléfono de contacto</li>";
 
-                valido = false;
-            }
+            //    valido = false;
+            //}
 
             if (string.IsNullOrWhiteSpace(
                     txtDescripcionActividad.Text))
@@ -1627,8 +1627,8 @@ namespace SIICOP_V1._2.Captura
             {
                 MODE = Convert.ToInt32(ddlAmbito.SelectedValue);
                 datosGralReporte.NombreLugar_Escuela = this.ddlnombreescuela.Text == string.Empty ? "" : this.ddlnombreescuela.Text.ToUpper();
-                datosGralReporte.NombreContacto = this.txtnombrecontacto.Text == string.Empty ? "" : this.txtnombrecontacto.Text.ToUpper();
-                datosGralReporte.telcel = this.txtTelefono.Text;
+                //datosGralReporte.NombreContacto = this.txtnombrecontacto.Text == string.Empty ? "" : this.txtnombrecontacto.Text.ToUpper();
+                //datosGralReporte.telcel = this.txtTelefono.Text;
                 datosGralReporte.ClavePlantel = this.txtclave.Text == string.Empty ? "" : this.txtclave.Text.ToUpper();
                 direccionReporte.MunicipioID = new int?(this.ddlMuNICIPIO.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlMuNICIPIO.SelectedValue));
              // datosGralReporte.Nivel = this.ddlNivel.Text == string.Empty ? "" : this.ddlNivel.Text;
@@ -1643,8 +1643,8 @@ namespace SIICOP_V1._2.Captura
 
                 TB_DatosGralReporte nuevoDatosGral = new TB_DatosGralReporte();
                 nuevoDatosGral.idResumenDiario = new Guid?(idExpediente);
-                nuevoDatosGral.NombreContacto = this.txtnombrecontacto.Text == string.Empty ? "" : this.txtnombrecontacto.Text.ToUpper();
-                nuevoDatosGral.telcel = this.txtTelefono.Text;
+                //nuevoDatosGral.NombreContacto = this.txtnombrecontacto.Text == string.Empty ? "" : this.txtnombrecontacto.Text.ToUpper();
+                //nuevoDatosGral.telcel = this.txtTelefono.Text;
                 nuevoDatosGral.ClavePlantel = this.txtclave.Text == string.Empty ? "" : this.txtclave.Text.ToUpper();
 
                 nuevoDatosGral.Ambito = Convert.ToInt32(ddlAmbito.SelectedValue);
@@ -1693,7 +1693,7 @@ namespace SIICOP_V1._2.Captura
             if (tbReporteDiario != null)
             {
                 tbReporteDiario.descripcion_actividad = this.txtDescripcionActividad.Text == string.Empty ? "" : this.txtDescripcionActividad.Text.ToUpper();
-                tbReporteDiario.personal_atendio_actividad = this.txtpersonal_atendio_actividad.Text == string.Empty ? "" : this.txtpersonal_atendio_actividad.Text.ToUpper();
+                //tbReporteDiario.personal_atendio_actividad = this.txtpersonal_atendio_actividad.Text == string.Empty ? "" : this.txtpersonal_atendio_actividad.Text.ToUpper();
                 tbReporteDiario.seguimiento = this.txtSeguimiento.Text == string.Empty ? "" : this.txtSeguimiento.Text.ToUpper();
                 tbReporteDiario.AccionesID = new int?(this.ddlAcciones.SelectedValue == "null" ? 0 : Convert.ToInt32(this.ddlAcciones.SelectedValue));
                 tbReporteDiario.fecha = new DateTime?(Convert.ToDateTime(this.txtFecha.Text));
@@ -1750,54 +1750,54 @@ namespace SIICOP_V1._2.Captura
         }
 
 
-        protected void txtFecha_TextChanged(object sender, EventArgs e)
-        {
-            if (User.IsInRole("SYSADMIN") || User.IsInRole("Administrador"))
-            {
-                Session["actividades_fuera_tiempo"] = false;
-            }
-            else
-            {
-                string fecha = txtFecha.Text;
-                string[] commandArgs = fecha.ToString().Split(new char[] { '/' });
-                int diaActividad = Convert.ToInt32(commandArgs[0]);
-                int mesActividad = Convert.ToInt32(commandArgs[1]);
-                int anoacti = Convert.ToInt32(commandArgs[2]);
+        //protected void txtFecha_TextChanged(object sender, EventArgs e)
+        //{
+        //    if (User.IsInRole("SYSADMIN") || User.IsInRole("Administrador"))
+        //    {
+        //        Session["actividades_fuera_tiempo"] = false;
+        //    }
+        //    else
+        //    {
+        //        string fecha = txtFecha.Text;
+        //        string[] commandArgs = fecha.ToString().Split(new char[] { '/' });
+        //        int diaActividad = Convert.ToInt32(commandArgs[0]);
+        //        int mesActividad = Convert.ToInt32(commandArgs[1]);
+        //        int anoacti = Convert.ToInt32(commandArgs[2]);
 
-                int mes_actual = DateTime.Now.Month;
-                int dia = DateTime.Now.Day;
-                int ano = DateTime.Now.Year;
-                if (mesActividad < mes_actual)
+        //        int mes_actual = DateTime.Now.Month;
+        //        int dia = DateTime.Now.Day;
+        //        int ano = DateTime.Now.Year;
+        //        if (mesActividad < mes_actual)
 
-                {
-                    if (dia <= 4)
-                    {
-                        lnkbtnGuardar.Visible = true;
-                        Session["actividades_fuera_tiempo"] = false;
+        //        {
+        //            if (dia <= 4)
+        //            {
+        //                lnkbtnGuardar.Visible = true;
+        //                Session["actividades_fuera_tiempo"] = false;
 
-                    }
-                    else
-                    {
+        //            }
+        //            else
+        //            {
 
-                        Session["actividades_fuera_tiempo"] = true;
-                    }
-                }
-                else
-                {
-                    if (ano == anoacti)
-                    {
-                        lnkbtnGuardar.Visible = true;
-                        Session["actividades_fuera_tiempo"] = false;
-                    }
-                    else
-                    {
-                        Session["actividades_fuera_tiempo"] = true;
-                    }
+        //                Session["actividades_fuera_tiempo"] = true;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            if (ano == anoacti)
+        //            {
+        //                lnkbtnGuardar.Visible = true;
+        //                Session["actividades_fuera_tiempo"] = false;
+        //            }
+        //            else
+        //            {
+        //                Session["actividades_fuera_tiempo"] = true;
+        //            }
 
 
-                }
-            }
-        }
+        //        }
+        //    }
+        //}
         #endregion
 
 

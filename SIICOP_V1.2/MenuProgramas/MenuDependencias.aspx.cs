@@ -22,6 +22,13 @@ namespace SIICOP_V1._2.MenuProgramas
                         PanelEjeAtencion.Attributes["class"] = "col-md-6 col-sm-6 text-center contenedor col-md-offset-3";
                         PanelDGPVI.Visible = false;
                     }
+                    else if (User.IsInRole("CapDGPVI"))
+                    {
+
+                        PanelEjeAtencion.Visible = false;
+                        //PanelEjeAtencion.Attributes["class"] = "col-md-6 col-sm-6 text-center contenedor col-md-offset-3";
+                        PanelDGPVI.Visible = true;
+                    }
                     else
                     {
 

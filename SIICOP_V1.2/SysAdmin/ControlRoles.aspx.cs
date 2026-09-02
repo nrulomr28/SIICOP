@@ -43,7 +43,7 @@ namespace SIICOP_V1._2.SysAdmin
             {
                 string[] allRoles = Roles.GetAllRoles();
                 /// solo 4 roles ///
-                var filteredRoles = allRoles.Where(role => role == "SysAdmin" || role == "Visualizador"  || role== "CapEjeAtencion" || role == "Administrador").ToArray();
+                var filteredRoles = allRoles.Where(role => role == "SysAdmin" || role == "Visualizador"  || role== "CapEjeAtencion" || role == "CapDGPVI" || role == "Administrador").ToArray();
 
                 UsersRoleList.DataSource = filteredRoles;
                 UsersRoleList.DataBind();

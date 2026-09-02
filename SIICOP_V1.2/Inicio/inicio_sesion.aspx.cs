@@ -1,4 +1,5 @@
 ﻿using SIICOP_V1._2.Datos;
+using SIICOP_V1._2.Sesion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,6 @@ namespace SIICOP_V1._2.Inicio
 {
     public partial class inicio_sesion : System.Web.UI.Page
     {
-        SIICOPEntities ctx = new SIICOPEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -40,6 +40,35 @@ namespace SIICOP_V1._2.Inicio
 
                 // 3. Autenticación exitosa
                 FormsAuthentication.SetAuthCookie(Login.UserName, true);
+
+                using (var ctx = new SIICOPEntities())
+                {
+                    var usuario = ctx.Personales
+                    .Where(x => x.login == Login.UserName)
+                    .Select(x => new UsuarioAutenticado
+                    {
+                        PersonalId = x.Personalid,
+                        Nombre = x.Nombre + " " + x.paterno + " " + x.materno,
+                        DependenciaId = x.DependenciaId,
+                        Dependencia = x.Dependencia,
+                        AreaTrabajoId = x.cat_areaidarea,
+                        AreaTrabajo = x.AreaTrabajo,
+                        RolId = x.RolesId,
+                        NombreRol = x.RolesNombre
+                    })
+                    .FirstOrDefault();
+
+                    if (usuario == null)
+                    {
+                        FormsAuthentication.SignOut();
+
+                        e.Authenticated = false;
+                        Login.FailureText = "El usuario está autenticado, pero no existe información asociada a su cuenta.";
+                        return;
+                    }
+                    SesionUsuario.UsuarioLoggeado = usuario;
+                }
+
                 Response.Redirect("~/Inicio/Launcher.aspx");
             }
             catch (Exception ex)

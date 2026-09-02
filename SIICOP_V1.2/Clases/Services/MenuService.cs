@@ -36,6 +36,11 @@ namespace SIICOP_V1._2.Servicios
                 cards.AddRange(MenuSysAdmin.Obtener());
             }
 
+            if (roles.Contains(RolesSistema.CapDGPVI))
+            {
+                cards.AddRange(MenuCapDGPVI.Obtener());
+            }
+
             return cards;
         }
     }

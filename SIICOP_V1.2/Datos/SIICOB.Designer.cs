@@ -1,4 +1,4 @@
-﻿// La generación de código T4 está habilitada para el modelo 'C:\SIICOP3.0\SIICOP\SIICOP_V1.2\Datos\SIICOB.edmx'. 
+﻿// La generación de código T4 está habilitada para el modelo 'C:\Users\obrunop\source\repos\SIICOP\SIICOP_V1.2\Datos\SIICOB.edmx'. 
 // Para habilitar la generación de código heredada, cambie el valor de la propiedad del diseñador 'Estrategia de generación de código'
 // por 'ObjectContext heredado'. Esta propiedad está disponible en la ventana Propiedades cuando se abre
 // el modelo en el diseñador.

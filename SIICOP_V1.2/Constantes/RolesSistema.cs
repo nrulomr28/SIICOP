@@ -10,6 +10,7 @@
 
         public const string CapEjeAtencion = "CapEjeAtencion";  /// USUARIO DE CAPTURA DE DEPENDENCIAS FUERA DE TORRE 
 
-        
+        public const string CapDGPVI = "CapDGPVI"; ///USUARIO DE CAPTURA DE DEPENDENCIAS
+
     }
 }

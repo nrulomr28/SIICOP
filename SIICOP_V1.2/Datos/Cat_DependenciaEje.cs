@@ -12,25 +12,21 @@ namespace SIICOP_V1._2.Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class Cat_Dependencias
+    public partial class Cat_DependenciaEje
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cat_Dependencias()
+        public Cat_DependenciaEje()
         {
-            this.Personales = new HashSet<Personales>();
-            this.tb_programa = new HashSet<tb_programa>();
-            this.Cat_DependenciaEje = new HashSet<Cat_DependenciaEje>();
+            this.Cat_ResponsabilidadPrincipal = new HashSet<Cat_ResponsabilidadPrincipal>();
         }
     
+        public int DependenciaEjeId { get; set; }
         public int DependenciaId { get; set; }
-        public string DependenciaNombre { get; set; }
-        public string DependenciaSiglas { get; set; }
+        public int EjeId { get; set; }
     
+        public virtual Cat_Dependencias Cat_Dependencias { get; set; }
+        public virtual Cat_Eje Cat_Eje { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Personales> Personales { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_programa> tb_programa { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cat_DependenciaEje> Cat_DependenciaEje { get; set; }
+        public virtual ICollection<Cat_ResponsabilidadPrincipal> Cat_ResponsabilidadPrincipal { get; set; }
     }
 }

@@ -12,20 +12,20 @@ namespace SIICOP_V1._2.Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class Cat_Eje
+    public partial class Cat_ResponsabilidadPrincipal
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cat_Eje()
+        public Cat_ResponsabilidadPrincipal()
         {
-            this.Cat_DependenciaEje = new HashSet<Cat_DependenciaEje>();
+            this.Cat_IndicadorDesempeno = new HashSet<Cat_IndicadorDesempeno>();
         }
     
-        public int EjeId { get; set; }
-        public string Eje { get; set; }
-        public int EntornoId { get; set; }
+        public int ResponsabilidadId { get; set; }
+        public int DependenciaEjeId { get; set; }
+        public string DescripcionResponsabilidad { get; set; }
     
-        public virtual Cat_Entorno Cat_Entorno { get; set; }
+        public virtual Cat_DependenciaEje Cat_DependenciaEje { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cat_DependenciaEje> Cat_DependenciaEje { get; set; }
+        public virtual ICollection<Cat_IndicadorDesempeno> Cat_IndicadorDesempeno { get; set; }
     }
 }
