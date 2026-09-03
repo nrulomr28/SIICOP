@@ -17,6 +17,7 @@ namespace SIICOP_V1._2.Datos
         public int IndicadorId { get; set; }
         public int ResponsabilidadId { get; set; }
         public string DescripcionIndicador { get; set; }
+        public byte Habilitado { get; set; }
     
         public virtual Cat_ResponsabilidadPrincipal Cat_ResponsabilidadPrincipal { get; set; }
     }

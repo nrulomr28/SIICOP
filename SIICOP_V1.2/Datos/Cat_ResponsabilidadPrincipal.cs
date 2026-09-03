@@ -23,6 +23,7 @@ namespace SIICOP_V1._2.Datos
         public int ResponsabilidadId { get; set; }
         public int DependenciaEjeId { get; set; }
         public string DescripcionResponsabilidad { get; set; }
+        public byte Habilitado { get; set; }
     
         public virtual Cat_DependenciaEje Cat_DependenciaEje { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

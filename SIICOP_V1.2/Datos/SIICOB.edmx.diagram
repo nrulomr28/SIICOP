@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="13d2a1ab26f042bd9db230d717eb3350" Name="Diagram1" ZoomLevel="88">
+      <Diagram DiagramId="13d2a1ab26f042bd9db230d717eb3350" Name="Diagram1" ZoomLevel="94">
         <EntityTypeShape EntityType="SIICOPModel.Cat_Acciones" Width="1.5" PointX="7.5" PointY="44.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.Cat_area" Width="1.5" PointX="0.75" PointY="31.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.Cat_Delegacion" Width="1.5" PointX="3" PointY="43.375" IsExpanded="true" />

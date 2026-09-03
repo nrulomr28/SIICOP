@@ -574,7 +574,7 @@
                                                     </div>
 
 
-                                                    <div id="PanelAccionImplentada" runat="server" visible="false">
+                                                    <%--<div id="PanelAccionImplentada" runat="server" visible="false">
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="form-group form-group-sm">
@@ -585,9 +585,101 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>--%>
+
+
+                                                    <br />
+
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                            <div class="form-group form-group-sm">
+                                                                <label for="ddlAmbito">Entorno</label>
+                                                                <div class="input-group" id="ambito">
+                                                                    <asp:DropDownList
+                                                                        runat="server"
+                                                                        ID="ddlAmbito"
+                                                                        CssClass="form-control"
+                                                                        AutoPostBack="true"
+                                                                        OnSelectedIndexChanged="ddlAmbito_SelectedIndexChanged">
+
+                                                                        <asp:ListItem Value="0">--Seleccione--</asp:ListItem>
+
+                                                                    </asp:DropDownList>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="col-md-3">
+                                                            <div class="form-group form-group-sm">
+                                                                <label for="ddlEje">Eje</label>
+                                                                <div class="input-group" id="eje">
+
+                                                                    <asp:DropDownList
+                                                                        runat="server"
+                                                                        ID="ddlEje"
+                                                                        CssClass="form-control"
+                                                                        AutoPostBack="true"
+                                                                        OnSelectedIndexChanged="ddlEje_SelectedIndexChanged">
+
+                                                                        <asp:ListItem Value="0">--Seleccione--</asp:ListItem>
+
+                                                                    </asp:DropDownList>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="col-md-3">
+                                                            <div class="form-group form-group-sm">
+                                                                <label for="ddResponsabilidad">
+                                                                    Responsabilidad principal
+                                                                </label>
+
+                                                                <div class="input-group" id="responsabilidad">
+
+                                                                    <asp:DropDownList
+                                                                        runat="server"
+                                                                        ID="ddResponsabilidad"
+                                                                        CssClass="form-control"
+                                                                        AutoPostBack="true"
+                                                                        OnSelectedIndexChanged="ddResponsabilidad_SelectedIndexChanged"
+                                                                        Enabled="false">
+
+                                                                        <asp:ListItem Value="0">--Seleccione--</asp:ListItem>
+
+                                                                    </asp:DropDownList>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="col-md-4">
+                                                            <div class="form-group form-group-sm">
+                                                                <label for="ddIndicador">
+                                                                    Indicador de desempeño
+                                                                </label>
+
+                                                                <div class="input-group" id="indicador">
+
+                                                                    <asp:DropDownList
+                                                                        runat="server"
+                                                                        ID="ddIndicador"
+                                                                        CssClass="form-control"
+                                                                        AutoPostBack="true"
+                                                                        Enabled="false">
+
+                                                                        <asp:ListItem Value="0">--Seleccione--</asp:ListItem>
+
+                                                                    </asp:DropDownList>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
-
-
                                                     <br />
 
                                                     <div class="row">
@@ -610,64 +702,16 @@
                                                             <asp:TextBox ID="txtLugarActividad" CssClass="form-control" runat="server"></asp:TextBox>
                                                         </div>
 
-                                                        <div class="col-md-3">
+                                                        <%--<div class="col-md-3">
                                                             <label for="exampleInputEmail1">Nombre del contacto</label>
                                                             <asp:TextBox ID="txtnombrecontacto" CssClass="form-control" runat="server"></asp:TextBox>
                                                         </div>
                                                         <div class="col-md-2">
                                                             <label for="exampleInputEmail1">Tel/Cel</label>
                                                             <asp:TextBox ID="txtTelefono" CssClass="form-control" runat="server"></asp:TextBox>
-                                                        </div>
+                                                        </div>--%>
                                                     </div>
                                                     <br />
-                                                    <div class="row">
-
-                                                        <div class="col-md-2">
-                                                            <div class="form-group form-group-sm">
-                                                                <label for="exampleInputEmail1">Entorno</label>
-                                                                <div class='input-group ' id='ambito'>
-                                                                    <asp:DropDownList runat="server" ID="ddlAmbito" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlAmbito_SelectedIndexChanged">
-                                                                        <asp:ListItem Value="0">--Seleccione--</asp:ListItem>
-                                                                    </asp:DropDownList>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-3">
-                                                            <div class="form-group form-group-sm">
-                                                                <label for="exampleInputEmail1">Eje</label>
-                                                                <div class='input-group ' id='eje'>
-                                                                    <asp:DropDownList runat="server" ID="ddlEje" CssClass="form-control" AutoPostBack="true">
-                                                                        <asp:ListItem Value="0">--Seleccione--</asp:ListItem>
-                                                                    </asp:DropDownList>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-3">
-                                                            <div class="form-group form-group-sm">
-                                                                <label for="exampleInputEmail1">Responsabilidad principal</label>
-                                                                <div class='input-group ' id='responsabilidad'>
-                                                                    <asp:DropDownList runat="server" ID="ddResponsabilidad" CssClass="form-control" AutoPostBack="true">
-                                                                        <asp:ListItem Value="0">--Seleccione--</asp:ListItem>
-                                                                    </asp:DropDownList>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-4">
-                                                            <div class="form-group form-group-sm">
-                                                                <label for="exampleInputEmail1">Indicador de desempeño</label>
-                                                                <div class='input-group ' id='indicador'>
-                                                                    <asp:DropDownList runat="server" ID="ddIndicador" CssClass="form-control" AutoPostBack="true">
-                                                                        <asp:ListItem Value="0">--Seleccione--</asp:ListItem>
-                                                                    </asp:DropDownList>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
 
                                                     <div class="row mt-3">
 
@@ -719,7 +763,7 @@
                                                         </div>
 
 
-                                                        <div class="row mt-3">
+                                                        <%--<div class="row mt-3">
 
                                                             <div class="col-md-6">
                                                                 <label for="txtInstitucionesParticipantes">Instituciones Participantes</label>
@@ -732,7 +776,7 @@
                                                             </div>
 
 
-                                                        </div>
+                                                        </div>--%>
 
                                                     </div>
 
@@ -804,14 +848,14 @@
                                                         </div>
                                                     </div>
                                                     <br />
-                                                    <div class="col-md-12">
+                                                    <%--<div class="col-md-12">
                                                         <div class="row">
                                                             <div id="Div1" runat="server">
                                                                 <h3>Persona que atendió la actividad</h3>
                                                                 <asp:TextBox ID="txtpersonal_atendio_actividad" CssClass="form-control" runat="server" TextMode="MultiLine"></asp:TextBox>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div>--%>
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <h3>Seguimiento</h3>

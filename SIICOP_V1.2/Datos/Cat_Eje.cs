@@ -23,6 +23,7 @@ namespace SIICOP_V1._2.Datos
         public int EjeId { get; set; }
         public string Eje { get; set; }
         public int EntornoId { get; set; }
+        public Nullable<byte> Habilitado { get; set; }
     
         public virtual Cat_Entorno Cat_Entorno { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -2106,6 +2106,9 @@
     <Compile Include="Datos\Cat_ResponsabilidadPrincipal.cs">
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Datos\Repositorio\EjeRepository.cs" />
+    <Compile Include="Datos\Repositorio\IndicadorRepository.cs" />
+    <Compile Include="Datos\Repositorio\ResponsabilidadRepository.cs" />
     <Compile Include="Datos\Repositorio\UsuarioRepository.cs" />
     <Compile Include="Legacy\Bienvenidas\Bienvenido_C4.aspx.cs">
       <DependentUpon>Bienvenido_C4.aspx</DependentUpon>

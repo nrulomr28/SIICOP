@@ -69,6 +69,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Cat_Coordinador' no tiene definid
           <Property Name="EjeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Eje" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="EntornoId" Type="int" Nullable="false" />
+          <Property Name="Habilitado" Type="tinyint" />
         </EntityType>
         <EntityType Name="Cat_Entorno">
           <Key>
@@ -84,6 +85,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Cat_Coordinador' no tiene definid
           <Property Name="IndicadorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ResponsabilidadId" Type="int" Nullable="false" />
           <Property Name="DescripcionIndicador" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Habilitado" Type="tinyint" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'SIICOP.dbo.Cat_Ravi' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -108,6 +110,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Cat_Ravi' no tiene definida ningu
           <Property Name="ResponsabilidadId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DependenciaEjeId" Type="int" Nullable="false" />
           <Property Name="DescripcionResponsabilidad" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Habilitado" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="Cat_SubAcciones">
           <Key>
@@ -3840,6 +3843,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <Property Name="EntornoId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Cat_Entorno" Relationship="SIICOPModel.FK_Cat_Eje_Cat_Entorno" FromRole="Cat_Eje" ToRole="Cat_Entorno" />
           <NavigationProperty Name="Cat_DependenciaEje" Relationship="SIICOPModel.FK_Cat_DependenciaEje_Cat_Eje" FromRole="Cat_Eje" ToRole="Cat_DependenciaEje" />
+          <Property Name="Habilitado" Type="Byte" />
         </EntityType>
         <EntityType Name="Cat_Entorno">
           <Key>
@@ -4079,6 +4083,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <Property Name="ResponsabilidadId" Type="Int32" Nullable="false" />
           <Property Name="DescripcionIndicador" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cat_ResponsabilidadPrincipal" Relationship="SIICOPModel.FK_Cat_IndicadorDesempeno_Cat_ResponsabilidadPrincipal" FromRole="Cat_IndicadorDesempeno" ToRole="Cat_ResponsabilidadPrincipal" />
+          <Property Name="Habilitado" Type="Byte" Nullable="false" />
         </EntityType>
         <EntityType Name="Cat_ResponsabilidadPrincipal">
           <Key>
@@ -4089,6 +4094,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <Property Name="DescripcionResponsabilidad" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cat_DependenciaEje" Relationship="SIICOPModel.FK_Cat_ResponsabilidadPrincipal_Cat_DependenciaEje" FromRole="Cat_ResponsabilidadPrincipal" ToRole="Cat_DependenciaEje" />
           <NavigationProperty Name="Cat_IndicadorDesempeno" Relationship="SIICOPModel.FK_Cat_IndicadorDesempeno_Cat_ResponsabilidadPrincipal" FromRole="Cat_ResponsabilidadPrincipal" ToRole="Cat_IndicadorDesempeno" />
+          <Property Name="Habilitado" Type="Byte" Nullable="false" />
         </EntityType>
         <Association Name="FK_Cat_DependenciaEje_Cat_Dependencias">
           <End Type="SIICOPModel.Cat_Dependencias" Role="Cat_Dependencias" Multiplicity="1" />
@@ -5177,6 +5183,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <EntitySetMapping Name="Cat_Eje">
             <EntityTypeMapping TypeName="SIICOPModel.Cat_Eje">
               <MappingFragment StoreEntitySet="Cat_Eje">
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
                 <ScalarProperty Name="EntornoId" ColumnName="EntornoId" />
                 <ScalarProperty Name="Eje" ColumnName="Eje" />
                 <ScalarProperty Name="EjeId" ColumnName="EjeId" />
@@ -5302,6 +5309,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <EntitySetMapping Name="Cat_IndicadorDesempeno">
             <EntityTypeMapping TypeName="SIICOPModel.Cat_IndicadorDesempeno">
               <MappingFragment StoreEntitySet="Cat_IndicadorDesempeno">
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
                 <ScalarProperty Name="DescripcionIndicador" ColumnName="DescripcionIndicador" />
                 <ScalarProperty Name="ResponsabilidadId" ColumnName="ResponsabilidadId" />
                 <ScalarProperty Name="IndicadorId" ColumnName="IndicadorId" />
@@ -5311,6 +5319,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <EntitySetMapping Name="Cat_ResponsabilidadPrincipal">
             <EntityTypeMapping TypeName="SIICOPModel.Cat_ResponsabilidadPrincipal">
               <MappingFragment StoreEntitySet="Cat_ResponsabilidadPrincipal">
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
                 <ScalarProperty Name="DescripcionResponsabilidad" ColumnName="DescripcionResponsabilidad" />
                 <ScalarProperty Name="DependenciaEjeId" ColumnName="DependenciaEjeId" />
                 <ScalarProperty Name="ResponsabilidadId" ColumnName="ResponsabilidadId" />

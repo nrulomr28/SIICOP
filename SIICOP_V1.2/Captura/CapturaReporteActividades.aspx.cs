@@ -2,6 +2,7 @@
 using SIICOP_V1._2.Clases.Services;
 using SIICOP_V1._2.Datos;
 using SIICOP_V1._2.Datos.Repositorio;
+using SIICOP_V1._2.Sesion;
 using System;
 using System.Drawing;
 using System.Globalization;
@@ -113,6 +114,7 @@ namespace SIICOP_V1._2.Captura
             if (!IsPostBack)
             {
                 InicializarPagina();
+                CargarEjes();
                 CargarZonas();
                 CargarCordinador();
                 CargarProgramas();
@@ -388,14 +390,14 @@ namespace SIICOP_V1._2.Captura
 
             bool esEstrategia = Session["ImagenSeleccionada"] != null;                             
 
-            if (PanelAccionImplentada != null)
-            {
-                 PanelAccionImplentada.Visible = esEstrategia;
-            }
+            //if (PanelAccionImplentada != null)
+            //{
+            //     PanelAccionImplentada.Visible = esEstrategia;
+            //}
             if (PanelListados != null)
             {
                 PanelListados.Visible = visible && !esEstrategia;
-                PanelAccionImplentada.Visible = esEstrategia;
+                //PanelAccionImplentada.Visible = esEstrategia;
             }
             
         }
@@ -565,7 +567,7 @@ namespace SIICOP_V1._2.Captura
                 string accionId = reportesHistorico.AccionesID != 0 ? reportesHistorico.AccionesID.ToString().Trim() : "0";
                 if (ddlAcciones.Items.FindByValue(accionId) != null) ddlAcciones.SelectedValue = accionId;
 
-                this.txtAccionImplementada.Text = reportesHistorico.AccionesNombre.ToString();
+                //this.txtAccionImplementada.Text = reportesHistorico.AccionesNombre.ToString();
             
                 var direccionReporte = ctx.tb_DireccionReporte.FirstOrDefault(t => t.idResumenDiario == idExpediente);
                 if (direccionReporte != null)
@@ -623,7 +625,7 @@ namespace SIICOP_V1._2.Captura
 
             if (entornoId > 0)
             {
-                CargarEje(entornoId);
+                CargarEjes();
             }
             else
             {
@@ -850,9 +852,9 @@ namespace SIICOP_V1._2.Captura
                     : Convert.ToInt32(
                         ddlAcciones.SelectedValue);
 
-            reporte.accion_implementada =
-                txtAccionImplementada.Text
-                    .ToUpper();
+            //reporte.accion_implementada =
+            //    txtAccionImplementada.Text
+            //        .ToUpper();
 
             reporte.descripcion_actividad =
                 txtDescripcionActividad.Text
@@ -1987,7 +1989,60 @@ namespace SIICOP_V1._2.Captura
             }
         }
 
+        private void CargarEjes()
+        {
+            try
+            {
+                var repo = new EjeRepository().ObtenerEjesPorDependecia(dependenciaId: SesionUsuario.UsuarioLoggeado.DependenciaId);
+                ddlEje.DataSource = repo;
+                ddlEje.DataTextField = "Eje";
+                ddlEje.DataValueField = "EjeId";
+                ddlEje.DataBind();
+                ddlEje.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
 
+                LimpiarResponsabilidades();
+                LimpiarIndicadores();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private void CargarResponsabilidades()
+        {
+            int dependenciaId = (int)SesionUsuario.UsuarioLoggeado.DependenciaId;
+            int ejeId = int.Parse(ddlEje.SelectedValue);
+
+            try
+            {
+                var repo = new ResponsabilidadRepository().ObtenerResponsabilidadPorEje(dependenciaId, ejeId);
+                ddResponsabilidad.DataSource = repo;
+                ddResponsabilidad.DataTextField = "DescripcionResponsabilidad";
+                ddResponsabilidad.DataValueField = "ResponsabilidadId";
+                ddResponsabilidad.DataBind();
+
+                ddResponsabilidad.Items.Insert(0, new ListItem("--Seleccione--", "0"));
+
+                ddResponsabilidad.Enabled = repo.Count > 0;
+            }
+            catch (Exception ex) { }
+        }
+
+        private void CargarIndicadores()
+        {
+            int responsabilidadId = int.Parse(ddResponsabilidad.SelectedValue);
+            try
+            {
+                var repo = new IndicadorRepository().ObtenerIndicadoresPorResponsabilidad(responsabilidadId);
+                ddIndicador.DataSource = repo;
+                ddIndicador.DataTextField = "DescripcionIndicador";
+                ddIndicador.DataValueField = "IndicadorId";
+                ddIndicador.DataBind();
+                ddIndicador.Items.Insert(0, new ListItem("--Seleccione--", "0"));
+                ddIndicador.Enabled = repo.Count > 0;
+            }
+            catch (Exception ex) { }
+        }
 
         private void CargarZonas()
         {
@@ -2278,29 +2333,71 @@ namespace SIICOP_V1._2.Captura
             }
         }
 
-        private void CargarEje(int EntornoId)
+        //private void CargarEje(int EntornoId)
+        //{
+        //    try
+        //    {
+        //        var repo = new EjeRepository();
+
+        //        var localidades = repo.ObtenerEjesPorDependecia(SesionUsuario.UsuarioLoggeado);
+
+        //        ddlEje.DataSource = localidades;
+        //        ddlEje.DataTextField = "Eje";
+        //        ddlEje.DataValueField = "EjeId";
+        //        ddlEje.DataBind();
+
+        //        ddlEje.Items.Insert(0, new ListItem("-- Seleccione eje --", "0"));
+        //    }
+
+        //    catch (Exception)
+        //    {
+        //        lblError.Text = "Error al cargar eje";
+        //        lblError.Visible = true;
+        //    }
+
+        //}
+
+        protected void ddlEje_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                var repo = new EntornoRepository();
+            LimpiarResponsabilidades();
+            LimpiarIndicadores();
 
-                var localidades = repo.ObtenerEje(EntornoId);
+            if (ddlEje.SelectedValue == "0")
+                return;
 
-                ddlEje.DataSource = localidades;
-                ddlEje.DataTextField = "Eje";
-                ddlEje.DataValueField = "EjeId";
-                ddlEje.DataBind();
-
-                ddlEje.Items.Insert(0, new ListItem("-- Seleccione eje --", "0"));
-            }
-
-            catch (Exception)
-            {
-                lblError.Text = "Error al cargar eje";
-                lblError.Visible = true;
-            }
-
+            CargarResponsabilidades();
         }
 
+        protected void ddResponsabilidad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LimpiarIndicadores();
+
+            if(ddResponsabilidad.SelectedValue == "0") 
+                return;
+
+            CargarIndicadores();
+        }
+
+        private void LimpiarResponsabilidades()
+        {
+            ddResponsabilidad.Items.Clear();
+
+            ddResponsabilidad.Items.Add(
+                new ListItem("--Seleccione--", "0")
+            );
+
+            ddResponsabilidad.Enabled = false;
+        }
+
+        private void LimpiarIndicadores()
+        {
+            ddIndicador.Items.Clear();
+
+            ddIndicador.Items.Add(
+                new ListItem("--Seleccione--", "0")
+            );
+
+            ddIndicador.Enabled = false;
+        }
     }
 }
