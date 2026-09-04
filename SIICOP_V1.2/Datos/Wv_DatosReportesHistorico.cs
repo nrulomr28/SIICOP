@@ -71,5 +71,7 @@ namespace SIICOP_V1._2.Datos
         public Nullable<int> EjeId { get; set; }
         public string tema_impartido { get; set; }
         public Nullable<int> Ambito { get; set; }
+        public Nullable<int> ResponsabilidadId { get; set; }
+        public Nullable<int> IndicadorId { get; set; }
     }
 }

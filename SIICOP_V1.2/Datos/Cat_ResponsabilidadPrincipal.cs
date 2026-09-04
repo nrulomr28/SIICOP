@@ -18,15 +18,18 @@ namespace SIICOP_V1._2.Datos
         public Cat_ResponsabilidadPrincipal()
         {
             this.Cat_IndicadorDesempeno = new HashSet<Cat_IndicadorDesempeno>();
+            this.TB_DatosGralReporte = new HashSet<TB_DatosGralReporte>();
         }
     
         public int ResponsabilidadId { get; set; }
         public int DependenciaEjeId { get; set; }
         public string DescripcionResponsabilidad { get; set; }
-        public byte Habilitado { get; set; }
+        public Nullable<byte> Habilitado { get; set; }
     
         public virtual Cat_DependenciaEje Cat_DependenciaEje { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cat_IndicadorDesempeno> Cat_IndicadorDesempeno { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_DatosGralReporte> TB_DatosGralReporte { get; set; }
     }
 }

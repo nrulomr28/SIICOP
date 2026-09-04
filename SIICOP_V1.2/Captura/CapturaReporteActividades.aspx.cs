@@ -4,6 +4,7 @@ using SIICOP_V1._2.Datos;
 using SIICOP_V1._2.Datos.Repositorio;
 using SIICOP_V1._2.Sesion;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -132,6 +133,7 @@ namespace SIICOP_V1._2.Captura
                     }
                     else if (entornoId == 2)
                     {
+                        pnlResponsabilidadIndicador.Visible = false;
                         CargarEntorno(entornoId);
                         CargarMunicipiosP();
                     }
@@ -559,8 +561,20 @@ namespace SIICOP_V1._2.Captura
                     ddlEje.SelectedValue = ejeid;
                 }
 
+                string responsabilidadid = reportesHistorico.ResponsabilidadId != 0 ? reportesHistorico.ResponsabilidadId.ToString() : "0";     ///// RESPONSABILIDADID
+                if(!string.IsNullOrEmpty(responsabilidadid) && ddlResponsabilidad.Items.FindByValue(responsabilidadid) != null)
+                {
+                    ddlResponsabilidad.SelectedValue = responsabilidadid;
+                }
+
+                string indicadorid = reportesHistorico.IndicadorId != 0 ? reportesHistorico.IndicadorId.ToString() : "0";     ///// INDICADORID
+                if (!string.IsNullOrEmpty(indicadorid) && ddlIndicador.Items.FindByValue(indicadorid) != null)
+                {
+                    ddlIndicador.SelectedValue = indicadorid;
+                }
+
                 //this.txtTemaImpartido.Text = reportesHistorico.tema_impartido.ToString();
-                
+
                 string subId = reportesHistorico.subprogramaId != 0 ? reportesHistorico.subprogramaId.ToString() : "0";
                 if (ddlsubprograma.Items.FindByValue(subId) != null) ddlsubprograma.SelectedValue = subId;
 
@@ -623,15 +637,15 @@ namespace SIICOP_V1._2.Captura
         {
             int entornoId = Convert.ToInt32(ddlAmbito.SelectedValue);
 
-            if (entornoId > 0)
-            {
-                CargarEjes();
-            }
-            else
-            {
-                ddlEje.Items.Clear();
-                ddlEje.Items.Insert(0, new ListItem("-- Seleccione localidad --", "0"));
-            }
+            //if (entornoId > 0)
+            //{
+            //    CargarEjes();
+            //}
+            //else
+            //{
+            //    ddlEje.Items.Clear();
+            //    ddlEje.Items.Insert(0, new ListItem("-- Seleccione localidad --", "0"));
+            //}
 
             if (entornoId == 2)
             {
@@ -1022,7 +1036,13 @@ namespace SIICOP_V1._2.Captura
                     ddlOfrecioSegurichat.SelectedValue == "1",
 
                 segurichat =
-                    txtSegurichat.Text.ToUpper()
+                    txtSegurichat.Text.ToUpper(),
+                
+                ResponsabilidadId = Convert.ToInt32(
+                        ddlResponsabilidad.SelectedValue),
+
+                IndicadorId = Convert.ToInt32(
+                        ddlIndicador.SelectedValue)
             };
         }
 
@@ -1163,29 +1183,82 @@ namespace SIICOP_V1._2.Captura
                 var validadorImagenes =
                     new Validaciones.Imagenes();
 
+                int cantidadArchivos = file.PostedFiles.Count;
+
+                bool contienePdf = false;
+                bool contieneImagen = false;
+
                 foreach (HttpPostedFile archivo in file.PostedFiles)
                 {
                     string nombreArchivo =
-                        archivo.FileName;
+                        Path.GetFileName(archivo.FileName);
 
-                    if (!validadorImagenes
-                            .ValidateVideoExtension(
-                                nombreArchivo))
+                    string extension =
+                        Path.GetExtension(nombreArchivo)
+                            .ToLowerInvariant();
+
+                    bool esPdf =
+                        extension == ".pdf";
+
+                    bool esImagen =
+                        extension == ".jpg" ||
+                        extension == ".jpeg" ||
+                        extension == ".png";
+
+                    if (esPdf)
+                    {
+                        contienePdf = true;
+                    }
+                    else if (esImagen)
+                    {
+                        contieneImagen = true;
+                    }
+                    else
                     {
                         textoValidacion +=
-                            "<li>Solo permite subir imágenes en formato PNG o JPG</li>";
+                            "<li>Solo se permiten archivos JPG, JPEG, PNG o PDF</li>";
 
                         valido = false;
                     }
 
-                    tamanoTotalArchivos +=
-                        archivo.ContentLength;
+                    tamanoTotalArchivos += archivo.ContentLength;
+                }
+
+                // Si es PDF, debe ser solamente un archivo
+                if (contienePdf)
+                {
+                    if (cantidadArchivos > 1)
+                    {
+                        textoValidacion +=
+                            "<li>Cuando la evidencia es un PDF, solo se permite subir un archivo PDF</li>";
+
+                        valido = false;
+                    }
+                }
+                // Si son imágenes, máximo 2
+                else if (contieneImagen)
+                {
+                    if (cantidadArchivos > 2)
+                    {
+                        textoValidacion +=
+                            "<li>Se permite subir un máximo de 2 imágenes</li>";
+
+                        valido = false;
+                    }
+                }
+
+                if (contienePdf && contieneImagen)
+                {
+                    textoValidacion +=
+                        "<li>No se puede combinar un PDF con imágenes. Suba únicamente el PDF o las imágenes.</li>";
+
+                    valido = false;
                 }
 
                 if (tamanoTotalArchivos >= 3000000)
                 {
                     textoValidacion +=
-                        "<li>El tamaño máximo permitido por archivo es de 3 MB</li>";
+                        "<li>El tamaño máximo permitido es de 3 MB</li>";
 
                     valido = false;
                 }
@@ -1193,7 +1266,7 @@ namespace SIICOP_V1._2.Captura
             else
             {
                 textoValidacion +=
-                    "<li>Es obligatorio subir al menos una imagen</li>";
+                    "<li>Es obligatorio subir al menos una evidencia fotográfica</li>";
 
                 valido = false;
             }
@@ -1650,7 +1723,10 @@ namespace SIICOP_V1._2.Captura
                 nuevoDatosGral.ClavePlantel = this.txtclave.Text == string.Empty ? "" : this.txtclave.Text.ToUpper();
 
                 nuevoDatosGral.Ambito = Convert.ToInt32(ddlAmbito.SelectedValue);
-                nuevoDatosGral.EjeId = Convert.ToInt32(ddlEje.SelectedValue);
+                //nuevoDatosGral.EjeId = Convert.ToInt32(ddlEje.SelectedValue);
+                nuevoDatosGral.EjeId = new int?(this.ddlEje.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlEje.SelectedValue));
+                nuevoDatosGral.ResponsabilidadId = new int?(this.ddlResponsabilidad.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlResponsabilidad.SelectedValue));
+                nuevoDatosGral.IndicadorId = new int?(this.ddlIndicador.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlIndicador.SelectedValue));
                 nuevoDatosGral.niñas = new int?(this.txnina.Value == "" ? 0 : Convert.ToInt32(this.txnina.Value));
                 nuevoDatosGral.niños = new int?(this.txnino.Value == "" ? 0 : Convert.ToInt32(this.txnino.Value));
                 nuevoDatosGral.hombres = new int?(this.txhombres.Value == "" ? 0 : Convert.ToInt32(this.txhombres.Value));
@@ -1700,6 +1776,7 @@ namespace SIICOP_V1._2.Captura
                 tbReporteDiario.AccionesID = new int?(this.ddlAcciones.SelectedValue == "null" ? 0 : Convert.ToInt32(this.ddlAcciones.SelectedValue));
                 tbReporteDiario.fecha = new DateTime?(Convert.ToDateTime(this.txtFecha.Text));
                 tbReporteDiario.subprogramaId = new int?(this.ddlsubprograma.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlsubprograma.SelectedValue));
+
                 MODE = Convert.ToInt32(ddlAmbito.SelectedValue);
 
                 int Hombres = 0;
@@ -1993,7 +2070,17 @@ namespace SIICOP_V1._2.Captura
         {
             try
             {
-                var repo = new EjeRepository().ObtenerEjesPorDependecia(dependenciaId: SesionUsuario.UsuarioLoggeado.DependenciaId);
+                string valor = Request.QueryString["ValorEntorno"];
+                int entornoId = Convert.ToInt32(valor);
+                List<Cat_Eje> repo = new List<Cat_Eje>();
+                if (entornoId == 2) // Escolar
+                {
+                    repo = new EjeRepository().ObtenerEjesPorEntorno(entornoId);
+                }
+                else { // Cominitario
+                    repo = new EjeRepository().ObtenerEjesPorDependecia(SesionUsuario.UsuarioLoggeado.DependenciaId, entornoId);
+                }
+                
                 ddlEje.DataSource = repo;
                 ddlEje.DataTextField = "Eje";
                 ddlEje.DataValueField = "EjeId";
@@ -2016,30 +2103,30 @@ namespace SIICOP_V1._2.Captura
             try
             {
                 var repo = new ResponsabilidadRepository().ObtenerResponsabilidadPorEje(dependenciaId, ejeId);
-                ddResponsabilidad.DataSource = repo;
-                ddResponsabilidad.DataTextField = "DescripcionResponsabilidad";
-                ddResponsabilidad.DataValueField = "ResponsabilidadId";
-                ddResponsabilidad.DataBind();
+                ddlResponsabilidad.DataSource = repo;
+                ddlResponsabilidad.DataTextField = "DescripcionResponsabilidad";
+                ddlResponsabilidad.DataValueField = "ResponsabilidadId";
+                ddlResponsabilidad.DataBind();
 
-                ddResponsabilidad.Items.Insert(0, new ListItem("--Seleccione--", "0"));
+                ddlResponsabilidad.Items.Insert(0, new ListItem("--Seleccione--", "0"));
 
-                ddResponsabilidad.Enabled = repo.Count > 0;
+                ddlResponsabilidad.Enabled = repo.Count > 0;
             }
             catch (Exception ex) { }
         }
 
         private void CargarIndicadores()
         {
-            int responsabilidadId = int.Parse(ddResponsabilidad.SelectedValue);
+            int responsabilidadId = int.Parse(ddlResponsabilidad.SelectedValue);
             try
             {
                 var repo = new IndicadorRepository().ObtenerIndicadoresPorResponsabilidad(responsabilidadId);
-                ddIndicador.DataSource = repo;
-                ddIndicador.DataTextField = "DescripcionIndicador";
-                ddIndicador.DataValueField = "IndicadorId";
-                ddIndicador.DataBind();
-                ddIndicador.Items.Insert(0, new ListItem("--Seleccione--", "0"));
-                ddIndicador.Enabled = repo.Count > 0;
+                ddlIndicador.DataSource = repo;
+                ddlIndicador.DataTextField = "DescripcionIndicador";
+                ddlIndicador.DataValueField = "IndicadorId";
+                ddlIndicador.DataBind();
+                ddlIndicador.Items.Insert(0, new ListItem("--Seleccione--", "0"));
+                ddlIndicador.Enabled = repo.Count > 0;
             }
             catch (Exception ex) { }
         }
@@ -2372,7 +2459,7 @@ namespace SIICOP_V1._2.Captura
         {
             LimpiarIndicadores();
 
-            if(ddResponsabilidad.SelectedValue == "0") 
+            if(ddlResponsabilidad.SelectedValue == "0") 
                 return;
 
             CargarIndicadores();
@@ -2380,24 +2467,24 @@ namespace SIICOP_V1._2.Captura
 
         private void LimpiarResponsabilidades()
         {
-            ddResponsabilidad.Items.Clear();
+            ddlResponsabilidad.Items.Clear();
 
-            ddResponsabilidad.Items.Add(
+            ddlResponsabilidad.Items.Add(
                 new ListItem("--Seleccione--", "0")
             );
 
-            ddResponsabilidad.Enabled = false;
+            ddlResponsabilidad.Enabled = false;
         }
 
         private void LimpiarIndicadores()
         {
-            ddIndicador.Items.Clear();
+            ddlIndicador.Items.Clear();
 
-            ddIndicador.Items.Add(
+            ddlIndicador.Items.Add(
                 new ListItem("--Seleccione--", "0")
             );
 
-            ddIndicador.Enabled = false;
+            ddlIndicador.Enabled = false;
         }
     }
 }

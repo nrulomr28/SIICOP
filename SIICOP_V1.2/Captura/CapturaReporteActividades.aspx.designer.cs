@@ -303,22 +303,31 @@ namespace SIICOP_V1._2.Captura
         protected global::System.Web.UI.WebControls.DropDownList ddlEje;
 
         /// <summary>
-        /// Control ddResponsabilidad.
+        /// Control pnlResponsabilidadIndicador.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddResponsabilidad;
+        protected global::System.Web.UI.WebControls.Panel pnlResponsabilidadIndicador;
 
         /// <summary>
-        /// Control ddIndicador.
+        /// Control ddlResponsabilidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddIndicador;
+        protected global::System.Web.UI.WebControls.DropDownList ddlResponsabilidad;
+
+        /// <summary>
+        /// Control ddlIndicador.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlIndicador;
 
         /// <summary>
         /// Control ddlnombreescuela.

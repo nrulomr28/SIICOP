@@ -60,7 +60,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Cat_Coordinador' no tiene definid
           </Key>
           <Property Name="DependenciaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DependenciaNombre" Type="nchar" MaxLength="100" />
-          <Property Name="DependenciaSiglas" Type="nchar" MaxLength="10" />
+          <Property Name="DependenciaSiglas" Type="nchar" MaxLength="25" />
         </EntityType>
         <EntityType Name="Cat_Eje">
           <Key>
@@ -85,7 +85,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Cat_Coordinador' no tiene definid
           <Property Name="IndicadorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ResponsabilidadId" Type="int" Nullable="false" />
           <Property Name="DescripcionIndicador" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Habilitado" Type="tinyint" Nullable="false" />
+          <Property Name="Habilitado" Type="tinyint" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'SIICOP.dbo.Cat_Ravi' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -110,7 +110,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Cat_Ravi' no tiene definida ningu
           <Property Name="ResponsabilidadId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DependenciaEjeId" Type="int" Nullable="false" />
           <Property Name="DescripcionResponsabilidad" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Habilitado" Type="tinyint" Nullable="false" />
+          <Property Name="Habilitado" Type="tinyint" />
         </EntityType>
         <EntityType Name="Cat_SubAcciones">
           <Key>
@@ -445,6 +445,8 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Cat_Ravi' no tiene definida ningu
           <Property Name="total_acciones_ravi" Type="int" />
           <Property Name="ofrecieron_segurichat" Type="bit" />
           <Property Name="segurichat" Type="varchar" MaxLength="200" />
+          <Property Name="ResponsabilidadId" Type="int" />
+          <Property Name="IndicadorId" Type="int" />
         </EntityType>
         <EntityType Name="tb_DireccionReporte">
           <Key>
@@ -870,6 +872,8 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_DatosReportesHistorico' no tie
           <Property Name="idzona" Type="int" />
           <Property Name="zona" Type="varchar" MaxLength="150" />
           <Property Name="inst_participantes" Type="varchar" MaxLength="200" />
+          <Property Name="ResponsabilidadId" Type="int" />
+          <Property Name="IndicadorId" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'SIICOP.dbo.WV_Datosrepote_app' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1309,6 +1313,30 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
             </Principal>
             <Dependent Role="tb_Beneficiados_dgprs">
               <PropertyRef Name="idResumenDiario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_DatosGralReporte_Cat_IndicadorDesempeno">
+          <End Role="Cat_IndicadorDesempeno" Type="Self.Cat_IndicadorDesempeno" Multiplicity="0..1" />
+          <End Role="TB_DatosGralReporte" Type="Self.TB_DatosGralReporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_IndicadorDesempeno">
+              <PropertyRef Name="IndicadorId" />
+            </Principal>
+            <Dependent Role="TB_DatosGralReporte">
+              <PropertyRef Name="IndicadorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_DatosGralReporte_Cat_ResponsabilidadPrincipal">
+          <End Role="Cat_ResponsabilidadPrincipal" Type="Self.Cat_ResponsabilidadPrincipal" Multiplicity="0..1" />
+          <End Role="TB_DatosGralReporte" Type="Self.TB_DatosGralReporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_ResponsabilidadPrincipal">
+              <PropertyRef Name="ResponsabilidadId" />
+            </Principal>
+            <Dependent Role="TB_DatosGralReporte">
+              <PropertyRef Name="ResponsabilidadId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1857,7 +1885,9 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
     [Wv_DatosReportesHistorico].[FolioActividad] AS [FolioActividad], 
     [Wv_DatosReportesHistorico].[idzona] AS [idzona], 
     [Wv_DatosReportesHistorico].[zona] AS [zona], 
-    [Wv_DatosReportesHistorico].[inst_participantes] AS [inst_participantes]
+    [Wv_DatosReportesHistorico].[inst_participantes] AS [inst_participantes], 
+    [Wv_DatosReportesHistorico].[ResponsabilidadId] AS [ResponsabilidadId], 
+    [Wv_DatosReportesHistorico].[IndicadorId] AS [IndicadorId]
     FROM [dbo].[Wv_DatosReportesHistorico] AS [Wv_DatosReportesHistorico]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="WV_Datosrepote_app" EntityType="Self.WV_Datosrepote_app" store:Type="Views" store:Schema="dbo">
@@ -2123,6 +2153,14 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
             <End Role="tb_Reporte_Diario" EntitySet="tb_Reporte_Diario" />
             <End Role="tb_Beneficiados_dgprs" EntitySet="tb_Beneficiados_dgprs" />
           </AssociationSet>
+          <AssociationSet Name="FK_TB_DatosGralReporte_Cat_IndicadorDesempeno" Association="Self.FK_TB_DatosGralReporte_Cat_IndicadorDesempeno">
+            <End Role="Cat_IndicadorDesempeno" EntitySet="Cat_IndicadorDesempeno" />
+            <End Role="TB_DatosGralReporte" EntitySet="TB_DatosGralReporte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_DatosGralReporte_Cat_ResponsabilidadPrincipal" Association="Self.FK_TB_DatosGralReporte_Cat_ResponsabilidadPrincipal">
+            <End Role="Cat_ResponsabilidadPrincipal" EntitySet="Cat_ResponsabilidadPrincipal" />
+            <End Role="TB_DatosGralReporte" EntitySet="TB_DatosGralReporte" />
+          </AssociationSet>
           <AssociationSet Name="FK_TB_DatosGralReporte_tb_Reporte_Diario" Association="Self.FK_TB_DatosGralReporte_tb_Reporte_Diario">
             <End Role="tb_Reporte_Diario" EntitySet="tb_Reporte_Diario" />
             <End Role="TB_DatosGralReporte" EntitySet="TB_DatosGralReporte" />
@@ -2224,7 +2262,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           </Key>
           <Property Name="DependenciaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DependenciaNombre" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="DependenciaSiglas" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DependenciaSiglas" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Personales" Relationship="Self.FK_Personales_Cat_Dependencias" FromRole="Cat_Dependencias" ToRole="Personales" />
           <NavigationProperty Name="tb_programa" Relationship="Self.FK_tb_programa_Cat_Dependencias" FromRole="Cat_Dependencias" ToRole="tb_programa" />
           <NavigationProperty Name="Cat_DependenciaEje" Relationship="SIICOPModel.FK_Cat_DependenciaEje_Cat_Dependencias" FromRole="Cat_Dependencias" ToRole="Cat_DependenciaEje" />
@@ -2896,6 +2934,8 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <Property Name="EjeId" Type="Int32" />
           <Property Name="tema_impartido" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Ambito" Type="Int32" />
+          <Property Name="ResponsabilidadId" Type="Int32" />
+          <Property Name="IndicadorId" Type="Int32" />
         </EntityType>
         <EntityType Name="WV_Datosrepote_app">
           <Key>
@@ -3613,7 +3653,36 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
             <End Role="Cat_Eje" EntitySet="Cat_Eje" />
           </AssociationSet>
           <EntitySet Name="TB_DatosGralReporte" EntityType="SIICOPModel.TB_DatosGralReporte" />
+          <EntitySet Name="Cat_Coordinador" EntityType="SIICOPModel.Cat_Coordinador" />
+          <EntitySet Name="Cat_Ravi" EntityType="SIICOPModel.Cat_Ravi" />
+          <EntitySet Name="Cat_DependenciaEje" EntityType="SIICOPModel.Cat_DependenciaEje" />
+          <EntitySet Name="Cat_IndicadorDesempeno" EntityType="SIICOPModel.Cat_IndicadorDesempeno" />
+          <EntitySet Name="Cat_ResponsabilidadPrincipal" EntityType="SIICOPModel.Cat_ResponsabilidadPrincipal" />
+          <AssociationSet Name="FK_Cat_DependenciaEje_Cat_Dependencias" Association="SIICOPModel.FK_Cat_DependenciaEje_Cat_Dependencias">
+            <End Role="Cat_Dependencias" EntitySet="Cat_Dependencias" />
+            <End Role="Cat_DependenciaEje" EntitySet="Cat_DependenciaEje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cat_DependenciaEje_Cat_Eje" Association="SIICOPModel.FK_Cat_DependenciaEje_Cat_Eje">
+            <End Role="Cat_Eje" EntitySet="Cat_Eje" />
+            <End Role="Cat_DependenciaEje" EntitySet="Cat_DependenciaEje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cat_ResponsabilidadPrincipal_Cat_DependenciaEje" Association="SIICOPModel.FK_Cat_ResponsabilidadPrincipal_Cat_DependenciaEje">
+            <End Role="Cat_DependenciaEje" EntitySet="Cat_DependenciaEje" />
+            <End Role="Cat_ResponsabilidadPrincipal" EntitySet="Cat_ResponsabilidadPrincipal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cat_IndicadorDesempeno_Cat_ResponsabilidadPrincipal" Association="SIICOPModel.FK_Cat_IndicadorDesempeno_Cat_ResponsabilidadPrincipal">
+            <End Role="Cat_ResponsabilidadPrincipal" EntitySet="Cat_ResponsabilidadPrincipal" />
+            <End Role="Cat_IndicadorDesempeno" EntitySet="Cat_IndicadorDesempeno" />
+          </AssociationSet>
           <EntitySet Name="tb_Reporte_Diario" EntityType="SIICOPModel.tb_Reporte_Diario" />
+          <AssociationSet Name="FK_TB_DatosGralReporte_Cat_IndicadorDesempeno" Association="SIICOPModel.FK_TB_DatosGralReporte_Cat_IndicadorDesempeno">
+            <End Role="Cat_IndicadorDesempeno" EntitySet="Cat_IndicadorDesempeno" />
+            <End Role="TB_DatosGralReporte" EntitySet="TB_DatosGralReporte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_DatosGralReporte_Cat_ResponsabilidadPrincipal" Association="SIICOPModel.FK_TB_DatosGralReporte_Cat_ResponsabilidadPrincipal">
+            <End Role="Cat_ResponsabilidadPrincipal" EntitySet="Cat_ResponsabilidadPrincipal" />
+            <End Role="TB_DatosGralReporte" EntitySet="TB_DatosGralReporte" />
+          </AssociationSet>
           <AssociationSet Name="FK_tb_Reporte_Diario_Personales" Association="SIICOPModel.FK_tb_Reporte_Diario_Personales">
             <End Role="Personales" EntitySet="Personales" />
             <End Role="tb_Reporte_Diario" EntitySet="tb_Reporte_Diario" />
@@ -3641,27 +3710,6 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <AssociationSet Name="FK_tb_Resumen_Diario_TB_subprograma" Association="SIICOPModel.FK_tb_Resumen_Diario_TB_subprograma">
             <End Role="TB_subprograma" EntitySet="TB_subprograma" />
             <End Role="tb_Reporte_Diario" EntitySet="tb_Reporte_Diario" />
-          </AssociationSet>
-          <EntitySet Name="Cat_Coordinador" EntityType="SIICOPModel.Cat_Coordinador" />
-          <EntitySet Name="Cat_Ravi" EntityType="SIICOPModel.Cat_Ravi" />
-          <EntitySet Name="Cat_DependenciaEje" EntityType="SIICOPModel.Cat_DependenciaEje" />
-          <EntitySet Name="Cat_IndicadorDesempeno" EntityType="SIICOPModel.Cat_IndicadorDesempeno" />
-          <EntitySet Name="Cat_ResponsabilidadPrincipal" EntityType="SIICOPModel.Cat_ResponsabilidadPrincipal" />
-          <AssociationSet Name="FK_Cat_DependenciaEje_Cat_Dependencias" Association="SIICOPModel.FK_Cat_DependenciaEje_Cat_Dependencias">
-            <End Role="Cat_Dependencias" EntitySet="Cat_Dependencias" />
-            <End Role="Cat_DependenciaEje" EntitySet="Cat_DependenciaEje" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cat_DependenciaEje_Cat_Eje" Association="SIICOPModel.FK_Cat_DependenciaEje_Cat_Eje">
-            <End Role="Cat_Eje" EntitySet="Cat_Eje" />
-            <End Role="Cat_DependenciaEje" EntitySet="Cat_DependenciaEje" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cat_ResponsabilidadPrincipal_Cat_DependenciaEje" Association="SIICOPModel.FK_Cat_ResponsabilidadPrincipal_Cat_DependenciaEje">
-            <End Role="Cat_DependenciaEje" EntitySet="Cat_DependenciaEje" />
-            <End Role="Cat_ResponsabilidadPrincipal" EntitySet="Cat_ResponsabilidadPrincipal" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cat_IndicadorDesempeno_Cat_ResponsabilidadPrincipal" Association="SIICOPModel.FK_Cat_IndicadorDesempeno_Cat_ResponsabilidadPrincipal">
-            <End Role="Cat_ResponsabilidadPrincipal" EntitySet="Cat_ResponsabilidadPrincipal" />
-            <End Role="Cat_IndicadorDesempeno" EntitySet="Cat_IndicadorDesempeno" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -3914,8 +3962,116 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <Property Name="total_acciones_ravi" Type="Int32" />
           <Property Name="ofrecieron_segurichat" Type="Boolean" />
           <Property Name="segurichat" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ResponsabilidadId" Type="Int32" />
+          <Property Name="IndicadorId" Type="Int32" />
+          <NavigationProperty Name="Cat_IndicadorDesempeno" Relationship="SIICOPModel.FK_TB_DatosGralReporte_Cat_IndicadorDesempeno" FromRole="TB_DatosGralReporte" ToRole="Cat_IndicadorDesempeno" />
+          <NavigationProperty Name="Cat_ResponsabilidadPrincipal" Relationship="SIICOPModel.FK_TB_DatosGralReporte_Cat_ResponsabilidadPrincipal" FromRole="TB_DatosGralReporte" ToRole="Cat_ResponsabilidadPrincipal" />
           <NavigationProperty Name="tb_Reporte_Diario" Relationship="SIICOPModel.FK_TB_DatosGralReporte_tb_Reporte_Diario" FromRole="TB_DatosGralReporte" ToRole="tb_Reporte_Diario" />
         </EntityType>
+        <EntityType Name="Cat_Coordinador">
+          <Key>
+            <PropertyRef Name="CoordinadorId" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="Paterno" />
+            <PropertyRef Name="Materno" />
+            <PropertyRef Name="Activo" />
+          </Key>
+          <Property Name="CoordinadorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Paterno" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Materno" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="ZonaId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Cat_Ravi">
+          <Key>
+            <PropertyRef Name="RaviId" />
+          </Key>
+          <Property Name="RaviId" Type="Int32" Nullable="false" />
+          <Property Name="Num" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Cat_DependenciaEje">
+          <Key>
+            <PropertyRef Name="DependenciaEjeId" />
+          </Key>
+          <Property Name="DependenciaEjeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DependenciaId" Type="Int32" Nullable="false" />
+          <Property Name="EjeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cat_Dependencias" Relationship="SIICOPModel.FK_Cat_DependenciaEje_Cat_Dependencias" FromRole="Cat_DependenciaEje" ToRole="Cat_Dependencias" />
+          <NavigationProperty Name="Cat_Eje" Relationship="SIICOPModel.FK_Cat_DependenciaEje_Cat_Eje" FromRole="Cat_DependenciaEje" ToRole="Cat_Eje" />
+          <NavigationProperty Name="Cat_ResponsabilidadPrincipal" Relationship="SIICOPModel.FK_Cat_ResponsabilidadPrincipal_Cat_DependenciaEje" FromRole="Cat_DependenciaEje" ToRole="Cat_ResponsabilidadPrincipal" />
+        </EntityType>
+        <EntityType Name="Cat_IndicadorDesempeno">
+          <Key>
+            <PropertyRef Name="IndicadorId" />
+          </Key>
+          <Property Name="IndicadorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResponsabilidadId" Type="Int32" Nullable="false" />
+          <Property Name="DescripcionIndicador" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cat_ResponsabilidadPrincipal" Relationship="SIICOPModel.FK_Cat_IndicadorDesempeno_Cat_ResponsabilidadPrincipal" FromRole="Cat_IndicadorDesempeno" ToRole="Cat_ResponsabilidadPrincipal" />
+          <Property Name="Habilitado" Type="Byte" />
+          <NavigationProperty Name="TB_DatosGralReporte" Relationship="SIICOPModel.FK_TB_DatosGralReporte_Cat_IndicadorDesempeno" FromRole="Cat_IndicadorDesempeno" ToRole="TB_DatosGralReporte" />
+        </EntityType>
+        <EntityType Name="Cat_ResponsabilidadPrincipal">
+          <Key>
+            <PropertyRef Name="ResponsabilidadId" />
+          </Key>
+          <Property Name="ResponsabilidadId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DependenciaEjeId" Type="Int32" Nullable="false" />
+          <Property Name="DescripcionResponsabilidad" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cat_DependenciaEje" Relationship="SIICOPModel.FK_Cat_ResponsabilidadPrincipal_Cat_DependenciaEje" FromRole="Cat_ResponsabilidadPrincipal" ToRole="Cat_DependenciaEje" />
+          <NavigationProperty Name="Cat_IndicadorDesempeno" Relationship="SIICOPModel.FK_Cat_IndicadorDesempeno_Cat_ResponsabilidadPrincipal" FromRole="Cat_ResponsabilidadPrincipal" ToRole="Cat_IndicadorDesempeno" />
+          <Property Name="Habilitado" Type="Byte" />
+          <NavigationProperty Name="TB_DatosGralReporte" Relationship="SIICOPModel.FK_TB_DatosGralReporte_Cat_ResponsabilidadPrincipal" FromRole="Cat_ResponsabilidadPrincipal" ToRole="TB_DatosGralReporte" />
+        </EntityType>
+        <Association Name="FK_Cat_DependenciaEje_Cat_Dependencias">
+          <End Type="SIICOPModel.Cat_Dependencias" Role="Cat_Dependencias" Multiplicity="1" />
+          <End Type="SIICOPModel.Cat_DependenciaEje" Role="Cat_DependenciaEje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Dependencias">
+              <PropertyRef Name="DependenciaId" />
+            </Principal>
+            <Dependent Role="Cat_DependenciaEje">
+              <PropertyRef Name="DependenciaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cat_DependenciaEje_Cat_Eje">
+          <End Type="SIICOPModel.Cat_Eje" Role="Cat_Eje" Multiplicity="1" />
+          <End Type="SIICOPModel.Cat_DependenciaEje" Role="Cat_DependenciaEje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_Eje">
+              <PropertyRef Name="EjeId" />
+            </Principal>
+            <Dependent Role="Cat_DependenciaEje">
+              <PropertyRef Name="EjeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cat_ResponsabilidadPrincipal_Cat_DependenciaEje">
+          <End Type="SIICOPModel.Cat_DependenciaEje" Role="Cat_DependenciaEje" Multiplicity="1" />
+          <End Type="SIICOPModel.Cat_ResponsabilidadPrincipal" Role="Cat_ResponsabilidadPrincipal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_DependenciaEje">
+              <PropertyRef Name="DependenciaEjeId" />
+            </Principal>
+            <Dependent Role="Cat_ResponsabilidadPrincipal">
+              <PropertyRef Name="DependenciaEjeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cat_IndicadorDesempeno_Cat_ResponsabilidadPrincipal">
+          <End Type="SIICOPModel.Cat_ResponsabilidadPrincipal" Role="Cat_ResponsabilidadPrincipal" Multiplicity="1" />
+          <End Type="SIICOPModel.Cat_IndicadorDesempeno" Role="Cat_IndicadorDesempeno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_ResponsabilidadPrincipal">
+              <PropertyRef Name="ResponsabilidadId" />
+            </Principal>
+            <Dependent Role="Cat_IndicadorDesempeno">
+              <PropertyRef Name="ResponsabilidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="tb_Reporte_Diario">
           <Key>
             <PropertyRef Name="idResumenDiario" />
@@ -3950,6 +4106,30 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <NavigationProperty Name="tb_programa" Relationship="SIICOPModel.FK_tb_Resumen_Diario_tb_programa" FromRole="tb_Reporte_Diario" ToRole="tb_programa" />
           <NavigationProperty Name="TB_subprograma" Relationship="SIICOPModel.FK_tb_Resumen_Diario_TB_subprograma" FromRole="tb_Reporte_Diario" ToRole="TB_subprograma" />
         </EntityType>
+        <Association Name="FK_TB_DatosGralReporte_Cat_IndicadorDesempeno">
+          <End Type="SIICOPModel.Cat_IndicadorDesempeno" Role="Cat_IndicadorDesempeno" Multiplicity="0..1" />
+          <End Type="SIICOPModel.TB_DatosGralReporte" Role="TB_DatosGralReporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_IndicadorDesempeno">
+              <PropertyRef Name="IndicadorId" />
+            </Principal>
+            <Dependent Role="TB_DatosGralReporte">
+              <PropertyRef Name="IndicadorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_DatosGralReporte_Cat_ResponsabilidadPrincipal">
+          <End Type="SIICOPModel.Cat_ResponsabilidadPrincipal" Role="Cat_ResponsabilidadPrincipal" Multiplicity="0..1" />
+          <End Type="SIICOPModel.TB_DatosGralReporte" Role="TB_DatosGralReporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cat_ResponsabilidadPrincipal">
+              <PropertyRef Name="ResponsabilidadId" />
+            </Principal>
+            <Dependent Role="TB_DatosGralReporte">
+              <PropertyRef Name="ResponsabilidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tb_Reporte_Diario_Personales">
           <End Type="SIICOPModel.Personales" Role="Personales" Multiplicity="0..1" />
           <End Type="SIICOPModel.tb_Reporte_Diario" Role="tb_Reporte_Diario" Multiplicity="*" />
@@ -4039,108 +4219,6 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
             </Principal>
             <Dependent Role="tb_Reporte_Diario">
               <PropertyRef Name="subprogramaId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Cat_Coordinador">
-          <Key>
-            <PropertyRef Name="CoordinadorId" />
-            <PropertyRef Name="Nombre" />
-            <PropertyRef Name="Paterno" />
-            <PropertyRef Name="Materno" />
-            <PropertyRef Name="Activo" />
-          </Key>
-          <Property Name="CoordinadorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Paterno" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Materno" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Activo" Type="Boolean" Nullable="false" />
-          <Property Name="ZonaId" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Cat_Ravi">
-          <Key>
-            <PropertyRef Name="RaviId" />
-          </Key>
-          <Property Name="RaviId" Type="Int32" Nullable="false" />
-          <Property Name="Num" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Cat_DependenciaEje">
-          <Key>
-            <PropertyRef Name="DependenciaEjeId" />
-          </Key>
-          <Property Name="DependenciaEjeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DependenciaId" Type="Int32" Nullable="false" />
-          <Property Name="EjeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Cat_Dependencias" Relationship="SIICOPModel.FK_Cat_DependenciaEje_Cat_Dependencias" FromRole="Cat_DependenciaEje" ToRole="Cat_Dependencias" />
-          <NavigationProperty Name="Cat_Eje" Relationship="SIICOPModel.FK_Cat_DependenciaEje_Cat_Eje" FromRole="Cat_DependenciaEje" ToRole="Cat_Eje" />
-          <NavigationProperty Name="Cat_ResponsabilidadPrincipal" Relationship="SIICOPModel.FK_Cat_ResponsabilidadPrincipal_Cat_DependenciaEje" FromRole="Cat_DependenciaEje" ToRole="Cat_ResponsabilidadPrincipal" />
-        </EntityType>
-        <EntityType Name="Cat_IndicadorDesempeno">
-          <Key>
-            <PropertyRef Name="IndicadorId" />
-          </Key>
-          <Property Name="IndicadorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ResponsabilidadId" Type="Int32" Nullable="false" />
-          <Property Name="DescripcionIndicador" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Cat_ResponsabilidadPrincipal" Relationship="SIICOPModel.FK_Cat_IndicadorDesempeno_Cat_ResponsabilidadPrincipal" FromRole="Cat_IndicadorDesempeno" ToRole="Cat_ResponsabilidadPrincipal" />
-          <Property Name="Habilitado" Type="Byte" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Cat_ResponsabilidadPrincipal">
-          <Key>
-            <PropertyRef Name="ResponsabilidadId" />
-          </Key>
-          <Property Name="ResponsabilidadId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DependenciaEjeId" Type="Int32" Nullable="false" />
-          <Property Name="DescripcionResponsabilidad" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Cat_DependenciaEje" Relationship="SIICOPModel.FK_Cat_ResponsabilidadPrincipal_Cat_DependenciaEje" FromRole="Cat_ResponsabilidadPrincipal" ToRole="Cat_DependenciaEje" />
-          <NavigationProperty Name="Cat_IndicadorDesempeno" Relationship="SIICOPModel.FK_Cat_IndicadorDesempeno_Cat_ResponsabilidadPrincipal" FromRole="Cat_ResponsabilidadPrincipal" ToRole="Cat_IndicadorDesempeno" />
-          <Property Name="Habilitado" Type="Byte" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_Cat_DependenciaEje_Cat_Dependencias">
-          <End Type="SIICOPModel.Cat_Dependencias" Role="Cat_Dependencias" Multiplicity="1" />
-          <End Type="SIICOPModel.Cat_DependenciaEje" Role="Cat_DependenciaEje" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cat_Dependencias">
-              <PropertyRef Name="DependenciaId" />
-            </Principal>
-            <Dependent Role="Cat_DependenciaEje">
-              <PropertyRef Name="DependenciaId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cat_DependenciaEje_Cat_Eje">
-          <End Type="SIICOPModel.Cat_Eje" Role="Cat_Eje" Multiplicity="1" />
-          <End Type="SIICOPModel.Cat_DependenciaEje" Role="Cat_DependenciaEje" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cat_Eje">
-              <PropertyRef Name="EjeId" />
-            </Principal>
-            <Dependent Role="Cat_DependenciaEje">
-              <PropertyRef Name="EjeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cat_ResponsabilidadPrincipal_Cat_DependenciaEje">
-          <End Type="SIICOPModel.Cat_DependenciaEje" Role="Cat_DependenciaEje" Multiplicity="1" />
-          <End Type="SIICOPModel.Cat_ResponsabilidadPrincipal" Role="Cat_ResponsabilidadPrincipal" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cat_DependenciaEje">
-              <PropertyRef Name="DependenciaEjeId" />
-            </Principal>
-            <Dependent Role="Cat_ResponsabilidadPrincipal">
-              <PropertyRef Name="DependenciaEjeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cat_IndicadorDesempeno_Cat_ResponsabilidadPrincipal">
-          <End Type="SIICOPModel.Cat_ResponsabilidadPrincipal" Role="Cat_ResponsabilidadPrincipal" Multiplicity="1" />
-          <End Type="SIICOPModel.Cat_IndicadorDesempeno" Role="Cat_IndicadorDesempeno" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cat_ResponsabilidadPrincipal">
-              <PropertyRef Name="ResponsabilidadId" />
-            </Principal>
-            <Dependent Role="Cat_IndicadorDesempeno">
-              <PropertyRef Name="ResponsabilidadId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4787,6 +4865,8 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <EntitySetMapping Name="Wv_DatosReportesHistorico">
             <EntityTypeMapping TypeName="SIICOPModel.Wv_DatosReportesHistorico">
               <MappingFragment StoreEntitySet="Wv_DatosReportesHistorico">
+                <ScalarProperty Name="IndicadorId" ColumnName="IndicadorId" />
+                <ScalarProperty Name="ResponsabilidadId" ColumnName="ResponsabilidadId" />
                 <ScalarProperty Name="Ambito" ColumnName="Ambito" />
                 <ScalarProperty Name="tema_impartido" ColumnName="tema_impartido" />
                 <ScalarProperty Name="EjeId" ColumnName="EjeId" />
@@ -5201,6 +5281,8 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <EntitySetMapping Name="TB_DatosGralReporte">
             <EntityTypeMapping TypeName="SIICOPModel.TB_DatosGralReporte">
               <MappingFragment StoreEntitySet="TB_DatosGralReporte">
+                <ScalarProperty Name="IndicadorId" ColumnName="IndicadorId" />
+                <ScalarProperty Name="ResponsabilidadId" ColumnName="ResponsabilidadId" />
                 <ScalarProperty Name="segurichat" ColumnName="segurichat" />
                 <ScalarProperty Name="ofrecieron_segurichat" ColumnName="ofrecieron_segurichat" />
                 <ScalarProperty Name="total_acciones_ravi" ColumnName="total_acciones_ravi" />
@@ -5246,34 +5328,6 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
                 <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
                 <ScalarProperty Name="NombreLugar_Escuela" ColumnName="NombreLugar_Escuela" />
                 <ScalarProperty Name="DatosGralReporteID" ColumnName="DatosGralReporteID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_Reporte_Diario">
-            <EntityTypeMapping TypeName="SIICOPModel.tb_Reporte_Diario">
-              <MappingFragment StoreEntitySet="tb_Reporte_Diario">
-                <ScalarProperty Name="idReportreFOL" ColumnName="idReportreFOL" />
-                <ScalarProperty Name="FolioActividad" ColumnName="FolioActividad" />
-                <ScalarProperty Name="DelegacionOcoonurbacion" ColumnName="DelegacionOcoonurbacion" />
-                <ScalarProperty Name="capturaAPP" ColumnName="capturaAPP" />
-                <ScalarProperty Name="fechacaptura" ColumnName="fechacaptura" />
-                <ScalarProperty Name="hora" ColumnName="hora" />
-                <ScalarProperty Name="total_atendidos" ColumnName="total_atendidos" />
-                <ScalarProperty Name="TotalMujeresAtendidas" ColumnName="TotalMujeresAtendidas" />
-                <ScalarProperty Name="TotalHombresAtendidos" ColumnName="TotalHombresAtendidos" />
-                <ScalarProperty Name="accion_implementada" ColumnName="accion_implementada" />
-                <ScalarProperty Name="subprogramaId" ColumnName="subprogramaId" />
-                <ScalarProperty Name="programasID" ColumnName="programasID" />
-                <ScalarProperty Name="Personalid" ColumnName="Personalid" />
-                <ScalarProperty Name="idcoordinacion" ColumnName="idcoordinacion" />
-                <ScalarProperty Name="idzona" ColumnName="idzona" />
-                <ScalarProperty Name="coordinador" ColumnName="coordinador" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="AccionesID" ColumnName="AccionesID" />
-                <ScalarProperty Name="seguimiento" ColumnName="seguimiento" />
-                <ScalarProperty Name="personal_atendio_actividad" ColumnName="personal_atendio_actividad" />
-                <ScalarProperty Name="descripcion_actividad" ColumnName="descripcion_actividad" />
-                <ScalarProperty Name="idResumenDiario" ColumnName="idResumenDiario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5323,6 +5377,34 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
                 <ScalarProperty Name="DescripcionResponsabilidad" ColumnName="DescripcionResponsabilidad" />
                 <ScalarProperty Name="DependenciaEjeId" ColumnName="DependenciaEjeId" />
                 <ScalarProperty Name="ResponsabilidadId" ColumnName="ResponsabilidadId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Reporte_Diario">
+            <EntityTypeMapping TypeName="SIICOPModel.tb_Reporte_Diario">
+              <MappingFragment StoreEntitySet="tb_Reporte_Diario">
+                <ScalarProperty Name="idReportreFOL" ColumnName="idReportreFOL" />
+                <ScalarProperty Name="FolioActividad" ColumnName="FolioActividad" />
+                <ScalarProperty Name="DelegacionOcoonurbacion" ColumnName="DelegacionOcoonurbacion" />
+                <ScalarProperty Name="capturaAPP" ColumnName="capturaAPP" />
+                <ScalarProperty Name="fechacaptura" ColumnName="fechacaptura" />
+                <ScalarProperty Name="hora" ColumnName="hora" />
+                <ScalarProperty Name="total_atendidos" ColumnName="total_atendidos" />
+                <ScalarProperty Name="TotalMujeresAtendidas" ColumnName="TotalMujeresAtendidas" />
+                <ScalarProperty Name="TotalHombresAtendidos" ColumnName="TotalHombresAtendidos" />
+                <ScalarProperty Name="accion_implementada" ColumnName="accion_implementada" />
+                <ScalarProperty Name="subprogramaId" ColumnName="subprogramaId" />
+                <ScalarProperty Name="programasID" ColumnName="programasID" />
+                <ScalarProperty Name="Personalid" ColumnName="Personalid" />
+                <ScalarProperty Name="idcoordinacion" ColumnName="idcoordinacion" />
+                <ScalarProperty Name="idzona" ColumnName="idzona" />
+                <ScalarProperty Name="coordinador" ColumnName="coordinador" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="AccionesID" ColumnName="AccionesID" />
+                <ScalarProperty Name="seguimiento" ColumnName="seguimiento" />
+                <ScalarProperty Name="personal_atendio_actividad" ColumnName="personal_atendio_actividad" />
+                <ScalarProperty Name="descripcion_actividad" ColumnName="descripcion_actividad" />
+                <ScalarProperty Name="idResumenDiario" ColumnName="idResumenDiario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

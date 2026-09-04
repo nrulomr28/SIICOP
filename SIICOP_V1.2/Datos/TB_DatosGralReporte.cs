@@ -59,7 +59,11 @@ namespace SIICOP_V1._2.Datos
         public Nullable<int> total_acciones_ravi { get; set; }
         public Nullable<bool> ofrecieron_segurichat { get; set; }
         public string segurichat { get; set; }
+        public Nullable<int> ResponsabilidadId { get; set; }
+        public Nullable<int> IndicadorId { get; set; }
     
+        public virtual Cat_IndicadorDesempeno Cat_IndicadorDesempeno { get; set; }
+        public virtual Cat_ResponsabilidadPrincipal Cat_ResponsabilidadPrincipal { get; set; }
         public virtual tb_Reporte_Diario tb_Reporte_Diario { get; set; }
     }
 }

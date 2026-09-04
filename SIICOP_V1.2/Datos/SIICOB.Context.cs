@@ -75,12 +75,12 @@ namespace SIICOP_V1._2.Datos
         public virtual DbSet<Cat_Eje> Cat_Eje { get; set; }
         public virtual DbSet<Cat_Entorno> Cat_Entorno { get; set; }
         public virtual DbSet<TB_DatosGralReporte> TB_DatosGralReporte { get; set; }
-        public virtual DbSet<tb_Reporte_Diario> tb_Reporte_Diario { get; set; }
         public virtual DbSet<Cat_Coordinador> Cat_Coordinador { get; set; }
         public virtual DbSet<Cat_Ravi> Cat_Ravi { get; set; }
         public virtual DbSet<Cat_DependenciaEje> Cat_DependenciaEje { get; set; }
         public virtual DbSet<Cat_IndicadorDesempeno> Cat_IndicadorDesempeno { get; set; }
         public virtual DbSet<Cat_ResponsabilidadPrincipal> Cat_ResponsabilidadPrincipal { get; set; }
+        public virtual DbSet<tb_Reporte_Diario> tb_Reporte_Diario { get; set; }
     
         public virtual int CrearReporteEscolar(string descractividad, string atendioactividadper, Nullable<int> accionesID, Nullable<System.DateTime> fecha, Nullable<int> personalid, Nullable<int> programasID, Nullable<int> subprogramaId, Nullable<int> totalHombresAtendidos, Nullable<int> totalMujeresAtendidas, Nullable<int> total_atendidos, string capturaapp, string delegacion, string nombrelugarescul, string nombreContacto, string telcel, string clavePlantel, string nivel, string turno, string niñas, string niños, string hombres, string mujeres, string docentesH, string docentesM, string direccionGoogle, string latitud, string longitud, string estado, string calle, string coloni, Nullable<int> localidadID, Nullable<int> municipioID, Nullable<int> regionID, Nullable<int> delegacionID, string entrecalle1, string entrecalle2)
         {

@@ -1,8 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CapturaReporteActividades.aspx.cs" Inherits="SIICOP_V1._2.Captura.CapturaReporteActividades" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- <script src="../Scripts/Alert_Gral.js"></script>    
-    <link href="~/Content/styleFormularios.css" rel="stylesheet" /> --%>
+    <%--Prestada por Claudia--%>
     <asp:HiddenField ID="HiddenField1cn" runat="server" Value="0" />
     <div class="container-fluid" id="main" style="padding-top: 3%">
         <div class="row">
@@ -113,10 +112,7 @@
                                 <div class="timeline-badge primary"><i class="fas fa-globe" title="Ubicación"></i></div>
                                 <h3 class="timeline-head"><strong style="color: #34495e">Ubicación</strong></h3>
                             </li>
-                            <%--  <li id="id-resume">
-                            <div class="timeline-badge default"><i class="fa fa-globe" data-original-title="" title=""></i></div>
-                            <h3 class="timeline-head"><strong style="color: #34495e">Ubicación</strong></h3>
-                        </li>--%>
+                                <%--Del Depto--%>
                             <li id="resumen">
                                 <div class="timeline-badge warning"></div>
                                 <div class="timeline-panel">
@@ -368,12 +364,44 @@
                                                     }
                                                 }
                                             </script>
-                                            <%--termina--%>
-
-                                            <%--Prestada por Claudia--%>
-                                            <%--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzKpx_jKJbeh1oiuY7p4pdfspnIcbmxco&libraries=places&callback=initMap" async defer></script>--%>
-
-                                            <%--Del Depto--%>
+                                            <%--<div id="PanelAccionImplentada" runat="server" visible="false">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group form-group-sm">
+                                                                    <label for="exampleInputEmail1">Acción implementada</label>
+                                                                    <div>
+                                                                        <asp:TextBox ID="txtAccionImplementada" CssClass="form-control" TextMode="MultiLine" runat="server"></asp:TextBox>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>--%>                                            <%--<div class="col-md-3">
+                                                            <label for="exampleInputEmail1">Nombre del contacto</label>
+                                                            <asp:TextBox ID="txtnombrecontacto" CssClass="form-control" runat="server"></asp:TextBox>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="exampleInputEmail1">Tel/Cel</label>
+                                                            <asp:TextBox ID="txtTelefono" CssClass="form-control" runat="server"></asp:TextBox>
+                                                        </div>--%>                                            <%--<div id="PanelAccionImplentada" runat="server" visible="false">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group form-group-sm">
+                                                                    <label for="exampleInputEmail1">Acción implementada</label>
+                                                                    <div>
+                                                                        <asp:TextBox ID="txtAccionImplementada" CssClass="form-control" TextMode="MultiLine" runat="server"></asp:TextBox>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>--%>
+                                            <%--<div class="col-md-3">
+                                                            <label for="exampleInputEmail1">Nombre del contacto</label>
+                                                            <asp:TextBox ID="txtnombrecontacto" CssClass="form-control" runat="server"></asp:TextBox>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="exampleInputEmail1">Tel/Cel</label>
+                                                            <asp:TextBox ID="txtTelefono" CssClass="form-control" runat="server"></asp:TextBox>
+                                                        </div>--%>
                                             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI08v0vd-dWhFIxanIu5O5wlnYfmYto-Y&libraries=places&callback=initMap" async defer></script>
 
 
@@ -591,10 +619,13 @@
                                                     <br />
 
                                                     <div class="row">
+
+                                                        <!-- ENTORNO -->
                                                         <div class="col-md-2">
                                                             <div class="form-group form-group-sm">
                                                                 <label for="ddlAmbito">Entorno</label>
                                                                 <div class="input-group" id="ambito">
+
                                                                     <asp:DropDownList
                                                                         runat="server"
                                                                         ID="ddlAmbito"
@@ -605,11 +636,12 @@
                                                                         <asp:ListItem Value="0">--Seleccione--</asp:ListItem>
 
                                                                     </asp:DropDownList>
+
                                                                 </div>
                                                             </div>
                                                         </div>
 
-
+                                                        <!-- EJE -->
                                                         <div class="col-md-3">
                                                             <div class="form-group form-group-sm">
                                                                 <label for="ddlEje">Eje</label>
@@ -630,54 +662,70 @@
                                                             </div>
                                                         </div>
 
+                                                        <!-- RESPONSABILIDAD + INDICADOR -->
+                                                        <asp:Panel
+                                                            ID="pnlResponsabilidadIndicador"
+                                                            runat="server"
+                                                            CssClass="col-md-7">
 
-                                                        <div class="col-md-3">
-                                                            <div class="form-group form-group-sm">
-                                                                <label for="ddResponsabilidad">
-                                                                    Responsabilidad principal
-                                                                </label>
+                                                            <div class="row">
 
-                                                                <div class="input-group" id="responsabilidad">
+                                                                <!-- RESPONSABILIDAD -->
+                                                                <div class="col-md-5">
+                                                                    <div class="form-group form-group-sm">
 
-                                                                    <asp:DropDownList
-                                                                        runat="server"
-                                                                        ID="ddResponsabilidad"
-                                                                        CssClass="form-control"
-                                                                        AutoPostBack="true"
-                                                                        OnSelectedIndexChanged="ddResponsabilidad_SelectedIndexChanged"
-                                                                        Enabled="false">
+                                                                        <label for="ddResponsabilidad">
+                                                                            Responsabilidad principal
+                                                                        </label>
 
-                                                                        <asp:ListItem Value="0">--Seleccione--</asp:ListItem>
+                                                                        <div class="input-group" id="responsabilidad">
 
-                                                                    </asp:DropDownList>
+                                                                            <asp:DropDownList
+                                                                                runat="server"
+                                                                                ID="ddlResponsabilidad"
+                                                                                CssClass="form-control"
+                                                                                AutoPostBack="true"
+                                                                                OnSelectedIndexChanged="ddResponsabilidad_SelectedIndexChanged"
+                                                                                Enabled="false">
 
+                                                                                <asp:ListItem Value="0">--Seleccione--</asp:ListItem>
+
+                                                                            </asp:DropDownList>
+
+                                                                        </div>
+
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
 
+                                                                <!-- INDICADOR -->
+                                                                <div class="col-md-7">
+                                                                    <div class="form-group form-group-sm">
 
-                                                        <div class="col-md-4">
-                                                            <div class="form-group form-group-sm">
-                                                                <label for="ddIndicador">
-                                                                    Indicador de desempeño
-                                                                </label>
+                                                                        <label for="ddIndicador">
+                                                                            Indicador de desempeño
+                                                                        </label>
 
-                                                                <div class="input-group" id="indicador">
+                                                                        <div class="input-group" id="indicador">
 
-                                                                    <asp:DropDownList
-                                                                        runat="server"
-                                                                        ID="ddIndicador"
-                                                                        CssClass="form-control"
-                                                                        AutoPostBack="true"
-                                                                        Enabled="false">
+                                                                            <asp:DropDownList
+                                                                                runat="server"
+                                                                                ID="ddlIndicador"
+                                                                                CssClass="form-control"
+                                                                                AutoPostBack="true"
+                                                                                Enabled="false">
 
-                                                                        <asp:ListItem Value="0">--Seleccione--</asp:ListItem>
+                                                                                <asp:ListItem Value="0">--Seleccione--</asp:ListItem>
 
-                                                                    </asp:DropDownList>
+                                                                            </asp:DropDownList>
 
+                                                                        </div>
+
+                                                                    </div>
                                                                 </div>
+
                                                             </div>
-                                                        </div>
+
+                                                        </asp:Panel>
 
                                                     </div>
                                                     <br />
@@ -842,7 +890,7 @@
                                                     <h3>Descripción/Observación</h3>
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <asp:TextBox ID="txtDescripcionActividad" CssClass="form-control" runat="server" Height="60px" TextMode="MultiLine" MaxLength="300" onpaste="return false;"></asp:TextBox>
+                                                            <asp:TextBox ID="txtDescripcionActividad" CssClass="form-control" runat="server" Height="60px" TextMode="MultiLine" MaxLength="300" ></asp:TextBox>
                                                             <small class="text-muted">Caracteres restantes: <span id="charsLeft">300</span>
                                                             </small>
                                                         </div>
@@ -859,7 +907,7 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <h3>Seguimiento</h3>
-                                                            <asp:TextBox ID="txtSeguimiento" CssClass="form-control" runat="server" Height="60px" TextMode="MultiLine" MaxLength="300" onpaste="return false;"></asp:TextBox>
+                                                            <asp:TextBox ID="txtSeguimiento" CssClass="form-control" runat="server" Height="60px" TextMode="MultiLine" MaxLength="300" ></asp:TextBox>
                                                             </small>
                                                         </div>
                                                     </div>
@@ -998,8 +1046,7 @@
                                 <div class="timeline-panel">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <asp:FileUpload CssClass="file" runat="server" ID="file" AllowMultiple="true" type="file" data-min-file-count="1" data-max-file-count="2" />
-
+                                            <asp:FileUpload CssClass="file" runat="server" ID="file" AllowMultiple="true" type="file" accept=".jpg,.jpeg,.png,.pdf" data-min-file-count="1" data-max-file-count="2" />
                                         </div>
                                         <br />
                                     </div>

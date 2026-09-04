@@ -2110,6 +2110,9 @@
     <Compile Include="Datos\Repositorio\IndicadorRepository.cs" />
     <Compile Include="Datos\Repositorio\ResponsabilidadRepository.cs" />
     <Compile Include="Datos\Repositorio\UsuarioRepository.cs" />
+    <Compile Include="Datos\tb_Reporte_Diario.cs">
+      <DependentUpon>SIICOB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Legacy\Bienvenidas\Bienvenido_C4.aspx.cs">
       <DependentUpon>Bienvenido_C4.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2451,9 +2454,6 @@
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>
     <Compile Include="Datos\tb_programa.cs">
-      <DependentUpon>SIICOB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Datos\tb_Reporte_Diario.cs">
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>
     <Compile Include="Datos\TB_subprograma.cs">

@@ -14,11 +14,19 @@ namespace SIICOP_V1._2.Datos
     
     public partial class Cat_IndicadorDesempeno
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Cat_IndicadorDesempeno()
+        {
+            this.TB_DatosGralReporte = new HashSet<TB_DatosGralReporte>();
+        }
+    
         public int IndicadorId { get; set; }
         public int ResponsabilidadId { get; set; }
         public string DescripcionIndicador { get; set; }
-        public byte Habilitado { get; set; }
+        public Nullable<byte> Habilitado { get; set; }
     
         public virtual Cat_ResponsabilidadPrincipal Cat_ResponsabilidadPrincipal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TB_DatosGralReporte> TB_DatosGralReporte { get; set; }
     }
 }
