@@ -956,7 +956,7 @@ namespace SIICOP_V1._2.Captura
         private TB_DatosGralReporte CrearDatosGenerales(
             Guid idResumen)
         {
-            return new TB_DatosGralReporte
+            var reporte = new TB_DatosGralReporte
             {
                 idResumenDiario = idResumen,
 
@@ -1051,6 +1051,7 @@ namespace SIICOP_V1._2.Captura
 
                 segurichat =
                     txtSegurichat.Text.ToUpper(),
+
                 
                 ResponsabilidadId = Convert.ToInt32(
                         ddlResponsabilidad.SelectedValue),
@@ -1058,6 +1059,19 @@ namespace SIICOP_V1._2.Captura
                 IndicadorId = Convert.ToInt32(
                         ddlIndicador.SelectedValue)
             };
+
+            string valor = Request.QueryString["ValorEntorno"];
+            if (!string.IsNullOrEmpty(valor))
+            {
+                int entornoId = Convert.ToInt32(valor);
+                if (entornoId == 2)
+                {
+                    reporte.ResponsabilidadId = null;
+                    reporte.IndicadorId = null;
+                }
+             }
+
+            return reporte;
         }
 
         private void CalcularBeneficiarios()
