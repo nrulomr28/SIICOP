@@ -1,5 +1,8 @@
 ﻿using SIICOP_V1._2.Captura.DGTSV;
+using SIICOP_V1._2.Helpers;
+using SIICOP_V1._2.Sesion;
 using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Providers.Entities;
 using System.Web.Security;
@@ -81,8 +84,26 @@ namespace SIICOP_V1._2
 
         protected void btnLogout_Click(object sender, EventArgs e)
         {
+
+            var sesionesActivas = Application["SesionesActivas"] as Dictionary<string, string>;
+            if (sesionesActivas != null && SesionUsuario.UsuarioLoggeado != null)
+            {
+                var usuario = SesionUsuario.UsuarioLoggeado;
+                if (sesionesActivas.ContainsKey(usuario.usuario))
+                {
+                    sesionesActivas.Remove(usuario.usuario);
+                    System.Diagnostics.Debug.WriteLine($"Sesión eliminada para usuario: {usuario.usuario}");
+                }
+            }
+
             FormsAuthentication.SignOut();
-            Response.Redirect("~/Inicio/inicio_sesion.aspx");
+
+            SesionUsuario.CerrarSesion();
+
+            Session.Clear();
+            Session.Abandon();
+
+            RedirectHelper.Redirect(this.Response, "~/Inicio/inicio_sesion.aspx");
         }
 
         protected void lnkbtnFormularioDGTV_Click(object sender, EventArgs e)
@@ -90,7 +111,7 @@ namespace SIICOP_V1._2
             this.Session["AccionReporte"] = Ficha_idetificacion_diaria.AccionReporte.Creacion;
             this.Session["idPrograma_Accion"] = 21;
             this.Session["idReporte_Accion"] = 1;
-            this.Response.Redirect("~/Captura/DGTSV/Ficha_idetificacion_diaria.aspx");
+            RedirectHelper.Redirect(this.Response, "~/Captura/DGTSV/Ficha_idetificacion_diaria.aspx");
         }
     }
 }

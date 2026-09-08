@@ -6,6 +6,7 @@ using OfficeOpenXml;
 using SIICOP_V1._2.Captura;
 using SIICOP_V1._2.Datos;
 using SIICOP_V1._2.Datos.Repositorio;
+using SIICOP_V1._2.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -46,7 +47,7 @@ namespace SIICOP_V1._2.VistasReportes
                 }
                 else
                 {
-                    this.Response.Redirect("~/TotalAccionesBeneficiados.aspx");
+                    RedirectHelper.Redirect(this.Response, "~/TotalAccionesBeneficiados.aspx");
                 }
             }
         }
@@ -434,7 +435,7 @@ namespace SIICOP_V1._2.VistasReportes
                     this.Session["AccionExpediente"] = CapturaReporteActividades.AccionExpediente.Edicion;
                     int entorno = resultado.Datos.Ambito ?? 0;
                     string urlDestino = $"~/Captura/CapturaReporteActividades.aspx?ValorEntorno={entorno}";
-                    Response.Redirect(urlDestino, false);
+                    RedirectHelper.Redirect(this.Response, urlDestino);
                     Context.ApplicationInstance.CompleteRequest();
                 }
             }

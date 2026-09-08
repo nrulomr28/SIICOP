@@ -1,4 +1,5 @@
 ﻿using SIICOP_V1._2.Datos;
+using SIICOP_V1._2.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -399,7 +400,7 @@ namespace SIICOP_V1._2.Graficas
                         txtOctubre.Text = "";
                         txtNoviembre.Text = "";
                         txtDiciembre.Text = "";
-                        Response.Redirect("~/Graficas/Cargas_de_trabajo.aspx");
+                        RedirectHelper.Redirect(this.Response, "~/Graficas/Cargas_de_trabajo.aspx");
 
                     }
                     catch (Exception ex)

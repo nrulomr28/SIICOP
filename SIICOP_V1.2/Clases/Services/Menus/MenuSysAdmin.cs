@@ -41,7 +41,15 @@ namespace SIICOP_V1._2.Servicios.Menus
                     "fas fa-user-shield",
                     "~/sysadmin/ControlRoles.aspx",
                     "card-danger",
-                    "#dc3545")
+                    "#dc3545"),
+
+                MenuFactory.Crear(
+                   "Errores",
+                   "Reporte de errores",
+                   "fa-solid fa-bug",
+                   "~/sysadmin/ErrorLog.aspx",
+                   "card-warning",
+                   "#fd7e14"),
             };
         }
     }

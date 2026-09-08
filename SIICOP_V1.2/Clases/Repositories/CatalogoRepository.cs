@@ -30,12 +30,27 @@ namespace SIICOP_V1._2.Clases.Repositories
 
         public string ObtenerNombrePrograma(int? programaId)
         {
+            if (!programaId.HasValue || programaId.Value <= 0)
+            {
+                return string.Empty;
+            }
+
             using (var db = new SIICOPEntities())
             {
-                return db.tb_programa
-                    .Where(p => p.programasID == programaId)
-                    .Select(p => p.NombrePrograma)
-                    .FirstOrDefault();
+                try
+                {
+                    var nombre = db.tb_programa
+                        .Where(p => p.programasID == programaId.Value)
+                        .Select(p => p.NombrePrograma)
+                        .FirstOrDefault();
+
+                    return nombre ?? string.Empty;
+                }
+                catch (System.Data.Entity.Core.EntityException ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Error de conexión: {ex.Message}");
+                    return string.Empty;
+                }
             }
         }
     }

@@ -2,6 +2,7 @@
 using SIICOP_V1._2.Clases.Services;
 using SIICOP_V1._2.Datos;
 using SIICOP_V1._2.Datos.Repositorio;
+using SIICOP_V1._2.Helpers;
 using SIICOP_V1._2.Sesion;
 using System;
 using System.Collections.Generic;
@@ -105,7 +106,14 @@ namespace SIICOP_V1._2.Captura
             }
             if (!SesionValida())
             {
-                Response.Redirect("~/Captura/Entorno.aspx");
+                RedirectHelper.Redirect(this.Response, "~/Captura/Entorno.aspx");
+                return;
+            }
+
+            if (!SesionUsuario.EstaAutenticado || SesionUsuario.UsuarioLoggeado == null)
+            {
+                // Si la sesión expiró o no hay usuario, redirigir al login
+                RedirectHelper.Redirect(this.Response, "~/Inicio/inicio_sesion.aspx");
                 return;
             }
 
@@ -140,7 +148,7 @@ namespace SIICOP_V1._2.Captura
                 }
                 else
                 {
-                    Response.Redirect("Entorno.aspx");
+                    RedirectHelper.Redirect(this.Response, "Entorno.aspx");
                     return;
                 }
 
@@ -406,8 +414,7 @@ namespace SIICOP_V1._2.Captura
      
         private void RedirigirInicio()
         {
-            Response.Redirect("~/TotalAccionesBeneficiados.aspx", false);
-            Context.ApplicationInstance.CompleteRequest();
+            RedirectHelper.Redirect(this.Response, "~/TotalAccionesBeneficiados.aspx");
         }
 
         protected void MostrarPrograma(int? programaId)
@@ -472,7 +479,7 @@ namespace SIICOP_V1._2.Captura
             }
             else
             {
-                sUsuarioActual = System.Web.Security.Membership.GetUser().UserName;
+                sUsuarioActual = SesionUsuario.UsuarioLoggeado?.usuario ?? "Sesión expirada";
                 var a = ctx.Personales.Where(x => x.login == sUsuarioActual).FirstOrDefault();
                 if (a != null)
                 {
@@ -675,7 +682,7 @@ namespace SIICOP_V1._2.Captura
         {
             this.Session["idExpediente_Accion"] = (object)null;
             this.Session["AccionExpediente"] = (object)null;
-            this.Response.Redirect("~/TotalAccionesBeneficiados.aspx");
+            RedirectHelper.Redirect(this.Response, "~/TotalAccionesBeneficiados.aspx");
             this.HiddenField1cn.Value = (string)null;
             this.btnGuardarEdicion.Visible = false;
             this.btnSalir.Visible = false;
@@ -1839,7 +1846,7 @@ namespace SIICOP_V1._2.Captura
         {
             this.Session["idExpediente_Accion"] = (object)null;
             this.Session["AccionExpediente"] = (object)null;
-            this.Response.Redirect("~/TotalAccionesBeneficiados.aspx");
+            RedirectHelper.Redirect(this.Response, "~/TotalAccionesBeneficiados.aspx");
             this.HiddenField1cn.Value = (string)null;
             this.btnGuardarEdicion.Visible = false;
             this.btnSalir.Visible = false;

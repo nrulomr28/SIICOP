@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SIICOP_V1._2.Helpers;
+using System;
 
 namespace SIICOP_V1._2.Captura
 {
@@ -23,8 +24,7 @@ namespace SIICOP_V1._2.Captura
 
         protected void EnviarDatos(int valor)
         {
-            Response.Redirect(
-            $"~/Captura/CapturaReporteActividades.aspx?ValorEntorno={valor}");
+            RedirectHelper.Redirect(this.Response, $"~/Captura/CapturaReporteActividades.aspx?ValorEntorno={valor}");
         }
 
     }

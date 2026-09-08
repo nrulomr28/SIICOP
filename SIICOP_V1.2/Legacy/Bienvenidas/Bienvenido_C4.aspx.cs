@@ -1,4 +1,5 @@
 ﻿using SIICOP_V1._2.Datos;
+using SIICOP_V1._2.Helpers;
 using System;
 using System.Web.Security;
 
@@ -27,7 +28,7 @@ namespace SIICOP_V1._2
                     Session.Abandon();
                     FormsAuthentication.RedirectToLoginPage();
                     FormsAuthentication.SignOut();
-                    Response.Redirect("~/Inicio/Inicio.aspx");
+                    RedirectHelper.Redirect(this.Response, "~/Inicio/Inicio.aspx");
                 }
             }
 

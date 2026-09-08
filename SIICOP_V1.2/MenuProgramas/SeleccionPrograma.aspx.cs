@@ -1,4 +1,5 @@
 ﻿using SIICOP_V1._2.Datos.Repositorio;
+using SIICOP_V1._2.Helpers;
 using System;
 using System.Web.UI.WebControls;
 
@@ -50,8 +51,7 @@ namespace SIICOP_V1._2.MenuProgramas
                     break;
             }
 
-            Response.Redirect(
-                $"~/Captura/CapturaReporteActividades.aspx?ValorEntorno={entornoId}");
+            RedirectHelper.Redirect(this.Response, $"~/Captura/CapturaReporteActividades.aspx?ValorEntorno={entornoId}");
         }
     }
 }

@@ -9,6 +9,7 @@ namespace SIICOP_V1._2.Sesion
     {
         public int PersonalId { get; set; }
         public string Nombre { get; set; }
+        public string usuario { get; set; }
         public int? DependenciaId { get; set; }
         public string Dependencia { get; set; }
         public int? AreaTrabajoId { get; set; }

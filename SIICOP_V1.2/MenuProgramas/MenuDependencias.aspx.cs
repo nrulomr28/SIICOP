@@ -1,5 +1,6 @@
 ﻿
 using SIICOP_V1._2.Captura.DGTSV;
+using SIICOP_V1._2.Helpers;
 using System;
 using System.Web.UI.WebControls;
 
@@ -40,7 +41,7 @@ namespace SIICOP_V1._2.MenuProgramas
                 }
                 else
                 {
-                    Response.Redirect("~/Inicio/inicio_sesion.aspx");
+                    RedirectHelper.Redirect(this.Response, "~/Inicio/inicio_sesion.aspx");
                 }
 
             }
@@ -64,16 +65,14 @@ namespace SIICOP_V1._2.MenuProgramas
                 Session["ImagenSeleccionada"] = true;
                 Session["programasID"] = null;
 
-                Response.Redirect(
-                    "~/Captura/CapturaReporteActividades.aspx",
-                    true);
+                RedirectHelper.Redirect(this.Response, "~/Captura/CapturaReporteActividades.aspx");
 
                 return;
             }
             else
             {
                 Session["ImagenSeleccionada"] = null;
-                Response.Redirect("~/MenuProgramas/SeleccionPrograma.aspx", true);
+                RedirectHelper.Redirect(this.Response, "~/MenuProgramas/SeleccionPrograma.aspx");
             }
             /*   if (opcion == "DGPVI")
                {
@@ -89,9 +88,7 @@ namespace SIICOP_V1._2.MenuProgramas
 
             Session["ImagenSeleccionada"] = null;
 
-            Response.Redirect(
-                "~/Captura/Entorno.aspx",
-                true);
+            RedirectHelper.Redirect(this.Response, "~/Captura/Entorno.aspx");
         }
 
         

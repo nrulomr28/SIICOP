@@ -2117,6 +2117,7 @@
     <Compile Include="Handlers\ArchivoEvidencia.ashx.cs">
       <DependentUpon>ArchivoEvidencia.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\RedirectHelper.cs" />
     <Compile Include="Legacy\Bienvenidas\Bienvenido_C4.aspx.cs">
       <DependentUpon>Bienvenido_C4.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

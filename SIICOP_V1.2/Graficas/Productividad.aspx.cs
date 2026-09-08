@@ -1,5 +1,6 @@
 ﻿using Microsoft.Reporting.WebForms;
 using SIICOP_V1._2.Datos;
+using SIICOP_V1._2.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,7 @@ namespace SIICOP_V1._2.Graficas
             }
             else
             {
-                this.Response.Redirect("~/TotalAccionesBeneficiados.aspx");
+                RedirectHelper.Redirect(this.Response, "~/TotalAccionesBeneficiados.aspx");
             }
         }
 

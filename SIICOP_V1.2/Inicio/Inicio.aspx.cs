@@ -1,4 +1,5 @@
 ﻿using SIICOP_V1._2.Datos;
+using SIICOP_V1._2.Helpers;
 using System;
 using System.Linq;
 using System.Web.Security;
@@ -33,29 +34,29 @@ namespace SIICOP_V1._2.Inicio
 
                     if (depen == "C4")
                     {
-                        Response.Redirect("~/Bienvenido_C4.aspx");
+                        RedirectHelper.Redirect(this.Response, "~/Bienvenido_C4.aspx");
                     }
                     if (depen == "SSP DVI")
                     {
-                        Response.Redirect("~/TotalAccionesBeneficiados.aspx");
+                        RedirectHelper.Redirect(this.Response, "~/TotalAccionesBeneficiados.aspx");
                     }
                     if (depen == "DGTSV")
                     {
-                        Response.Redirect("~/Bienvenido_DGTSV.aspx");
+                        RedirectHelper.Redirect(this.Response, "~/Bienvenido_DGTSV.aspx");
                     }
 
                     if (depen == "CEPREVIDE")
                     {
-                        Response.Redirect("~/Bienvenido_CEPREVIDE.aspx");
+                        RedirectHelper.Redirect(this.Response, "~/Bienvenido_CEPREVIDE.aspx");
                     }
 
                     if (depen == "SESCESP")
                     {
-                        Response.Redirect("~/Bienvenido_CVcMyCPC.aspx");
+                        RedirectHelper.Redirect(this.Response, "~/Bienvenido_CVcMyCPC.aspx");
                     }
                     if (depen == "DGRS")
                     {
-                        Response.Redirect("~/Bienvenido_DGRS.aspx");
+                        RedirectHelper.Redirect(this.Response, "~/Bienvenido_DGRS.aspx");
                     }
                 }
             }
