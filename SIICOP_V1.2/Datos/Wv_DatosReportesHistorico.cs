@@ -73,5 +73,7 @@ namespace SIICOP_V1._2.Datos
         public Nullable<int> Ambito { get; set; }
         public Nullable<int> ResponsabilidadId { get; set; }
         public Nullable<int> IndicadorId { get; set; }
+        public string DescripcionResponsabilidad { get; set; }
+        public string DescripcionIndicador { get; set; }
     }
 }

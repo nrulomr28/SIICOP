@@ -549,19 +549,42 @@
                                     <!-- Wrapper for slides -->
                                     <div class="carousel-inner">
                                         <div class="item active" runat="server" id="fotouno" visible="false">
-                                            <asp:Image ID="ImagenEvidencia1" runat="server" CssClass="tamañoImgCarru" />
+
+                                            <asp:Image ID="ImagenEvidencia1"
+                                                runat="server"
+                                                CssClass="tamañoImgCarru" />
+
+                                            <iframe id="PdfEvidencia1"
+                                                runat="server"
+                                                style="width:100%; height:600px; border:none; display:none;">
+                                            </iframe>
+
                                         </div>
                                         <div class="item" runat="server" id="fotodos" visible="false">
-                                            <asp:Image ID="ImagenEvidencia2" CssClass="tamañoImgCarru" runat="server" />
+
+                                            <asp:Image ID="ImagenEvidencia2"
+                                                runat="server"
+                                                CssClass="tamañoImgCarru" />
+
+                                            <iframe id="PdfEvidencia2"
+                                                runat="server"
+                                                style="width:100%; height:600px; border:none; display:none;">
+                                            </iframe>
+
                                         </div>
 
                                         <div class="item" runat="server" id="fototres" visible="false">
-                                            <asp:Image ID="ImagenEvidencia3" runat="server" CssClass="tamañoImgCarru" />
-                                        </div>
-                                        <%--  <div class="item" runat="server" id="fotocuatro" visible="false">
-                                            <asp:Image ID="ImagenEvidencia4" runat="server" CssClass="tamañoImgCarru" />
 
-                                        </div>--%>
+                                            <asp:Image ID="ImagenEvidencia3"
+                                                runat="server"
+                                                CssClass="tamañoImgCarru" />
+
+                                            <iframe id="PdfEvidencia3"
+                                                runat="server"
+                                                style="width:100%; height:600px; border:none; display:none;">
+                                            </iframe>
+
+                                        </div>
                                     </div>
 
                                     <!-- Left and right controls -->

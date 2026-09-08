@@ -330,7 +330,7 @@ namespace SIICOP_V1._2.Captura
         {
             lblPrograma.Text = string.Empty;
             MostrarPrograma(programasID);
-            DeterminarAccion();
+            //DeterminarAccion();
         }
 
         /*  private void ConfigurarPaneles()
@@ -555,22 +555,24 @@ namespace SIICOP_V1._2.Captura
                     ddlAmbito.SelectedValue = ambito;
                 }
 
-                string ejeid = reportesHistorico.EjeId != 0 ? reportesHistorico.EjeId.ToString() : "0";     ///// EJEID
-                if (!string.IsNullOrEmpty(ejeid) && ddlEje.Items.FindByValue(ejeid) != null)
+                int ejeid = reportesHistorico.EjeId ?? 0;     ///// EJEID
+                if (ejeid != 0 && ddlEje.Items.FindByValue(ejeid.ToString()) != null)
                 {
-                    ddlEje.SelectedValue = ejeid;
+                    ddlEje.SelectedValue = ejeid.ToString();
+                    CargarResponsabilidades();
                 }
 
-                string responsabilidadid = reportesHistorico.ResponsabilidadId != 0 ? reportesHistorico.ResponsabilidadId.ToString() : "0";     ///// RESPONSABILIDADID
-                if(!string.IsNullOrEmpty(responsabilidadid) && ddlResponsabilidad.Items.FindByValue(responsabilidadid) != null)
+                int responsabilidadid = reportesHistorico.ResponsabilidadId ?? 0;     ///// RESPONSABILIDADID
+                if (responsabilidadid != 0 && ddlResponsabilidad.Items.FindByValue(responsabilidadid.ToString()) != null)
                 {
-                    ddlResponsabilidad.SelectedValue = responsabilidadid;
+                    ddlResponsabilidad.SelectedValue = responsabilidadid.ToString();
+                    CargarIndicadores();
                 }
 
-                string indicadorid = reportesHistorico.IndicadorId != 0 ? reportesHistorico.IndicadorId.ToString() : "0";     ///// INDICADORID
-                if (!string.IsNullOrEmpty(indicadorid) && ddlIndicador.Items.FindByValue(indicadorid) != null)
+                int indicadorid = reportesHistorico.IndicadorId ?? 0;     ///// INDICADORID
+                if (indicadorid != 0 && ddlIndicador.Items.FindByValue(indicadorid.ToString()) != null)
                 {
-                    ddlIndicador.SelectedValue = indicadorid;
+                    ddlIndicador.SelectedValue = indicadorid.ToString();
                 }
 
                 //this.txtTemaImpartido.Text = reportesHistorico.tema_impartido.ToString();
@@ -592,7 +594,11 @@ namespace SIICOP_V1._2.Captura
                     this.colony.Value = direccionReporte.coloni ?? "";
 
                     string muniId = direccionReporte.MunicipioID.ToString().Trim();
-                    if (ddlMuNICIPIO.Items.FindByValue(muniId) != null) ddlMuNICIPIO.SelectedValue = muniId;
+                    if (ddlMuNICIPIO.Items.FindByValue(muniId) != null)
+                    {
+                        ddlMuNICIPIO.SelectedValue = muniId;
+                        CargarLocalidades(direccionReporte.MunicipioID.Value);
+                    }
 
                     string locId = direccionReporte.LocalidadID != null ? direccionReporte.LocalidadID.ToString() : "0";
                     if (ddlLocalidad.Items.FindByValue(locId) != null) ddlLocalidad.SelectedValue = locId;
@@ -605,6 +611,7 @@ namespace SIICOP_V1._2.Captura
                 if (datosGralReporte != null)
                 {
                     this.txtLugarActividad.Text = datosGralReporte.NombreLugar_Escuela ?? "";
+
                     //this.txtnombrecontacto.Text = datosGralReporte.NombreContacto ?? "";
                     //this.txtTelefono.Text = datosGralReporte.telcel ?? "";
                 }
@@ -1701,12 +1708,12 @@ namespace SIICOP_V1._2.Captura
             if (datosGralReporte != null)
             {
                 MODE = Convert.ToInt32(ddlAmbito.SelectedValue);
-                datosGralReporte.NombreLugar_Escuela = this.ddlnombreescuela.Text == string.Empty ? "" : this.ddlnombreescuela.Text.ToUpper();
+                datosGralReporte.NombreLugar_Escuela = this.ddlnombreescuela.Text == string.Empty ? "" : this.ddlnombreescuela.Text;
                 //datosGralReporte.NombreContacto = this.txtnombrecontacto.Text == string.Empty ? "" : this.txtnombrecontacto.Text.ToUpper();
                 //datosGralReporte.telcel = this.txtTelefono.Text;
                 datosGralReporte.ClavePlantel = this.txtclave.Text == string.Empty ? "" : this.txtclave.Text.ToUpper();
                 direccionReporte.MunicipioID = new int?(this.ddlMuNICIPIO.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlMuNICIPIO.SelectedValue));
-             // datosGralReporte.Nivel = this.ddlNivel.Text == string.Empty ? "" : this.ddlNivel.Text;
+                datosGralReporte.Nivel = this.ddlNivel.Text == string.Empty ? "" : this.ddlNivel.Text;
                 datosGralReporte.Ambito = MODE;
                 datosGralReporte.niñas = new int?(this.txnina.Value == "" ? 0 : Convert.ToInt32(this.txnina.Value));
                 datosGralReporte.niños = new int?(this.txnino.Value == "" ? 0 : Convert.ToInt32(this.txnino.Value));
@@ -1773,19 +1780,29 @@ namespace SIICOP_V1._2.Captura
                 tbReporteDiario.descripcion_actividad = this.txtDescripcionActividad.Text == string.Empty ? "" : this.txtDescripcionActividad.Text.ToUpper();
                 //tbReporteDiario.personal_atendio_actividad = this.txtpersonal_atendio_actividad.Text == string.Empty ? "" : this.txtpersonal_atendio_actividad.Text.ToUpper();
                 tbReporteDiario.seguimiento = this.txtSeguimiento.Text == string.Empty ? "" : this.txtSeguimiento.Text.ToUpper();
-                tbReporteDiario.AccionesID = new int?(this.ddlAcciones.SelectedValue == "null" ? 0 : Convert.ToInt32(this.ddlAcciones.SelectedValue));
+
+                int accionesId = 0;
+
+                if (!int.TryParse(this.ddlAcciones.SelectedValue, out accionesId))
+                {
+                    accionesId = 0;
+                }
+
+                tbReporteDiario.AccionesID = accionesId;
+
                 tbReporteDiario.fecha = new DateTime?(Convert.ToDateTime(this.txtFecha.Text));
                 tbReporteDiario.subprogramaId = new int?(this.ddlsubprograma.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlsubprograma.SelectedValue));
 
                 MODE = Convert.ToInt32(ddlAmbito.SelectedValue);
 
+                CalcularBeneficiarios();
                 int Hombres = 0;
                 int Mujeres = 0;
                 if (MODE == 1)
                 {
 
-                    if (this.txnina.Value != "")
-                        nina = int.Parse(this.txnina.Value, (IFormatProvider)CultureInfo.InvariantCulture);
+                    //if (this.txnina.Value != "")
+                    //    nina = int.Parse(this.txnina.Value, (IFormatProvider)CultureInfo.InvariantCulture);
 
 
                     Hombres = nino + padresH;
@@ -1796,7 +1813,7 @@ namespace SIICOP_V1._2.Captura
 
                 tbReporteDiario.TotalHombresAtendidos = new int?(Hombres);
                 tbReporteDiario.TotalMujeresAtendidas = new int?(Mujeres);
-                tbReporteDiario.total_atendidos = new int?(this.txtatendiosH.Text == string.Empty ? 0 : Convert.ToInt32(this.txtatendiosH.Text));
+                tbReporteDiario.total_atendidos = TotalA;
                 tbReporteDiario.fechacaptura = new DateTime?(DateTime.Now);
             }
 
@@ -2073,7 +2090,7 @@ namespace SIICOP_V1._2.Captura
                 string valor = Request.QueryString["ValorEntorno"];
                 int entornoId = Convert.ToInt32(valor);
                 List<Cat_Eje> repo = new List<Cat_Eje>();
-                if (entornoId == 2) // Escolar
+                if (entornoId == 2 || User.IsInRole("Administrador")) // Escolar y ROL ADMINISTRADOR
                 {
                     repo = new EjeRepository().ObtenerEjesPorEntorno(entornoId);
                 }
@@ -2100,9 +2117,18 @@ namespace SIICOP_V1._2.Captura
             int dependenciaId = (int)SesionUsuario.UsuarioLoggeado.DependenciaId;
             int ejeId = int.Parse(ddlEje.SelectedValue);
 
+            List<Cat_ResponsabilidadPrincipal> repo = null;
+
             try
             {
-                var repo = new ResponsabilidadRepository().ObtenerResponsabilidadPorEje(dependenciaId, ejeId);
+                if (User.IsInRole("Administrador"))
+                {
+                    repo = new ResponsabilidadRepository().ObtenerResponsabilidadPorEje(ejeId);
+                }
+                else {
+                    repo = new ResponsabilidadRepository().ObtenerResponsabilidadPorDependenciaYEje(dependenciaId, ejeId);
+                }
+
                 ddlResponsabilidad.DataSource = repo;
                 ddlResponsabilidad.DataTextField = "DescripcionResponsabilidad";
                 ddlResponsabilidad.DataValueField = "ResponsabilidadId";

@@ -874,6 +874,8 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_DatosReportesHistorico' no tie
           <Property Name="inst_participantes" Type="varchar" MaxLength="200" />
           <Property Name="ResponsabilidadId" Type="int" />
           <Property Name="IndicadorId" Type="int" />
+          <Property Name="DescripcionResponsabilidad" Type="nvarchar" MaxLength="200" />
+          <Property Name="DescripcionIndicador" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'SIICOP.dbo.WV_Datosrepote_app' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1887,7 +1889,9 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
     [Wv_DatosReportesHistorico].[zona] AS [zona], 
     [Wv_DatosReportesHistorico].[inst_participantes] AS [inst_participantes], 
     [Wv_DatosReportesHistorico].[ResponsabilidadId] AS [ResponsabilidadId], 
-    [Wv_DatosReportesHistorico].[IndicadorId] AS [IndicadorId]
+    [Wv_DatosReportesHistorico].[IndicadorId] AS [IndicadorId], 
+    [Wv_DatosReportesHistorico].[DescripcionResponsabilidad] AS [DescripcionResponsabilidad], 
+    [Wv_DatosReportesHistorico].[DescripcionIndicador] AS [DescripcionIndicador]
     FROM [dbo].[Wv_DatosReportesHistorico] AS [Wv_DatosReportesHistorico]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="WV_Datosrepote_app" EntityType="Self.WV_Datosrepote_app" store:Type="Views" store:Schema="dbo">
@@ -2936,6 +2940,8 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <Property Name="Ambito" Type="Int32" />
           <Property Name="ResponsabilidadId" Type="Int32" />
           <Property Name="IndicadorId" Type="Int32" />
+          <Property Name="DescripcionResponsabilidad" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DescripcionIndicador" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="WV_Datosrepote_app">
           <Key>
@@ -4865,6 +4871,8 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <EntitySetMapping Name="Wv_DatosReportesHistorico">
             <EntityTypeMapping TypeName="SIICOPModel.Wv_DatosReportesHistorico">
               <MappingFragment StoreEntitySet="Wv_DatosReportesHistorico">
+                <ScalarProperty Name="DescripcionIndicador" ColumnName="DescripcionIndicador" />
+                <ScalarProperty Name="DescripcionResponsabilidad" ColumnName="DescripcionResponsabilidad" />
                 <ScalarProperty Name="IndicadorId" ColumnName="IndicadorId" />
                 <ScalarProperty Name="ResponsabilidadId" ColumnName="ResponsabilidadId" />
                 <ScalarProperty Name="Ambito" ColumnName="Ambito" />

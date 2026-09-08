@@ -402,6 +402,15 @@ namespace SIICOP_V1._2.VistasReportes
         protected global::System.Web.UI.WebControls.Image ImagenEvidencia1;
 
         /// <summary>
+        /// Control PdfEvidencia1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlIframe PdfEvidencia1;
+
+        /// <summary>
         /// Control fotodos.
         /// </summary>
         /// <remarks>
@@ -420,6 +429,15 @@ namespace SIICOP_V1._2.VistasReportes
         protected global::System.Web.UI.WebControls.Image ImagenEvidencia2;
 
         /// <summary>
+        /// Control PdfEvidencia2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlIframe PdfEvidencia2;
+
+        /// <summary>
         /// Control fototres.
         /// </summary>
         /// <remarks>
@@ -436,6 +454,15 @@ namespace SIICOP_V1._2.VistasReportes
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image ImagenEvidencia3;
+
+        /// <summary>
+        /// Control PdfEvidencia3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlIframe PdfEvidencia3;
 
         /// <summary>
         /// Control validadottxt.

@@ -229,7 +229,7 @@ namespace SIICOP_V1._2.VistasReportes
         {
             try
             {
-                string[] encabezados = { "Fecha", "Capturista", "Zona", "Delegación", "Municipio", "Clave Municipio", "Localidad", "Clave Localidad", "Programa",  "SubPrograma", "Acciónes", "Niños", "Niñas", "Hombres", "Mujeres", "Docentes H", "Docentes M", "Total Hombres", "Total Mujeres", "Total Atendidos",  "Calle", "Colonia", "Lugar/Escuela", "Clave Plantel", "Turno","Nivel Educativo", "Contacto", "Teléfono", "Latitud", "Longitud", "Folio Actividad", "Folio Alternativo", "Coordinación", "Eje" };
+                string[] encabezados = { "Fecha", "Capturista", "Zona", "Delegación", "Municipio", "Clave Municipio", "Localidad", "Clave Localidad", "Programa",  "SubPrograma", "Acciónes", "Niños", "Niñas", "Hombres", "Mujeres", "Docentes H", "Docentes M", "Total Hombres", "Total Mujeres", "Total Atendidos",  "Calle", "Colonia", "Lugar/Escuela", "Clave Plantel", "Turno","Nivel Educativo", "Contacto", "Teléfono", "Latitud", "Longitud", "Folio Actividad", "Folio Alternativo", "Coordinación", "Eje", "Responsabilidad Principal", "Indicador" };
                 for (int i = 0; i < encabezados.Length; i++)
                 {
                     xlWorkSheetGral.Cell(1, i + 1).Value = encabezados[i];
@@ -289,6 +289,8 @@ namespace SIICOP_V1._2.VistasReportes
                     xlWorkSheetGral.Cell(Renglon, 32).Value = item.idResumenDiario.ToString();  
                     xlWorkSheetGral.Cell(Renglon, 33).Value = item.DelegacionOcoonurbacion;
                     xlWorkSheetGral.Cell(Renglon, 34).Value = item.Eje;
+                    xlWorkSheetGral.Cell(Renglon, 35).Value = item.DescripcionResponsabilidad;
+                    xlWorkSheetGral.Cell(Renglon, 36).Value = item.DescripcionIndicador;
                     Renglon++;
                 }
 
@@ -437,33 +439,33 @@ namespace SIICOP_V1._2.VistasReportes
                 }
             }
 
-          /*  if (e.CommandName == "Editar")
-            {
-                Guid idExped = Guid.Parse(e.CommandArgument.ToString());
+            /*  if (e.CommandName == "Editar")
+              {
+                  Guid idExped = Guid.Parse(e.CommandArgument.ToString());
 
-                var resultado = (from reporte in ctx.tb_Reporte_Diario
-                                 join datosGral in ctx.TB_DatosGralReporte
-                                 on reporte.idResumenDiario equals datosGral.idResumenDiario
-                                 where reporte.idResumenDiario == idExped
-                                 select new
-                                 {
-                                     Reporte = reporte,
-                                     Datos = datosGral
-                                 }).FirstOrDefault();
+                  var resultado = (from reporte in ctx.tb_Reporte_Diario
+                                   join datosGral in ctx.TB_DatosGralReporte
+                                   on reporte.idResumenDiario equals datosGral.idResumenDiario
+                                   where reporte.idResumenDiario == idExped
+                                   select new
+                                   {
+                                       Reporte = reporte,
+                                       Datos = datosGral
+                                   }).FirstOrDefault();
 
-                if (resultado != null)
-                {
-                    this.Session["idExpediente_Accion"] = idExped;
+                  if (resultado != null)
+                  {
+                      this.Session["idExpediente_Accion"] = idExped;
 
-                    this.Session["programasID"] = Convert.ToInt32(resultado.Reporte.programasID);
-                 // this.Session["AccionExpediente"] = AccionExpediente.Edicion;
-                    int entorno = resultado.Datos.Ambito ?? 0;
-                    string urlDestino = $"~/Captura/CapturaReporteActividades.aspx?ValorEntorno={entorno}";
-                    Response.Redirect(urlDestino, false);
-                    Context.ApplicationInstance.CompleteRequest();
-                }
-            }
-          */
+                      this.Session["programasID"] = Convert.ToInt32(resultado.Reporte.programasID);
+                   // this.Session["AccionExpediente"] = AccionExpediente.Edicion;
+                      int entorno = resultado.Datos.Ambito ?? 0;
+                      string urlDestino = $"~/Captura/CapturaReporteActividades.aspx?ValorEntorno={entorno}";
+                      Response.Redirect(urlDestino, false);
+                      Context.ApplicationInstance.CompleteRequest();
+                  }
+              }
+            */
             /*   if (e.CommandName == "Editar")
                {
 
@@ -480,93 +482,32 @@ namespace SIICOP_V1._2.VistasReportes
 
             if (e.CommandName == "VERFOTO")
             {
-                Guid numFila;
-                bool f1 = false;
-                bool f2 = false;
-                if (Guid.TryParse(e.CommandArgument.ToString(), out numFila))
+                Guid idExped;
+
+                if (!Guid.TryParse(e.CommandArgument.ToString(), out idExped))
+                    return;
+
+                Session["idExpediente_Accion"] = idExped;
+
+                LimpiarEvidencias();
+
+                List<tb_fotografia> archivos = ctx.tb_fotografia
+                    .Where(x => x.idResumenDiario == idExped)
+                    .OrderBy(x => x.idfotgrafia)
+                    .Take(3)
+                    .ToList();
+
+                for (int i = 0; i < archivos.Count; i++)
                 {
-                    Guid idExped = Guid.Parse(numFila.ToString());
-                    Session["idExpediente_Accion"] = idExped;
-
-                    ImagenEvidencia1.ImageUrl = "";
-                    ImagenEvidencia2.ImageUrl = "";
-                    ImagenEvidencia3.ImageUrl = "";
-                    List<tb_fotografia> foto = ctx.tb_fotografia.Where(x => x.idResumenDiario == idExped).ToList();
-
-                    foreach (var fotografia in foto)
-                    {
-                        Byte[] bytes = fotografia.image;
-                        var numero = foto.ToArray().Count();
-                        foreach (var r in numero.ToString())
-                        {
-
-                        }
-
-                        if (ImagenEvidencia1.ImageUrl == "")
-                        {
-                            if (bytes == null)
-                            {
-                                string base64String = fotografia.ImgBase64;
-                                ImagenEvidencia1.ImageUrl = "data:image/png;base64," + base64String;
-
-
-                            }
-                            else
-                            {
-                                Byte[] fotoVer = fotografia.image;
-                                ImagenEvidencia1.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(fotoVer);
-                                f1 = true;
-                            }
-
-
-                            foto1.Visible = true;
-                            fotouno.Visible = true;
-
-
-                        }
-
-                        if (f1 == true)
-                        {
-                            if (bytes == null)
-                            {
-                                string base64String = fotografia.ImgBase64;
-                                ImagenEvidencia2.ImageUrl = "data:image/png;base64," + base64String;
-                            }
-                            else
-                            {
-                                Byte[] fotoVer = fotografia.image;
-                                ImagenEvidencia2.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(fotoVer);
-
-                            }
-
-                            //ImagenEvidencia2.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(bytes);
-                            foto2.Visible = true;
-                            fotodos.Visible = true;
-
-                        }
-                        if (f2 == true)
-                        {
-                            if (bytes == null)
-                            {
-                                string base64String = fotografia.ImgBase64;
-                                ImagenEvidencia3.ImageUrl = "data:image/png;base64," + base64String;
-                            }
-                            else
-                            {
-                                Byte[] fotoVer = fotografia.image;
-                                ImagenEvidencia3.ImageUrl = "data:image/jpeg;base64," + Convert.ToBase64String(fotoVer);
-
-                            }
-                            foto3.Visible = true;
-                            fototres.Visible = true;
-                        }
-
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "AbrirModalFotos", "AbrirModalFotos();", true);
-                    }
-
+                    MostrarEvidencia(archivos[i], i + 1);
                 }
 
-
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    this.GetType(),
+                    "AbrirModalFotos",
+                    "AbrirModalFotos();",
+                    true);
             }
 
 
@@ -603,6 +544,187 @@ namespace SIICOP_V1._2.VistasReportes
 
                 }
             }
+        }
+
+        private void MostrarEvidencia(tb_fotografia archivo, int posicion)
+        {
+            if (archivo == null)
+                return;
+
+            string extension = archivo.ImagenExtencion;
+
+            if (string.IsNullOrWhiteSpace(extension))
+                return;
+
+            extension = extension.Trim().ToLowerInvariant();
+
+            bool esPdf = extension == ".pdf";
+
+            switch (posicion)
+            {
+                case 1:
+
+                    fotouno.Visible = true;
+                    foto1.Visible = true;
+
+                    if (esPdf)
+                    {
+                        PdfEvidencia1.Attributes["src"] =
+                            ObtenerUrlArchivo(archivo);
+
+                        PdfEvidencia1.Style["display"] = "block";
+                        ImagenEvidencia1.Style["display"] = "none";
+                    }
+                    else
+                    {
+                        ImagenEvidencia1.ImageUrl =
+                            ObtenerImagenUrl(archivo);
+
+                        ImagenEvidencia1.Style["display"] = "block";
+                        PdfEvidencia1.Style["display"] = "none";
+                    }
+
+                    break;
+
+
+                case 2:
+
+                    fotodos.Visible = true;
+                    foto2.Visible = true;
+
+                    if (esPdf)
+                    {
+                        PdfEvidencia2.Attributes["src"] =
+                            ObtenerUrlArchivo(archivo);
+
+                        PdfEvidencia2.Style["display"] = "block";
+                        ImagenEvidencia2.Style["display"] = "none";
+                    }
+                    else
+                    {
+                        ImagenEvidencia2.ImageUrl =
+                            ObtenerImagenUrl(archivo);
+
+                        ImagenEvidencia2.Style["display"] = "block";
+                        PdfEvidencia2.Style["display"] = "none";
+                    }
+
+                    break;
+
+
+                case 3:
+
+                    fototres.Visible = true;
+                    foto3.Visible = true;
+
+                    if (esPdf)
+                    {
+                        PdfEvidencia3.Attributes["src"] =
+                            ObtenerUrlArchivo(archivo);
+
+                        PdfEvidencia3.Style["display"] = "block";
+                        ImagenEvidencia3.Style["display"] = "none";
+                    }
+                    else
+                    {
+                        ImagenEvidencia3.ImageUrl =
+                            ObtenerImagenUrl(archivo);
+
+                        ImagenEvidencia3.Style["display"] = "block";
+                        PdfEvidencia3.Style["display"] = "none";
+                    }
+
+                    break;
+            }
+        }
+
+        private string ObtenerImagenUrl(tb_fotografia archivo)
+        {
+            string contentType = archivo.contentType;
+
+            if (string.IsNullOrWhiteSpace(contentType))
+            {
+                contentType = ObtenerContentType(
+                    archivo.ImagenExtencion);
+            }
+
+            // Primero intentamos utilizar image
+            if (archivo.image != null &&
+                archivo.image.Length > 0)
+            {
+                return "data:" +
+                       contentType +
+                       ";base64," +
+                       Convert.ToBase64String(archivo.image);
+            }
+
+            // Si no existe image, utilizamos ImgBase64
+            if (!string.IsNullOrWhiteSpace(archivo.ImgBase64))
+            {
+                return "data:" +
+                       contentType +
+                       ";base64," +
+                       archivo.ImgBase64;
+            }
+
+            return "";
+        }
+
+        private string ObtenerUrlArchivo(tb_fotografia archivo)
+        {
+            return ResolveUrl(
+                "~/Handlers/ArchivoEvidencia.ashx?id=" +
+                archivo.idfotgrafia.ToString()
+            );
+        }
+
+        private string ObtenerContentType(string extension)
+        {
+            switch (extension.ToLowerInvariant())
+            {
+                case ".jpg":
+                case ".jpeg":
+                    return "image/jpeg";
+
+                case ".png":
+                    return "image/png";
+
+                case ".pdf":
+                    return "application/pdf";
+
+                default:
+                    return "application/octet-stream";
+            }
+        }
+
+        private void LimpiarEvidencias()
+        {
+            // Imágenes
+            ImagenEvidencia1.ImageUrl = "";
+            ImagenEvidencia2.ImageUrl = "";
+            ImagenEvidencia3.ImageUrl = "";
+
+            // PDFs
+            PdfEvidencia1.Attributes["src"] = "";
+            PdfEvidencia2.Attributes["src"] = "";
+            PdfEvidencia3.Attributes["src"] = "";
+
+            PdfEvidencia1.Style["display"] = "none";
+            PdfEvidencia2.Style["display"] = "none";
+            PdfEvidencia3.Style["display"] = "none";
+
+            ImagenEvidencia1.Style["display"] = "none";
+            ImagenEvidencia2.Style["display"] = "none";
+            ImagenEvidencia3.Style["display"] = "none";
+
+            // Contenedores
+            foto1.Visible = false;
+            foto2.Visible = false;
+            foto3.Visible = false;
+
+            fotouno.Visible = false;
+            fotodos.Visible = false;
+            fototres.Visible = false;
         }
 
 
