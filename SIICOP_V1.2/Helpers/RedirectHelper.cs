@@ -12,5 +12,11 @@ namespace SIICOP_V1._2.Helpers
             response.Redirect(url, false);
             HttpContext.Current.ApplicationInstance.CompleteRequest();
         }
+
+        public static void RedirectTrue(HttpResponse response, string url)
+        {
+            response.Redirect(url, true);
+            HttpContext.Current.ApplicationInstance.CompleteRequest();
+        }
     }
 }

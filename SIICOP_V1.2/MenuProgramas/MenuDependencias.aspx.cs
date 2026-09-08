@@ -65,14 +65,14 @@ namespace SIICOP_V1._2.MenuProgramas
                 Session["ImagenSeleccionada"] = true;
                 Session["programasID"] = null;
 
-                RedirectHelper.Redirect(this.Response, "~/Captura/CapturaReporteActividades.aspx");
+                RedirectHelper.RedirectTrue(this.Response, "~/Captura/CapturaReporteActividades.aspx");
 
                 return;
             }
             else
             {
                 Session["ImagenSeleccionada"] = null;
-                RedirectHelper.Redirect(this.Response, "~/MenuProgramas/SeleccionPrograma.aspx");
+                RedirectHelper.RedirectTrue(this.Response, "~/MenuProgramas/SeleccionPrograma.aspx");
             }
             /*   if (opcion == "DGPVI")
                {
@@ -88,7 +88,7 @@ namespace SIICOP_V1._2.MenuProgramas
 
             Session["ImagenSeleccionada"] = null;
 
-            RedirectHelper.Redirect(this.Response, "~/Captura/Entorno.aspx");
+            RedirectHelper.RedirectTrue(this.Response, "~/Captura/Entorno.aspx");
         }
 
         
