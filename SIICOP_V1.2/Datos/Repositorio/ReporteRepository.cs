@@ -83,9 +83,7 @@ namespace SIICOP_V1._2.Datos.Repositorio
                     new SqlParameter("@Localidad", (object)localidad ?? DBNull.Value),
                     new SqlParameter("@InstitucionesP", (object)institucion ?? DBNull.Value)
                 ).ToList();
-
                 return resultado;
-
             }
 
         }

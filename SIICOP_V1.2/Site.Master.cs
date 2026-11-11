@@ -84,7 +84,6 @@ namespace SIICOP_V1._2
 
         protected void btnLogout_Click(object sender, EventArgs e)
         {
-
             var sesionesActivas = Application["SesionesActivas"] as Dictionary<string, string>;
             if (sesionesActivas != null && SesionUsuario.UsuarioLoggeado != null)
             {
@@ -95,14 +94,10 @@ namespace SIICOP_V1._2
                     System.Diagnostics.Debug.WriteLine($"Sesión eliminada para usuario: {usuario.usuario}");
                 }
             }
-
             FormsAuthentication.SignOut();
-
             SesionUsuario.CerrarSesion();
-
             Session.Clear();
             Session.Abandon();
-
             RedirectHelper.Redirect(this.Response, "~/Inicio/inicio_sesion.aspx");
         }
 

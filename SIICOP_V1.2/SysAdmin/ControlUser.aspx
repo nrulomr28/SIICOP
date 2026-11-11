@@ -1,22 +1,19 @@
-﻿
-<%@ Page Title="Administración de usuarios" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ControlUser.aspx.cs" Inherits="SIICOP_V1._2.SysAdmin.ControlUser" %>
+﻿<%@ Page Title="Administración de usuarios" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ControlUser.aspx.cs" Inherits="SIICOP_V1._2.SysAdmin.ControlUser" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server"> 
- 
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">  
     <script type="text/javascript">
         function Correcto() {
-          
             Swal.fire({
                 title: "¡Correcto!",
                 text: "Operación realizada con éxito",
                 icon: "success",
-                confirmButtonText: "Aceptar" 
+                confirmButtonText: "Aceptar"
             });
             return false;
-        }  
+        }
         function openModalpassword(loginValue) {
-            $('#myModalPassword').modal('show');         
-        }      
+            $('#myModalPassword').modal('show');
+        }
         function openModalNuevoUser() {
             $('#ModalCrearUser').modal('show');
         }
@@ -27,67 +24,90 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <h3 style="text-align: center"><span>Administración y control de usuarios</span></h3>
-                <asp:LinkButton runat="server" ID="lnkbtnAgregarUser" CssClass="btn btn-success pull-right" 
-                    OnClientClick="openModalNuevoUser(); return false;">
-                    Agregar usuario <i class="fas fa-user-plus"></i>
-                </asp:LinkButton>
-                <br />  
+                <h3 style="text-align: center; margin-bottom: 20px;"><span>Administración y control de usuarios</span></h3>                
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                <ContentTemplate>
-                <asp:GridView runat="server" CssClass="table table-bordered" ID="gvuser" AutoGenerateColumns="False" 
-                    DataKeyNames="Personalid, guidUsuario"
-                    CellPadding="3" AllowPaging="True"
-                    OnDataBound="gvuser_DataBound"
-                    OnRowCommand="gvuser_RowCommand"
-                    OnPageIndexChanging="gvuser_PageIndexChanging" EnableViewState="false"
-                    PagerSettings-PageButtonCount="5" PageSize="10">
-                    <PagerStyle HorizontalAlign="Center" CssClass="GridPager" />
-                    <PagerTemplate>
-                        <div class="row" style="width:100%; padding:10px;">
-                            <div class="col-md-6 text-right">
-                                <asp:Label ID="CurrentPageLabelt" runat="server" CssClass="fw-bold"></asp:Label>
-                            </div>
-                            <div class="col-md-6 text-left">
-                                Ir a página: 
-                                <asp:DropDownList ID="PageDropDownListAdmin" AutoPostBack="true" 
-                                    OnSelectedIndexChanged="PageDropDownListAdmin_SelectedIndexChanged" 
-                                    runat="server" 
-                                    CssClass="form-control d-inline-block w-auto" />
+                <ContentTemplate>                    
+                    <!-- BARRA DE BÚSQUEDA Y BOTÓN AGREGAR -->
+                    <div class="row" style="margin-bottom: 15px;">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fas fa-search"></i></span>
+                                <asp:TextBox runat="server" ID="txtBuscar" CssClass="form-control" placeholder="Buscar por nombre o login..."></asp:TextBox>
+                                <span class="input-group-btn">
+                                    <asp:LinkButton runat="server" ID="btnBuscar" CssClass="btn btn-primary" OnClick="btnBuscar_Click">
+                                        Buscar
+                                    </asp:LinkButton>
+                                    <asp:LinkButton runat="server" ID="btnLimpiar" CssClass="btn btn-default" OnClick="btnLimpiar_Click" ToolTip="Limpiar búsqueda">
+                                        <i class="fas fa-eraser"></i>
+                                    </asp:LinkButton>
+                                </span>
                             </div>
                         </div>
-                    </PagerTemplate>
-                    <Columns>
-                        <asp:TemplateField HeaderText="Nombre" SortExpression="Nombre">
-                            <ItemTemplate>
-                                <asp:Label runat="server" Text='<%# Bind("Nombre") %>' ID="Label1"></asp:Label>&nbsp;
-                                <asp:Label runat="server" Text='<%# Bind("paterno") %>' ID="Label2"></asp:Label>&nbsp;
-                                <asp:Label runat="server" Text='<%# Bind("materno") %>' ID="Label3"></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:BoundField DataField="AreaTrabajo" HeaderText="Área de trabajo" SortExpression="AreaTrabajo"></asp:BoundField>
-                        <asp:BoundField DataField="fechacrecion" HeaderText="Fecha de creación" SortExpression="fechacrecion"></asp:BoundField>
-                        <asp:BoundField DataField="login" HeaderText="Login" SortExpression="login"></asp:BoundField>
-                        <asp:BoundField DataField="Dependencia" HeaderText="Dependencia" SortExpression="Dependencia"></asp:BoundField>
-                        <asp:TemplateField HeaderText="Acciones">
-                            <ItemTemplate>
-                                <asp:LinkButton runat="server" Text="ResetPassword" CommandName="ResetPassword" CssClass="btn btn-info" CausesValidation="False" ID="lnkbtnCambiarContraseña" ToolTip="Editar contraseña" CommandArgument='<%# Eval("guidUsuario") %>'>
-                                     <i class="fas fa-lock"></i>
-                                </asp:LinkButton>
-                               
-                                <asp:LinkButton runat="server" Text="Editaruser" CommandName="EditarUser" class="btn btn-warning" CausesValidation="False" ID="lnkbtnEdirUser" ToolTip="Editar usuarios" CommandArgument='<%# Eval("Personalid") %>'>
-                                    <i class="fas fa-user-edit"></i>
-                                </asp:LinkButton>
-                            </ItemTemplate>
-                            <ItemStyle HorizontalAlign="Center"></ItemStyle>
-                        </asp:TemplateField>
-                    </Columns>                    
-                </asp:GridView>
-              </ContentTemplate>
-            </asp:UpdatePanel>
+                        <div class="col-md-6">
+                            <asp:LinkButton runat="server" ID="lnkbtnAgregarUser" CssClass="btn btn-success pull-right" 
+                                OnClientClick="openModalNuevoUser(); return false;">
+                                Agregar usuario <i class="fas fa-user-plus"></i>
+                            </asp:LinkButton>
+                        </div>
+                    </div>
+                    <!-- FIN BARRA DE BÚSQUEDA -->
+
+                    <asp:GridView runat="server" CssClass="table table-bordered table-hover" ID="gvuser" AutoGenerateColumns="False" 
+                        DataKeyNames="Personalid, guidUsuario"
+                        CellPadding="3" AllowPaging="True"
+                        OnDataBound="gvuser_DataBound"
+                        OnRowCommand="gvuser_RowCommand"
+                        AllowSorting="True" 
+                        OnSorting="gvuser_Sorting"
+                        OnPageIndexChanging="gvuser_PageIndexChanging" EnableViewState="true"
+                        PagerSettings-PageButtonCount="5" PageSize="10">
+                        <PagerStyle HorizontalAlign="Center" CssClass="GridPager" />
+                        <PagerTemplate>
+                            <div class="row" style="width:100%; padding:10px;">
+                                <div class="col-md-6 text-right">
+                                    <asp:Label ID="CurrentPageLabelt" runat="server" CssClass="fw-bold"></asp:Label>
+                                </div>
+                                <div class="col-md-6 text-left">
+                                    Ir a página: 
+                                    <asp:DropDownList ID="PageDropDownListAdmin" AutoPostBack="true" 
+                                        OnSelectedIndexChanged="PageDropDownListAdmin_SelectedIndexChanged" 
+                                        runat="server" 
+                                        CssClass="form-control d-inline-block w-auto" />
+                                </div>
+                            </div>
+                        </PagerTemplate>
+                        <Columns>
+                            <asp:TemplateField HeaderText="Nombre" SortExpression="Nombre">
+                                <ItemTemplate>
+                                    <asp:Label runat="server" Text='<%# Bind("Nombre") %>' ID="Label1"></asp:Label>&nbsp;
+                                    <asp:Label runat="server" Text='<%# Bind("paterno") %>' ID="Label2"></asp:Label>&nbsp;
+                                    <asp:Label runat="server" Text='<%# Bind("materno") %>' ID="Label3"></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:BoundField DataField="AreaTrabajo" HeaderText="Área de trabajo" SortExpression="AreaTrabajo"></asp:BoundField>
+                            <asp:BoundField DataField="fechacrecion" HeaderText="Fecha de creación" SortExpression="fechacrecion"></asp:BoundField>
+                            <asp:BoundField DataField="login" HeaderText="Login" SortExpression="login"></asp:BoundField>
+                            <asp:BoundField DataField="Dependencia" HeaderText="Dependencia" SortExpression="Dependencia"></asp:BoundField>
+                            <asp:TemplateField HeaderText="Acciones">
+                                <ItemTemplate>
+                                    <asp:LinkButton runat="server" Text="ResetPassword" CommandName="ResetPassword" CssClass="btn btn-info" CausesValidation="False" ID="lnkbtnCambiarContraseña" ToolTip="Editar contraseña" CommandArgument='<%# Eval("guidUsuario") %>'>
+                                         <i class="fas fa-lock"></i>
+                                    </asp:LinkButton>                                   
+                                    <asp:LinkButton runat="server" Text="Editaruser" CommandName="EditarUser" class="btn btn-warning" CausesValidation="False" ID="lnkbtnEdirUser" ToolTip="Editar usuarios" CommandArgument='<%# Eval("Personalid") %>'>
+                                        <i class="fas fa-user-edit"></i>
+                                    </asp:LinkButton>
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Center"></ItemStyle>
+                            </asp:TemplateField>
+                        </Columns>                    
+                    </asp:GridView>
+                </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
         </div>
     </div>
+
+   
 
     <%-- MODAL: CAMBIAR CONTRASEÑA --%>
     <div class="modal fade" id="myModalPassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

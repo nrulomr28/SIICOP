@@ -34,10 +34,8 @@ namespace SIICOP_V1._2.MenuProgramas
             int programaId =
                 Convert.ToInt32(
                     e.CommandArgument);
-
             Session["programasID"] =
                 programaId;
-
             int entornoId = 0;
 
             switch (e.CommandName)
@@ -50,7 +48,6 @@ namespace SIICOP_V1._2.MenuProgramas
                     entornoId = 1;
                     break;
             }
-
             RedirectHelper.Redirect(this.Response, $"~/Captura/CapturaReporteActividades.aspx?ValorEntorno={entornoId}");
         }
     }

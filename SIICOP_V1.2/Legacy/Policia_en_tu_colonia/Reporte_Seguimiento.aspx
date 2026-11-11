@@ -25,8 +25,6 @@
             return false
         }
 
-
-
         function Correcto() {
             swal({
                 title: "Correcto!",
@@ -41,8 +39,6 @@
 
         }
     </script>
-
-
 
     <div class="container">
         <div class="row">

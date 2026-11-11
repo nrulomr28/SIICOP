@@ -403,7 +403,8 @@ namespace SIICOP_V1._2.Graficas
                         RedirectHelper.Redirect(this.Response, "~/Graficas/Cargas_de_trabajo.aspx");
 
                     }
-                    catch (Exception ex)
+                    catch (Exception)
+               //     catch (Exception ex)
                     {
                         ScriptManager.RegisterStartupScript(this, GetType(), "error", "error();", true);
 
@@ -595,8 +596,6 @@ namespace SIICOP_V1._2.Graficas
                                           OCTUBRE = g.Where(T => T.a.Mes_Num == 10).Sum(r => r.a.cifra),
                                           NOVIEMBRE = g.Where(T => T.a.Mes_Num == 11).Sum(r => r.a.cifra),
                                           DICIEMBRE = g.Where(T => T.a.Mes_Num == 12).Sum(r => r.a.cifra),
-
-
                                       }).ToList();
 
             gvBeneficiadosEnlace.DataSource = BeneficiadosEnlace;
@@ -755,10 +754,8 @@ namespace SIICOP_V1._2.Graficas
                         int tipo = 3;
                         string dela = ddlDelegación.Text;
                         int años = DateTime.Now.Year;
-
                         var cifras = new List<int> { Convert.ToInt32(txtEneroB.Text), Convert.ToInt32(txtFebreroB.Text), Convert.ToInt32(txtMarzoB.Text), Convert.ToInt32(txtAbrilB.Text), Convert.ToInt32(txtMayoB.Text), Convert.ToInt32(txtJunioB.Text), Convert.ToInt32(txtJulioB.Text), Convert.ToInt32(txtAgostoB.Text), Convert.ToInt32(txtSeptiembreB.Text), Convert.ToInt32(txtOctubreB.Text), Convert.ToInt32(txtNoviembreB.Text), Convert.ToInt32(txtDiciembreB.Text) };
                         var numeromes = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
-
                         var numbersAndWords = cifras.Zip(numeromes, (n, w) => new { cifras = n, numeromes = w });
                         foreach (var item in numbersAndWords)
                         {
@@ -771,7 +768,6 @@ namespace SIICOP_V1._2.Graficas
                             nuevo.Tipo_TA_BA_TB = tipo;
                             nuevo.Delegacion = dela;
                             nuevo.Año = años;
-
                             ctx.tbCarga_trabajo_Dele.Add(nuevo);
                             ctx.SaveChanges();
                             gvBenificiadosXalapa.DataBind();
@@ -785,7 +781,8 @@ namespace SIICOP_V1._2.Graficas
                         ScriptManager.RegisterStartupScript(this, GetType(), "GuardadoConExito", "GuardadoConExito();", true);
 
                     }
-                    catch (Exception ex)
+               //     catch (Exception ex)
+                    catch (Exception)
                     {
                         ScriptManager.RegisterStartupScript(this, GetType(), "error", "error();", true);
 

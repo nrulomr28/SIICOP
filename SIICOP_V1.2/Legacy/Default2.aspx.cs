@@ -14,9 +14,9 @@ namespace SIICOP_V1._2
         SIICOPEntities ctx = new SIICOPEntities();
         public enum AccionExpediente { Creacion, Edicion, Visualizacion }
 
-        int sessionPrograID;
+       // int sessionPrograID;
         int progragr;
-        string Delegacion;
+      //  string Delegacion;
         string fechaMes;
         //int año = 2020;
         int año = DateTime.Now.Year;
@@ -194,7 +194,7 @@ namespace SIICOP_V1._2
             #region //EMPRESARIAL
             //BENEFICIADOS
 
-            int BeneficiadosEmpreSuma = 0;
+        //    int BeneficiadosEmpreSuma = 0;
             tb_AcionesBeneficiadosXmes beneficiadosEmpre = this.ctx.tb_AcionesBeneficiadosXmes.Where(x => x.programa == 13 && x.MesInt == fechaMes && x.Año == año && x.TipoB_A == 1).FirstOrDefault();
             if (beneficiadosEmpre != null)
             {
@@ -276,7 +276,7 @@ namespace SIICOP_V1._2
 
             #region //ESCOLAR
             //BENEFICIADOS
-            int BeneficiadosEscoSuma = 0;
+         //   int BeneficiadosEscoSuma = 0;
             tb_AcionesBeneficiadosXmes beneficiadosEscolarOBJ = this.ctx.tb_AcionesBeneficiadosXmes.Where(x => x.programa == 9 && x.MesInt == fechaMes && x.Año == año && x.TipoB_A == 1).FirstOrDefault();
             if (beneficiadosEscolarOBJ != null)
             {
@@ -356,7 +356,7 @@ namespace SIICOP_V1._2
 
             #region //Redes Vecinales
             //BENEFICIADOS
-            int BeneficiadosRedesSuma = 0;
+         //   int BeneficiadosRedesSuma = 0;
             tb_AcionesBeneficiadosXmes beneficiadosRedesOBJ = this.ctx.tb_AcionesBeneficiadosXmes.Where(x => x.programa == 8 && x.MesInt == fechaMes && x.Año == año && x.TipoB_A == 1).FirstOrDefault();
             if (beneficiadosRedesOBJ != null)
             {
@@ -437,7 +437,7 @@ namespace SIICOP_V1._2
 
             #region //Deporte y cultura
             //BENEFICIADOS
-            int BeneficiadosDeportes_CulturaSuma = 0;
+          //  int BeneficiadosDeportes_CulturaSuma = 0;
             tb_AcionesBeneficiadosXmes beneficiadosDeportes_CulturaOBJ = this.ctx.tb_AcionesBeneficiadosXmes.Where(x => x.programa == 12 && x.MesInt == fechaMes && x.Año == año && x.TipoB_A == 1).FirstOrDefault();
             if (beneficiadosDeportes_CulturaOBJ != null)
             {
@@ -517,7 +517,7 @@ namespace SIICOP_V1._2
 
             #region //Genero
             //BENEFICIADOS
-            int BeneficiadosGeneroSuma = 0;
+        //    int BeneficiadosGeneroSuma = 0;
             tb_AcionesBeneficiadosXmes beneficiadosGeneroOBJ = this.ctx.tb_AcionesBeneficiadosXmes.Where(x => x.programa == 10 && x.MesInt == fechaMes && x.Año == año && x.TipoB_A == 1).FirstOrDefault();
             if (beneficiadosGeneroOBJ != null)
             {
@@ -600,7 +600,7 @@ namespace SIICOP_V1._2
 
             #region //Igualdad de genero
             //BENEFICIADOS
-            int BeneficiadosIgualdadSuma = 0;
+        //    int BeneficiadosIgualdadSuma = 0;
             tb_AcionesBeneficiadosXmes beneficiadosIgualdadOBJ = this.ctx.tb_AcionesBeneficiadosXmes.Where(x => x.programa == 7 && x.MesInt == fechaMes && x.Año == año && x.TipoB_A == 1).FirstOrDefault();
             if (beneficiadosIgualdadOBJ != null)
             {
@@ -935,7 +935,7 @@ namespace SIICOP_V1._2
             // TERMINA EL CONTEO DE ACCIONES 
 
             //CONTEO DE BENEFICIADOS POR DIA 
-            int BeneficiadosXdiaSuma = 0;
+        //    int BeneficiadosXdiaSuma = 0;
             tbCarga_trabajo_Dele beneficiadosGralxdiadOBJ = this.ctx.tbCarga_trabajo_Dele.Where(x => x.programa == progragr && x.Mes_Num == mesactual && x.Año == año && x.Delegacion == Dele && x.Tipo_TA_BA_TB == 2).FirstOrDefault();
             if (beneficiadosGralxdiadOBJ != null)
             {

@@ -15,7 +15,7 @@ namespace SIICOP_V1._2.Captura
         SIICOPEntities ctx = new SIICOPEntities();
         string sUsuarioActual;
         int personalID;
-        int TotalAtendidos;
+        //int TotalAtendidos;
         int nino;
         int nina;
         int padresH;
@@ -88,7 +88,8 @@ namespace SIICOP_V1._2.Captura
                     Guid idExpediente = Guid.Parse(Session["idExpediente_Accion"].ToString());
                     expediente_Llenar(idExpediente);
                 }
-                catch (Exception ex) { /*salidaBandeja();*/ }
+              //  catch (Exception ex)
+                catch (Exception) { /*salidaBandeja();*/ }
             }
             else
             {
@@ -168,8 +169,8 @@ namespace SIICOP_V1._2.Captura
         }
         protected void btnGuardarEdicion_Click(object sender, EventArgs e)
         {
-            int r = 0;
-            int tamanoarchivo;
+         //   int r = 0;
+        //    int tamanoarchivo;
             string fileName = "";
             string contentType = "";
             nino = 0;
@@ -338,7 +339,8 @@ namespace SIICOP_V1._2.Captura
                 //ScriptManager.RegisterStartupScript((Page)this, this.GetType(), "redirect", "alert('DATOS GUARDADOS CON EXITO'); window.location='" + this.Request.ApplicationPath + "TotalAccionesBeneficiados.aspx';", true);
                 Response.Redirect("~/VistasReportes/Informe_Construccion_Cultura_Incluyente.aspx");
             }
-            catch (Exception ex)
+            catch (Exception)
+          //  catch (Exception ex)
             {
                 ScriptManager.RegisterClientScriptBlock((Page)this, this.GetType(), "alertMessage", "alert('¡Error al guardar los datos!')", true);
             }
@@ -349,7 +351,7 @@ namespace SIICOP_V1._2.Captura
         {
             bool valido = true;
             int r = 0;
-            int tamanoarchivo;
+          //  int tamanoarchivo;
             string fileName = "";
             string contentType = "";
             string textoValidacion = "<ul>";
@@ -735,7 +737,8 @@ namespace SIICOP_V1._2.Captura
                     HiddenField1.Value = null;
                     Session["actividades_fuera_tiempo"] = null;
                 }
-                catch (Exception ex)
+                catch (Exception )
+             //   catch (Exception ex)
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "error", "error();", true);
 

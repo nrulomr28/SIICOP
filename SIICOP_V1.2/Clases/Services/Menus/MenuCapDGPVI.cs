@@ -16,7 +16,15 @@ namespace SIICOP_V1._2.Servicios.Menus
                     "fas fa-edit",
                     "~/MenuProgramas/MenuDependencias.aspx",
                     "card-primary",
-                    "#0d6efd")
+                    "#0d6efd"),
+
+                 MenuFactory.Crear(
+                    "Productividad",
+                    "Indicadores y métricas",
+                    "fas fa-chart-bar",
+                    "~/VistasReportes/VistaAdmiReportes.aspx",
+                    "card-success",
+                    "#198754"),
             };
         }
     }

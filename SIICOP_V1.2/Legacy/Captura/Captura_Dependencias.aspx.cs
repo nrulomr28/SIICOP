@@ -82,7 +82,8 @@ namespace SIICOP_V1._2.Captura
                     Guid idExpediente = Guid.Parse(Session["idExpediente_Accion"].ToString());
                     expediente_Llenar(idExpediente);
                 }
-                catch (Exception ex) { /*salidaBandeja();*/ }
+               // catch (Exception ex)
+                catch (Exception ) { /*salidaBandeja();*/ }
             }
             else
             {
@@ -97,7 +98,6 @@ namespace SIICOP_V1._2.Captura
             Guid idReporte = idExpediente;
             Wv_DatosReportesHistorico reportesHistorico = ctx.Wv_DatosReportesHistorico.Find((object)idReporte);
             HiddenField1.Value = idReporte.ToString();
-
             this.txtResponsable.Text = reportesHistorico.nombrecompleto != null ? reportesHistorico.nombrecompleto : "";
             this.txtArea.Text = reportesHistorico.AreaTrabajo != null ? reportesHistorico.AreaTrabajo : "";
             this.txtFecha.Text = string.Format("{0:dd/MM/yyyy}", (object)reportesHistorico.fecha);
@@ -111,7 +111,6 @@ namespace SIICOP_V1._2.Captura
             this.txtmujer.Text = reportesHistorico.TotalMujeresAtendidas != 0 ? reportesHistorico.TotalMujeresAtendidas.ToString() : "0";
             this.txtatendios.Text = reportesHistorico.total_atendidos != 0 ? reportesHistorico.total_atendidos.ToString() : "0";
 
-
             tb_DireccionReporte direccionReporte = ctx.tb_DireccionReporte.Where(t => t.idResumenDiario == idReporte).FirstOrDefault();
             if (direccionReporte != null)
             {
@@ -120,10 +119,10 @@ namespace SIICOP_V1._2.Captura
                 this.longi.Value = direccionReporte.Longitud != null ? direccionReporte.Longitud : "";
                 this.route.Value = direccionReporte.calle != null ? direccionReporte.calle : "";
                 this.colony.Value = direccionReporte.coloni != null ? direccionReporte.coloni : "";
-               // this.entrecalle1.Value = direccionReporte.Entrecalle1 != null ? direccionReporte.Entrecalle1 : "";
-              //   this.entrecalle2.Value = direccionReporte.Entrecalle2 != null ? direccionReporte.Entrecalle2 : "";
-                //ddlRegion.SelectedValue = direccionReporte.RegionID.ToString();
-                //ddlDelegacion.SelectedValue = direccionReporte.DelegacionID != null ? direccionReporte.DelegacionID.ToString() : "0";
+             // this.entrecalle1.Value = direccionReporte.Entrecalle1 != null ? direccionReporte.Entrecalle1 : "";
+            //  this.entrecalle2.Value = direccionReporte.Entrecalle2 != null ? direccionReporte.Entrecalle2 : "";
+             // ddlRegion.SelectedValue = direccionReporte.RegionID.ToString();
+             // ddlDelegacion.SelectedValue = direccionReporte.DelegacionID != null ? direccionReporte.DelegacionID.ToString() : "0";
                 ddlMuNICIPIO.SelectedValue = direccionReporte.MunicipioID.ToString().Trim();
                 ddlMuNICIPIO.DataBind();
                 ddlLocalidad.SelectedValue = direccionReporte.LocalidadID != null ? direccionReporte.LocalidadID.ToString() : "0";
@@ -170,7 +169,8 @@ namespace SIICOP_V1._2.Captura
                     this.txtatendios.Text = (Hombre + Mujer).ToString();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
+           // catch (Exception ex)
             {
                 this.CalcularTotalAles();
             }
@@ -365,7 +365,8 @@ namespace SIICOP_V1._2.Captura
                     ScriptManager.RegisterStartupScript((Page)this, this.GetType(), "redirect", "alert('Datos guardados con exito'); window.location='" + this.Request.ApplicationPath + "TotalAccionesBeneficiados.aspx';", true);
                     HiddenField1.Value = null;
                 }
-                catch (Exception ex)
+                catch (Exception )
+               // catch (Exception ex)
                 {
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "alertMessage", "alert('ERRO AL GUARDAR LOS DATOS')", true);
 
@@ -500,7 +501,8 @@ namespace SIICOP_V1._2.Captura
                 this.Session["AccionExpediente"] = (object)null;
                 ScriptManager.RegisterStartupScript((Page)this, this.GetType(), "redirect", "alert('DATOS GUARDADOS CON EXITO'); window.location='" + this.Request.ApplicationPath + "TotalAccionesBeneficiados.aspx';", true);
             }
-            catch (Exception ex)
+            catch (Exception )
+          //  catch (Exception ex)
             {
                 ScriptManager.RegisterClientScriptBlock((Page)this, this.GetType(), "alertMessage", "alert('¡Error al guardar los datos!')", true);
             }

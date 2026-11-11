@@ -25,36 +25,31 @@
             --color-secundario60: rgb(168,37,60, .6);
             --color-secundario40: rgb(168,37,60, .4);
             --color-secundario20: rgb(168,37,60, .2);
-
             /*COLOR DORADO*/
             --color-dorado: #B28854;
             --color-dorad80: rgb(178,136,84, .8);
             --color-dorad60: rgb(178,136,84, .6);
             --color-dorado40: rgb(178,136,84, .4);
             --color-dorad20: rgb(178,136,84, .2);
-
-              /*COLOR BAGE*/
+            /*COLOR BAGE*/
             --color-bage: #DAC195;
             --color-bage80: rgb(218,193,149, .8);
             --color-bage60: rgb(218,193,149, .6);
             --color-bage40: rgb(218,193,149, .4);
             --color-bage20: rgb(218,193,149, .2);
-
-              /*COLOR MELON*/
+            /*COLOR MELON*/
             --color-melon: #EDD1AA;
             --color-melon80: rgb(237,209,170, .8);
             --color-melon60: rgb(237,209,170, .6);
             --color-melon40: rgb(237,209,170, .4);
             --color-melon20: rgb(237,209,170, .2);
-
-             /*COLOR GRAFITO*/
+            /*COLOR GRAFITO*/
             --color-grafito: #696968;
             --color-grafito80: rgb(105,105,104, .8);
             --color-grafito60: rgb(105,105,104, .6);
             --color-grafito40: rgb(105,105,104, .4);
             --color-grafito20: rgb(105,105,104, .2);
-
-             /*COLOR GRIS*/
+            /*COLOR GRIS*/
             --color-gris: #A8253C;
             --color-gris80: rgb(192,192,192, .8);
             --color-gris60: rgb(192,192,192, .6);
@@ -69,11 +64,11 @@
 
         /*LOGIN*/
         .login-container {
-    min-height: 80vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
 
         /* Simple CSS3 Fade-in-down Animation */
@@ -122,7 +117,7 @@
 
         .btn-principal {
             color: white;
-            background-color:  var(--color-principal)
+            background-color: var(--color-principal)
         }
 
             .btn-principal:hover {
@@ -147,7 +142,7 @@
 
         .logo-card {
             /*width: 20dvw;*/
-             width: 100%;
+            width: 100%;
             object-fit: cover;
             object-position: bottom;
         }
@@ -169,7 +164,7 @@
                                     <h4 class="text-titulo">INICIAR SESIÓN</h4>
                                     <asp:Login ID="Login" runat="server" OnLoggedIn="Login_LoggedIn" OnAuthenticate="Login_Authenticate">
                                         <LayoutTemplate>
-                                            <span style="color:red; font-weight:bold;">
+                                            <span style="color: red; font-weight: bold;">
                                                 <asp:Literal ID="FailureText" runat="server"></asp:Literal>
                                             </span>
                                             <!-- Login Form -->
@@ -181,11 +176,7 @@
                                                 <span class="input-group-text" id="addon-wrapping"><i class="fas fa-lock icono-c"></i></span>
                                                 <asp:TextBox runat="server" ID="Password" class="form-control" placeholder="Contraseña" TextMode="Password" required autocomplete="off"> </asp:TextBox>
                                             </div>
-
-
                                             <asp:Button ID="LoginButton" CommandName="Login" runat="server" class=" btn col-11 mx-auto btn-principal" ValidationGroup="Login1" Text="Ingresar" />
-
-
                                         </LayoutTemplate>
                                     </asp:Login>
                                 </div>
@@ -194,7 +185,6 @@
                     </div>
                     <div class="text-center fadeInDown">
                         <img class="avatar" src="~/Imagenes/SSP_Convivencia.png" runat="server" style="width: 40%" />
-
                     </div>
 
                 </div>

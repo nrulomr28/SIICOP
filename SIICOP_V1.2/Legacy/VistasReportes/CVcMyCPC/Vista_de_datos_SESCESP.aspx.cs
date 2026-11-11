@@ -175,7 +175,8 @@ namespace SIICOP_V1._2.VistasReportes.CVcMyCPC
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
+         //   catch (Exception ex)
             {
 
             }
@@ -430,7 +431,8 @@ namespace SIICOP_V1._2.VistasReportes.CVcMyCPC
                     }
                 }
             }
-            catch (Exception exe)
+            catch (Exception )
+           // catch (Exception exe)
             {
                 //lblError.Text = exe.Message;
             }

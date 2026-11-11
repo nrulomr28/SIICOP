@@ -114,7 +114,8 @@ namespace SIICOP_V1._2.Graficas
 
 
             }
-            catch (Exception ex)
+            catch (Exception )
+           // catch (Exception ex)
             {
                 return null;
             }
@@ -251,7 +252,8 @@ namespace SIICOP_V1._2.Graficas
                     this.gvzonanorte.DataBind();
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
+           // catch (Exception ex)
             {
             }
         }
@@ -376,7 +378,8 @@ namespace SIICOP_V1._2.Graficas
 
                 this.gvZonaCentro.DataBind();
             }
-            catch (Exception ex)
+            catch (Exception )
+           // catch (Exception ex)
             {
             }
         }
@@ -506,7 +509,8 @@ namespace SIICOP_V1._2.Graficas
                     this.GvProgramaSur.DataBind();
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
+            //catch (Exception ex)
             {
             }
         }

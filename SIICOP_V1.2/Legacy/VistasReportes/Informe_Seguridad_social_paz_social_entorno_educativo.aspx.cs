@@ -18,10 +18,10 @@ namespace SIICOP_V1._2.VistasReportes
     {
         SIICOPEntities ctx = new SIICOPEntities();
         private int iduser;
-        private static DataTable dtPrincipal;
+       // private static DataTable dtPrincipal;
         int progragr;
         String fechaMes;
-        int mesactual;
+       // int mesactual;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -131,7 +131,7 @@ namespace SIICOP_V1._2.VistasReportes
                 string fechainicial = string.Format("{0:d}", this.txtFInicialC.Text);
                 string fechaFinal = string.Format("{0:d}", this.txtfechafin.Text);
                 int tiprograma = Convert.ToInt32(9);
-                int regionid = 0;
+            //    int regionid = 0;
                 ExcelPackage excel = new ExcelPackage(); 
 
                 #region *** descrgar excel por medio de fechas
@@ -859,7 +859,8 @@ namespace SIICOP_V1._2.VistasReportes
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
+          //  catch (Exception ex)
             {
                 return null;
             }
@@ -916,7 +917,8 @@ namespace SIICOP_V1._2.VistasReportes
 
 
             }
-            catch (Exception ex)
+            catch (Exception )
+            //catch (Exception ex)
             {
                 return null;
             }
@@ -974,7 +976,8 @@ namespace SIICOP_V1._2.VistasReportes
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
+        //    catch (Exception ex)
             {
                 return null;
             }
@@ -1028,7 +1031,8 @@ namespace SIICOP_V1._2.VistasReportes
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
+         //   catch (Exception ex)
             {
                 return null;
             }
@@ -1085,7 +1089,8 @@ namespace SIICOP_V1._2.VistasReportes
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
+           // catch (Exception ex)
             {
                 return null;
             }
@@ -1140,7 +1145,8 @@ namespace SIICOP_V1._2.VistasReportes
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
+          //  catch (Exception ex)
             {
                 return null;
             }
@@ -1174,7 +1180,8 @@ namespace SIICOP_V1._2.VistasReportes
 
                 }
             }
-            catch (Exception ex)
+           // catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -1207,7 +1214,8 @@ namespace SIICOP_V1._2.VistasReportes
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
+           // catch (Exception ex)
             {
 
             }

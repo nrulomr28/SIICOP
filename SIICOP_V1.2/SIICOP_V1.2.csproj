@@ -209,6 +209,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Imagenes\Menudependencia\DGPVI.png" />
+    <Content Include="Imagenes\Menudependencia\IMG_ESTRATEGIA.jpg" />
     <Content Include="Legacy\Bienvenidas\Bienvenido_C4.aspx" />
     <Content Include="Legacy\Bienvenidas\Bienvenido_CEPREVIDE.aspx" />
     <Content Include="Legacy\Bienvenidas\Bienvenido_CVcMyCPC.aspx" />
@@ -1991,10 +1993,10 @@
     <Content Include="Imagenes\sort-desc.png" />
     <Content Include="Imagenes\SSP_Convivencia.png" />
     <Content Include="Inicio\Countter.xml" />
-    <Content Include="Inicio\Inicio.aspx" />
+    <Content Include="Legacy\Inicio\Inicio.aspx" />
     <Content Include="Inicio\inicio_sesion.aspx" />
     <Content Include="Inicio\Launcher.aspx" />
-    <Content Include="Inicio\Reporte.aspx" />
+    <Content Include="Legacy\Inicio\Reporte.aspx" />
     <Content Include="Legacy\MenuProgramas\C4\Programas_C4.aspx" />
     <Content Include="Legacy\MenuProgramas\CREPREVIDE\Programa_CEPREVIDE.aspx" />
     <Content Include="Legacy\MenuProgramas\DGRS\Programas_DGRS.aspx" />
@@ -2057,11 +2059,9 @@
     <Content Include="Site.Master" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="sysadmin\Administracion.aspx" />
-    <Content Include="sysadmin\Calendar.aspx" />
     <Content Include="sysadmin\ControlRoles.aspx" />
     <Content Include="sysadmin\ControlUser.aspx" />
     <Content Include="sysadmin\ErrorLog.aspx" />
-    <Content Include="sysadmin\Nuevo_Usuario.aspx" />
     <Content Include="sysadmin\Cambiar_Contrasena.aspx" />
     <Content Include="TotalAccionesBeneficiados.aspx" />
     <Content Include="ViewSwitcher.ascx" />
@@ -2092,6 +2092,9 @@
     <Compile Include="Clases\DTOs\UsuarioDto.cs" />
     <Compile Include="Clases\Services\Menus\MenuAdministrador.cs" />
     <Compile Include="Clases\Services\Menus\MenuCapDGPVI.cs" />
+    <Compile Include="Datos\Applications.cs">
+      <DependentUpon>SIICOB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Datos\Cat_Coordinador.cs">
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>
@@ -2107,11 +2110,35 @@
     <Compile Include="Datos\Cat_ResponsabilidadPrincipal.cs">
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Datos\C_Cat_Acciones.cs">
+      <DependentUpon>SIICOB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\C__MigrationHistory.cs">
+      <DependentUpon>SIICOB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\ErrorLog.cs">
+      <DependentUpon>SIICOB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Memberships.cs">
+      <DependentUpon>SIICOB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\municipio.cs">
+      <DependentUpon>SIICOB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Datos\Repositorio\EjeRepository.cs" />
     <Compile Include="Datos\Repositorio\IndicadorRepository.cs" />
     <Compile Include="Datos\Repositorio\ResponsabilidadRepository.cs" />
     <Compile Include="Datos\Repositorio\UsuarioRepository.cs" />
+    <Compile Include="Datos\Roles.cs">
+      <DependentUpon>SIICOB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Datos\tb_Reporte_Diario.cs">
+      <DependentUpon>SIICOB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Users.cs">
+      <DependentUpon>SIICOB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Wv_DatosReportesHistorico.cs">
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>
     <Compile Include="Handlers\ArchivoEvidencia.ashx.cs">
@@ -2506,9 +2533,6 @@
     <Compile Include="Datos\vw_Indicadores_Beneficiados.cs">
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Datos\Wv_DatosReportesHistorico.cs">
-      <DependentUpon>SIICOB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Datos\WV_Datosrepote_app.cs">
       <DependentUpon>SIICOB.tt</DependentUpon>
     </Compile>
@@ -2603,11 +2627,11 @@
     <Compile Include="Graficas\SIAGEE.aspx.designer.cs">
       <DependentUpon>SIAGEE.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Inicio\Inicio.aspx.cs">
+    <Compile Include="Legacy\Inicio\Inicio.aspx.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Inicio\Inicio.aspx.designer.cs">
+    <Compile Include="Legacy\Inicio\Inicio.aspx.designer.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
     </Compile>
     <Compile Include="Inicio\inicio_sesion.aspx.cs">
@@ -2624,11 +2648,11 @@
     <Compile Include="Inicio\Launcher.aspx.designer.cs">
       <DependentUpon>Launcher.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Inicio\Reporte.aspx.cs">
+    <Compile Include="Legacy\Inicio\Reporte.aspx.cs">
       <DependentUpon>Reporte.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Inicio\Reporte.aspx.designer.cs">
+    <Compile Include="Legacy\Inicio\Reporte.aspx.designer.cs">
       <DependentUpon>Reporte.aspx</DependentUpon>
     </Compile>
     <Compile Include="json\ActividadesGeo.ashx.cs">
@@ -2745,13 +2769,6 @@
     <Compile Include="sysadmin\Administracion.aspx.designer.cs">
       <DependentUpon>Administracion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="sysadmin\Calendar.aspx.cs">
-      <DependentUpon>Calendar.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="sysadmin\Calendar.aspx.designer.cs">
-      <DependentUpon>Calendar.aspx</DependentUpon>
-    </Compile>
     <Compile Include="sysadmin\ControlRoles.aspx.cs">
       <DependentUpon>ControlRoles.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2772,13 +2789,6 @@
     </Compile>
     <Compile Include="sysadmin\ErrorLog.aspx.designer.cs">
       <DependentUpon>ErrorLog.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="sysadmin\Nuevo_Usuario.aspx.cs">
-      <DependentUpon>Nuevo_Usuario.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="sysadmin\Nuevo_Usuario.aspx.designer.cs">
-      <DependentUpon>Nuevo_Usuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="sysadmin\Cambiar_Contrasena.aspx.cs">
       <DependentUpon>Cambiar_Contrasena.aspx</DependentUpon>

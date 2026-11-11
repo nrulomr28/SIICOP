@@ -19,31 +19,98 @@ namespace SIICOP_V1._2.SysAdmin
         {
             ctx = new SIICOPEntities();
 
-            // Dado que el GridView tiene EnableViewState="false", 
-            // es obligatorio cargar el Grid en cada ciclo de vida (PostBack).
-        
             if (!IsPostBack)
             {
                 CargarDependencias();
                 CargarAreas();
+                CargarGrid();
             }
-            CargarGrid();
-
+            
         }
 
-        private void CargarGrid()
+        /// ORDENAR EL GRID 
+        private string SortDirection
+        {
+            get { return ViewState["SortDirection"] != null ? ViewState["SortDirection"].ToString() : "DESC"; }
+            set { ViewState["SortDirection"] = value; }
+        }
+
+        private string SortExpression
+        {
+            get { return ViewState["SortExpression"] != null ? ViewState["SortExpression"].ToString() : "fechacrecion"; }
+            set { ViewState["SortExpression"] = value; }
+        }
+
+
+        /// ORDENAR EL GRID 
+        protected void gvuser_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            if (SortExpression == e.SortExpression)
+            {
+                SortDirection = SortDirection == "ASC" ? "DESC" : "ASC";
+            }
+            else
+            {
+                SortExpression = e.SortExpression;
+                SortDirection = "ASC";
+            }
+
+            string filtro = txtBuscar.Text.Trim();
+            CargarGrid(filtro);
+        }
+
+        /// ORDENAR EL GRID 
+        private void CargarGrid(string busqueda = "")
         {
             try
             {
-                var usuarios = ctx.Personales.OrderByDescending(u => u.fechacrecion).ToList();
+                var query = ctx.Personales.AsQueryable();
+
+                if (!string.IsNullOrEmpty(busqueda))
+                {
+                    query = query.Where(u =>
+                        (u.Nombre  != null && u.Nombre.Contains(busqueda)) ||
+                        (u.paterno != null && u.paterno.Contains(busqueda)) ||
+                        (u.materno != null && u.materno.Contains(busqueda)) ||
+                        (u.login   != null && u.login.Contains(busqueda))
+                    );
+                }
+          //    var usuarios = query.OrderByDescending(u => u.fechacrecion).ToList();
+                bool isAsc = SortDirection == "ASC";
+
+                switch (SortExpression)
+                {
+                    case "Nombre":
+                        query = isAsc ? query.OrderBy(u => u.Nombre) : query.OrderByDescending(u => u.Nombre);
+                        break;
+                    case "AreaTrabajo":
+                        query = isAsc ? query.OrderBy(u => u.AreaTrabajo) : query.OrderByDescending(u => u.AreaTrabajo);
+                        break;
+                    case "login":
+                        query = isAsc ? query.OrderBy(u => u.login) : query.OrderByDescending(u => u.login);
+                        break;
+                    case "Dependencia":
+                        query = isAsc ? query.OrderBy(u => u.Dependencia) : query.OrderByDescending(u => u.Dependencia);
+                        break;
+                    case "fechacrecion":
+                    default:
+                        query = isAsc ? query.OrderBy(u => u.fechacrecion) : query.OrderByDescending(u => u.fechacrecion);
+                        break;
+                }
+
+                var usuarios = query.ToList();
                 gvuser.DataSource = usuarios;
                 gvuser.DataBind();
+            //  gvuser.DataSource = usuarios;
+            //  gvuser.DataBind();
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("Error al cargar Grid: " + ex.Message);
             }
         }
+
+
 
         protected void PageDropDownListAdmin_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -54,7 +121,8 @@ namespace SIICOP_V1._2.SysAdmin
                 if (pageList != null)
                 {
                     gvuser.PageIndex = pageList.SelectedIndex;
-                    CargarGrid(); // ¡CORRECCIÓN: Obligatorio volver a consultar y enlazar!
+                 
+                    CargarGrid(txtBuscar.Text.Trim());
                 }
             }
         }
@@ -98,17 +166,13 @@ namespace SIICOP_V1._2.SysAdmin
         protected void gvuser_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvuser.PageIndex = e.NewPageIndex;
-            CargarGrid();
+            CargarGrid(txtBuscar.Text.Trim());
         }
 
-
-
-
         protected void gvuser_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            
-            if (e.CommandName == "ResetPassword")
-            {
+        {            
+           if (e.CommandName == "ResetPassword")
+           {
                 Guid idusermember;
                 if (Guid.TryParse(e.CommandArgument.ToString(), out idusermember))
                 {
@@ -118,17 +182,13 @@ namespace SIICOP_V1._2.SysAdmin
                         txtLogin.Text = login.login;
                         hfUsuarioSeleccionado.Value = login.login;
                         txtpassword.Text = "";
-                        updModalPassword.Update();
-
-                        // 2. ABRIMOS EL MODAL
+                        updModalPassword.Update();                     
                         ScriptManager.RegisterStartupScript(UpdatePanel1, UpdatePanel1.GetType(), "openModalpassword", "openModalpassword();", true);
                     }
                 }
-            }
-        
-
+           }       
            if (e.CommandName == "EditarUser")
-            {
+           {
                 int idusermember;
                 if (int.TryParse(e.CommandArgument.ToString(), out idusermember))
                 {
@@ -142,33 +202,37 @@ namespace SIICOP_V1._2.SysAdmin
                         txtAmaterno.Text = user.materno;
                         hfAMaterno.Value = user.materno;
                         updModaleditaruserm.Update();
-
-                        // Validación segura para evitar crasheos si el catálogo cambia
                         if (user.cat_areaidarea != null && ddlArea.Items.FindByValue(user.cat_areaidarea.ToString()) != null)
                             ddlArea.SelectedValue = user.cat_areaidarea.ToString();
-
                         if (user.DependenciaId != null && ddldepen_edit.Items.FindByValue(user.DependenciaId.ToString()) != null)
                             ddldepen_edit.SelectedValue = user.DependenciaId.ToString();
-
                         Session["iduser"] = idusermember;
-
-                        // Funciona perfectamente
                         ScriptManager.RegisterStartupScript(UpdatePanel1, UpdatePanel1.GetType(), "openModalEditUser", "openModalEditUser();", true);
                     }
                 }
-            }
+           }
         }
 
 
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            string filtro = txtBuscar.Text.Trim();
+
+            CargarGrid(filtro);
+        }
+
+        
+        protected void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtBuscar.Text = string.Empty;
+            CargarGrid();
+        }
 
         protected void lkbGuardarContraseña_Click(object sender, EventArgs e)       {
-            
-            try
-            {
+        try
+           {
                 string username = txtLogin.Text.Trim();
-               // string username = hfUsuarioSeleccionado.Value; 
                 string password = txtpassword.Text;
-                // CORRECCIÓN: Si el usuario está vacío, lanzamos error. Si tiene contenido, procedemos.
                 if (string.IsNullOrEmpty(username))
                 {
                     string script = "Swal.fire('Error', 'El usuario no fue detectado.', 'error');";
@@ -188,10 +252,8 @@ namespace SIICOP_V1._2.SysAdmin
                 {
                     if (mu.IsLockedOut) mu.UnlockUser();
 
-                    // Cambiar contraseña
                     mu.ChangePassword(mu.ResetPassword(), password);
 
-                    // Éxito: cerramos modal y lanzamos alerta
                     string scriptExito = "$('#myModalPassword').modal('hide'); Correcto();";
                     ScriptManager.RegisterStartupScript(lkbGuardarContraseña, lkbGuardarContraseña.GetType(), "ExitoPassword", scriptExito, true);
                 }
@@ -212,7 +274,6 @@ namespace SIICOP_V1._2.SysAdmin
         protected void lnkbEditUser_Click(object sender, EventArgs e)
         {
             if (Session["iduser"] == null) return;
-
             int iduser = Convert.ToInt32(Session["iduser"]);
             if (iduser != 0)
             {
@@ -237,30 +298,24 @@ namespace SIICOP_V1._2.SysAdmin
                             useredit.DependenciaId = iddepen;
                             useredit.Dependencia = ddldepen_edit.SelectedItem.Text;
                         }
-
                         ctx.SaveChanges();
-
-                        // 1. Recargamos los datos del GridView
                         CargarGrid();
-
-                        // 2. Cerramos el modal Y mostramos el mensaje de éxito
-                        // Inyectamos el cierre del modal + la función Correcto()
                         string scriptExito = "$('#myModalEditUser').modal('hide'); Correcto();";
 
-                        // Usamos 'lnkbEditUser' (el botón) como fuente para que el UpdatePanel lo procese
                         ScriptManager.RegisterStartupScript(lnkbEditUser, lnkbEditUser.GetType(), "ExitoEditar", scriptExito, true);
                     }
                 }
                 catch (Exception ex)
                 {
                     System.Diagnostics.Debug.WriteLine("Error al editar usuario: " + ex.Message);
-                    // Mensaje de error visible para el usuario
+                 
                     string scriptError = $"Swal.fire('Error', 'No se pudo guardar: {ex.Message.Replace("'", "")}', 'error');";
                     ScriptManager.RegisterStartupScript(lnkbEditUser, lnkbEditUser.GetType(), "ErrorEditar", scriptError, true);
                 }
             }
         }
-      /*  protected void lnkbEditUser_Click(object sender, EventArgs e)
+
+     /* protected void lnkbEditUser_Click(object sender, EventArgs e)
         {
             if (Session["iduser"] == null) return;
 
@@ -309,19 +364,16 @@ namespace SIICOP_V1._2.SysAdmin
             try
             {
                 var areas = ctx.Cat_area.OrderBy(a => a.area_nombre).ToList();
-
                 ddlAreaNuevo.DataSource = areas;
                 ddlAreaNuevo.DataTextField = "area_nombre";
                 ddlAreaNuevo.DataValueField = "idarea";
                 ddlAreaNuevo.DataBind();
                 ddlAreaNuevo.Items.Insert(0, new ListItem("--Seleccione área--", "0"));
-
                 ddlArea.DataSource = areas;
                 ddlArea.DataTextField = "area_nombre"; 
                 ddlArea.DataValueField = "idarea";
                 ddlArea.DataBind();
-                ddlArea.Items.Insert(0, new ListItem("--Seleccione un área--", "0"));
-               // ddlArea.Items.Insert(0, new ListItem("--Seleccione un área--", "0"));
+                ddlArea.Items.Insert(0, new ListItem("--Seleccione un área--", "0"));  
             }
             catch (Exception ex)
             {
@@ -337,12 +389,10 @@ namespace SIICOP_V1._2.SysAdmin
                 var listadoDependencias = ctx.Cat_Dependencias
                                              .OrderBy(d => d.DependenciaNombre)
                                              .ToList();
-
                 ddldepndencia.DataSource = listadoDependencias;
                 ddldepndencia.DataTextField = "DependenciaSiglas"; 
                 ddldepndencia.DataValueField = "DependenciaId";    
                 ddldepndencia.DataBind();
-
                 ddldepen_edit.DataSource = listadoDependencias;
                 ddldepen_edit.DataTextField = "DependenciaSiglas";
                 ddldepen_edit.DataValueField = "DependenciaId";
@@ -354,8 +404,7 @@ namespace SIICOP_V1._2.SysAdmin
             }
         }
         protected void lnkbtnAgregarUser_Click(object sender, EventArgs e)
-        {
-          
+        {          
             ScriptManager.RegisterStartupScript(UpdatePanel1, UpdatePanel1.GetType(), "openModalNuevoUser", "openModalNuevoUser();", true);
         }
 
@@ -525,8 +574,7 @@ namespace SIICOP_V1._2.SysAdmin
 
         protected void ddldepen_edit_DataBound(object sender, EventArgs e)
         {
-            // Opcional: Agregar elemento por defecto si enlazas dinámicamente
-            // this.ddldepen_edit.Items.Insert(0, new ListItem("--Seleccione--", "0"));
+          
         }
 
         public override void Dispose()

@@ -180,7 +180,8 @@ namespace SIICOP_V1._2.VistasReportes.DGRS
 
                 }
             }
-            catch (Exception ex)
+     //       catch (Exception ex)
+            catch (Exception )
             {
 
             }
@@ -442,7 +443,8 @@ namespace SIICOP_V1._2.VistasReportes.DGRS
                     }
                 }
             }
-            catch (Exception exe)
+            catch (Exception)
+           // catch (Exception exe)
             {
                 //lblError.Text = exe.Message;
             }

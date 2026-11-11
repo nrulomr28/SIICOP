@@ -1,4 +1,5 @@
 ﻿
+using ExcelLibrary.BinaryFileFormat;
 using SIICOP_V1._2.Clases.Services;
 using SIICOP_V1._2.Datos;
 using SIICOP_V1._2.Datos.Repositorio;
@@ -24,78 +25,75 @@ namespace SIICOP_V1._2.Captura
         int padresH;
         int padresM;
         int TotalA;
-
         int? programasID = null;
-
-
         SIICOPEntities ctx = new SIICOPEntities();
         string sUsuarioActual;
         public enum AccionExpediente { Creacion, Edicion, Visualizacion }
-
         private readonly CatalogoService _catalogoService = new CatalogoService();
 
-        /*  protected void Page_Load(object sender, EventArgs e)
-          {
+        /* 
+         protected void Page_Load(object sender, EventArgs e)
+         {
 
 
-              if (!UsuarioTieneAcceso())
-              {
-                  RedirigirInicio();
-                  return;
-              }
+               if (!UsuarioTieneAcceso())
+               {
+                   RedirigirInicio();
+                   return;
+               }
 
-              programasID = Convert.ToInt32(Session["programasID"]);
+               programasID = Convert.ToInt32(Session["programasID"]);
 
-              if (programasID == 0)
-              {
-                  PanelCoordinacion.Visible = false;
-                  PanelMunicipiosPrioritarios.Visible = false;
-                  PanelRAVI.Visible = false;
+               if (programasID == 0)
+               {
+                   PanelCoordinacion.Visible = false;
+                   PanelMunicipiosPrioritarios.Visible = false;
+                   PanelRAVI.Visible = false;
 
-              }
-              else
-              {
-                  PanelCoordinacion.Visible = true;
-                  PanelMunicipiosPrioritarios.Visible = true;
-                  PanelRAVI.Visible = true;
-              }
+               }
+               else
+               {
+                   PanelCoordinacion.Visible = true;
+                   PanelMunicipiosPrioritarios.Visible = true;
+                   PanelRAVI.Visible = true;
+               }
 
 
-              if (!IsPostBack)
-              {
-                  InicializarPagina();
-                  CargarZonas();
-                  CargarMunicipios();
-                  CargarProgramas();
+               if (!IsPostBack)
+               {
+                   InicializarPagina();
+                   CargarZonas();
+                   CargarMunicipios();
+                   CargarProgramas();
 
-                  string valor = Request.QueryString["ValorEntorno"];
+                   string valor = Request.QueryString["ValorEntorno"];
 
-                  if (!string.IsNullOrEmpty(valor))
-                  {
-                      int entornoId = Convert.ToInt32(valor);
+                   if (!string.IsNullOrEmpty(valor))
+                   {
+                       int entornoId = Convert.ToInt32(valor);
 
-                      if (entornoId == 1)
-                      {
-                          CargarEntorno(entornoId);
-                          //CargarEje(entornoId);
-                      }
-                      else if (entornoId == 2)
-                      {
-                          CargarEntorno(entornoId);
-                          //CargarEje(entornoId);
-                      }
-                  }
-                  else
-                  {
-                      Response.Redirect("Entorno.aspx");
-                  }
+                       if (entornoId == 1)
+                       {
+                           CargarEntorno(entornoId);
+                           //CargarEje(entornoId);
+                       }
+                       else if (entornoId == 2)
+                       {
+                           CargarEntorno(entornoId);
+                           //CargarEje(entornoId);
+                       }
+                   }
+                   else
+                   {
+                       Response.Redirect("Entorno.aspx");
+                   }
 
-              }
+               }
 
-              ConfigurarPaneles();
+               ConfigurarPaneles();
 
-          } 
-        */
+           } 
+         */
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -109,17 +107,14 @@ namespace SIICOP_V1._2.Captura
                 RedirectHelper.Redirect(this.Response, "~/Captura/Entorno.aspx");
                 return;
             }
-
             if (!SesionUsuario.EstaAutenticado || SesionUsuario.UsuarioLoggeado == null)
             {
                 // Si la sesión expiró o no hay usuario, redirigir al login
                 RedirectHelper.Redirect(this.Response, "~/Inicio/inicio_sesion.aspx");
                 return;
             }
-
             programasID = (int)Session["programasID"];
             ConfigurarPanelesPrograma();
-
             if (!IsPostBack)
             {
                 InicializarPagina();
@@ -143,7 +138,8 @@ namespace SIICOP_V1._2.Captura
                     {
                         pnlResponsabilidadIndicador.Visible = false;
                         CargarEntorno(entornoId);
-                        CargarMunicipiosP();
+                        //CargarMunicipiosP();   /// CAMBIO POR SOLICITUD DEL AREA 
+                        CargarMunicipios();
                     }
                 }
                 else
@@ -159,165 +155,164 @@ namespace SIICOP_V1._2.Captura
 
 
         /*    protected void Page_Load(object sender, EventArgs e)
-        {          
-               // Guid idExpediente = Guid.Parse(Session["idExpediente_Accion"].ToString());
-                if (!UsuarioTieneAcceso())
-                {
-                    RedirigirInicio();
-                    return;
-                }
-                if (!SesionValida())
-                {
-                    Response.Redirect("~/Captura/Entorno.aspx");
-                    return;
-                }
-                programasID = (int)Session["programasID"];
-                ConfigurarPanelesPrograma();
-                if (!IsPostBack)
-                {
-                    InicializarPagina();
-                    CargarZonas();
-                    CargarCordinador();               
-                    CargarProgramas();
-                    ConfigurarPaneles();
-                    CargarRavis();
-                    string valor = Request.QueryString["ValorEntorno"];
-                    if (!string.IsNullOrEmpty(valor))
+            {          
+                   // Guid idExpediente = Guid.Parse(Session["idExpediente_Accion"].ToString());
+                    if (!UsuarioTieneAcceso())
                     {
-                        int entornoId = Convert.ToInt32(valor);
-                        if (entornoId == 1)
-
-                        {
-                            CargarEntorno(entornoId);
-                              CargarMunicipios();
-                        }
-                        else if (entornoId == 2)
-                        {
-                            CargarEntorno(entornoId);
-                            CargarMunicipiosP();
-                        }
+                        RedirigirInicio();
+                        return;
                     }
-                    else
+                    if (!SesionValida())
                     {
-                        Response.Redirect("Entorno.aspx");
+                        Response.Redirect("~/Captura/Entorno.aspx");
+                        return;
                     }
+                    programasID = (int)Session["programasID"];
+                    ConfigurarPanelesPrograma();
+                    if (!IsPostBack)
+                    {
+                        InicializarPagina();
+                        CargarZonas();
+                        CargarCordinador();               
+                        CargarProgramas();
+                        ConfigurarPaneles();
+                        CargarRavis();
+                        string valor = Request.QueryString["ValorEntorno"];
+                        if (!string.IsNullOrEmpty(valor))
+                        {
+                            int entornoId = Convert.ToInt32(valor);
+                            if (entornoId == 1)
 
-                }           
+                            {
+                                CargarEntorno(entornoId);
+                                  CargarMunicipios();
+                            }
+                            else if (entornoId == 2)
+                            {
+                                CargarEntorno(entornoId);
+                                CargarMunicipiosP();
+                            }
+                        }
+                        else
+                        {
+                            Response.Redirect("Entorno.aspx");
+                        }
 
-        }
-        */
-        /*
-           protected void Page_Load(object sender, EventArgs e)
-               {
-                   if (!IsPostBack)
-                   {
-                       if (Session["idExpediente_Accion"] != null && Session["AccionExpediente"] != null)
-                       {
-                           AccionExpediente accion = (AccionExpediente)Session["AccionExpediente"];
+                    }           
 
-                           switch ((int)accion)
-                           {
-                               case (int)AccionExpediente.Edicion:
-
-                                   Guid idExpediente = (Guid)Session["idExpediente_Accion"];
-
-                                   ViewState["idExpediente_Actual"] = idExpediente;
-                                   ddlMuNICIPIO.DataBind();
-                                   ddlsubprograma.DataBind();
-                                   CargarDatosEdicion(idExpediente);
-                                   lnkbtnGuardar.Visible = true;
-                                   break;
-                           }
-
-                           Session["idExpediente_Accion"] = null;
-                           Session["AccionExpediente"] = null;
-                       }
-                       else
-                       {
-                           string sUsuarioActual = System.Web.Security.Membership.GetUser().UserName;
-                           var a = ctx.Personales.FirstOrDefault(x => x.login == sUsuarioActual);
-
-                           if (a != null)
-                           {
-                               txtResponsable.Text = string.Format("{0} {1} {2}", a.Nombre, a.paterno, a.materno);
-                               txtArea.Text = a.AreaTrabajo;
-                           }
-
-                           lnkbtnGuardar.Visible = true;
-                       }
-                   }
-               }
-
-           */
-        /* private void CargarDatosEdicion(Guid idExped)
-           {
-               var resultado = (from reporte in ctx.tb_Reporte_Diario
-                                join datosGral in ctx.TB_DatosGralReporte
-                                on reporte.idResumenDiario equals datosGral.idResumenDiario
-                                join DiReport in ctx.tb_DireccionReporte
-                                on reporte.idResumenDiario equals DiReport.idResumenDiario
-                                where reporte.idResumenDiario == idExped
-                                select new
-                                {
-                                    Reporte = reporte,
-                                    Datos = datosGral,
-                                    Direccion = DiReport
-                                }).FirstOrDefault();
-
-               if (resultado != null)
-               {
-                   txtComentarios.Text = resultado.Reporte.Comentarios;
-
-                   if (resultado.Reporte.Fecha.HasValue)
-                   {
-                       txtFecha.Text = resultado.Reporte.Fecha.Value.ToString("yyyy-MM-dd");
-                   }
-
-                   string idMuni = resultado.Reporte.idMunicipio.ToString();
-                   if (ddlMuNICIPIO.Items.FindByValue(idMuni) != null)
-                   {
-                       ddlMuNICIPIO.SelectedValue = idMuni;
-                   }
-
-                   string idSub = resultado.Reporte.programasID.ToString();
-                   if (ddlsubprograma.Items.FindByValue(idSub) != null)
-                   {
-                       ddlsubprograma.SelectedValue = idSub;
-                   }
-                   var personal = ctx.Personales.FirstOrDefault(p => p.idPersonal == resultado.Reporte.idPersonal);
-                   if (personal != null)
-                   {
-                       txtResponsable.Text = string.Format("{0} {1} {2}", personal.Nombre, personal.paterno, personal.materno);
-                       txtArea.Text = personal.AreaTrabajo;
-                   }
-               }
-           }
-         */
-
-      /*  private void ConfigurarPanelesPrograma()
-        {
-            // 1. Recuperar el ID de forma segura desde la sesión
-            int idProgramaActual = 0;
-
-            if (Session["programasID"] != null)
-            {
-                idProgramaActual = Convert.ToInt32(Session["programasID"]);
             }
+            */
+        /*
+               protected void Page_Load(object sender, EventArgs e)
+                   {
+                       if (!IsPostBack)
+                       {
+                           if (Session["idExpediente_Accion"] != null && Session["AccionExpediente"] != null)
+                           {
+                               AccionExpediente accion = (AccionExpediente)Session["AccionExpediente"];
 
-          
-            bool visible = (idProgramaActual > 0);
+                               switch ((int)accion)
+                               {
+                                   case (int)AccionExpediente.Edicion:
 
-            // 3. Aplicar la visibilidad a los paneles
-            if (PanelCoordinacion != null) PanelCoordinacion.Visible = visible;
-            if (PanelMunicipiosPrioritarios != null) PanelMunicipiosPrioritarios.Visible = visible;
-            if (PanelRAVI != null) PanelRAVI.Visible = visible;
-        }
-      */
+                                       Guid idExpediente = (Guid)Session["idExpediente_Accion"];
 
-     private void ConfigurarPanelesPrograma()
+                                       ViewState["idExpediente_Actual"] = idExpediente;
+                                       ddlMuNICIPIO.DataBind();
+                                       ddlsubprograma.DataBind();
+                                       CargarDatosEdicion(idExpediente);
+                                       lnkbtnGuardar.Visible = true;
+                                       break;
+                               }
+
+                               Session["idExpediente_Accion"] = null;
+                               Session["AccionExpediente"] = null;
+                           }
+                           else
+                           {
+                               string sUsuarioActual = System.Web.Security.Membership.GetUser().UserName;
+                               var a = ctx.Personales.FirstOrDefault(x => x.login == sUsuarioActual);
+
+                               if (a != null)
+                               {
+                                   txtResponsable.Text = string.Format("{0} {1} {2}", a.Nombre, a.paterno, a.materno);
+                                   txtArea.Text = a.AreaTrabajo;
+                               }
+
+                               lnkbtnGuardar.Visible = true;
+                           }
+                       }
+                   }
+
+               */
+        /* private void CargarDatosEdicion(Guid idExped)
+               {
+                   var resultado = (from reporte in ctx.tb_Reporte_Diario
+                                    join datosGral in ctx.TB_DatosGralReporte
+                                    on reporte.idResumenDiario equals datosGral.idResumenDiario
+                                    join DiReport in ctx.tb_DireccionReporte
+                                    on reporte.idResumenDiario equals DiReport.idResumenDiario
+                                    where reporte.idResumenDiario == idExped
+                                    select new
+                                    {
+                                        Reporte = reporte,
+                                        Datos = datosGral,
+                                        Direccion = DiReport
+                                    }).FirstOrDefault();
+
+                   if (resultado != null)
+                   {
+                       txtComentarios.Text = resultado.Reporte.Comentarios;
+
+                       if (resultado.Reporte.Fecha.HasValue)
+                       {
+                           txtFecha.Text = resultado.Reporte.Fecha.Value.ToString("yyyy-MM-dd");
+                       }
+
+                       string idMuni = resultado.Reporte.idMunicipio.ToString();
+                       if (ddlMuNICIPIO.Items.FindByValue(idMuni) != null)
+                       {
+                           ddlMuNICIPIO.SelectedValue = idMuni;
+                       }
+
+                       string idSub = resultado.Reporte.programasID.ToString();
+                       if (ddlsubprograma.Items.FindByValue(idSub) != null)
+                       {
+                           ddlsubprograma.SelectedValue = idSub;
+                       }
+                       var personal = ctx.Personales.FirstOrDefault(p => p.idPersonal == resultado.Reporte.idPersonal);
+                       if (personal != null)
+                       {
+                           txtResponsable.Text = string.Format("{0} {1} {2}", personal.Nombre, personal.paterno, personal.materno);
+                           txtArea.Text = personal.AreaTrabajo;
+                       }
+                   }
+               }
+             */
+
+        /*  private void ConfigurarPanelesPrograma()
+            {
+                // 1. Recuperar el ID de forma segura desde la sesión
+                int idProgramaActual = 0;
+
+                if (Session["programasID"] != null)
+                {
+                    idProgramaActual = Convert.ToInt32(Session["programasID"]);
+                }
+
+
+                bool visible = (idProgramaActual > 0);
+
+                // 3. Aplicar la visibilidad a los paneles
+                if (PanelCoordinacion != null) PanelCoordinacion.Visible = visible;
+                if (PanelMunicipiosPrioritarios != null) PanelMunicipiosPrioritarios.Visible = visible;
+                if (PanelRAVI != null) PanelRAVI.Visible = visible;
+            }
+          */
+
+        private void ConfigurarPanelesPrograma()
         {
             bool visible = programasID != 0;
-
             PanelCoordinacion.Visible = visible;
             PanelMunicipiosPrioritarios.Visible = visible;
             PanelRAVI.Visible = visible;
@@ -384,21 +379,21 @@ namespace SIICOP_V1._2.Captura
 
 
 
-      private void ConfigurarPaneles()
+        private void ConfigurarPaneles()
         {
             int? idProgramaActual = null;
             if (Session["programasID"] != null &&
                 Session["programasID"] != DBNull.Value &&
                 !string.IsNullOrEmpty(Session["programasID"].ToString()))
             {
-            idProgramaActual = Convert.ToInt32(Session["programasID"]);         
+                idProgramaActual = Convert.ToInt32(Session["programasID"]);
             }
             bool visible = idProgramaActual.HasValue && idProgramaActual.Value > 0;
 
             // bool esEstrategia = Session["ImagenSeleccionada"] != null &&
             //    !string.IsNullOrEmpty(Session["ImagenSeleccionada"].ToString());
 
-            bool esEstrategia = Session["ImagenSeleccionada"] != null;                             
+            bool esEstrategia = Session["ImagenSeleccionada"] != null;
 
             //if (PanelAccionImplentada != null)
             //{
@@ -409,9 +404,9 @@ namespace SIICOP_V1._2.Captura
                 PanelListados.Visible = visible && !esEstrategia;
                 //PanelAccionImplentada.Visible = esEstrategia;
             }
-            
+
         }
-     
+
         private void RedirigirInicio()
         {
             RedirectHelper.Redirect(this.Response, "~/TotalAccionesBeneficiados.aspx");
@@ -425,41 +420,41 @@ namespace SIICOP_V1._2.Captura
         }
 
 
-        #region ***** DETERMINACION DE LA ACCIÓN DEL REPOTE YA SEA CREAR NUEVO O EDITAR Y LLENAR REPORTE
-     /*   protected void DeterminarAccion()
-        {
-            if (Session["idExpediente_Accion"] != null && Session["AccionExpediente"] != null)
-            {
-                AccionExpediente accion = (AccionExpediente)Session["AccionExpediente"];
-              
-                switch ((int)accion)
-                {
-                    /*case (int)AccionExpediente.Creacion:
-                        if (!User.IsInRole("SysAdmin") && !User.IsInRole("Foraneo") && !User.IsInRole("Cap_RVCPZ") && !User.IsInRole("Admin_RVCPZ"))
-                        {
-                            Response.Redirect("~/VistasReportes/vista_Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx");
-                        }
-                        break;
-                    */
-          /*          case (int)AccionExpediente.Edicion:
-                        //   CargarDatosEdicion(idExpediente);
-                        expediente_Edicion_Visualizacion();
-                        ddlMuNICIPIO.DataBind();
-                        ddlsubprograma.DataBind();                        
-                        break;                        
-                }
-            }
-            else
-            {
-                sUsuarioActual = System.Web.Security.Membership.GetUser().UserName;
-                var a = ctx.Personales.Where(x => x.login == sUsuarioActual).FirstOrDefault();
-                txtResponsable.Text = a.Nombre + " " + a.paterno + " " + a.materno;
-                txtArea.Text = a.AreaTrabajo;
-                lnkbtnGuardar.Visible = true;
-                return;
-            }
-            Session["idExpediente_Accion"] = null;
-        }*/
+        #region ***** DETERMINACION DE LA ACCIÓN DEL REPORTE YA SEA CREAR NUEVO O EDITAR Y LLENAR REPORTE
+        /*   protected void DeterminarAccion()
+           {
+               if (Session["idExpediente_Accion"] != null && Session["AccionExpediente"] != null)
+               {
+                   AccionExpediente accion = (AccionExpediente)Session["AccionExpediente"];
+
+                   switch ((int)accion)
+                   {
+                       /*case (int)AccionExpediente.Creacion:
+                           if (!User.IsInRole("SysAdmin") && !User.IsInRole("Foraneo") && !User.IsInRole("Cap_RVCPZ") && !User.IsInRole("Admin_RVCPZ"))
+                           {
+                               Response.Redirect("~/VistasReportes/vista_Redes_Veracruzanas_en_la_Construccion_de_la_Paz.aspx");
+                           }
+                           break;
+                       */
+        /*          case (int)AccionExpediente.Edicion:
+                           //   CargarDatosEdicion(idExpediente);
+                           expediente_Edicion_Visualizacion();
+                           ddlMuNICIPIO.DataBind();
+                           ddlsubprograma.DataBind();                        
+                           break;                        
+                   }
+               }
+               else
+               {
+                   sUsuarioActual = System.Web.Security.Membership.GetUser().UserName;
+                   var a = ctx.Personales.Where(x => x.login == sUsuarioActual).FirstOrDefault();
+                   txtResponsable.Text = a.Nombre + " " + a.paterno + " " + a.materno;
+                   txtArea.Text = a.AreaTrabajo;
+                   lnkbtnGuardar.Visible = true;
+                   return;
+               }
+               Session["idExpediente_Accion"] = null;
+           }*/
 
         protected void DeterminarAccion()
         {
@@ -471,9 +466,7 @@ namespace SIICOP_V1._2.Captura
                 {
                     case (int)AccionExpediente.Edicion:
                         ViewState["idExpediente_Actual"] = Session["idExpediente_Accion"];
-
                         expediente_Edicion_Visualizacion();
-
                         break;
                 }
             }
@@ -503,53 +496,105 @@ namespace SIICOP_V1._2.Captura
 
                     expediente_Llenar(idExpediente);
                 }
-                catch (Exception ex)
+                //   catch (Exception ex)
+                catch (Exception)
                 {
-                   
+
                 }
             }
         }
 
-
         protected void expediente_Llenar(Guid idExpediente)
         {
-           // ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ESTÁ EN MODO EDICIÓN DEL REPORTE.');", true);
-
+            // ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('ESTÁ EN MODO EDICIÓN DEL REPORTE.');", true);
             this.btnGuardarEdicion.Visible = true;
             this.btnSalir.Visible = true;
             this.HiddenField1cn.Value = idExpediente.ToString();
 
             try
             {
-                   var reportesHistorico = ctx.Wv_DatosReportesHistorico.FirstOrDefault(x => x.idResumenDiario == idExpediente);
+                var reportesHistorico = ctx.Wv_DatosReportesHistorico.FirstOrDefault(x => x.idResumenDiario == idExpediente);
 
                 if (reportesHistorico == null)
                 {
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "AlertaNulo", "alert('ERROR: NO existe en la base de datos (Wv_DatosReportesHistorico).');", true);
-                    return; 
+                    return;
                 }
 
+                //// campos nuevos 
+                string coordinador = reportesHistorico.coordinador ?? "";
+
+                if (!string.IsNullOrEmpty(coordinador) && txtCoordinador.Items.FindByValue(coordinador) != null)
+                {
+                    txtCoordinador.SelectedValue = coordinador;
+                }
+
+                string region = reportesHistorico.idzona != null ? reportesHistorico.idzona.ToString() : "0";   /// Region 
+
+                if (!string.IsNullOrEmpty(region) && ddlZona.Items.FindByValue(region) != null)
+                {
+                    ddlZona.SelectedValue = region;
+                }
+
+                /*    string idcoordinacion = reportesHistorico.id != null ? reportesHistorico.idcoordinacion.ToString() : "0";  // Region estrategia
+                      if (!string.IsNullOrEmpty(region) && ddlCoordinacion.Items.FindByValue(region) != null)
+                      {
+                          ddlCoordinacion.SelectedValue = idcoordinacion;
+                      }
+                */
+
+                string munprioritario = reportesHistorico.mpio_prioritario != null ? reportesHistorico.mpio_prioritario.ToString() : "0";
+                if (!string.IsNullOrEmpty(munprioritario) && ddlMunicipioPrioritario.Items.FindByValue(munprioritario) != null)
+                {
+                    ddlMunicipioPrioritario.SelectedValue = munprioritario;
+                }
+
+                string munHomicidio = reportesHistorico.mpio_homicidio != null ? reportesHistorico.mpio_homicidio.ToString() : "0";
+                if (!string.IsNullOrEmpty(munHomicidio) && ddlMunicipioHomicidio.Items.FindByValue(munHomicidio) != null)
+                {
+                    ddlMunicipioHomicidio.SelectedValue = munHomicidio;
+                }
+
+                string colPrioritaria = reportesHistorico.col_prioritario != null ? reportesHistorico.col_prioritario.ToString() : "0";
+                if (!string.IsNullOrEmpty(colPrioritaria) && ddlColoniaPrioritaria.Items.FindByValue(colPrioritaria) != null)
+                {
+                    ddlColoniaPrioritaria.SelectedValue = colPrioritaria;
+                }
+
+                string Pobindigena = reportesHistorico.mpio_indigena != null ? reportesHistorico.mpio_indigena.ToString() : "0";
+                if (!string.IsNullOrEmpty(colPrioritaria) && ddlColoniaPrioritaria.Items.FindByValue(colPrioritaria) != null)
+                {
+                    ddlMunicipioIndigena.SelectedValue = Pobindigena;
+                }
+
+                string progistmo = reportesHistorico.programa_istmo != null ? reportesHistorico.programa_istmo.ToString() : "0";
+                if (!string.IsNullOrEmpty(progistmo) && ddlProgramaIstmo.Items.FindByValue(progistmo) != null)
+                {
+                    ddlProgramaIstmo.SelectedValue = progistmo;
+                }
+
+                /// campos nuevos 
+                /// 
                 this.txtResponsable.Text = reportesHistorico.nombrecompleto ?? "";
                 this.txtArea.Text = reportesHistorico.AreaTrabajo ?? "";
                 this.txtFecha.Text = string.Format("{0:dd/MM/yyyy}", reportesHistorico.fecha);
                 this.txtDescripcionActividad.Text = reportesHistorico.descripcion_actividad ?? "";
-                //this.txtpersonal_atendio_actividad.Text = reportesHistorico.personal_atendio_actividad ?? "";
+                this.txtSeguimiento.Text = reportesHistorico.seguimiento ?? "";
+                this.txtclave.Text = reportesHistorico.ClavePlantel ?? "";
                 this.txnino.Value = reportesHistorico.niños != 0 ? reportesHistorico.niños.ToString() : "0";
                 this.txnina.Value = reportesHistorico.niñas != 0 ? reportesHistorico.niñas.ToString() : "0";
                 this.txhombres.Value = reportesHistorico.hombres != 0 ? reportesHistorico.hombres.ToString() : "0";
-                this.txmujeres.Value = reportesHistorico.mujeres != 0 ? reportesHistorico.mujeres.ToString() : "0";                
+                this.txmujeres.Value = reportesHistorico.mujeres != 0 ? reportesHistorico.mujeres.ToString() : "0";
                 this.txtatendiosH.Text = reportesHistorico.TotalHombresAtendidos != 0 ? reportesHistorico.TotalHombresAtendidos.ToString() : "0";
                 this.txtatendiosM.Text = reportesHistorico.TotalMujeresAtendidas != 0 ? reportesHistorico.TotalMujeresAtendidas.ToString() : "0";
-                //this.txtInstitucionesParticipantes.Text = reportesHistorico.inst_participantes ?? "";
-
+                // this.txtInstitucionesParticipantes.Text = reportesHistorico.inst_participantes ?? "";               
+                this.txtNumAccciones.Text = reportesHistorico.NumAcciones != 0 ? reportesHistorico.NumAcciones.ToString() : "0";
                 string lugaresc = reportesHistorico.NombreLugar_Escuela != null ? reportesHistorico.NombreLugar_Escuela.Trim() : "";    /// LUGAR DONDE SE REALIZO LA ACTIVDAD
 
                 if (!string.IsNullOrEmpty(lugaresc) && ddlnombreescuela.Items.FindByValue(lugaresc) != null)
                 {
                     ddlnombreescuela.SelectedValue = lugaresc;
                 }
-
-
                 string nivel = reportesHistorico.Nivel != null ? reportesHistorico.Nivel.Trim() : "";    ///// NIVEL EDUCATIVO
                 if (!string.IsNullOrEmpty(nivel) && ddlNivel.Items.FindByValue(nivel) != null)
                 {
@@ -584,14 +629,98 @@ namespace SIICOP_V1._2.Captura
 
                 //this.txtTemaImpartido.Text = reportesHistorico.tema_impartido.ToString();
 
-                string subId = reportesHistorico.subprogramaId != 0 ? reportesHistorico.subprogramaId.ToString() : "0";
-                if (ddlsubprograma.Items.FindByValue(subId) != null) ddlsubprograma.SelectedValue = subId;
+                int subId = reportesHistorico.subprogramaId ?? 0; // subprograma 
+                if (subId != 0 && ddlsubprograma.Items.FindByValue(subId.ToString()) != null)
+                {
+                    ddlsubprograma.SelectedValue = subId.ToString();
+                    CargarAcciones(subId);
+                }
+                //  string subId = reportesHistorico.subprogramaId != 0 ? reportesHistorico.subprogramaId.ToString() : "0";
+                //if (ddlsubprograma.Items.FindByValue(subId) != null) ddlsubprograma.SelectedValue = subId;
 
-                string accionId = reportesHistorico.AccionesID != 0 ? reportesHistorico.AccionesID.ToString().Trim() : "0";
-                if (ddlAcciones.Items.FindByValue(accionId) != null) ddlAcciones.SelectedValue = accionId;
+                int accionId = reportesHistorico.AccionesID ?? 0;
+                //  if (ddlAcciones.Items.FindByValue(accionId) != null) ddlAcciones.SelectedValue = accionId;
+                if (accionId != 0 && ddlAcciones.Items.FindByValue(accionId.ToString()) != null)
+                {
+                    ddlAcciones.SelectedValue = accionId.ToString();
+                    CargarSubaccion(accionId);
+                }
 
-                //this.txtAccionImplementada.Text = reportesHistorico.AccionesNombre.ToString();
-            
+                string subaccion = reportesHistorico.accion_implementada != null ? reportesHistorico.accion_implementada.Trim() : "";
+                if (!string.IsNullOrEmpty(coordinador) && ddlSubAcciones.Items.FindByValue(subaccion) != null)
+                {
+                    ddlSubAcciones.SelectedValue = subaccion;
+                }
+
+
+                //   string planteldiag = reportesHistorico.plantel_diagnosticado != null ? reportesHistorico.plantel_diagnosticado.ToString() : "0";
+                //   if (!string.IsNullOrEmpty(planteldiag) && ddlPlantelDiagnosticado.Items.FindByValue(planteldiag) != null)
+                //   {
+                //        ddlPlantelDiagnosticado.SelectedValue = planteldiag;
+                //    }
+
+
+                string planteldiag = reportesHistorico.plantel_diagnosticado == true ? "1" :
+                         (reportesHistorico.plantel_diagnosticado == false ? "0" : "");
+
+                if (ddlPlantelDiagnosticado.Items.FindByValue(planteldiag) != null)
+                {
+                    ddlPlantelDiagnosticado.SelectedValue = planteldiag;
+                }
+
+                //   string casosRavi = reportesHistorico.casos_ravi != null ? reportesHistorico.casos_ravi.ToString() : "0";
+
+                ///   if (!string.IsNullOrEmpty(casosRavi) && ddlCasosRavi.Items.FindByValue(casosRavi) != null)
+                //   {
+                //       ddlCasosRavi.SelectedValue = casosRavi;
+                //    }
+
+                string casosRavi = reportesHistorico.casos_ravi == true ? "1" :
+                         (reportesHistorico.casos_ravi == false ? "0" : "");
+
+                if (ddlCasosRavi.Items.FindByValue(casosRavi) != null)
+                {
+                    ddlCasosRavi.SelectedValue = casosRavi;
+                }
+
+
+
+
+                string nocasosravi = reportesHistorico.nocasos_ravi != null ? reportesHistorico.nocasos_ravi.ToString() : "0";
+                if (!string.IsNullOrEmpty(nocasosravi) && txtNoCasosRavi.Items.FindByValue(nocasosravi) != null)
+                {
+                    txtNoCasosRavi.SelectedValue = nocasosravi;
+                }
+
+                this.txtDirigidoA.Text = reportesHistorico.dirigido.ToString();
+                this.txtGiroComercio.Text = reportesHistorico.giro_comercios.ToString();
+
+
+                string acciones_dgpvi = reportesHistorico.no_acciones_dgpvi != null ? reportesHistorico.no_acciones_dgpvi.ToString() : "0";
+                if (!string.IsNullOrEmpty(acciones_dgpvi) && ddlNoaccionesDGPVI.Items.FindByValue(acciones_dgpvi) != null)
+                {
+                    ddlNoaccionesDGPVI.SelectedValue = acciones_dgpvi;
+                }
+
+                string acciones_institu = reportesHistorico.no_acciones_institucionales != null ? reportesHistorico.no_acciones_institucionales.ToString() : "0";
+                if (!string.IsNullOrEmpty(acciones_institu) && ddlNoAccionesInstitucionales.Items.FindByValue(acciones_institu) != null)
+                {
+                    ddlNoAccionesInstitucionales.SelectedValue = acciones_institu;
+                }
+
+                this.txtTotalAccionesRAVI.Text = reportesHistorico.total_acciones_ravi.ToString();
+
+                string ofre_segurichat = reportesHistorico.ofrecieron_segurichat == true ? "1" :
+                         (reportesHistorico.ofrecieron_segurichat == false ? "0" : "");
+
+                if (ddlOfrecioSegurichat.Items.FindByValue(ofre_segurichat) != null)
+                {
+                    ddlOfrecioSegurichat.SelectedValue = ofre_segurichat;
+                }
+
+
+                this.txtSegurichat.Text = reportesHistorico.segurichat.ToString();
+
                 var direccionReporte = ctx.tb_DireccionReporte.FirstOrDefault(t => t.idResumenDiario == idExpediente);
                 if (direccionReporte != null)
                 {
@@ -610,8 +739,8 @@ namespace SIICOP_V1._2.Captura
                     string locId = direccionReporte.LocalidadID != null ? direccionReporte.LocalidadID.ToString() : "0";
                     if (ddlLocalidad.Items.FindByValue(locId) != null) ddlLocalidad.SelectedValue = locId;
 
-                 //   ScriptManager.RegisterStartupScript(this, this.GetType(), "VerDireccionMapa", "VerDireccionMapa();", true);   
-                                                                                ///// no se donde esta la funcion
+                    // ScriptManager.RegisterStartupScript(this, this.GetType(), "VerDireccionMapa", "VerDireccionMapa();", true);   
+                    ///// no se donde esta la funcion
                 }
 
                 var datosGralReporte = ctx.TB_DatosGralReporte.FirstOrDefault(t => t.idResumenDiario == idExpediente);
@@ -623,7 +752,7 @@ namespace SIICOP_V1._2.Captura
                     //this.txtTelefono.Text = datosGralReporte.telcel ?? "";
                 }
 
-               // ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Exito", "alert('¡Datos cargados correctamente en pantalla!');", true);
+                // ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Exito", "alert('¡Datos cargados correctamente en pantalla!');", true);
             }
             catch (Exception ex)
             {
@@ -632,7 +761,7 @@ namespace SIICOP_V1._2.Captura
             }
         }
 
-   
+
 
         #endregion
 
@@ -650,7 +779,6 @@ namespace SIICOP_V1._2.Captura
         protected void Ambitos()
         {
             int entornoId = Convert.ToInt32(ddlAmbito.SelectedValue);
-
             //if (entornoId > 0)
             //{
             //    CargarEjes();
@@ -661,7 +789,7 @@ namespace SIICOP_V1._2.Captura
             //    ddlEje.Items.Insert(0, new ListItem("-- Seleccione localidad --", "0"));
             //}
 
-            if (entornoId == 2)
+            if (entornoId == 2)   // entorno escolar
             {
                 PanelEscuela.Visible = true;
 
@@ -701,43 +829,40 @@ namespace SIICOP_V1._2.Captura
             if (!ValidarFormulario(out errores))
             {
                 lblValidacionesTxt.Text = errores;
-               
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "ModalError", "openModalvalidador();", true);
 
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ModalError", "openModalvalidador();", true);
                 return;
             }
-
             GuardarReporte();
-
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ModalExito", "openGuardadoExito();", true);
         }
 
-       /* protected void lnkbtnGuardar_Click(object sender, EventArgs e)
-        {
-            programasID = Session["programasID"] as int?;
-            string errores;
+        /* protected void lnkbtnGuardar_Click(object sender, EventArgs e)
+         {
+             programasID = Session["programasID"] as int?;
+             string errores;
 
-            if (!ValidarFormulario(out errores))
-            {
-                // 1. Asigna el texto de errores al Label dentro del modal
-                lblValidacionesTxt.Text = errores;
+             if (!ValidarFormulario(out errores))
+             {
+                 // 1. Asigna el texto de errores al Label dentro del modal
+                 lblValidacionesTxt.Text = errores;
 
-             // 2. Inyecta el script para mostrar el modal de errores
-            //    ScriptManager.RegisterStartupScript(this, this.GetType(), "exampleModal",
-           //         "openModalvalidador();", true);
-           //   return;
+              // 2. Inyecta el script para mostrar el modal de errores
+             //    ScriptManager.RegisterStartupScript(this, this.GetType(), "exampleModal",
+            //         "openModalvalidador();", true);
+            //   return;
 
-                ScriptManager.RegisterStartupScript(this,this.GetType(),   "Pop",
-                    "Sys.Application.add_load(function() { openModalvalidador(); });",
-                    true);
-                return;
-            }
-            GuardarReporte();
+                 ScriptManager.RegisterStartupScript(this,this.GetType(),   "Pop",
+                     "Sys.Application.add_load(function() { openModalvalidador(); });",
+                     true);
+                 return;
+             }
+             GuardarReporte();
 
-            // 3. Si todo salió bien, inyecta el script para el modal de éxito
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "abrirModalExito",
-                "openGuardadoExito();", true);
-        }*/
+             // 3. Si todo salió bien, inyecta el script para el modal de éxito
+             ScriptManager.RegisterStartupScript(this, this.GetType(), "abrirModalExito",
+                 "openGuardadoExito();", true);
+         }*/
 
         private void GuardarReporte()
         {
@@ -749,7 +874,6 @@ namespace SIICOP_V1._2.Captura
             string coordinacion =
                 ObtenerCoordinacion(
                 Convert.ToInt32(usuario.cat_areaidarea));
-
             try
             {
                 Guid idResumen = Guid.NewGuid();
@@ -764,13 +888,10 @@ namespace SIICOP_V1._2.Captura
                 var datosGenerales =
                     CrearDatosGenerales(
                         idResumen);
-
                 ctx.tb_Reporte_Diario.Add(reporte);
                 ctx.tb_DireccionReporte.Add(direccion);
                 ctx.TB_DatosGralReporte.Add(datosGenerales);
-
                 RegistrarAuditoria(idResumen);
-
                 string extension =
                     GuardarFotografias(
                         idResumen,
@@ -795,15 +916,15 @@ namespace SIICOP_V1._2.Captura
                 Session["ImagenSeleccionada"] = null;
                 Session["programasID"] = null;
             }
-          /*  catch (Exception ex)
-            {
-                ScriptManager.RegisterClientScriptBlock(
-                    this,
-                    GetType(),
-                    "alertMessage",
-                    "alert('ERROR AL GUARDAR EL REGISTRO')",
-                    true);
-            }*/
+            /*  catch (Exception ex)
+              {
+                  ScriptManager.RegisterClientScriptBlock(
+                      this,
+                      GetType(),
+                      "alertMessage",
+                      "alert('ERROR AL GUARDAR EL REGISTRO')",
+                      true);
+              }*/
 
             catch (Exception ex)
             {
@@ -813,13 +934,29 @@ namespace SIICOP_V1._2.Captura
                     errorReal = errorReal.InnerException;
                 }
 
-                string mensajeError = errorReal.Message
-                    .Replace("'", "\\'")   
-                    .Replace("\"", "\\\"") 
-                    .Replace("\r", "")    
-                    .Replace("\n", " ");   
 
-                string scriptAlerta = $"alert('ERROR AL GUARDAR EL REGISTRO:\\n\\nDetalle: {mensajeError}');";
+                string mensajeError = errorReal.Message
+                    .Replace("'", "\\'")
+                    .Replace("\"", "\\\"")
+                    .Replace("\r", "")
+                    .Replace("\n", " ");
+
+
+                string rastroError = errorReal.StackTrace ?? "Origen desconocido";
+                rastroError = rastroError
+                    .Replace("'", "\\'")
+                    .Replace("\"", "\\\"")
+                    .Replace("\r", "")
+                    .Replace("\n", " ");
+
+
+                if (rastroError.Length > 300)
+                {
+                    rastroError = rastroError.Substring(0, 300) + "...";
+                }
+
+
+                string scriptAlerta = $"alert('ERROR AL GUARDAR:\\n\\nDetalle: {mensajeError}\\n\\nLugar del error: {rastroError}');";
 
                 ScriptManager.RegisterClientScriptBlock(
                     this,
@@ -836,12 +973,10 @@ namespace SIICOP_V1._2.Captura
         {
             var reporte =
                 new tb_Reporte_Diario();
-
             reporte.idResumenDiario = idResumen;
             reporte.Personalid = personalID;
             reporte.fechacaptura = DateTime.Now;
             reporte.fecha = Convert.ToDateTime(txtFecha.Text);
-
             reporte.coordinador =
                 string.IsNullOrWhiteSpace(txtCoordinador.Text)
                     ? ""
@@ -861,7 +996,7 @@ namespace SIICOP_V1._2.Captura
                     ? coordinacionId
                     : (int?)null;
 
-          //  reporte.programasID = programasID;
+            // reporte.programasID = programasID;
             reporte.programasID = (programasID > 0)
                    ? programasID
                    : (int?)null;
@@ -880,9 +1015,11 @@ namespace SIICOP_V1._2.Captura
                     : Convert.ToInt32(
                         ddlAcciones.SelectedValue);
 
-            //reporte.accion_implementada =
-            //    txtAccionImplementada.Text
-            //        .ToUpper();
+            //     reporte.accion_implementada =
+            //              string.IsNullOrEmpty(ddlSubAcciones.Text)
+            //                  ? ""
+            //                   : ddlSubAcciones.Text.Trim();    /// SUBACCIONES 
+
 
             reporte.descripcion_actividad =
                 txtDescripcionActividad.Text
@@ -937,19 +1074,20 @@ namespace SIICOP_V1._2.Captura
                         ddlLocalidad.SelectedValue),
 
                 mpio_prioritario =
-                    ddlMunicipioPrioritario.SelectedValue == "1",
+
+                    ddlMunicipioPrioritario.SelectedValue == "True",
 
                 mpio_homicidio =
-                    ddlMunicipioHomicidio.SelectedValue == "1",
+                    ddlMunicipioHomicidio.SelectedValue == "True",
 
                 col_prioritario =
-                    ddlColoniaPrioritaria.SelectedValue == "1",
+                    ddlColoniaPrioritaria.SelectedValue == "True",
 
                 mpio_indigena =
-                    ddlMunicipioIndigena.SelectedValue == "1",
+                    ddlMunicipioIndigena.SelectedValue == "True",
 
                 programa_istmo =
-                    ddlProgramaIstmo.SelectedValue == "1"
+                    ddlProgramaIstmo.SelectedValue == "True"
             };
         }
 
@@ -963,9 +1101,12 @@ namespace SIICOP_V1._2.Captura
                 NombreLugar_Escuela =
                     ddlnombreescuela.SelectedValue,
 
-                //NombreContacto =
-                //    txtnombrecontacto.Text.ToUpper(),
+                NumAcciones = string.IsNullOrWhiteSpace(txtNumAccciones.Text)
+                             ? (int?)null
+                             : Convert.ToInt32(txtNumAccciones.Text),
 
+                //NombreContacto =
+                //txtnombrecontacto.Text.ToUpper(),
                 //telcel = txtTelefono.Text,
 
                 ClavePlantel =
@@ -1031,7 +1172,6 @@ namespace SIICOP_V1._2.Captura
                         out var dgpvi)
                         ? dgpvi
                         : (int?)null,
-
                 no_acciones_institucionales =
                     int.TryParse(
                         ddlNoAccionesInstitucionales.SelectedValue,
@@ -1052,12 +1192,21 @@ namespace SIICOP_V1._2.Captura
                 segurichat =
                     txtSegurichat.Text.ToUpper(),
 
-                
-                ResponsabilidadId = Convert.ToInt32(
-                        ddlResponsabilidad.SelectedValue),
 
-                IndicadorId = Convert.ToInt32(
-                        ddlIndicador.SelectedValue)
+                /*  ResponsabilidadId = Convert.ToInt32(
+                          ddlResponsabilidad.SelectedValue),
+                  IndicadorId = Convert.ToInt32(
+                          ddlIndicador.SelectedValue)
+               */
+
+                ResponsabilidadId = int.TryParse(ddlResponsabilidad.SelectedValue, out var resId)
+                            ? resId
+                            : (int?)null,
+
+                IndicadorId = int.TryParse(ddlIndicador.SelectedValue, out var indId)
+                      ? indId
+                      : (int?)null
+
             };
 
             string valor = Request.QueryString["ValorEntorno"];
@@ -1069,7 +1218,7 @@ namespace SIICOP_V1._2.Captura
                     reporte.ResponsabilidadId = null;
                     reporte.IndicadorId = null;
                 }
-             }
+            }
 
             return reporte;
         }
@@ -1094,9 +1243,9 @@ namespace SIICOP_V1._2.Captura
         }
 
 
-    private void RegistrarAuditoria(
-    Guid idResumen)
-    {
+        private void RegistrarAuditoria(
+        Guid idResumen)
+        {
             tbAuditoria audit =
                 new tbAuditoria()
                 {
@@ -1125,12 +1274,12 @@ namespace SIICOP_V1._2.Captura
                 };
 
             ctx.tbAuditoria.Add(audit);
-    }
+        }
 
-    private string GuardarFotografias(
-    Guid idResumen,
-    ref string fileName,
-    ref string contentType)
+        private string GuardarFotografias(
+        Guid idResumen,
+        ref string fileName,
+        ref string contentType)
         {
             string extension = "";
 
@@ -1401,82 +1550,82 @@ namespace SIICOP_V1._2.Captura
         }
 
 
-         private void MostrarErrores(string mensaje)
-          {
-              lblValidacionesTxt.Text = mensaje;
-
-              ScriptManager.RegisterStartupScript(
-                  this,
-                  GetType(),
-                  "openModalvalidador",
-                  "openModalvalidador();",
-                  true);
-
-              ScriptManager.RegisterStartupScript(
-                  this,
-                  GetType(),
-                  "sumar",
-                  "sumar();",
-                  true);
-          }
-     
-    /* private void MostrarErrores(string mensaje)
+        private void MostrarErrores(string mensaje)
         {
             lblValidacionesTxt.Text = mensaje;
 
-            string scriptCliente = @"
-        $('#exampleModal').removeAttr('aria-hidden'); // Quitamos el atributo conflictivo
-        $('#exampleModal').modal('show');             // Abrimos el modal";
+            ScriptManager.RegisterStartupScript(
+                this,
+                GetType(),
+                "openModalvalidador",
+                "openModalvalidador();",
+                true);
 
             ScriptManager.RegisterStartupScript(
                 this,
-                this.GetType(),
-                "AbrirValidacion",
-                scriptCliente,
+                GetType(),
+                "sumar",
+                "sumar();",
                 true);
         }
-       */
-    /* private void MostrarErrores(string mensaje)
-        {
-            // 1. Asignamos el mensaje al Label
-            lblValidacionesTxt.Text = mensaje;
 
-            // 2. Construimos el script garantizando que se ejecute AL FINAL de la carga
-            string scriptCliente = @"
-        Sys.Application.add_load(function() {
-            // Mostramos el modal directamente de forma segura
-            $('#exampleModal').modal('show');
-            
-            // Recalculamos los totales para que no se pierdan
-            if (typeof sumarH === 'function') sumarH();
-            if (typeof sumarM === 'function') sumarM();
-        });";
+        /* private void MostrarErrores(string mensaje)
+            {
+                lblValidacionesTxt.Text = mensaje;
 
-            // 3. Registramos el script
-            ScriptManager.RegisterStartupScript(
-                this,
-                this.GetType(),
-                "PopValidacionSeguro",
-                scriptCliente,
-                true);
-        }*/
+                string scriptCliente = @"
+            $('#exampleModal').removeAttr('aria-hidden'); // Quitamos el atributo conflictivo
+            $('#exampleModal').modal('show');             // Abrimos el modal";
+
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    this.GetType(),
+                    "AbrirValidacion",
+                    scriptCliente,
+                    true);
+            }
+           */
+        /* private void MostrarErrores(string mensaje)
+            {
+                // 1. Asignamos el mensaje al Label
+                lblValidacionesTxt.Text = mensaje;
+
+                // 2. Construimos el script garantizando que se ejecute AL FINAL de la carga
+                string scriptCliente = @"
+            Sys.Application.add_load(function() {
+                // Mostramos el modal directamente de forma segura
+                $('#exampleModal').modal('show');
+
+                // Recalculamos los totales para que no se pierdan
+                if (typeof sumarH === 'function') sumarH();
+                if (typeof sumarM === 'function') sumarM();
+            });";
+
+                // 3. Registramos el script
+                ScriptManager.RegisterStartupScript(
+                    this,
+                    this.GetType(),
+                    "PopValidacionSeguro",
+                    scriptCliente,
+                    true);
+            }*/
 
 
-    /*    private void MostrarErrores(string mensaje)
-        {
-            // 1. Asignar el mensaje al Label
-            lblValidacionesTxt.Text = mensaje;
+        /*    private void MostrarErrores(string mensaje)
+            {
+                // 1. Asignar el mensaje al Label
+                lblValidacionesTxt.Text = mensaje;
 
-            // 2. Ejecutar los scripts en el cliente (abrir modal y recalcular sumas reales)
-            string scriptCliente = "openModalvalidador(); sumarH(); sumarM();";
+                // 2. Ejecutar los scripts en el cliente (abrir modal y recalcular sumas reales)
+                string scriptCliente = "openModalvalidador(); sumarH(); sumarM();";
 
-            ScriptManager.RegisterStartupScript(
-                this.Page,
-                this.GetType(),
-                "ScriptValidacion",
-                scriptCliente,
-                true);
-        }*/
+                ScriptManager.RegisterStartupScript(
+                    this.Page,
+                    this.GetType(),
+                    "ScriptValidacion",
+                    scriptCliente,
+                    true);
+            }*/
 
         private Personales ObtenerUsuarioActual()
         {
@@ -1485,7 +1634,6 @@ namespace SIICOP_V1._2.Captura
                     .Membership
                     .GetUser()
                     .UserName;
-
             return ctx.Personales
                       .FirstOrDefault(x =>
                             x.login == usuarioActual);
@@ -1546,74 +1694,89 @@ namespace SIICOP_V1._2.Captura
         protected void btnGuardarEdicion_Click(
         object sender,
         EventArgs e)
+        {
+            Guid idExpediente =
+                Guid.Parse(
+                    HiddenField1cn.Value);
+
+            string fileName = "";
+            string contentType = "";
+
+            nino = 0;
+            nina = 0;
+            padresH = 0;
+            padresM = 0;
+            TotalA = 0;
+
+            int MODE = 0;
+
+            try
             {
-                Guid idExpediente =
-                    Guid.Parse(
-                        HiddenField1cn.Value);
-
-                string fileName = "";
-                string contentType = "";
-
-                nino = 0;
-                nina = 0;
-                padresH = 0;
-                padresM = 0;
-                TotalA = 0;
-
-                int MODE = 0;
-
-                try
-                {
-                    MODE =
-                        ActualizarReporteDiario(
-                            idExpediente,
-                            MODE);
-
-                    var direccionReporte =
-                        ActualizarDireccionReporte(
-                            idExpediente);
-
-                    MODE =
-                        ActualizarDatosGenerales(
-                            idExpediente,
-                            MODE,
-                            direccionReporte);
-
-                    string extension =
-                        GuardarFotografiasEdicion(
-                            idExpediente,
-                            ref fileName,
-                            ref contentType);
-
-                    ctx.SaveChanges();
-
-                    string claveF = "RVCPZ-DVI";
-
-                    ctx.sp_folio_actividad(
+                MODE =
+                    ActualizarReporteDiario(
                         idExpediente,
-                        claveF,
-                        extension);
+                        MODE);
 
-                    RegistrarAuditoriaEdicion(
+                var direccionReporte =
+                    ActualizarDireccionReporte(
                         idExpediente);
 
-                    ctx.SaveChanges();
+                MODE =
+                    ActualizarDatosGenerales(
+                        idExpediente,
+                        MODE,
+                        direccionReporte);
 
-                    FinalizarEdicion();
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine(
-                        ex.ToString());
+                string extension =
+                    GuardarFotografiasEdicion(
+                        idExpediente,
+                        ref fileName,
+                        ref contentType);
 
-                    ScriptManager.RegisterClientScriptBlock(
-                        this,
-                        GetType(),
-                        "alertMessage",
-                        "alert('¡Error al guardar los datos!')",
-                        true);
-                }
+                ctx.SaveChanges();
+
+                string claveF = "RVCPZ-DVI";
+
+                ctx.sp_folio_actividad(
+                    idExpediente,
+                    claveF,
+                    extension);
+
+                RegistrarAuditoriaEdicion(
+                    idExpediente);
+
+                ctx.SaveChanges();
+
+                FinalizarEdicion();
             }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+
+                // Extraer el error profundo de SQL o Entity Framework
+                string mensajeError = ex.Message;
+
+                // Entity Framework suele esconder el error real en las excepciones internas
+                if (ex.InnerException != null)
+                {
+                    mensajeError += " | Detalle SQL: " + ex.InnerException.Message;
+                    if (ex.InnerException.InnerException != null)
+                    {
+                        mensajeError += " | " + ex.InnerException.InnerException.Message;
+                    }
+                }
+
+                // Limpiar saltos de línea y comillas simples para que no rompan el script de JavaScript
+                mensajeError = mensajeError.Replace("'", "\"").Replace("\r", " ").Replace("\n", " ");
+
+                ScriptManager.RegisterClientScriptBlock(
+                    this,
+                    GetType(),
+                    "alertMessage",
+                    $"alert('¡Error al guardar! Motivo: {mensajeError}')",
+                    true);
+            }
+        }
         private void ReiniciarBeneficiarios()
         {
             nino = 0;
@@ -1623,9 +1786,9 @@ namespace SIICOP_V1._2.Captura
             TotalA = 0;
         }
 
-    private void RegistrarAuditoriaEdicion(
-    Guid idExpediente)
-    {
+        private void RegistrarAuditoriaEdicion(
+        Guid idExpediente)
+        {
             var auditoria =
                 new tbAuditoria
                 {
@@ -1655,7 +1818,7 @@ namespace SIICOP_V1._2.Captura
 
             ctx.tbAuditoria.Add(
                 auditoria);
-     }
+        }
 
         private void FinalizarEdicion()
         {
@@ -1713,7 +1876,6 @@ namespace SIICOP_V1._2.Captura
                                 ctx.tb_fotografia.Add(foto);
                             }
 
-
                         }
                     }
                 }
@@ -1726,12 +1888,26 @@ namespace SIICOP_V1._2.Captura
         {
             ////  GUARDAR LOS DATOS GENERALES DEL REPORTE 
             TB_DatosGralReporte datosGralReporte = ctx.TB_DatosGralReporte.Where(t => t.idResumenDiario == idExpediente).FirstOrDefault();
+            /*  if (datosGralReporte != null)
+                {
+                    MODE = Convert.ToInt32(ddlAmbito.SelectedValue);
+                    datosGralReporte.NombreLugar_Escuela = this.ddlnombreescuela.Text == string.Empty ? "" : this.ddlnombreescuela.Text;
+                    //datosGralReporte.NombreContacto = this.txtnombrecontacto.Text == string.Empty ? "" : this.txtnombrecontacto.Text.ToUpper();
+                    //datosGralReporte.telcel = this.txtTelefono.Text;
+                    datosGralReporte.ClavePlantel = this.txtclave.Text == string.Empty ? "" : this.txtclave.Text.ToUpper();
+                    direccionReporte.MunicipioID = new int?(this.ddlMuNICIPIO.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlMuNICIPIO.SelectedValue));
+                    datosGralReporte.Nivel = this.ddlNivel.Text == string.Empty ? "" : this.ddlNivel.Text;
+                    datosGralReporte.Ambito = MODE;
+                    datosGralReporte.niñas = new int?(this.txnina.Value == "" ? 0 : Convert.ToInt32(this.txnina.Value));
+                    datosGralReporte.niños = new int?(this.txnino.Value == "" ? 0 : Convert.ToInt32(this.txnino.Value));
+                    datosGralReporte.hombres = new int?(this.txhombres.Value == "" ? 0 : Convert.ToInt32(this.txhombres.Value));
+                    datosGralReporte.mujeres = new int?(this.txmujeres.Value == "" ? 0 : Convert.ToInt32(this.txmujeres.Value));
+               }
+           */
             if (datosGralReporte != null)
             {
                 MODE = Convert.ToInt32(ddlAmbito.SelectedValue);
                 datosGralReporte.NombreLugar_Escuela = this.ddlnombreescuela.Text == string.Empty ? "" : this.ddlnombreescuela.Text;
-                //datosGralReporte.NombreContacto = this.txtnombrecontacto.Text == string.Empty ? "" : this.txtnombrecontacto.Text.ToUpper();
-                //datosGralReporte.telcel = this.txtTelefono.Text;
                 datosGralReporte.ClavePlantel = this.txtclave.Text == string.Empty ? "" : this.txtclave.Text.ToUpper();
                 direccionReporte.MunicipioID = new int?(this.ddlMuNICIPIO.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlMuNICIPIO.SelectedValue));
                 datosGralReporte.Nivel = this.ddlNivel.Text == string.Empty ? "" : this.ddlNivel.Text;
@@ -1740,27 +1916,69 @@ namespace SIICOP_V1._2.Captura
                 datosGralReporte.niños = new int?(this.txnino.Value == "" ? 0 : Convert.ToInt32(this.txnino.Value));
                 datosGralReporte.hombres = new int?(this.txhombres.Value == "" ? 0 : Convert.ToInt32(this.txhombres.Value));
                 datosGralReporte.mujeres = new int?(this.txmujeres.Value == "" ? 0 : Convert.ToInt32(this.txmujeres.Value));
+                datosGralReporte.NumAcciones = new int?(this.txtNumAccciones.Text == "" ? 0 : Convert.ToInt32(this.txtNumAccciones.Text));
+                datosGralReporte.segurichat = this.txtSegurichat.Text == string.Empty ? "" : this.txtSegurichat.Text.ToUpper();
+                datosGralReporte.ofrecieron_segurichat = (this.ddlOfrecioSegurichat.SelectedValue == "1") ? true :
+                                                         (this.ddlOfrecioSegurichat.SelectedValue == "0" ? false : (bool?)null);
+                datosGralReporte.total_acciones_ravi = new int?(this.txtTotalAccionesRAVI.Text == "" ? 0 : Convert.ToInt32(this.txtTotalAccionesRAVI.Text));
+                datosGralReporte.no_acciones_institucionales = new int?(this.ddlNoAccionesInstitucionales.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlNoAccionesInstitucionales.SelectedValue));
+                datosGralReporte.no_acciones_dgpvi = new int?(this.ddlNoaccionesDGPVI.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlNoaccionesDGPVI.SelectedValue));
+                datosGralReporte.giro_comercios = this.txtGiroComercio.Text == string.Empty ? "" : this.txtGiroComercio.Text.ToUpper();
+                datosGralReporte.dirigido = this.txtDirigidoA.Text == string.Empty ? "" : this.txtDirigidoA.Text.ToUpper();
+                datosGralReporte.nocasos_ravi = new int?(this.txtNoCasosRavi.Text == "" ? 0 : Convert.ToInt32(this.txtNoCasosRavi.Text));
+                datosGralReporte.casos_ravi = (this.ddlCasosRavi.SelectedValue == "1") ? true :
+                                              (this.ddlCasosRavi.SelectedValue == "0" ? false : (bool?)null);
+                datosGralReporte.plantel_diagnosticado = (this.ddlPlantelDiagnosticado.SelectedValue == "1") ? true :
+                                                              (this.ddlPlantelDiagnosticado.SelectedValue == "0" ? false : (bool?)null);
+                datosGralReporte.EjeId = new int?(this.ddlEje.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlEje.SelectedValue));
+                // Atrapamos tanto el nulo/vacío como el "0" explícito
+                datosGralReporte.ResponsabilidadId = (string.IsNullOrEmpty(this.ddlResponsabilidad.SelectedValue) || this.ddlResponsabilidad.SelectedValue == "0")
+                                                     ? (int?)null
+                                                     : Convert.ToInt32(this.ddlResponsabilidad.SelectedValue);
+
+                datosGralReporte.IndicadorId = (string.IsNullOrEmpty(this.ddlIndicador.SelectedValue) || this.ddlIndicador.SelectedValue == "0")
+                                               ? (int?)null
+                                               : Convert.ToInt32(this.ddlIndicador.SelectedValue);
+                // datosGralReporte.ResponsabilidadId = string.IsNullOrEmpty(this.ddlResponsabilidad.SelectedValue) ? (int?)null : Convert.ToInt32(this.ddlResponsabilidad.SelectedValue);
+                // datosGralReporte.IndicadorId = string.IsNullOrEmpty(this.ddlIndicador.SelectedValue) ? (int?)null : Convert.ToInt32(this.ddlIndicador.SelectedValue);
             }
             else
             {
-
                 TB_DatosGralReporte nuevoDatosGral = new TB_DatosGralReporte();
                 nuevoDatosGral.idResumenDiario = new Guid?(idExpediente);
                 //nuevoDatosGral.NombreContacto = this.txtnombrecontacto.Text == string.Empty ? "" : this.txtnombrecontacto.Text.ToUpper();
                 //nuevoDatosGral.telcel = this.txtTelefono.Text;
                 nuevoDatosGral.ClavePlantel = this.txtclave.Text == string.Empty ? "" : this.txtclave.Text.ToUpper();
-
                 nuevoDatosGral.Ambito = Convert.ToInt32(ddlAmbito.SelectedValue);
                 //nuevoDatosGral.EjeId = Convert.ToInt32(ddlEje.SelectedValue);
                 nuevoDatosGral.EjeId = new int?(this.ddlEje.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlEje.SelectedValue));
-                nuevoDatosGral.ResponsabilidadId = new int?(this.ddlResponsabilidad.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlResponsabilidad.SelectedValue));
-                nuevoDatosGral.IndicadorId = new int?(this.ddlIndicador.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlIndicador.SelectedValue));
+                // nuevoDatosGral.ResponsabilidadId = new int?(this.ddlResponsabilidad.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlResponsabilidad.SelectedValue));
+                // nuevoDatosGral.IndicadorId = new int?(this.ddlIndicador.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlIndicador.SelectedValue));
                 nuevoDatosGral.niñas = new int?(this.txnina.Value == "" ? 0 : Convert.ToInt32(this.txnina.Value));
                 nuevoDatosGral.niños = new int?(this.txnino.Value == "" ? 0 : Convert.ToInt32(this.txnino.Value));
                 nuevoDatosGral.hombres = new int?(this.txhombres.Value == "" ? 0 : Convert.ToInt32(this.txhombres.Value));
                 nuevoDatosGral.mujeres = new int?(this.txmujeres.Value == "" ? 0 : Convert.ToInt32(this.txmujeres.Value));
-                ctx.TB_DatosGralReporte.Add(nuevoDatosGral);
 
+                /// campos nuevos 
+           /*   nuevoDatosGral.NumAcciones = new int?(this.txtNumAccciones.Text == "" ? 0 : Convert.ToInt32(this.txtNumAccciones.Text));
+                nuevoDatosGral.segurichat = this.txtSegurichat.Text == string.Empty ? "" : this.txtSegurichat.Text.ToUpper();
+                nuevoDatosGral.ofrecieron_segurichat = (this.ddlOfrecioSegurichat.SelectedValue == "1") ? true :
+                                                       (this.ddlOfrecioSegurichat.SelectedValue == "0" ? false : (bool?)null);
+                nuevoDatosGral.total_acciones_ravi = new int?(this.txtTotalAccionesRAVI.Text == "" ? 0 : Convert.ToInt32(this.txtTotalAccionesRAVI.Text)); 
+                nuevoDatosGral.no_acciones_institucionales = new int?(this.ddlNoAccionesInstitucionales.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlNoAccionesInstitucionales.SelectedValue)); 
+                nuevoDatosGral.no_acciones_dgpvi = new int?(this.ddlNoaccionesDGPVI.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlNoaccionesDGPVI.SelectedValue)); 
+                nuevoDatosGral.giro_comercios = this.txtGiroComercio.Text == string.Empty ? "" : this.txtGiroComercio.Text.ToUpper();   
+                nuevoDatosGral.dirigido  = this.txtDirigidoA.Text == string.Empty ? "" : this.txtDirigidoA.Text.ToUpper();
+                nuevoDatosGral.nocasos_ravi = new int?(this.txtNoCasosRavi.Text == "" ? 0 : Convert.ToInt32(this.txtNoCasosRavi.Text)); ;
+                nuevoDatosGral.casos_ravi = (this.ddlCasosRavi.SelectedValue == "1") ? true :
+                                                       (this.ddlCasosRavi.SelectedValue == "0" ? false : (bool?)null); 
+               
+                nuevoDatosGral.plantel_diagnosticado = (this.ddlPlantelDiagnosticado.SelectedValue == "1") ? true :
+                                                       (this.ddlPlantelDiagnosticado.SelectedValue == "0" ? false : (bool?)null);
+            */
+
+                // campos nuevos 
+                ctx.TB_DatosGralReporte.Add(nuevoDatosGral);
             }
 
             return MODE;
@@ -1778,6 +1996,17 @@ namespace SIICOP_V1._2.Captura
                 direccionReporte.coloni = this.colony.Value == string.Empty ? "" : this.colony.Value;
                 direccionReporte.MunicipioID = new int?(this.ddlMuNICIPIO.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlMuNICIPIO.SelectedValue));
                 direccionReporte.LocalidadID = new int?(this.ddlLocalidad.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlLocalidad.SelectedValue));
+                direccionReporte.mpio_prioritario = (this.ddlMunicipioPrioritario.SelectedValue == "True") ? true :
+                                                          (this.ddlMunicipioPrioritario.SelectedValue == "False" ? false : (bool?)null);
+                direccionReporte.mpio_homicidio = (this.ddlMunicipioHomicidio.SelectedValue == "True") ? true :
+                                                         (this.ddlMunicipioHomicidio.SelectedValue == "False" ? false : (bool?)null);
+                direccionReporte.mpio_indigena = (this.ddlMunicipioIndigena.SelectedValue == "True") ? true :
+                                                           (this.ddlMunicipioIndigena.SelectedValue == "False" ? false : (bool?)null);
+                direccionReporte.col_prioritario = (this.ddlColoniaPrioritaria.SelectedValue == "True") ? true :
+                                                      (this.ddlColoniaPrioritaria.SelectedValue == "False" ? false : (bool?)null);
+
+                direccionReporte.programa_istmo = (this.ddlProgramaIstmo.SelectedValue == "True") ? true :
+                                                     (this.ddlProgramaIstmo.SelectedValue == "False" ? false : (bool?)null);
             }
             else
                 ctx.tb_DireccionReporte.Add(new tb_DireccionReporte()
@@ -1799,9 +2028,10 @@ namespace SIICOP_V1._2.Captura
             if (tbReporteDiario != null)
             {
                 tbReporteDiario.descripcion_actividad = this.txtDescripcionActividad.Text == string.Empty ? "" : this.txtDescripcionActividad.Text.ToUpper();
-                //tbReporteDiario.personal_atendio_actividad = this.txtpersonal_atendio_actividad.Text == string.Empty ? "" : this.txtpersonal_atendio_actividad.Text.ToUpper();
+                tbReporteDiario.coordinador = this.txtCoordinador.Text == string.Empty ? null : this.txtCoordinador.Text;
+                tbReporteDiario.idzona = new int?(this.ddlZona.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlZona.SelectedValue));
+                // tbReporteDiario.idcoordinacion = new int?(this.ddlCoordinacion.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlCoordinacion.SelectedValue));
                 tbReporteDiario.seguimiento = this.txtSeguimiento.Text == string.Empty ? "" : this.txtSeguimiento.Text.ToUpper();
-
                 int accionesId = 0;
 
                 if (!int.TryParse(this.ddlAcciones.SelectedValue, out accionesId))
@@ -1810,22 +2040,18 @@ namespace SIICOP_V1._2.Captura
                 }
 
                 tbReporteDiario.AccionesID = accionesId;
-
                 tbReporteDiario.fecha = new DateTime?(Convert.ToDateTime(this.txtFecha.Text));
                 tbReporteDiario.subprogramaId = new int?(this.ddlsubprograma.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlsubprograma.SelectedValue));
-
                 MODE = Convert.ToInt32(ddlAmbito.SelectedValue);
 
                 CalcularBeneficiarios();
                 int Hombres = 0;
                 int Mujeres = 0;
                 if (MODE == 1)
-                {
 
+                {
                     //if (this.txnina.Value != "")
                     //    nina = int.Parse(this.txnina.Value, (IFormatProvider)CultureInfo.InvariantCulture);
-
-
                     Hombres = nino + padresH;
                     Mujeres = nina + padresM;
                     // TotalAtendidos = Hombres + Mujeres; 
@@ -1845,7 +2071,7 @@ namespace SIICOP_V1._2.Captura
 
 
         #region ### pasos finales boton de guardado exitoso y generador de folio
-      protected void lkbtSalirReporte_Click(object sender, EventArgs e)
+        protected void lkbtSalirReporte_Click(object sender, EventArgs e)
         {
             /* Guid id = Guid.Parse(Session["idresumen"].ToString());
              ScriptManager.RegisterStartupScript(this, GetType(), "openFolio", "openFolio();", true);
@@ -1856,7 +2082,6 @@ namespace SIICOP_V1._2.Captura
         }
 
         protected void btnaceptar_Click(object sender, EventArgs e)
-
         {
             this.Session["idExpediente_Accion"] = (object)null;
             this.Session["AccionExpediente"] = (object)null;
@@ -1928,16 +2153,13 @@ namespace SIICOP_V1._2.Captura
                 ddlsubprograma.DataTextField = "NombreSubPrograma";   // campo que se muestra
                 ddlsubprograma.DataValueField = "subprogramaId";      // campo valor
                 ddlsubprograma.DataBind();
-
                 ddlsubprograma.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
             }
-
             catch (Exception ex)
             {
                 // Mostrar mensaje amigable
                 lblError.Text = "Ocurrió un error al cargar municipios";
                 lblError.Visible = true;
-
                 // (opcional) log
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }
@@ -1975,8 +2197,6 @@ namespace SIICOP_V1._2.Captura
         }
 
 
-
-
         private void CargarAcciones(int subprogramaId)
         {
             try
@@ -1986,15 +2206,11 @@ namespace SIICOP_V1._2.Captura
 
                 ddlAcciones.Items.Clear();
                 ddlSubAcciones.Items.Clear();
-
                 ddlAcciones.DataSource = repo.ObtenerAcciones(subprogramaId);
                 ddlAcciones.DataTextField = "AccionesNombre";   // campo que se muestra
-                ddlAcciones.DataValueField = "AccionesID";      // campo valor
+                ddlAcciones.DataValueField = "AccionesId";      // campo valor
                 ddlAcciones.DataBind();
-
                 ddlAcciones.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
-
-
             }
 
             catch (Exception ex)
@@ -2010,12 +2226,10 @@ namespace SIICOP_V1._2.Captura
             try
             {
                 var repo = new ProgramaRepository();
-
                 ddlSubAcciones.DataSource = repo.ObtenerSubacciones(accionId);
                 ddlSubAcciones.DataTextField = "SubAccion";   // campo que se muestra
-                ddlSubAcciones.DataValueField = "SubAccionesId";      // campo valor
+                ddlSubAcciones.DataValueField = "SubAccion";      // campo valor
                 ddlSubAcciones.DataBind();
-
                 ddlSubAcciones.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
             }
 
@@ -2037,11 +2251,10 @@ namespace SIICOP_V1._2.Captura
                 ddlMuNICIPIO.DataTextField = "MUNICIPIO";   // campo que se muestra
                 ddlMuNICIPIO.DataValueField = "MunicipioID";      // campo valor
                 ddlMuNICIPIO.DataBind();
-
                 ddlMuNICIPIO.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
             }
             catch (Exception ex)
-            {                
+            {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }
         }
@@ -2055,7 +2268,6 @@ namespace SIICOP_V1._2.Captura
                 ddlMuNICIPIO.DataTextField = "MUNICIPIO";   // campo que se muestra
                 ddlMuNICIPIO.DataValueField = "MunicipioID";      // campo valor
                 ddlMuNICIPIO.DataBind();
-
                 ddlMuNICIPIO.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
             }
             catch (Exception ex)
@@ -2063,8 +2275,6 @@ namespace SIICOP_V1._2.Captura
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }
         }
-
-
 
         private void CargarRavis()
         {
@@ -2079,14 +2289,12 @@ namespace SIICOP_V1._2.Captura
 
                 txtNoCasosRavi.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
 
-
                 ddlNoaccionesDGPVI.DataSource = repo.ObtenerRavis();
                 ddlNoaccionesDGPVI.DataTextField = "Num";
                 ddlNoaccionesDGPVI.DataValueField = "RaviId";
                 ddlNoaccionesDGPVI.DataBind();
 
                 ddlNoaccionesDGPVI.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
-
 
                 ddlNoAccionesInstitucionales.DataSource = repo.ObtenerRavis();
                 ddlNoAccionesInstitucionales.DataTextField = "Num";
@@ -2095,10 +2303,9 @@ namespace SIICOP_V1._2.Captura
 
                 ddlNoAccionesInstitucionales.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
 
-
             }
-
-            catch (Exception ex)
+            catch (Exception)
+            //catch (Exception ex)
             {
 
             }
@@ -2109,26 +2316,30 @@ namespace SIICOP_V1._2.Captura
             try
             {
                 string valor = Request.QueryString["ValorEntorno"];
+
                 int entornoId = Convert.ToInt32(valor);
+
                 List<Cat_Eje> repo = new List<Cat_Eje>();
+
                 if (entornoId == 2 || User.IsInRole("Administrador")) // Escolar y ROL ADMINISTRADOR
                 {
                     repo = new EjeRepository().ObtenerEjesPorEntorno(entornoId);
                 }
-                else { // Cominitario
+                else
+                { // Comunitario
                     repo = new EjeRepository().ObtenerEjesPorDependecia(SesionUsuario.UsuarioLoggeado.DependenciaId, entornoId);
                 }
-                
+
                 ddlEje.DataSource = repo;
                 ddlEje.DataTextField = "Eje";
                 ddlEje.DataValueField = "EjeId";
                 ddlEje.DataBind();
                 ddlEje.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
-
                 LimpiarResponsabilidades();
                 LimpiarIndicadores();
             }
-            catch (Exception ex)
+            catch (Exception)
+            //  catch (Exception ex)
             {
             }
         }
@@ -2146,7 +2357,8 @@ namespace SIICOP_V1._2.Captura
                 {
                     repo = new ResponsabilidadRepository().ObtenerResponsabilidadPorEje(ejeId);
                 }
-                else {
+                else
+                {
                     repo = new ResponsabilidadRepository().ObtenerResponsabilidadPorDependenciaYEje(dependenciaId, ejeId);
                 }
 
@@ -2154,12 +2366,11 @@ namespace SIICOP_V1._2.Captura
                 ddlResponsabilidad.DataTextField = "DescripcionResponsabilidad";
                 ddlResponsabilidad.DataValueField = "ResponsabilidadId";
                 ddlResponsabilidad.DataBind();
-
-                ddlResponsabilidad.Items.Insert(0, new ListItem("--Seleccione--", "0"));
-
+                ddlResponsabilidad.Items.Insert(0, new ListItem("--Seleccione--", ""));
                 ddlResponsabilidad.Enabled = repo.Count > 0;
             }
-            catch (Exception ex) { }
+            //   catch (Exception ex)
+            catch (Exception) { }
         }
 
         private void CargarIndicadores()
@@ -2172,10 +2383,12 @@ namespace SIICOP_V1._2.Captura
                 ddlIndicador.DataTextField = "DescripcionIndicador";
                 ddlIndicador.DataValueField = "IndicadorId";
                 ddlIndicador.DataBind();
-                ddlIndicador.Items.Insert(0, new ListItem("--Seleccione--", "0"));
+                ddlIndicador.Items.Insert(0, new ListItem("--Seleccione--", ""));
                 ddlIndicador.Enabled = repo.Count > 0;
             }
-            catch (Exception ex) { }
+            catch (Exception)
+            // catch (Exception ex) 
+            { }
         }
 
         private void CargarZonas()
@@ -2191,8 +2404,8 @@ namespace SIICOP_V1._2.Captura
 
                 ddlZona.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
             }
-
-            catch (Exception ex)
+            catch (Exception)
+            // catch (Exception ex)
             {
 
             }
@@ -2206,19 +2419,20 @@ namespace SIICOP_V1._2.Captura
 
                 var listaCoordinadores = repo.ObtenerCoord();
 
-                   var datosFormateados = listaCoordinadores.Select(c => new
+                var datosFormateados = listaCoordinadores.Select(c => new
                 {
                     ID = c.CoordinadorId,
                     NombreCompleto = $"{c.Nombre} {c.Paterno} {c.Materno}"
-                }).ToList();              
+                }).ToList();
                 txtCoordinador.DataSource = datosFormateados;
-                txtCoordinador.DataTextField = "NombreCompleto"; 
-                txtCoordinador.DataValueField = "NombreCompleto"; 
+                txtCoordinador.DataTextField = "NombreCompleto";
+                txtCoordinador.DataValueField = "NombreCompleto";
                 txtCoordinador.DataBind();
 
                 txtCoordinador.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
             }
-            catch (Exception ex)
+            catch (Exception)
+            //  catch (Exception ex)
             {
             }
         }
@@ -2226,7 +2440,7 @@ namespace SIICOP_V1._2.Captura
         protected void ddlMunicipio_SelectedIndexChanged(
         object sender,
         EventArgs e)
-            {
+        {
             int municipioId =
                 int.Parse(
                     ddlMuNICIPIO.SelectedValue);
@@ -2274,14 +2488,14 @@ namespace SIICOP_V1._2.Captura
         private void AsignarValorBooleano(
             DropDownList ddl,
             bool? valor)
-                {
-                    if (valor == true)
-                        ddl.SelectedValue = "True";
-                    else if (valor == false)
-                        ddl.SelectedValue = "False";
-                    else
-                        ddl.SelectedValue = "-1";
-                }
+        {
+            if (valor == true)
+                ddl.SelectedValue = "True";
+            else if (valor == false)
+                ddl.SelectedValue = "False";
+            else
+                ddl.SelectedValue = "-1";
+        }
 
         protected void MostrarPoblacionIndigena(
     int municipioId)
@@ -2392,7 +2606,7 @@ namespace SIICOP_V1._2.Captura
             if (zonaId > 0)
             {
                 CargarCoordinacionesPorZona(zonaId);
-            }            
+            }
         }
 
 
@@ -2460,8 +2674,8 @@ namespace SIICOP_V1._2.Captura
 
                 ddlAmbito.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
             }
-
-            catch (Exception ex)
+            catch (Exception)
+            // catch (Exception ex)
             {
 
             }
@@ -2506,7 +2720,7 @@ namespace SIICOP_V1._2.Captura
         {
             LimpiarIndicadores();
 
-            if(ddlResponsabilidad.SelectedValue == "0") 
+            if (ddlResponsabilidad.SelectedValue == "0")
                 return;
 
             CargarIndicadores();

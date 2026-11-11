@@ -44,6 +44,7 @@ namespace SIICOP_V1._2.Datos
         public string MUNICIPIO { get; set; }
         public Nullable<int> MunicipioID { get; set; }
         public string calveMuni { get; set; }
+        public string Eje { get; set; }
         public string Localidad { get; set; }
         public Nullable<int> LocalidadID { get; set; }
         public string clavelocali { get; set; }
@@ -55,11 +56,33 @@ namespace SIICOP_V1._2.Datos
         public string Nivel { get; set; }
         public string NombreContacto { get; set; }
         public string telcel { get; set; }
+        public Nullable<int> EjeId { get; set; }
+        public string tema_impartido { get; set; }
+        public Nullable<int> Ambito { get; set; }
         public string Longitud { get; set; }
         public string Latitud { get; set; }
         public string descripcion_actividad { get; set; }
         public string personal_atendio_actividad { get; set; }
         public Nullable<System.DateTime> fechacaptura { get; set; }
+        public string coordinador { get; set; }
+        public Nullable<bool> mpio_prioritario { get; set; }
+        public Nullable<bool> mpio_homicidio { get; set; }
+        public Nullable<bool> col_prioritario { get; set; }
+        public Nullable<bool> mpio_indigena { get; set; }
+        public Nullable<bool> programa_istmo { get; set; }
+        public string segurichat { get; set; }
+        public Nullable<bool> plantel_diagnosticado { get; set; }
+        public Nullable<bool> casos_ravi { get; set; }
+        public Nullable<int> nocasos_ravi { get; set; }
+        public string dirigido { get; set; }
+        public string giro_comercios { get; set; }
+        public Nullable<int> no_acciones_dgpvi { get; set; }
+        public Nullable<int> no_acciones_institucionales { get; set; }
+        public Nullable<int> total_acciones_ravi { get; set; }
+        public Nullable<bool> ofrecieron_segurichat { get; set; }
+        public string seguimiento { get; set; }
+        public string accion_implementada { get; set; }
+        public Nullable<int> NumAcciones { get; set; }
         public Nullable<int> fotos { get; set; }
         public string Dependencia { get; set; }
         public string DelegacionOcoonurbacion { get; set; }
@@ -67,10 +90,6 @@ namespace SIICOP_V1._2.Datos
         public Nullable<int> idzona { get; set; }
         public string zona { get; set; }
         public string inst_participantes { get; set; }
-        public string Eje { get; set; }
-        public Nullable<int> EjeId { get; set; }
-        public string tema_impartido { get; set; }
-        public Nullable<int> Ambito { get; set; }
         public Nullable<int> ResponsabilidadId { get; set; }
         public Nullable<int> IndicadorId { get; set; }
         public string DescripcionResponsabilidad { get; set; }

@@ -9,7 +9,6 @@ namespace SIICOP_V1._2.Captura
         {
 
         }
-
         protected void btnEscolar_Click(object sender, EventArgs e)
         {
             Session["programasID"] = 0; // temporal

@@ -85,8 +85,8 @@ namespace SIICOP_V1._2.json
                             });
                         }
                     }
-
-                    catch (Exception ex)
+                    catch (Exception )
+                   // catch (Exception ex)
                     {
                     }
                 };
@@ -157,8 +157,8 @@ namespace SIICOP_V1._2.json
                             });
                         }
                     }
-
-                    catch (Exception ex)
+                 //   catch (Exception ex)
+                    catch (Exception )
                     {
                     }
                 };

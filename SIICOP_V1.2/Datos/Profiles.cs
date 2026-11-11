@@ -19,5 +19,7 @@ namespace SIICOP_V1._2.Datos
         public string PropertyValueStrings { get; set; }
         public byte[] PropertyValueBinary { get; set; }
         public System.DateTime LastUpdatedDate { get; set; }
+    
+        public virtual Users Users { get; set; }
     }
 }

@@ -189,7 +189,8 @@ namespace SIICOP_V1._2.VistasReportes.CEPREVIDE
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
+         //   catch (Exception ex)
             {
 
             }
@@ -467,7 +468,8 @@ namespace SIICOP_V1._2.VistasReportes.CEPREVIDE
                     }
                 }
             }
-            catch (Exception exe)
+            catch (Exception )
+        //    catch (Exception exe)
             {
                 //lblError.Text = exe.Message;
             }

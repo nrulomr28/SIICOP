@@ -16,8 +16,8 @@ namespace SIICOP_V1._2.Graficas
     {
         SIICOPEntities ctx = new SIICOPEntities();
 
-        int Datos;
-        int progragr;
+      //  int Datos;
+     //   int progragr;
         int inclusion = 0;
         int redesOld = 0;
         int redesOldNew = 0;
@@ -437,7 +437,8 @@ namespace SIICOP_V1._2.Graficas
 
 
             }
-            catch (Exception ex)
+          //  catch (Exception ex)
+            catch (Exception )
             {
                 return null;
             }
@@ -495,7 +496,8 @@ namespace SIICOP_V1._2.Graficas
 
 
             }
-            catch (Exception ex)
+            catch (Exception )
+           // catch (Exception ex)
             {
                 return null;
             }
@@ -553,7 +555,8 @@ namespace SIICOP_V1._2.Graficas
 
 
             }
-            catch (Exception ex)
+            catch (Exception )
+           // catch (Exception ex)
             {
                 return null;
             }
@@ -608,7 +611,8 @@ namespace SIICOP_V1._2.Graficas
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
+           // catch (Exception ex)
             {
                 return null;
             }
@@ -666,7 +670,8 @@ namespace SIICOP_V1._2.Graficas
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
+        //    catch (Exception ex)
             {
                 return null;
             }
@@ -722,7 +727,8 @@ namespace SIICOP_V1._2.Graficas
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
+         //   catch (Exception ex)
             {
                 return null;
             }

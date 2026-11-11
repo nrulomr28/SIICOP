@@ -254,7 +254,9 @@ namespace SIICOP_V1._2.VistasReportes.C4
                     }
                 }
             }
-            catch (Exception exe)
+            catch (Exception)
+         
+           // catch (Exception exe)
             {
                 //lblError.Text = exe.Message;
             }
@@ -352,7 +354,8 @@ namespace SIICOP_V1._2.VistasReportes.C4
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
+       //     catch (Exception ex)
             {
 
             }

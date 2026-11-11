@@ -11,8 +11,8 @@ namespace SIICOP_V1._2.sysadmin
     public partial class Administracion : System.Web.UI.Page
     {
         protected void Page_Load(
-    object sender,
-    EventArgs e)
+         object sender,
+         EventArgs e)
         {
             if (!IsPostBack)
             {

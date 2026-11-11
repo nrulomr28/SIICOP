@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="13d2a1ab26f042bd9db230d717eb3350" Name="Diagram1" ZoomLevel="94">
+      <Diagram DiagramId="13d2a1ab26f042bd9db230d717eb3350" Name="Diagram1" ZoomLevel="65">
         <EntityTypeShape EntityType="SIICOPModel.Cat_Acciones" Width="1.5" PointX="7.5" PointY="44.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.Cat_area" Width="1.5" PointX="0.75" PointY="31.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.Cat_Delegacion" Width="1.5" PointX="3" PointY="43.375" IsExpanded="true" />
@@ -38,7 +38,6 @@
         <EntityTypeShape EntityType="SIICOPModel.vw_Indicadores_Acciones" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.vw_Indicadores_Acciones_Convenios" Width="1.5" PointX="2.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.vw_Indicadores_Beneficiados" Width="1.5" PointX="4.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SIICOPModel.Wv_DatosReportesHistorico" Width="2.75" PointX="14.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.WV_Datosrepote_app" Width="1.5" PointX="19.375" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.wv_personaluser" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIICOPModel.wv_PeticionesForPoliciaIntegralProxi" Width="1.5" PointX="18.75" PointY="17.125" IsExpanded="true" />
@@ -95,6 +94,21 @@
         <AssociationConnector Association="SIICOPModel.FK_tb_fotografia_tb_Reporte_Diario" />
         <AssociationConnector Association="SIICOPModel.FK_tb_Resumen_Diario_tb_programa" />
         <AssociationConnector Association="SIICOPModel.FK_tb_Resumen_Diario_TB_subprograma" />
+        <EntityTypeShape EntityType="SIICOPModel.C__MigrationHistory" Width="1.5" PointX="19.375" PointY="2" />
+        <EntityTypeShape EntityType="SIICOPModel.Applications" Width="1.5" PointX="0.75" PointY="10" />
+        <EntityTypeShape EntityType="SIICOPModel.ErrorLog" Width="1.5" PointX="19.375" PointY="5" />
+        <EntityTypeShape EntityType="SIICOPModel.Memberships" Width="1.5" PointX="16.5" PointY="0.75" />
+        <EntityTypeShape EntityType="SIICOPModel.Roles" Width="1.5" PointX="3" PointY="11.625" />
+        <EntityTypeShape EntityType="SIICOPModel.Users" Width="1.5" PointX="5.25" PointY="8.375" />
+        <EntityTypeShape EntityType="SIICOPModel.C_Cat_Acciones" Width="1.5" PointX="9.375" PointY="22" />
+        <EntityTypeShape EntityType="SIICOPModel.municipio" Width="1.5" PointX="21.375" PointY="2" />
+        <AssociationConnector Association="SIICOPModel.MembershipApplication" />
+        <AssociationConnector Association="SIICOPModel.RoleApplication" />
+        <AssociationConnector Association="SIICOPModel.UserApplication" />
+        <AssociationConnector Association="SIICOPModel.MembershipUser" />
+        <AssociationConnector Association="SIICOPModel.UserProfile" />
+        <AssociationConnector Association="SIICOPModel.UsersInRoles" />
+        <EntityTypeShape EntityType="SIICOPModel.Wv_DatosReportesHistorico" Width="1.5" PointX="15.375" PointY="21.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

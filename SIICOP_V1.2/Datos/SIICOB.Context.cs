@@ -60,7 +60,6 @@ namespace SIICOP_V1._2.Datos
         public virtual DbSet<vw_Indicadores_Acciones> vw_Indicadores_Acciones { get; set; }
         public virtual DbSet<vw_Indicadores_Acciones_Convenios> vw_Indicadores_Acciones_Convenios { get; set; }
         public virtual DbSet<vw_Indicadores_Beneficiados> vw_Indicadores_Beneficiados { get; set; }
-        public virtual DbSet<Wv_DatosReportesHistorico> Wv_DatosReportesHistorico { get; set; }
         public virtual DbSet<WV_Datosrepote_app> WV_Datosrepote_app { get; set; }
         public virtual DbSet<wv_personaluser> wv_personaluser { get; set; }
         public virtual DbSet<wv_PeticionesForPoliciaIntegralProxi> wv_PeticionesForPoliciaIntegralProxi { get; set; }
@@ -81,6 +80,15 @@ namespace SIICOP_V1._2.Datos
         public virtual DbSet<Cat_IndicadorDesempeno> Cat_IndicadorDesempeno { get; set; }
         public virtual DbSet<Cat_ResponsabilidadPrincipal> Cat_ResponsabilidadPrincipal { get; set; }
         public virtual DbSet<tb_Reporte_Diario> tb_Reporte_Diario { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<Applications> Applications { get; set; }
+        public virtual DbSet<ErrorLog> ErrorLog { get; set; }
+        public virtual DbSet<Memberships> Memberships { get; set; }
+        public virtual DbSet<Roles> Roles { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<C_Cat_Acciones> C_Cat_Acciones { get; set; }
+        public virtual DbSet<municipio> municipio { get; set; }
+        public virtual DbSet<Wv_DatosReportesHistorico> Wv_DatosReportesHistorico { get; set; }
     
         public virtual int CrearReporteEscolar(string descractividad, string atendioactividadper, Nullable<int> accionesID, Nullable<System.DateTime> fecha, Nullable<int> personalid, Nullable<int> programasID, Nullable<int> subprogramaId, Nullable<int> totalHombresAtendidos, Nullable<int> totalMujeresAtendidas, Nullable<int> total_atendidos, string capturaapp, string delegacion, string nombrelugarescul, string nombreContacto, string telcel, string clavePlantel, string nivel, string turno, string niñas, string niños, string hombres, string mujeres, string docentesH, string docentesM, string direccionGoogle, string latitud, string longitud, string estado, string calle, string coloni, Nullable<int> localidadID, Nullable<int> municipioID, Nullable<int> regionID, Nullable<int> delegacionID, string entrecalle1, string entrecalle2)
         {

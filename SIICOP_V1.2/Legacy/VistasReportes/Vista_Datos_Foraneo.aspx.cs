@@ -92,10 +92,8 @@ namespace SIICOP_V1._2.VistasReportes
 
         protected void GvInformeResultados_DataBound(object sender, EventArgs e)
         {
-
             try
             {
-
                 // Recupera la el PagerRow...
                 GridViewRow pagerRow = GvInformeResultados.BottomPagerRow;
                 // Recupera los controles DropDownList y label...
@@ -150,7 +148,7 @@ namespace SIICOP_V1._2.VistasReportes
             int encuentrociudadano = 11;
             int fomentodeporte = 12;
             int empresarial = 13;
-            int resdesXpaz = 14;
+           // int resdesXpaz = 14;
 
             if (e.CommandName == "Editar")
             {
@@ -311,7 +309,6 @@ namespace SIICOP_V1._2.VistasReportes
 
         }
 
-
         protected void PageDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
             {
@@ -397,9 +394,6 @@ namespace SIICOP_V1._2.VistasReportes
             DateTime fechainicial = Convert.ToDateTime(this.txtFInicialC.Text);
             DateTime fechaFinal = Convert.ToDateTime(this.txtfechafin.Text);
 
-
-
-
             if (Xzona == 1)
             {
                 this.ZonaNorte.InnerText = (from s in ctx.tb_Reporte_Diario
@@ -440,8 +434,6 @@ namespace SIICOP_V1._2.VistasReportes
 
             DateTime fechainicial = Convert.ToDateTime(this.txtFInicialC.Text);
             DateTime fechaFinal = Convert.ToDateTime(this.txtfechafin.Text);
-
-
 
             //Beneficiados
             this.H2MombresBeneficiados.InnerText = (from c in ctx.tb_Reporte_Diario
@@ -496,8 +488,6 @@ namespace SIICOP_V1._2.VistasReportes
         {
             this.iduser = int.Parse(this.Session["responsable"].ToString());
             int Xzona = Convert.ToInt32(HDFRegion.Value);
-
-
             DateTime fechainicial = Convert.ToDateTime(this.txtFInicialC.Text);
             DateTime fechaFinal = Convert.ToDateTime(this.txtfechafin.Text);
 
@@ -580,7 +570,8 @@ namespace SIICOP_V1._2.VistasReportes
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
+         //   catch (Exception ex)
             {
                 return null;
             }
@@ -637,7 +628,8 @@ namespace SIICOP_V1._2.VistasReportes
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
+           // catch (Exception ex)
             {
                 return null;
             }
@@ -697,7 +689,8 @@ namespace SIICOP_V1._2.VistasReportes
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
+            //catch (Exception ex)
             {
                 return null;
             }
@@ -753,7 +746,8 @@ namespace SIICOP_V1._2.VistasReportes
 
 
             }
-            catch (Exception ex)
+            catch (Exception )
+            //catch (Exception ex)
             {
                 return null;
             }
@@ -812,7 +806,8 @@ namespace SIICOP_V1._2.VistasReportes
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
+           // catch (Exception ex)
             {
                 return null;
             }
@@ -868,7 +863,8 @@ namespace SIICOP_V1._2.VistasReportes
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
+         // catch (Exception ex)
             {
                 return null;
             }
@@ -954,7 +950,8 @@ namespace SIICOP_V1._2.VistasReportes
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
+           // catch (Exception ex)
             {
 
             }

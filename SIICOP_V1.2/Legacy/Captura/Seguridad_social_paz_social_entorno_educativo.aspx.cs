@@ -13,7 +13,7 @@ namespace SIICOP_V1._2.Captura
     public partial class EscuelaSegura : System.Web.UI.Page
     {
         int personalID;
-        int TotalAtendidos;
+       // int TotalAtendidos;
         int nino;
         int nina;
         int padresH;
@@ -94,7 +94,8 @@ namespace SIICOP_V1._2.Captura
                     Guid idExpediente = Guid.Parse(Session["idExpediente_Accion"].ToString());
                     expediente_Llenar(idExpediente);
                 }
-                catch (Exception ex) { /*salidaBandeja();*/ }
+                //catch (Exception ex)
+                catch (Exception) { /*salidaBandeja();*/ }
             }
             else
             {
@@ -148,7 +149,6 @@ namespace SIICOP_V1._2.Captura
                 this.txtTelefono.Text = datosGralReporte.telcel != null ? datosGralReporte.telcel : "";
                 this.ddlNivel.Text = datosGralReporte.Nivel != "0" ? datosGralReporte.Nivel : "0";
                 this.ddlTurno.Text = datosGralReporte.Turno != "0" ? datosGralReporte.Turno : "0";
-
                 txtnina.Value = datosGralReporte.niñas != 0 ? datosGralReporte.niñas.ToString() : "0";
                 txtnino.Value = datosGralReporte.niños != 0 ? datosGralReporte.niños.ToString() : "0";
                 txthombres.Value = datosGralReporte.hombres != 0 ? datosGralReporte.hombres.ToString() : "0";
@@ -240,8 +240,8 @@ namespace SIICOP_V1._2.Captura
             padresM = 0;
             DocentesH = 0;
             DocentesM = 0;
-            int r = 0;
-            int tamanoarchivo;
+        //    int r = 0;
+          //  int tamanoarchivo;
             string fileName = "";
             string contentType = "";
             try
@@ -367,7 +367,6 @@ namespace SIICOP_V1._2.Captura
                                     ctx.tb_fotografia.Add(foto);
                                 }
 
-
                             }
                         }
                     }
@@ -397,7 +396,8 @@ namespace SIICOP_V1._2.Captura
                 this.Session["AccionExpediente"] = (object)null;
                 ScriptManager.RegisterStartupScript((Page)this, this.GetType(), "redirect", "alert('DATOS GUARDADOS CON EXITO'); window.location='" + this.Request.ApplicationPath + "TotalAccionesBeneficiados.aspx';", true);
             }
-            catch (Exception ex)
+           // catch (Exception ex)
+            catch (Exception)
             {
                 ScriptManager.RegisterClientScriptBlock((Page)this, this.GetType(), "alertMessage", "alert('¡Error al guardar los datos!')", true);
             }
@@ -408,7 +408,7 @@ namespace SIICOP_V1._2.Captura
             bool valido = true;
             string textoValidacion = "<ul>";
             int r = 0;
-            int tamanoarchivo;
+        //    int tamanoarchivo;
             string fileName = "";
             string contentType = "";
             bool actividadfueradefecha = Convert.ToBoolean(Session["actividades_fuera_tiempo"]);
@@ -738,7 +738,8 @@ namespace SIICOP_V1._2.Captura
                     Session["actividades_fuera_tiempo"] = null;
 
                 }
-                catch (Exception ex)
+                catch (Exception )
+             //   catch (Exception ex)
                 {
                     //ScriptManager.RegisterClientScriptBlock(this, GetType(), "alertMessage", "alert('ERRO AL GUARDAR LOS DATOS')", true);
                     ScriptManager.RegisterStartupScript(this, GetType(), "error", "error();", true);

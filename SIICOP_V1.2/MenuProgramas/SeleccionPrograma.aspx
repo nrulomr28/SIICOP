@@ -50,23 +50,20 @@
             background-color: #777;
         }
 
-        .card-title
-{
-    min-height: 110px;
-}
-        .card
-{
-    transition: all .2s ease;
-}
+        .card-title {
+            min-height: 110px;
+        }
 
-.card:hover
-{
-    transform: translateY(-3px);
-}
+        .card {
+            transition: all .2s ease;
+        }
 
+            .card:hover {
+                transform: translateY(-3px);
+            }
     </style>
 
-    <div class="container">        
+    <div class="container">
         <div class="row mt-3">
             <div class="col-md-8 col-md-offset-2">
                 <h3 class="text-center">
@@ -80,72 +77,54 @@
 
 
         <div class="row mt-3">
-
-            <div class="col-md-8 col-md-offset-2">               
+            <div class="col-md-8 col-md-offset-2">
                 <div class="panel-body">
                     <div class="grid-wrapper">
                         <div class="container mt-4">
-
-                            <h2 class="mb-4">
-                                Seleccione un programa
+                            <h2 class="mb-4">Seleccione un programa
                             </h2>
-        <div class="row">
-
-            <asp:Repeater
-                ID="rptProgramas"
-                runat="server"
-                OnItemCommand="rptProgramas_ItemCommand">
-                <ItemTemplate>
-                <div class="col-md-4 mb-4">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-body text-center">
-                            <h4 class="card-title">
-                                <%# Eval("NombrePrograma") %>
-                            </h4>
-                            <hr />
-                            <div class="d-grid gap-2">
-                                <asp:LinkButton
-                                    ID="btnEscolar"
+                            <div class="row">
+                                <asp:Repeater
+                                    ID="rptProgramas"
                                     runat="server"
-                                    CssClass="btn btn-primary"
-                                    CommandName="Escolar"
-                                    CommandArgument='<%# Eval("programasID") %>'>
-                                    🎓 Escolar
-                                </asp:LinkButton>
-
-                                <asp:LinkButton
-                                    ID="btnComunitario"
-                                    runat="server"
-                                    CssClass="btn btn-success"
-                                    CommandName="Comunitario"
-                                    CommandArgument='<%# Eval("programasID") %>'>
-                                    🏘 Comunitario
-                                </asp:LinkButton>
-
+                                    OnItemCommand="rptProgramas_ItemCommand">
+                                    <ItemTemplate>
+                                        <div class="col-md-4 mb-4">
+                                            <div class="card shadow-sm h-100">
+                                                <div class="card-body text-center">
+                                                    <h4 class="card-title">
+                                                        <%# Eval("NombrePrograma") %>
+                                                    </h4>
+                                                    <hr />
+                                                    <div class="d-grid gap-2">
+                                                        <asp:LinkButton
+                                                            ID="btnEscolar"
+                                                            runat="server"
+                                                            CssClass="btn btn-primary"
+                                                            CommandName="Escolar"
+                                                            CommandArgument='<%# Eval("programasID") %>'>
+                                                        🎓 Escolar
+                                                        </asp:LinkButton>
+                                                        <asp:LinkButton
+                                                            ID="btnComunitario"
+                                                            runat="server"
+                                                            CssClass="btn btn-success"
+                                                            CommandName="Comunitario"
+                                                            CommandArgument='<%# Eval("programasID") %>'>
+                                                        🏘 Comunitario
+                                                        </asp:LinkButton>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ItemTemplate>
+                                </asp:Repeater>
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
-
-            </ItemTemplate>
-
-        </asp:Repeater>
-
-    </div>
-
-</div>
-
-                    </div>
-
-                </div>
-                
             </div>
         </div>
     </div>
-
-    
     <br />
 </asp:Content>

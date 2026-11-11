@@ -44,8 +44,7 @@ namespace SIICOP_V1._2.Datos
         public string capturaAPP { get; set; }
         public string DelegacionOcoonurbacion { get; set; }
         public string FolioActividad { get; set; }
-        public int idReportreFOL { get; set; }
-    
+        public int idReportreFOL { get; set; }    
         public virtual Personales Personales { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_Beneficiados_dgprs> tb_Beneficiados_dgprs { get; set; }

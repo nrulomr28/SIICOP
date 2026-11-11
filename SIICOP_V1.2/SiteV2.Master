@@ -3,24 +3,17 @@
     Inherits="SIICOP_V1._2.SiteV2Master" %>
 
 <!DOCTYPE html>
-
 <html>
 <head runat="server">
-
     <title>SIICOP | <%: Page.Title %></title>
-
     <meta charset="utf-8" />
-
     <meta name="viewport"
           content="width=device-width, initial-scale=1" />
-
     <link href="~/Content/bootstrap.min.css"
           rel="stylesheet"
           runat="server" />
-
     <link href="~/Content/fontawesome-free/css/all.min.css"
           rel="stylesheet" />
-
     <style>
 
         body

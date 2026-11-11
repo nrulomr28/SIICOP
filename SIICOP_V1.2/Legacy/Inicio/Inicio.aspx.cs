@@ -10,7 +10,7 @@ namespace SIICOP_V1._2.Inicio
 {
     public partial class Inicio : System.Web.UI.Page
     {
-        string sUsuarioActual;
+      //  string sUsuarioActual;
         SIICOPEntities ctx = new SIICOPEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -60,7 +60,8 @@ namespace SIICOP_V1._2.Inicio
                     }
                 }
             }
-            catch (Exception ex)
+           // catch (Exception ex)
+            catch (Exception)
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "error", "error()", true);
 

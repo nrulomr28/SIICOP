@@ -32,7 +32,7 @@ namespace SIICOP_V1._2.Policia_en_tu_colonia
         string sUsuarioActual;
         private int b;
         private int foliooo;
-        Guid folioEditar;
+      //  Guid folioEditar;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -580,7 +580,8 @@ namespace SIICOP_V1._2.Policia_en_tu_colonia
                 //Response.Redirect("~/Policia_en_tu_colonia/Reporte_Seguimiento.aspx");
 
             }
-            catch (Exception ex)
+            catch (Exception )
+           // catch (Exception ex)
             {
                 this.FolioReportecancelar();
                 ScriptManager.RegisterClientScriptBlock((Page)this, this.GetType(), "error", "error()", true);
@@ -602,7 +603,6 @@ namespace SIICOP_V1._2.Policia_en_tu_colonia
                     tcSeguimiento.NombreCompleto = this.txtNombreCIudadano.Text == "" ? "ANONIMO" : this.txtNombreCIudadano.Text;
                     tcSeguimiento.idcapturaInt = new int?(idcapturaInt);
                     tcSeguimiento.edad = string.IsNullOrEmpty(this.txtEdad.Text) ? new int?() : new int?(Convert.ToInt32(this.txtEdad.Text));
-
                     tcSeguimiento.Colonia = new int?(this.ddlColonia.SelectedValue == null ? 0 : Convert.ToInt32(this.ddlColonia.SelectedValue));
                     tcSeguimiento.calle = string.IsNullOrEmpty(this.txtCalle.Text) ? "" : this.txtCalle.Text;
                     tcSeguimiento.Referencia = string.IsNullOrEmpty(this.txtReferencia.Text) ? "" : this.txtReferencia.Text;
@@ -716,7 +716,7 @@ namespace SIICOP_V1._2.Policia_en_tu_colonia
                     if (this.rbinseguro.Checked)
                         peticionCiudadana.seguridadcolonia = new int?(2);
                     if (this.rbnoseguro.Checked)
-                        peticionCiudadana.seguridadcolonia = new int?(3);
+                    peticionCiudadana.seguridadcolonia = new int?(3);
                     peticionCiudadana.casa = string.IsNullOrEmpty(this.txtCasaseuri.Text) ? new int?() : new int?(Convert.ToInt32(this.txtCasaseuri.Text));
                     peticionCiudadana.escuela = string.IsNullOrEmpty(this.txtEscuela.Text) ? new int?() : new int?(Convert.ToInt32(this.txtEscuela.Text));
                     peticionCiudadana.TransportePublico = string.IsNullOrEmpty(this.txttrasporte.Text) ? new int?() : new int?(Convert.ToInt32(this.txttrasporte.Text));
@@ -751,9 +751,10 @@ namespace SIICOP_V1._2.Policia_en_tu_colonia
                 this.Session["AccionExpediente"] = (object)null;
                 this.Session[nameof(idExpediente)] = (object)null;
                 this.gvPeticiones.DataBind();
-                //Response.Redirect("~/Policia_en_tu_colonia/Reporte_Seguimiento.aspx");
+              //Response.Redirect("~/Policia_en_tu_colonia/Reporte_Seguimiento.aspx");
             }
-            catch (Exception ex)
+          //  catch (Exception ex)
+            catch (Exception)
             {
                 ScriptManager.RegisterClientScriptBlock((Page)this, this.GetType(), "error", "error()", true);
             }
@@ -814,7 +815,6 @@ namespace SIICOP_V1._2.Policia_en_tu_colonia
                 package = new ExcelPackage(new FileInfo(Plantilla));
                 ExcelWorkbook excelWorkBook = package.Workbook;
                 var xlWorkSheet = excelWorkBook.Worksheets["Hoja2"];
-
                 LlenaHoja(xlWorkSheet);
 
                 fileStream = new MemoryStream();
@@ -849,9 +849,6 @@ namespace SIICOP_V1._2.Policia_en_tu_colonia
                     convertidoFI = DateTime.TryParse(txtFInicialC.Text, out fechaInicial);
                     DateTime fechaFinal = new DateTime();
                     convertidoFF = DateTime.TryParse(txtfechafin.Text, out fechaFinal);
-
-
-
 
                     List<wv_PeticionesForPoliciaIntegralProxi> listaReportes = ctx.wv_PeticionesForPoliciaIntegralProxi.Where(R => (((convertidoFI && R.fechaRepor >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fechaRepor <= fechaFinal) || !convertidoFF))).ToList();
                     dtPrincipal = ConvertToDataTable(listaReportes);
@@ -940,7 +937,8 @@ namespace SIICOP_V1._2.Policia_en_tu_colonia
                     }
                 }
             }
-            catch (Exception exe)
+            catch (Exception)
+         //   catch (Exception exe)
             {
                 //lblError.Text = exe.Message;
             }
@@ -1026,7 +1024,8 @@ namespace SIICOP_V1._2.Policia_en_tu_colonia
 
 
             }
-            catch (Exception ex)
+            catch (Exception )
+         //   catch (Exception ex)
             {
                 this.CalcularTotalAles();
             }
@@ -1156,8 +1155,8 @@ namespace SIICOP_V1._2.Policia_en_tu_colonia
                 ScriptManager.RegisterStartupScript((Page)this, this.GetType(), "Correcto", "Correcto();", true);
                 ScriptManager.RegisterClientScriptBlock((Page)this, this.GetType(), "closeProxi", "closeProxi()", true);
             }
-
-            catch (Exception ex)
+            catch (Exception)
+         //   catch (Exception ex)
             {
 
             }
@@ -1243,8 +1242,8 @@ namespace SIICOP_V1._2.Policia_en_tu_colonia
                 busquedadescripcion.Visible = true;
                 lblTotalRegistrosProximidad.Visible = true;
             }
-
-            catch (Exception ex)
+            catch (Exception)
+          //  catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript((Page)this, this.GetType(), "error", "error();", true);
 
@@ -1433,7 +1432,8 @@ namespace SIICOP_V1._2.Policia_en_tu_colonia
 
                         ScriptManager.RegisterStartupScript((Page)this, this.GetType(), "copenProxi", "copenProxi();", true);
                     }
-                    catch (Exception ex)
+                   // catch (Exception ex)
+                    catch (Exception)
                     {
 
                     }

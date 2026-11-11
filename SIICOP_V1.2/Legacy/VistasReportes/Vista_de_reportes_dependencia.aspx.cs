@@ -87,7 +87,8 @@ namespace SIICOP_V1._2.VistasReportes
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
+           // catch (Exception ex)
             {
 
             }

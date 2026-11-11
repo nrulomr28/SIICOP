@@ -69,7 +69,7 @@
                                                                 <label class="control-label">Fecha de la actividad</label>
                                                                 <div class="input-group date" id="datetimepicker1">
                                                                     <asp:TextBox runat="server" ID="txtFecha" CssClass="form-control"
-                                                                        placeholder="dd/mm/aaaa" autocomplete="off" AutoPostBack="true" />
+                                                                        onkeydown="return false;" placeholder="dd/mm/aaaa" autocomplete="off" AutoPostBack="true" />
                                                                     <ajaxToolkit:CalendarExtender ID="DateNacimiento_CalendarExtender" runat="server"
                                                                         BehaviorID="DateNacimiento_CalendarExtender" TargetControlID="txtFecha"
                                                                         Format="dd/MM/yyyy"></ajaxToolkit:CalendarExtender>
@@ -112,7 +112,7 @@
                                 <div class="timeline-badge primary"><i class="fas fa-globe" title="Ubicación"></i></div>
                                 <h3 class="timeline-head"><strong style="color: #34495e">Ubicación</strong></h3>
                             </li>
-                                <%--Del Depto--%>
+                            <%--Del Depto--%>
                             <li id="resumen">
                                 <div class="timeline-badge warning"></div>
                                 <div class="timeline-panel">
@@ -192,8 +192,6 @@
                                                         $("[id*='" + 'lati' + "']").val(arregloDeSubCadenas[0]);
                                                         $("[id*='" + 'lati' + "']").removeAttr('disabled');
                                                         console.log("--cuarta ENCUENTRO = " + 'lati' + arregloDeSubCadenas[0]);
-
-
 
                                                         //se cambio de esta manera por que asi es como le puedes poner un runat server
                                                         //document.getElementById('longi').value = arregloDeSubCadenas[1];
@@ -312,23 +310,23 @@
                                                 function VerDireccionMapa() {
 
                                                     var ActividadId = document.getElementById('<%=HiddenField1cn.ClientID %>').value;
-                                                console.log("Si entro");
-                                                console.log("Actividad ID" + ActividadId);
-                                                $.ajax({
-                                                    type: "POST",
-                                                    contentType: "application/json; charset=utf-8",
-                                                    dataType: "json",
-                                                    url: '<%= ResolveUrl("EsculaSegura.aspx/Cordenadas")%>',
-                                                    data: JSON.stringify({ 'ActividadId': ActividadId }),
-                                                    success: OnSuccess,
-                                                    failure: function (response) {
+                                                    console.log("Si entro");
+                                                    console.log("Actividad ID" + ActividadId);
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        contentType: "application/json; charset=utf-8",
+                                                        dataType: "json",
+                                                        url: '<%= ResolveUrl("EsculaSegura.aspx/Cordenadas")%>',
+                                                        data: JSON.stringify({ 'ActividadId': ActividadId }),
+                                                        success: OnSuccess,
+                                                        failure: function (response) {
 
-                                                        //alert(response.d);
-                                                    },
-                                                    error: function (response) {
+                                                            //alert(response.d);
+                                                        },
+                                                        error: function (response) {
 
-                                                    }
-                                                });
+                                                        }
+                                                    });
 
                                                     function OnSuccess(response) {
                                                         latitude = response.latitud;
@@ -594,6 +592,7 @@
                                                             <div class="form-group form-group-sm col-md-4">
                                                                 <label for="exampleInputEmail1">Sub acción implementada</label>
                                                                 <div class='input-group ' id='date42'>
+
                                                                     <asp:DropDownList ID="ddlSubAcciones" runat="server" CssClass="form-control" AutoPostBack="true">
                                                                     </asp:DropDownList>
                                                                 </div>
@@ -619,24 +618,19 @@
                                                     <br />
 
                                                     <div class="row">
-
                                                         <!-- ENTORNO -->
                                                         <div class="col-md-2">
                                                             <div class="form-group form-group-sm">
                                                                 <label for="ddlAmbito">Entorno</label>
                                                                 <div class="input-group" id="ambito">
-
                                                                     <asp:DropDownList
                                                                         runat="server"
                                                                         ID="ddlAmbito"
                                                                         CssClass="form-control"
                                                                         AutoPostBack="true"
                                                                         OnSelectedIndexChanged="ddlAmbito_SelectedIndexChanged">
-
                                                                         <asp:ListItem Value="0">--Seleccione--</asp:ListItem>
-
                                                                     </asp:DropDownList>
-
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -646,18 +640,14 @@
                                                             <div class="form-group form-group-sm">
                                                                 <label for="ddlEje">Eje</label>
                                                                 <div class="input-group" id="eje">
-
                                                                     <asp:DropDownList
                                                                         runat="server"
                                                                         ID="ddlEje"
                                                                         CssClass="form-control"
                                                                         AutoPostBack="true"
                                                                         OnSelectedIndexChanged="ddlEje_SelectedIndexChanged">
-
                                                                         <asp:ListItem Value="0">--Seleccione--</asp:ListItem>
-
                                                                     </asp:DropDownList>
-
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -667,19 +657,14 @@
                                                             ID="pnlResponsabilidadIndicador"
                                                             runat="server"
                                                             CssClass="col-md-7">
-
                                                             <div class="row">
-
                                                                 <!-- RESPONSABILIDAD -->
                                                                 <div class="col-md-5">
                                                                     <div class="form-group form-group-sm">
-
                                                                         <label for="ddResponsabilidad">
                                                                             Responsabilidad principal
                                                                         </label>
-
                                                                         <div class="input-group" id="responsabilidad">
-
                                                                             <asp:DropDownList
                                                                                 runat="server"
                                                                                 ID="ddlResponsabilidad"
@@ -687,13 +672,9 @@
                                                                                 AutoPostBack="true"
                                                                                 OnSelectedIndexChanged="ddResponsabilidad_SelectedIndexChanged"
                                                                                 Enabled="false">
-
                                                                                 <asp:ListItem Value="0">--Seleccione--</asp:ListItem>
-
                                                                             </asp:DropDownList>
-
                                                                         </div>
-
                                                                     </div>
                                                                 </div>
 
@@ -704,9 +685,7 @@
                                                                         <label for="ddIndicador">
                                                                             Indicador de desempeño
                                                                         </label>
-
                                                                         <div class="input-group" id="indicador">
-
                                                                             <asp:DropDownList
                                                                                 runat="server"
                                                                                 ID="ddlIndicador"
@@ -733,7 +712,6 @@
                                                     <div class="row">
 
                                                         <div class="col-md-3">
-
                                                             <label for="exampleInputEmail1">Lugar donde se realizó la actividad</label>
                                                             <asp:DropDownList runat="server" ID="ddlnombreescuela" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlAmbito_SelectedIndexChanged">
                                                                 <asp:ListItem Value="0">--Seleccione--</asp:ListItem>
@@ -741,23 +719,29 @@
                                                                 <asp:ListItem Value="Empresa">Empresa</asp:ListItem>
                                                                 <asp:ListItem Value="Red Vecinal">Red Vecinal</asp:ListItem>
                                                                 <asp:ListItem Value="Centro Comunitario">Centro Comunitario</asp:ListItem>
+                                                                <asp:ListItem Value="Otro">Otro</asp:ListItem>
                                                             </asp:DropDownList>
-
                                                         </div>
-
                                                         <div class="col-md-4">
                                                             <label class="control-label">Nombre/lugar/escuela/red</label>
                                                             <asp:TextBox ID="txtLugarActividad" CssClass="form-control" runat="server"></asp:TextBox>
                                                         </div>
 
-                                                        <%--<div class="col-md-3">
+                                                        <div class="col-md-4">
+                                                            <label class="control-label">Número de acciones</label>
+                                                            <asp:TextBox ID="txtNumAccciones" CssClass="form-control" TextMode="Number" runat="server"></asp:TextBox>
+                                                        </div>
+
+                                                        <%--
+                                                         <div class="col-md-3">
                                                             <label for="exampleInputEmail1">Nombre del contacto</label>
                                                             <asp:TextBox ID="txtnombrecontacto" CssClass="form-control" runat="server"></asp:TextBox>
                                                         </div>
                                                         <div class="col-md-2">
                                                             <label for="exampleInputEmail1">Tel/Cel</label>
                                                             <asp:TextBox ID="txtTelefono" CssClass="form-control" runat="server"></asp:TextBox>
-                                                        </div>--%>
+                                                        </div>
+                                                        --%>
                                                     </div>
                                                     <br />
 
@@ -825,7 +809,6 @@
 
 
                                                         </div>--%>
-
                                                     </div>
 
 
@@ -855,14 +838,11 @@
                                                             </div>
                                                         </div>
                                                         <div class="row mt-3">
-
                                                             <div class="col-md-2">
-
                                                                 <label for="ddlNoaccionesDGPVI">No.acciones DGPVI</label>
                                                                 <asp:DropDownList runat="server" ID="ddlNoaccionesDGPVI" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlNoaccionesDGPVI_SelectedIndexChanged">
                                                                 </asp:DropDownList>
                                                             </div>
-
                                                             <div class="col-md-3">
                                                                 <label for="ddlNoAccionesInstitucionales">No. acciones Institucionales</label>
                                                                 <asp:DropDownList runat="server" ID="ddlNoAccionesInstitucionales" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlNoaccionesDGPVI_SelectedIndexChanged">
@@ -890,24 +870,26 @@
                                                     <h3>Descripción/Observación</h3>
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <asp:TextBox ID="txtDescripcionActividad" CssClass="form-control" runat="server" Height="60px" TextMode="MultiLine" MaxLength="300" ></asp:TextBox>
+                                                            <asp:TextBox ID="txtDescripcionActividad" CssClass="form-control" runat="server" Height="60px" TextMode="MultiLine" MaxLength="300"></asp:TextBox>
                                                             <small class="text-muted">Caracteres restantes: <span id="charsLeft">300</span>
                                                             </small>
                                                         </div>
                                                     </div>
                                                     <br />
-                                                    <%--<div class="col-md-12">
+                                                    <%--
+                                                        <div class="col-md-12">
                                                         <div class="row">
                                                             <div id="Div1" runat="server">
                                                                 <h3>Persona que atendió la actividad</h3>
                                                                 <asp:TextBox ID="txtpersonal_atendio_actividad" CssClass="form-control" runat="server" TextMode="MultiLine"></asp:TextBox>
                                                             </div>
                                                         </div>
-                                                    </div>--%>
+                                                    </div>
+                                                    --%>
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <h3>Seguimiento</h3>
-                                                            <asp:TextBox ID="txtSeguimiento" CssClass="form-control" runat="server" Height="60px" TextMode="MultiLine" MaxLength="300" ></asp:TextBox>
+                                                            <asp:TextBox ID="txtSeguimiento" CssClass="form-control" runat="server" Height="60px" TextMode="MultiLine" MaxLength="300"></asp:TextBox>
                                                             </small>
                                                         </div>
                                                     </div>
@@ -940,7 +922,7 @@
                                                             <label for="txnino" class="col-md-5 col-form-label">Niños</label>
                                                             <div class="col-md-7">
                                                                 <div class="input-group">
-                                                                    <input type="text" id="txnino" class="form-control montoH" onkeyup="sumarH();" runat="server" />
+                                                                    <input type="number" id="txnino" class="form-control montoH" onkeyup="sumarH();" runat="server" />
                                                                     <span class="input-group-text"><i class="fa fa-male" style="color: #820E2E"></i></span>
                                                                     <span class="badge bg-white text-danger" data-toggle="tooltip" title="Es obligatorio este campo">*</span>
                                                                 </div>
@@ -954,7 +936,7 @@
                                                             <label for="txnina" class="col-md-5 col-form-label">Niñas</label>
                                                             <div class="col-md-7">
                                                                 <div class="input-group">
-                                                                    <input type="text" id="txnina" class="form-control montoM" onkeyup="sumarM();" runat="server" />
+                                                                    <input type="number" id="txnina" class="form-control montoM" onkeyup="sumarM();" runat="server" />
                                                                     <span class="input-group-text"><i class="fa fa-female" style="color: #820E2E"></i></span>
                                                                     <span class="badge bg-white text-danger" data-toggle="tooltip" title="Es obligatorio este campo">*</span>
                                                                 </div>
@@ -962,7 +944,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                                 <div class="row mt-3">
                                                     <!-- Hombres -->
                                                     <div class="col-md-6">
@@ -970,21 +951,20 @@
                                                             <label for="txhombres" class="col-md-5 col-form-label">Hombres</label>
                                                             <div class="col-md-7">
                                                                 <div class="input-group">
-                                                                    <input type="text" id="txhombres" class="form-control montoH" onkeyup="sumarH();" runat="server" />
+                                                                    <input type="number" id="txhombres" class="form-control montoH" onkeyup="sumarH();" runat="server" />
                                                                     <span class="input-group-text"><i class="fa fa-male" style="color: #820E2E"></i></span>
                                                                     <span class="badge bg-white text-danger" data-toggle="tooltip" title="Es obligatorio este campo">*</span>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                     <!-- Mujeres -->
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
                                                             <label for="txmujeres" class="col-md-5 col-form-label">Mujeres</label>
                                                             <div class="col-md-7">
                                                                 <div class="input-group">
-                                                                    <input type="text" id="txmujeres" class="form-control montoM" onkeyup="sumarM();" runat="server" />
+                                                                    <input type="number" id="txmujeres" class="form-control montoM" onkeyup="sumarM();" runat="server" />
                                                                     <span class="input-group-text"><i class="fa fa-female" style="color: #820E2E"></i></span>
                                                                     <span class="badge bg-white text-danger" data-toggle="tooltip" title="Es obligatorio este campo">*</span>
                                                                 </div>
@@ -992,8 +972,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
-
                                                 <div class="row mt-3">
                                                     <!-- Total Hombres -->
                                                     <div class="col-md-6">
@@ -1023,9 +1001,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
-
                                             <br />
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
@@ -1111,7 +1087,6 @@
                         Cancelar
                     </button>
                 </div>
-
             </div>
         </div>
     </div>

@@ -51,10 +51,8 @@
     </script>
 
     <div class="container" style="padding-top:3%">
-
         <div class="woww">
             <h2 class="center standart-h2title " style="text-align: center"><span class="large-text"><span class="main-color2">Cargas</span><span></span> de trabajo</span></h2>
-
         </div>
         <hr />
     </div>
@@ -73,7 +71,6 @@
                                 <td style="padding-left: 0; width: 100%">
                                 <td style="padding-right: 0; text-align: right; white-space: nowrap">
                                     <div>
-
                                         <asp:LinkButton runat="server" ID="btnCargaTrabajoNuevo" CssClass="btn btn-success btn-sm" data-toggle="modal" data-target="#ModalAcciones">Agregar acciones</asp:LinkButton>
                                     </div>
                                 </td>

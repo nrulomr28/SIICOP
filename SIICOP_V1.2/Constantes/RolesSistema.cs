@@ -2,15 +2,15 @@
 {
     public static class RolesSistema
     {
-        public const string SysAdmin = "SysAdmin";     /// USUARIO DE DTI
+        public const string SysAdmin =       "SysAdmin";     /// USUARIO DE DTI
 
-        public const string Administrador = "Administrador";  //// USUARIO ADMIN DE LA OFICINA ARRIBA 
+        public const string Administrador =  "Administrador";  //// USUARIO ADMIN DE LA OFICINA ARRIBA 
 
-        public const string Visualizador = "Visualizador";   /// USUARIO VER REPORTES 
+        public const string Visualizador =   "Visualizador";   /// USUARIO VER REPORTES 
 
         public const string CapEjeAtencion = "CapEjeAtencion";  /// USUARIO DE CAPTURA DE DEPENDENCIAS FUERA DE TORRE 
 
-        public const string CapDGPVI = "CapDGPVI"; ///USUARIO DE CAPTURA DE DEPENDENCIAS
+        public const string CapDGPVI =       "CapDGPVI";       ///USUARIO DE CAPTURA DE DEPENDENCIAS
 
     }
 }

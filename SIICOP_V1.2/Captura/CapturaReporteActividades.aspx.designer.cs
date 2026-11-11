@@ -348,6 +348,15 @@ namespace SIICOP_V1._2.Captura
         protected global::System.Web.UI.WebControls.TextBox txtLugarActividad;
 
         /// <summary>
+        /// Control txtNumAccciones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNumAccciones;
+
+        /// <summary>
         /// Control PanelEscuela.
         /// </summary>
         /// <remarks>
@@ -507,7 +516,7 @@ namespace SIICOP_V1._2.Captura
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txnino;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txnino;
 
         /// <summary>
         /// Control txnina.
@@ -516,7 +525,7 @@ namespace SIICOP_V1._2.Captura
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txnina;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txnina;
 
         /// <summary>
         /// Control txhombres.
@@ -525,7 +534,7 @@ namespace SIICOP_V1._2.Captura
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txhombres;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txhombres;
 
         /// <summary>
         /// Control txmujeres.
@@ -534,7 +543,7 @@ namespace SIICOP_V1._2.Captura
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txmujeres;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txmujeres;
 
         /// <summary>
         /// Control txtatendiosH.

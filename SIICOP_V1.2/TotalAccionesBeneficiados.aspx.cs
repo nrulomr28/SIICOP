@@ -15,10 +15,8 @@ namespace SIICOP_V1._2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
             int mes = DateTime.Now.Month;
             int anio = DateTime.Now.Year;
-
             var query = new ReporteAccionesBeneficiarios();
             var datos = query.ObtenerReporteBeneficiarios(mes, anio);
             gvTotalAcciones.DataSource = datos;

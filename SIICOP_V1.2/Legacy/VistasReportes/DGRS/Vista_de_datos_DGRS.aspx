@@ -175,7 +175,9 @@
                                     </div>
                                     <div class="col-lg-10" style="text-align: right;">
                                         <h3>
-                                            <asp:Label ID="CurrentPageLabelAdmin" runat="server" CssClass="label label-success" /></h3>
+                                            <asp:Label ID="CurrentPageLabelAdmin" runat="server" CssClass="label label-success" />
+
+                                        </h3>
                                     </div>
                                 </div>
                             </PagerTemplate>

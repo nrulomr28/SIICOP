@@ -11,7 +11,7 @@ namespace SIICOP_V1._2.VistasReportes
     {
         SIICOPEntities ctx = new SIICOPEntities();
         private int iduser;
-        private static DataTable dtPrincipal;
+     //   private static DataTable dtPrincipal;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -173,7 +173,8 @@ namespace SIICOP_V1._2.VistasReportes
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
+         //   catch (Exception ex)
             {
 
             }
@@ -207,7 +208,8 @@ namespace SIICOP_V1._2.VistasReportes
 
                 }
             }
-            catch (Exception ex)
+          //  catch (Exception ex)
+            catch (Exception)
             {
 
             }

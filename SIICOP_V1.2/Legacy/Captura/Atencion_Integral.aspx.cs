@@ -150,7 +150,7 @@ namespace SIICOP_V1._2.Captura
             bool valido = true;
             string textoValidacion = "<ul>";
             int r = 0;
-            int tamanoarchivo;
+           // int tamanoarchivo;
             string fileName = "";
             string contentType = "";
             bool actividadfueradefecha = Convert.ToBoolean(Session["actividades_fuera_tiempo"]);
@@ -478,7 +478,8 @@ namespace SIICOP_V1._2.Captura
                     ScriptManager.RegisterStartupScript(this, GetType(), "openGuardadoExito", "openGuardadoExito();", true);
                     Session["actividades_fuera_tiempo"] = null;
                 }
-                catch (Exception ex)
+              //  catch (Exception ex)
+                catch (Exception )
                 {
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "alertMessage", "alert('ERRO AL GUARDAR LOS DATOS')", true);
 
@@ -524,8 +525,8 @@ namespace SIICOP_V1._2.Captura
         protected void btnGuardarEdicion_Click(object sender, EventArgs e)
         {
             Guid idExpediente = Guid.Parse(HiddenField1cn.Value);
-            int r = 0;
-            int tamanoarchivo;
+          //  int r = 0;
+        //    int tamanoarchivo;
             string fileName = "";
             string contentType = "";
             nino = 0;
@@ -704,7 +705,8 @@ namespace SIICOP_V1._2.Captura
                 this.Session["AccionExpediente"] = (object)null;
                 ScriptManager.RegisterStartupScript((Page)this, this.GetType(), "redirect", "alert('DATOS GUARDADOS CON EXITO'); window.location='" + this.Request.ApplicationPath + "TotalAccionesBeneficiados.aspx';", true);
             }
-            catch (Exception ex)
+            catch (Exception)
+           // catch (Exception ex)
             {
                 ScriptManager.RegisterClientScriptBlock((Page)this, this.GetType(), "alertMessage", "alert('¡Error al guardar los datos!')", true);
             }

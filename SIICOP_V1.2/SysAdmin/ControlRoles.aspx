@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ControlRoles.aspx.cs" Inherits="SIICOP_V1._2.SysAdmin.ControlRoles" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">   
-   <script type="text/javascript">
+    <script type="text/javascript">
        $(document).ready(function () {
-           // Inicializa las pestañas de Bootstrap 3 (que es la versión que usa tu Site.Master)
+           // Inicializa las pestañas
            $('#myRoleTabs a').click(function (e) {
                e.preventDefault();
                $(this).tab('show');
@@ -19,89 +19,75 @@
            });
        });
    </script>
+   
     <section>
-        <div>
-            <!-- MAIN CONTENT CONTAINER -->
-            <div class="container">       
-                <div class="row-fluid">
-                    <hr class="half">
-                    <h2 class="center standart-h2title "><span class="large-text"><span class="main-color">Administración <span></span></span>de usuarios y roles</span>
+        <div class="container">       
+            <!-- Título -->
+            <div class="row mb-4 mt-2">
+                <div class="col-12">
+                    <h2 class="text-center fw-bold" style="color:#611232;">
+                        Administración de Usuarios y Roles
                     </h2>
+                    <hr />
                 </div>
-                <div class="marketing">
-                    <hr class="half">
-                    <div class="row-fluid">
-                        <div class="span12">
-                            <div class="well">
-                                <p align="center">
-                                    <asp:Label ID="ActionStatus" runat="server" CssClass="Important"></asp:Label>
-                                </p>
-                                <!-- HeaderCssClass="accordionHeader" -->
-                    <%--            <p>Agregar Rol</p>
-                                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-                                <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Agregar Rol" />
-                                <br />--%>
-                               <%-- <ajaxToolkit:Accordion ID="Accordion1" runat="server"
-                                    HeaderSelectedCssClass="accordionHeaderSelected" AutoSize="None" FadeTransitions="true"
-                                    TransitionDuration="250" FramesPerSecond="40" RequireOpenedPane="false" SuppressHeaderPostbacks="true"
-                                    SelectedIndex="-1" Visible="false">
-                                    <Panes>
-                                        <ajaxToolkit:AccordionPane ID="AccordionPane1" runat="server" HeaderCssClass="accordionHeader"
-                                            HeaderSelectedCssClass="accordionHeaderSelected">
-                                            <Header>Administrar por Usuarios</Header>
-                                            <Content>
-                                            </Content>
-                                        </ajaxToolkit:AccordionPane>
-                                        <ajaxToolkit:AccordionPane ID="AccordionPane2" runat="server" HeaderCssClass="accordionHeader"
-                                            HeaderSelectedCssClass="accordionHeaderSelected">
-                                            <Header>Administrar por Roles</Header>
-                                            <Content>
-                                            </Content>
-                                        </ajaxToolkit:AccordionPane>
-                                    </Panes>
-                                </ajaxToolkit:Accordion>--%>
-               
-
-
-
-                               <ul class="nav nav-tabs" id="myRoleTabs">
-                                    <li class="active"><a data-toggle="tab" href="#panelUsuarios">Usuarios</a></li>
-                                    <li><a data-toggle="tab" href="#panelRoles">Roles</a></li>
-                                </ul>
-
-                                <div class="tab-content">
-                              
-                                    <div id="panelUsuarios" class="tab-pane fade in active">
-                                        <br />
-                                        <div class="form-group">
-                                        <b>Seleccione el Usuario:</b>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <!-- 'card' reemplaza al antiguo 'well' -->
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">                            
+                            <p class="text-center">
+                                <asp:Label ID="ActionStatus" runat="server" CssClass="text-danger fw-bold"></asp:Label>
+                            </p>
+                            <!-- Pestañas modernas Bootstrap -->
+                            <ul class="nav nav-tabs" id="myRoleTabs">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#panelUsuarios">Usuarios</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#panelRoles">Roles</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content pt-4">                              
+                                <!-- TAB 1: USUARIOS -->
+                                <div id="panelUsuarios" class="tab-pane fade show in active">
+                                    <div class="mb-4">
+                                        <label class="form-label fw-bold">Seleccione el Usuario:</label>
+                                        <!-- Se cambió a form-select  -->
                                         <asp:DropDownList ID="UserList" runat="server" AutoPostBack="True" 
                                             DataTextField="UserName" DataValueField="UserName" 
-                                            OnSelectedIndexChanged="UserList_SelectedIndexChanged" CssClass="form-control">
+                                            OnSelectedIndexChanged="UserList_SelectedIndexChanged" CssClass="form-select">
                                         </asp:DropDownList>
-                                        <br /><br />
-                                            </div>
-                                        <asp:Repeater ID="UsersRoleList" runat="server" OnItemDataBound="UsersRoleList_ItemDataBound">
-                                            <ItemTemplate>
+                                    </div>                                    
+                                    <div class="ms-2">
+                                    <asp:Repeater ID="UsersRoleList" runat="server" OnItemDataBound="UsersRoleList_ItemDataBound">
+                                        <ItemTemplate>
+                                            <!--  -->
+                                            <div class="mb-2">
                                                 <asp:CheckBox runat="server" ID="RoleCheckBox" AutoPostBack="true" 
-                                                    OnCheckedChanged="RoleCheckBox_CheckChanged" />
-                                                <br />
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-                                    </div>
-
-                                    <div id="panelRoles" class="tab-pane fade">
-                                        <br />
-                                        <b>Seleccione un Rol:</b>
+                                                    OnCheckedChanged="RoleCheckBox_CheckChanged" 
+                                                    CssClass="d-inline-block me-2" />
+                                            </div>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </div>
+                                </div>
+                                <!-- TAB 2: ROLES -->
+                                <div id="panelRoles" class="tab-pane fade">
+                                    <div class="mb-4">
+                                        <label class="form-label fw-bold">Seleccione un Rol:</label>
                                         <asp:DropDownList ID="RoleList" runat="server" AutoPostBack="true" 
-                                            OnSelectedIndexChanged="RoleList_SelectedIndexChanged">
+                                            OnSelectedIndexChanged="RoleList_SelectedIndexChanged" CssClass="form-select">
                                         </asp:DropDownList>
-                                        <br /><br />
+                                    </div>                                    
+                                    <div class="table-responsive">
                                         <asp:GridView ID="RolesUserList" runat="server" AutoGenerateColumns="False" 
-                                            EmptyDataText="No users belong to this role."
-                                            OnRowDeleting="RolesUserList_RowDeleting" OnRowDataBound="RolesUserList_RowDataBound">
+                                            EmptyDataText="No hay usuarios asignados a este rol."
+                                            OnRowDeleting="RolesUserList_RowDeleting" OnRowDataBound="RolesUserList_RowDataBound"
+                                            CssClass="table table-striped table-bordered" UseAccessibleHeader="true">
                                             <Columns>
-                                                <asp:CommandField DeleteText="Quitar" ShowDeleteButton="True" />
+                                                <asp:CommandField DeleteText="Quitar" ShowDeleteButton="True" ControlStyle-CssClass="btn btn-danger btn-sm" />
                                                 <asp:TemplateField HeaderText="Usuarios">
                                                     <ItemTemplate>
                                                         <asp:Label runat="server" ID="UserNameLabel"></asp:Label>
@@ -109,77 +95,13 @@
                                                 </asp:TemplateField>
                                             </Columns>
                                         </asp:GridView>
-                                        <br />
-                                       <%-- <b>Buscar Usuario:</b>
-                                        <asp:TextBox ID="UserNameToAddToRole" runat="server"></asp:TextBox>
-                                        <asp:Button ID="AddUserToRoleButton" runat="server" Text="Agregar al rol" 
-                                            OnClick="AddUserToRoleButton_Click" CssClass="boton" />--%>
                                     </div>
-                                </div>
-
-
-
-
-                      <%--          <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0">
-                                    <ajaxToolkit:TabPanel runat="server" HeaderText="Usuarios" ID="TabPanel1">
-                                        <ContentTemplate>
-                                            <p>
-                                                <b>Seleccione el Usuario :</b>
-                                                <asp:DropDownList ID="UserList" runat="server" AutoPostBack="True" DataTextField="UserName"
-                                                    DataValueField="UserName" OnSelectedIndexChanged="UserList_SelectedIndexChanged">
-                                                </asp:DropDownList>
-                                            </p>
-                                             <p>                                           
-                                                <asp:Repeater ID="UsersRoleList" runat="server" OnItemDataBound="UsersRoleList_ItemDataBound">
-                                                <ItemTemplate>
-                                                    <asp:CheckBox runat="server" ID="RoleCheckBox" AutoPostBack="true" 
-                                                        OnCheckedChanged="RoleCheckBox_CheckChanged" />
-                                                    <br />
-                                                </ItemTemplate>
-                                            </asp:Repeater>
-                                            </p>
-                                        </ContentTemplate>
-
-                                    </ajaxToolkit:TabPanel>
-                                    <ajaxToolkit:TabPanel ID="TabPanel2" runat="server" HeaderText="Roles">
-                                        <ContentTemplate>
-                                            <p>
-                                                <b>Seleccione un Rol:</b>
-                                                <asp:DropDownList ID="RoleList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="RoleList_SelectedIndexChanged">
-                                                </asp:DropDownList>
-                                            </p>
-                                            <p>        
-                                                <asp:GridView ID="RolesUserList" runat="server" AutoGenerateColumns="False" EmptyDataText="No users belong to this role."
-                                                    OnRowDeleting="RolesUserList_RowDeleting" OnRowDataBound="RolesUserList_RowDataBound">
-                                                    <Columns>
-                                                        <asp:CommandField DeleteText="Quitar" ShowDeleteButton="True" />
-                                                       <asp:TemplateField HeaderText="Usuarios">
-                                                            <ItemTemplate>
-                                                                <asp:Label runat="server" ID="UserNameLabel"></asp:Label>
-                                                            </ItemTemplate>
-                                                       </asp:TemplateField>
-                                                    </Columns>
-                                                </asp:GridView>
-                                            </p>
-                                            <p>
-                                                <b>Buscar Usuario:</b>
-                                                <asp:TextBox ID="UserNameToAddToRole" runat="server"></asp:TextBox>
-                                                <br />
-                                                <asp:Button ID="AddUserToRoleButton" runat="server" Text="Agregar al rol" OnClick="AddUserToRoleButton_Click"
-                                                CssClass="boton" />
-                                            </p>
-                                        </ContentTemplate>
-                                    </ajaxToolkit:TabPanel>
-                                </ajaxToolkit:TabContainer>--%>
-
+                                </div>                                
                             </div>
                         </div>
                     </div>
-                    <!-- END CALL TO ACTION -->
-                    <hr class="half">
                 </div>
-                <!--- CLIENTS ROTATOR ## -->
-        </div>
+            </div>            
         </div>
     </section>
 </asp:Content>

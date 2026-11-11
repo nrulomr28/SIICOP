@@ -34,24 +34,22 @@ namespace SIICOP_V1._2.SysAdmin
                       RoleList.DataSource = roles;
                       RoleList.DataBind();
                   }
-
        */
 
         private void BindRolesToList()
         {
             try
             {
-                string[] allRoles = Roles.GetAllRoles();
-                /// solo 4 roles ///
-                var filteredRoles = allRoles.Where(role => role == "SysAdmin" || role == "Visualizador"  || role== "CapEjeAtencion" || role == "CapDGPVI" || role == "Administrador").ToArray();
-
+                string[] allRoles = Roles.GetAllRoles();       
+                var filteredRoles = allRoles.Where(role => role == "SysAdmin" || role == "Visualizador"  
+                || role== "CapEjeAtencion" || role == "CapDGPVI" || role == "Administrador").ToArray();
                 UsersRoleList.DataSource = filteredRoles;
                 UsersRoleList.DataBind();
-
                 RoleList.DataSource = filteredRoles;
                 RoleList.DataBind();
             }
-            catch (Exception ex)
+            catch (Exception)
+          //  catch (Exception ex)
             {
                
             }
@@ -146,7 +144,6 @@ namespace SIICOP_V1._2.SysAdmin
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 Label lbl = (Label)e.Row.FindControl("UserNameLabel");
-                // Asignas el valor aquí, fuera de la vista
                 lbl.Text = e.Row.DataItem.ToString();
             }
         }
@@ -228,7 +225,6 @@ namespace SIICOP_V1._2.SysAdmin
            }
          */
         #endregion
-
 
 
         /*   protected void Button1_Click(object sender, EventArgs e)

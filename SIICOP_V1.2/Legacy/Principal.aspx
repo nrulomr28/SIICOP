@@ -24,27 +24,27 @@
             background-color: #fff;
         }
 
-            .table-custom th {
+        .table-custom th {
                 text-align: center;
                 background-color: #337ab7;
                 color: white;
-            }
+        }
 
-            .table-custom td {
+       .table-custom td {
                 text-align: center;
                 vertical-align: middle !important;
-            }
+       }
 
-        .program-link {
+      .program-link {
             font-weight: bold;
             color: #337ab7;
             text-decoration: none;
-        }
+      }
 
-            .program-link:hover {
+      .program-link:hover {
                 text-decoration: underline;
                 color: #23527c;
-            }
+      }
 
         .badge-custom {
             background-color: #777;

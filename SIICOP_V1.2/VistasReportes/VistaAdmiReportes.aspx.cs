@@ -27,7 +27,7 @@ namespace SIICOP_V1._2.VistasReportes
     {
         SIICOPEntities ctx = new SIICOPEntities();
 
-        private static DataTable dtPrincipal;
+        // private static DataTable dtPrincipal;
         bool valido = true;
         string textoValidacion = "<ul>";
         protected void Page_Load(object sender, EventArgs e)
@@ -35,15 +35,17 @@ namespace SIICOP_V1._2.VistasReportes
             ScriptManager.GetCurrent(this).RegisterPostBackControl(this.lkbtnexcel);
             if (!IsPostBack)
             {
-                  if (User.IsInRole("SysAdmin") || User.IsInRole("Administrador") || User.IsInRole("Visualizador"))
+                lkbtnexcel.Visible = User.IsInRole("Administrador") || User.IsInRole("sysadmin");
+                if (User.IsInRole("SysAdmin") || User.IsInRole("Administrador") || User.IsInRole("Visualizador") || User.IsInRole("CapDGPVI") || User.IsInRole("CapEjeAtencion"))
                 {
                     CargarProgramas();
                     CargarZonas();
-                 // CargarEje();           
-                 // CargarMunicipios();
-                 // CargarDatosReporte();
-                 // ConteoactividadesAdmin();
-                 // GvPCAdmin.Rows[0].Visible = false;
+                    // CargarEje();           
+                    // CargarMunicipios();
+                    // CargarDatosReporte();
+                    // ConteoactividadesAdmin();
+                    // GvPCAdmin.Rows[0].Visible = false;
+                    // Response.Write("<h3>El rol en sesión es: " + Session["NombreDependenciaUsuario"] + "</h3>");               
                 }
                 else
                 {
@@ -51,18 +53,18 @@ namespace SIICOP_V1._2.VistasReportes
                 }
             }
         }
-      
+
+
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             bool valido = true;
-            string textoValidacion = "<ul>"; 
+            string textoValidacion = "<ul>";
             if (string.IsNullOrEmpty(this.txtFInicialC.Text) || string.IsNullOrEmpty(this.txtfechafin.Text))
             {
                 textoValidacion += "<li> Es necesario ingresar ambas fechas para generar el reporte. </li>";
                 valido = false;
             }
-        
             if (!valido)
             {
                 textoValidacion += "</ul>";
@@ -70,18 +72,14 @@ namespace SIICOP_V1._2.VistasReportes
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "AbrirModalValidador", "AbrirModalValidador();", true);
                 return;
             }
-
             if (DateTime.TryParse(this.txtFInicialC.Text, out DateTime fechaIncialParsed))
             {
                 this.Session["fInicialC"] = fechaIncialParsed.ToShortDateString();
             }
-
             if (DateTime.TryParse(this.txtfechafin.Text, out DateTime fechaFinalParsed))
             {
                 this.Session["fFinalC"] = fechaFinalParsed.ToShortDateString();
             }
-
-         
             CargarDatosReporte(true);
         }
 
@@ -123,59 +121,58 @@ namespace SIICOP_V1._2.VistasReportes
 
         #region ####  CONTEO DE ACTIVIDADES
 
-
-
         #endregion
 
         #region****************METODO EXPORTACIÓN DE EXCEL GENERAL DE ACTIVIDADES
 
-     /*   protected void lkbtnexcel_Click(object sender, EventArgs e)
-            {
-                string textoValidacion = "";
-                bool valido = true;
+        /*   protected void lkbtnexcel_Click(object sender, EventArgs e)
+               {
+                   string textoValidacion = "";
+                   bool valido = true;
 
-                if (string.IsNullOrEmpty(this.txtFInicialC.Text) || string.IsNullOrEmpty(this.txtfechafin.Text))
-                {
-                    textoValidacion += "<li> Es necesario ingresar las fechas para poder generar el reporte. </li>";
-                    valido = false;
-                }
+                   if (string.IsNullOrEmpty(this.txtFInicialC.Text) || string.IsNullOrEmpty(this.txtfechafin.Text))
+                   {
+                       textoValidacion += "<li> Es necesario ingresar las fechas para poder generar el reporte. </li>";
+                       valido = false;
+                   }
 
-                if (!valido)
-                {
-                    textoValidacion += "</ul>";
-                    validadottxt.Text = textoValidacion;
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "AbrirModalValidador", "AbrirModalValidador();", true);
-                }
-                else
-                {
-                    // 1. Iniciamos el libro de trabajo de ClosedXML (Totalmente libre)
-                    using (var workbook = new XLWorkbook())
-                    {
-                        // 2. Creamos la hoja
-                        var worksheet = workbook.Worksheets.Add("Reporte de Actividades");
+                   if (!valido)
+                   {
+                       textoValidacion += "</ul>";
+                       validadottxt.Text = textoValidacion;
+                       ScriptManager.RegisterStartupScript(this, this.GetType(), "AbrirModalValidador", "AbrirModalValidador();", true);
+                   }
+                   else
+                   {
+                       // 1. Iniciamos el libro de trabajo de ClosedXML (Totalmente libre)
+                       using (var workbook = new XLWorkbook())
+                       {
+                           // 2. Creamos la hoja
+                           var worksheet = workbook.Worksheets.Add("Reporte de Actividades");
 
-                        // 3. Llenamos los datos llamando a nuestra función
-                        LlenaHojaClosedXML(worksheet);
+                           // 3. Llenamos los datos llamando a nuestra función
+                           LlenaHojaClosedXML(worksheet);
 
-                        // 4. Preparamos el archivo para enviarlo al navegador
-                        using (var memoryStream = new MemoryStream())
-                        {
-                            workbook.SaveAs(memoryStream); // Guardamos en memoria
+                           // 4. Preparamos el archivo para enviarlo al navegador
+                           using (var memoryStream = new MemoryStream())
+                           {
+                               workbook.SaveAs(memoryStream); // Guardamos en memoria
 
-                            Response.Clear();
-                            Response.Buffer = true;
-                            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                            Response.AddHeader("content-disposition", "attachment; filename=Total_Actividades_" + DateTime.Now.ToString("ddMMyyyy") + ".xlsx");
+                               Response.Clear();
+                               Response.Buffer = true;
+                               Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                               Response.AddHeader("content-disposition", "attachment; filename=Total_Actividades_" + DateTime.Now.ToString("ddMMyyyy") + ".xlsx");
 
-                            Response.BinaryWrite(memoryStream.ToArray());
-                            Response.Flush();
-                            Response.SuppressContent = true;
-                            HttpContext.Current.ApplicationInstance.CompleteRequest();
-                        }
-                    }
-                }
-            }
-     */
+                               Response.BinaryWrite(memoryStream.ToArray());
+                               Response.Flush();
+                               Response.SuppressContent = true;
+                               HttpContext.Current.ApplicationInstance.CompleteRequest();
+                           }
+                       }
+                   }
+               }
+        */
+
         protected void lkbtnexcel_Click(object sender, EventArgs e)
         {
             string textoValidacion = "";
@@ -191,7 +188,6 @@ namespace SIICOP_V1._2.VistasReportes
             {
                 textoValidacion += "</ul>";
                 validadottxt.Text = textoValidacion;
-
                 string scriptModal = "document.getElementById('pantallaCarga').style.display = 'none'; AbrirModalValidador();";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "AbrirModalValidador", scriptModal, true);
             }
@@ -200,10 +196,7 @@ namespace SIICOP_V1._2.VistasReportes
                 using (var workbook = new XLWorkbook())
                 {
                     var worksheet = workbook.Worksheets.Add("Reporte de Actividades");
-
                     LlenaHojaClosedXML(worksheet);
-
-                    
                     using (var memoryStream = new MemoryStream())
                     {
                         workbook.SaveAs(memoryStream);
@@ -230,68 +223,89 @@ namespace SIICOP_V1._2.VistasReportes
         {
             try
             {
-                string[] encabezados = { "Fecha", "Capturista", "Zona", "Delegación", "Municipio", "Clave Municipio", "Localidad", "Clave Localidad", "Programa",  "SubPrograma", "Acciónes", "Niños", "Niñas", "Hombres", "Mujeres", "Docentes H", "Docentes M", "Total Hombres", "Total Mujeres", "Total Atendidos",  "Calle", "Colonia", "Lugar/Escuela", "Clave Plantel", "Turno","Nivel Educativo", "Contacto", "Teléfono", "Latitud", "Longitud", "Folio Actividad", "Folio Alternativo", "Coordinación", "Eje", "Responsabilidad Principal", "Indicador" };
+                string[] encabezados = { "Fecha", "Capturista", "Zona", "Delegación", "Municipio", "Clave Municipio", "Localidad", "Clave Localidad",
+                    "Programa",  "SubPrograma", "Acciónes", "Niños", "Niñas", "Hombres", "Mujeres", "Total Hombres",
+                    "Total Mujeres", "Total Atendidos",  "Calle", "Colonia", "Lugar/Escuela", "Clave Plantel", "Nivel Educativo", "Contacto",
+                    "Teléfono", "Latitud", "Longitud", "Folio Actividad", "Folio Alternativo", "Coordinación", "Entorno",
+                    "Eje", "Responsabilidad Principal", "Indicador", "Numero de Acciones","Descripción", "Seguimiento" };
                 for (int i = 0; i < encabezados.Length; i++)
                 {
                     xlWorkSheetGral.Cell(1, i + 1).Value = encabezados[i];
                     xlWorkSheetGral.Cell(1, i + 1).Style.Font.Bold = true; // Negritas
-                }                    
+                }
                 bool convertidoFI = DateTime.TryParse(txtFInicialC.Text, out DateTime fechaInicial);
                 bool convertidoFF = DateTime.TryParse(txtfechafin.Text, out DateTime fechaFinal);
                 int tiprograma = Convert.ToInt32(ddlProgramas.SelectedValue);
+                string TipoEntorno = "";
 
                 List<Wv_DatosReportesHistorico> listaReportes;
-
-                if (tiprograma == 0)
+                if (User.IsInRole("Administrador") || User.IsInRole("SysAdmin"))
                 {
-                    listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF) )).ToList();
-                   }
+                    listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF))).ToList();
+                }
                 else
                 {
-                    listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF)  && R.programasID == tiprograma)).ToList();
+                    if (tiprograma == 0)
+                    {
+                        listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF))).ToList();
+                    }
+                    else
+                    {
+                        listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF) && R.programasID == tiprograma)).ToList();
+                    }
                 }
-
-        
                 int Renglon = 2;
                 foreach (var item in listaReportes)
                 {
-     
                     xlWorkSheetGral.Cell(Renglon, 1).Value = item.fecha.HasValue ? item.fecha.Value.ToString("dd/MM/yyyy") : "";
-                    xlWorkSheetGral.Cell(Renglon, 2).Value = item.nombrecompleto; 
+                    xlWorkSheetGral.Cell(Renglon, 2).Value = item.nombrecompleto;
                     xlWorkSheetGral.Cell(Renglon, 3).Value = item.RegionNombre;
-                    xlWorkSheetGral.Cell(Renglon, 4).Value = item.DelegacionNombre; 
-                    xlWorkSheetGral.Cell(Renglon, 5).Value = item.MUNICIPIO; 
-                    xlWorkSheetGral.Cell(Renglon, 6).Value = item.calveMuni; 
-                    xlWorkSheetGral.Cell(Renglon, 7).Value = item.Localidad; 
+                    xlWorkSheetGral.Cell(Renglon, 4).Value = item.DelegacionNombre;
+                    xlWorkSheetGral.Cell(Renglon, 5).Value = item.MUNICIPIO;
+                    xlWorkSheetGral.Cell(Renglon, 6).Value = item.calveMuni;
+                    xlWorkSheetGral.Cell(Renglon, 7).Value = item.Localidad;
                     xlWorkSheetGral.Cell(Renglon, 8).Value = item.clavelocali;
-                    xlWorkSheetGral.Cell(Renglon, 9).Value = item.NombrePrograma; 
-                    xlWorkSheetGral.Cell(Renglon, 10).Value = item.NombreSubPrograma; 
-                    xlWorkSheetGral.Cell(Renglon, 11).Value = item.AccionesNombre; 
-                    xlWorkSheetGral.Cell(Renglon, 12).Value = item.niños;  
-                    xlWorkSheetGral.Cell(Renglon, 13).Value = item.niñas; 
-                    xlWorkSheetGral.Cell(Renglon, 14).Value = item.hombres; 
-                    xlWorkSheetGral.Cell(Renglon, 15).Value = item.mujeres; 
-                    xlWorkSheetGral.Cell(Renglon, 16).Value = item.docentesH;
-                    xlWorkSheetGral.Cell(Renglon, 17).Value = item.docentesM; 
-                    xlWorkSheetGral.Cell(Renglon, 18).Value = item.TotalHombresAtendidos; 
-                    xlWorkSheetGral.Cell(Renglon, 19).Value = item.TotalMujeresAtendidas; 
-                    xlWorkSheetGral.Cell(Renglon, 20).Value = item.total_atendidos; 
-                    xlWorkSheetGral.Cell(Renglon, 21).Value = item.calle;
-                    xlWorkSheetGral.Cell(Renglon, 22).Value = item.coloni;
-                    xlWorkSheetGral.Cell(Renglon, 23).Value = item.NombreLugar_Escuela;
-                    xlWorkSheetGral.Cell(Renglon, 24).Value = item.ClavePlantel;
-                    xlWorkSheetGral.Cell(Renglon, 25).Value = item.Turno;
-                    xlWorkSheetGral.Cell(Renglon, 26).Value = item.Nivel;
-                    xlWorkSheetGral.Cell(Renglon, 27).Value = item.NombreContacto;
-                    xlWorkSheetGral.Cell(Renglon, 28).Value = item.telcel;
-                    xlWorkSheetGral.Cell(Renglon, 29).Value = item.Latitud;
-                    xlWorkSheetGral.Cell(Renglon, 30).Value = item.Longitud;
-                    xlWorkSheetGral.Cell(Renglon, 31).Value = item.FolioActividad;                 
-                    xlWorkSheetGral.Cell(Renglon, 32).Value = item.idResumenDiario.ToString();  
-                    xlWorkSheetGral.Cell(Renglon, 33).Value = item.DelegacionOcoonurbacion;
-                    xlWorkSheetGral.Cell(Renglon, 34).Value = item.Eje;
-                    xlWorkSheetGral.Cell(Renglon, 35).Value = item.DescripcionResponsabilidad;
-                    xlWorkSheetGral.Cell(Renglon, 36).Value = item.DescripcionIndicador;
+                    xlWorkSheetGral.Cell(Renglon, 9).Value = item.NombrePrograma;
+                    xlWorkSheetGral.Cell(Renglon, 10).Value = item.NombreSubPrograma;
+                    xlWorkSheetGral.Cell(Renglon, 11).Value = item.AccionesNombre;
+                    xlWorkSheetGral.Cell(Renglon, 12).Value = item.niños;
+                    xlWorkSheetGral.Cell(Renglon, 13).Value = item.niñas;
+                    xlWorkSheetGral.Cell(Renglon, 14).Value = item.hombres;
+                    xlWorkSheetGral.Cell(Renglon, 15).Value = item.mujeres;
+                    //  xlWorkSheetGral.Cell(Renglon, 16).Value = item.docentesH;
+                    //  xlWorkSheetGral.Cell(Renglon, 17).Value = item.docentesM; 
+                    xlWorkSheetGral.Cell(Renglon, 16).Value = item.TotalHombresAtendidos;
+                    xlWorkSheetGral.Cell(Renglon, 17).Value = item.TotalMujeresAtendidas;
+                    xlWorkSheetGral.Cell(Renglon, 18).Value = item.total_atendidos;
+                    xlWorkSheetGral.Cell(Renglon, 19).Value = item.calle;
+                    xlWorkSheetGral.Cell(Renglon, 20).Value = item.coloni;
+                    xlWorkSheetGral.Cell(Renglon, 21).Value = item.NombreLugar_Escuela;
+                    xlWorkSheetGral.Cell(Renglon, 22).Value = item.ClavePlantel;
+                    //xlWorkSheetGral.Cell(Renglon, 25).Value = item.Turno;
+                    xlWorkSheetGral.Cell(Renglon, 23).Value = item.Nivel;
+                    xlWorkSheetGral.Cell(Renglon, 24).Value = item.NombreContacto;
+                    xlWorkSheetGral.Cell(Renglon, 25).Value = item.telcel;
+                    xlWorkSheetGral.Cell(Renglon, 26).Value = item.Latitud;
+                    xlWorkSheetGral.Cell(Renglon, 27).Value = item.Longitud;
+                    xlWorkSheetGral.Cell(Renglon, 28).Value = item.FolioActividad;
+                    xlWorkSheetGral.Cell(Renglon, 29).Value = item.idResumenDiario.ToString();
+                    xlWorkSheetGral.Cell(Renglon, 30).Value = item.DelegacionOcoonurbacion;
+                    if (item.Ambito == 1)
+                    {
+                        TipoEntorno = "Comunitario";
+
+                    }
+                    if (item.Ambito == 2)
+                    {
+                        TipoEntorno = "Escolar";
+                    }
+                    xlWorkSheetGral.Cell(Renglon, 31).Value = TipoEntorno;
+                    xlWorkSheetGral.Cell(Renglon, 32).Value = item.Eje;
+                    xlWorkSheetGral.Cell(Renglon, 33).Value = item.DescripcionResponsabilidad;
+                    xlWorkSheetGral.Cell(Renglon, 34).Value = item.DescripcionIndicador;
+                    xlWorkSheetGral.Cell(Renglon, 35).Value = item.NumAcciones;
+                    xlWorkSheetGral.Cell(Renglon, 36).Value = item.descripcion_actividad;
+                    xlWorkSheetGral.Cell(Renglon, 37).Value = item.seguimiento;
                     Renglon++;
                 }
 
@@ -303,6 +317,96 @@ namespace SIICOP_V1._2.VistasReportes
             }
         }
 
+
+        /*   private void LlenaHojaClosedXML(IXLWorksheet xlWorkSheetGral)
+           {
+               try
+               {
+                // if (!User.IsInRole("Administrador") || User.IsInRole("SysAdmin"))
+               // {
+                       string[] encabezados = { "Fecha", "Capturista", "Area Trabajo", "Zona", "Municipio", "Clave Municipio", "Localidad", 
+                           "Clave Localidad", "Programa", "SubPrograma", "Acciones", "Niños", "Niñas", "Hombres", "Mujeres", "Docentes H", "Docentes M", 
+                           "Total Hombres", "Total Mujeres", "Total Atendidos", "Calle", "Colonia", "Lugar/Escuela", "Clave Plantel", "Turno",
+                           "Nivel Educativo", "Contacto", "Teléfono", "Latitud", "Longitud", "Folio Actividad", "Folio Alternativo", "Coordinación", 
+                           "Entorno","Eje", "Responsabilidad Principal", "Indicador" };
+
+                       for (int i = 0; i < encabezados.Length; i++)
+                       {
+                           xlWorkSheetGral.Cell(1, i + 1).Value = encabezados[i];
+                           xlWorkSheetGral.Cell(1, i + 1).Style.Font.Bold = true;
+                       }
+
+               //  }
+                   bool convertidoFI = DateTime.TryParse(txtFInicialC.Text, out DateTime fechaInicial);
+                   bool convertidoFF = DateTime.TryParse(txtfechafin.Text, out DateTime fechaFinal);
+                   int tiprograma = Convert.ToInt32(ddlProgramas.SelectedValue);
+                   var query = ctx.Wv_DatosReportesHistorico.AsQueryable();
+                   if (convertidoFI) query = query.Where(r => r.fecha >= fechaInicial);
+                   if (convertidoFF) query = query.Where(r => r.fecha <= fechaFinal);
+                   if (!User.IsInRole("Administrador") || User.IsInRole("SysAdmin"))              
+                   {
+                       var usuario = ObtenerUsuarioActual();
+                       int personalID = usuario.Personalid;
+                       query = query.Where(r => r.Personalid == personalID);
+                       if (tiprograma != 0)
+                       {
+                           query = query.Where(r => r.programasID == tiprograma);
+                       }
+                   }
+                   List<Wv_DatosReportesHistorico> listaReportes = query.ToList();               
+                   int Renglon = 2;
+                   foreach (var item in listaReportes)
+                   {
+                       xlWorkSheetGral.Cell(Renglon, 1).Value = item.fecha.HasValue ? item.fecha.Value.ToString("dd/MM/yyyy") : "";
+                       xlWorkSheetGral.Cell(Renglon, 2).Value = item.nombrecompleto;
+                       xlWorkSheetGral.Cell(Renglon, 3).Value = item.zona;
+                   //  xlWorkSheetGral.Cell(Renglon, 4).Value = item.DelegacionNombre;
+                       xlWorkSheetGral.Cell(Renglon, 4).Value = item.AreaTrabajo;
+                       xlWorkSheetGral.Cell(Renglon, 5).Value = item.MUNICIPIO;
+                       xlWorkSheetGral.Cell(Renglon, 6).Value = item.calveMuni;
+                       xlWorkSheetGral.Cell(Renglon, 7).Value = item.Localidad;
+                       xlWorkSheetGral.Cell(Renglon, 8).Value = item.clavelocali;
+                       xlWorkSheetGral.Cell(Renglon, 9).Value = item.NombrePrograma;
+                       xlWorkSheetGral.Cell(Renglon, 10).Value = item.NombreSubPrograma;
+                       xlWorkSheetGral.Cell(Renglon, 11).Value = item.AccionesNombre;
+                       xlWorkSheetGral.Cell(Renglon, 12).Value = item.niños;
+                       xlWorkSheetGral.Cell(Renglon, 13).Value = item.niñas;
+                       xlWorkSheetGral.Cell(Renglon, 14).Value = item.hombres;
+                       xlWorkSheetGral.Cell(Renglon, 15).Value = item.mujeres;
+                       xlWorkSheetGral.Cell(Renglon, 16).Value = item.docentesH;
+                       xlWorkSheetGral.Cell(Renglon, 17).Value = item.docentesM;
+                       xlWorkSheetGral.Cell(Renglon, 18).Value = item.TotalHombresAtendidos;
+                       xlWorkSheetGral.Cell(Renglon, 19).Value = item.TotalMujeresAtendidas;
+                       xlWorkSheetGral.Cell(Renglon, 20).Value = item.total_atendidos;
+                       xlWorkSheetGral.Cell(Renglon, 21).Value = item.calle;
+                       xlWorkSheetGral.Cell(Renglon, 22).Value = item.coloni;
+                       xlWorkSheetGral.Cell(Renglon, 23).Value = item.NombreLugar_Escuela;
+                       xlWorkSheetGral.Cell(Renglon, 24).Value = item.ClavePlantel;
+                       xlWorkSheetGral.Cell(Renglon, 25).Value = item.Turno;
+                       xlWorkSheetGral.Cell(Renglon, 26).Value = item.Nivel;
+                       xlWorkSheetGral.Cell(Renglon, 27).Value = item.NombreContacto;
+                       xlWorkSheetGral.Cell(Renglon, 28).Value = item.telcel;
+                       xlWorkSheetGral.Cell(Renglon, 29).Value = item.Latitud;
+                       xlWorkSheetGral.Cell(Renglon, 30).Value = item.Longitud;
+                       xlWorkSheetGral.Cell(Renglon, 31).Value = item.FolioActividad;
+                       xlWorkSheetGral.Cell(Renglon, 32).Value = item.idResumenDiario.ToString();
+                       xlWorkSheetGral.Cell(Renglon, 33).Value = item.DelegacionOcoonurbacion;
+                       xlWorkSheetGral.Cell(Renglon, 34).Value = item.Ambito;
+                       xlWorkSheetGral.Cell(Renglon, 35).Value = item.Eje;
+                       xlWorkSheetGral.Cell(Renglon, 36).Value = item.DescripcionResponsabilidad;
+                       xlWorkSheetGral.Cell(Renglon, 37).Value = item.DescripcionIndicador;
+                       Renglon++;
+                   }
+
+                   xlWorkSheetGral.Columns().AdjustToContents();
+               }
+               catch (Exception exe)
+               {
+                   System.Diagnostics.Debug.WriteLine(exe.Message);
+               }
+           }
+
+           */
 
         public DataTable ConvertToDataTable<T>(IList<T> data)
         {
@@ -319,20 +423,14 @@ namespace SIICOP_V1._2.VistasReportes
                 table.Rows.Add(row);
             }
             return table;
-
         }
 
         protected void edsEstadistico_Selected(object sender, EntityDataSourceSelectedEventArgs e)
         {
             //Session["dtPrincipal"] = e.Results;
             List<wv_reportesGeneralExcel> listado = e.Results.Cast<wv_reportesGeneralExcel>().ToList();
-
             Session["dtPrincipal"] = listado;
-
-
         }
-
-
 
 
         //#endregion
@@ -434,6 +532,7 @@ namespace SIICOP_V1._2.VistasReportes
                     this.Session["programasID"] = Convert.ToInt32(resultado.Reporte.programasID);
                     this.Session["AccionExpediente"] = CapturaReporteActividades.AccionExpediente.Edicion;
                     int entorno = resultado.Datos.Ambito ?? 0;
+
                     string urlDestino = $"~/Captura/CapturaReporteActividades.aspx?ValorEntorno={entorno}";
                     RedirectHelper.Redirect(this.Response, urlDestino);
                     Context.ApplicationInstance.CompleteRequest();
@@ -510,8 +609,6 @@ namespace SIICOP_V1._2.VistasReportes
                     "AbrirModalFotos();",
                     true);
             }
-
-
             if (e.CommandName == "Eliminar")
             {
                 Guid idExped = Guid.Parse(e.CommandArgument.ToString());
@@ -553,12 +650,10 @@ namespace SIICOP_V1._2.VistasReportes
                 return;
 
             string extension = archivo.ImagenExtencion;
-
             if (string.IsNullOrWhiteSpace(extension))
                 return;
 
             extension = extension.Trim().ToLowerInvariant();
-
             bool esPdf = extension == ".pdf";
 
             switch (posicion)
@@ -572,7 +667,6 @@ namespace SIICOP_V1._2.VistasReportes
                     {
                         PdfEvidencia1.Attributes["src"] =
                             ObtenerUrlArchivo(archivo);
-
                         PdfEvidencia1.Style["display"] = "block";
                         ImagenEvidencia1.Style["display"] = "none";
                     }
@@ -580,7 +674,6 @@ namespace SIICOP_V1._2.VistasReportes
                     {
                         ImagenEvidencia1.ImageUrl =
                             ObtenerImagenUrl(archivo);
-
                         ImagenEvidencia1.Style["display"] = "block";
                         PdfEvidencia1.Style["display"] = "none";
                     }
@@ -686,13 +779,10 @@ namespace SIICOP_V1._2.VistasReportes
                 case ".jpg":
                 case ".jpeg":
                     return "image/jpeg";
-
                 case ".png":
                     return "image/png";
-
                 case ".pdf":
                     return "application/pdf";
-
                 default:
                     return "application/octet-stream";
             }
@@ -709,11 +799,9 @@ namespace SIICOP_V1._2.VistasReportes
             PdfEvidencia1.Attributes["src"] = "";
             PdfEvidencia2.Attributes["src"] = "";
             PdfEvidencia3.Attributes["src"] = "";
-
             PdfEvidencia1.Style["display"] = "none";
             PdfEvidencia2.Style["display"] = "none";
             PdfEvidencia3.Style["display"] = "none";
-
             ImagenEvidencia1.Style["display"] = "none";
             ImagenEvidencia2.Style["display"] = "none";
             ImagenEvidencia3.Style["display"] = "none";
@@ -722,7 +810,6 @@ namespace SIICOP_V1._2.VistasReportes
             foto1.Visible = false;
             foto2.Visible = false;
             foto3.Visible = false;
-
             fotouno.Visible = false;
             fotodos.Visible = false;
             fototres.Visible = false;
@@ -767,14 +854,13 @@ namespace SIICOP_V1._2.VistasReportes
 
 
 
- 
+
         protected void PageDropDownListAdmin_SelectedIndexChanged(object sender, EventArgs e)
         {
             {
                 GridViewRow pagerRow = GvPCAdmin.BottomPagerRow;
                 DropDownList pageList = (DropDownList)pagerRow.FindControl("PageDropDownListAdmin");
                 GvPCAdmin.PageIndex = pageList.SelectedIndex;
-     
                 CargarDatosReporte();
             }
         }
@@ -791,13 +877,11 @@ namespace SIICOP_V1._2.VistasReportes
             {
                 textoValidacion += "</ul>";
                 validadottxt.Text = textoValidacion;
-
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "AbrirModalValidador", "AbrirModalValidador();", true);
 
             }
             else
             {
-
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal();", true);
                 //ScriptManager.RegisterStartupScript(this, this.GetType(), "initMap", "initMap();", true);
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "MostrarPlanteles", "MostrarPlanteles();", true);
@@ -835,7 +919,7 @@ namespace SIICOP_V1._2.VistasReportes
                         }
                     }
 
-                   
+
                     object objFotos = DataBinder.Eval(e.Row.DataItem, "fotos");
                     if (objFotos != null && objFotos != DBNull.Value)
                     {
@@ -848,10 +932,11 @@ namespace SIICOP_V1._2.VistasReportes
                             else if (valorft == 0) imgft.ImageUrl = "~/Imagenes/PinesReporte/cross.png";
                         }
                     }
-           bool canView = User.IsInRole("SysAdmin") || User.IsInRole("Administrador") || User.IsInRole("Visualizador");
+
+                    bool canView = User.IsInRole("SysAdmin") || User.IsInRole("Administrador") || User.IsInRole("Visualizador");
                     e.Row.Cells[15].Visible = canView;
 
-                   
+
                     string cellText = e.Row.Cells[5].Text;
                     if (cellText == "Sector Empresarial" ||
                         cellText == "Sector Escolar" ||
@@ -864,103 +949,104 @@ namespace SIICOP_V1._2.VistasReportes
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
+            //   catch (Exception ex)
             {
                 // Avoid leaving this catch block entirely empty.
                 // It hides other errors making them impossible to debug.
                 // System.Diagnostics.Debug.WriteLine("Error in RowDataBound: " + ex.Message);
             }
         }
-      /*  protected void GvPCAdmin_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
+        /*  protected void GvPCAdmin_RowDataBound(object sender, GridViewRowEventArgs e)
+          {
 
 
-            try
-            {
-                if (e.Row.RowType == DataControlRowType.DataRow)
-                {
-                    int valor;
-                    valor = (int)DataBinder.Eval(e.Row.DataItem, "programasID");
-                    Image img = (Image)e.Row.FindControl("imgpato");
-                    if (valor == 7)
-                    {
-                        img.ImageUrl = "~/Imagenes/PinesReporte/ConstrucionCultura.png";
-                    }
-                    if (valor == 8)
-                    {
-                        img.ImageUrl = "~/Imagenes/PinesReporte/RedesVecinales.png";
-                    }
-                    if (valor == 9)
-                    {
-                        img.ImageUrl = "~/Imagenes/PinesReporte/Escolar.png";
-                    }
-                    if (valor == 10)
-                    {
-                        img.ImageUrl = "~/Imagenes/PinesReporte/ViolenciaGenero.png";
-                    }
-                    if (valor == 11)
-                    {
-                        img.ImageUrl = "~/Imagenes/PinesReporte/EncuentroCiudadano.png";
-                    }
-                    if (valor == 12)
-                    {
-                        img.ImageUrl = "~/Imagenes/PinesReporte/DeporteYcultura.png";
-                    }
-                    if (valor == 13)
-                    {
-                        img.ImageUrl = "~/Imagenes/PinesReporte/Empresarial.png";
-                    }
-                    if (valor == 14)
-                    {
-                        img.ImageUrl = "~/Imagenes/PinesReporte/RedesVerPorLaPaz.png";
-                    }
+              try
+              {
+                  if (e.Row.RowType == DataControlRowType.DataRow)
+                  {
+                      int valor;
+                      valor = (int)DataBinder.Eval(e.Row.DataItem, "programasID");
+                      Image img = (Image)e.Row.FindControl("imgpato");
+                      if (valor == 7)
+                      {
+                          img.ImageUrl = "~/Imagenes/PinesReporte/ConstrucionCultura.png";
+                      }
+                      if (valor == 8)
+                      {
+                          img.ImageUrl = "~/Imagenes/PinesReporte/RedesVecinales.png";
+                      }
+                      if (valor == 9)
+                      {
+                          img.ImageUrl = "~/Imagenes/PinesReporte/Escolar.png";
+                      }
+                      if (valor == 10)
+                      {
+                          img.ImageUrl = "~/Imagenes/PinesReporte/ViolenciaGenero.png";
+                      }
+                      if (valor == 11)
+                      {
+                          img.ImageUrl = "~/Imagenes/PinesReporte/EncuentroCiudadano.png";
+                      }
+                      if (valor == 12)
+                      {
+                          img.ImageUrl = "~/Imagenes/PinesReporte/DeporteYcultura.png";
+                      }
+                      if (valor == 13)
+                      {
+                          img.ImageUrl = "~/Imagenes/PinesReporte/Empresarial.png";
+                      }
+                      if (valor == 14)
+                      {
+                          img.ImageUrl = "~/Imagenes/PinesReporte/RedesVerPorLaPaz.png";
+                      }
 
-                    int valorft;
-                    valorft = (int)DataBinder.Eval(e.Row.DataItem, "fotos");
-                    Image imgft = (Image)e.Row.FindControl("imgfoto");
-                    if (valorft == 1)
-                    {
-                        imgft.ImageUrl = "~/Imagenes/PinesReporte/check.png";
-                    }
-                    if (valorft == 0)
-                    {
-                        imgft.ImageUrl = "~/Imagenes/PinesReporte/cross.png";
-                    }
+                      int valorft;
+                      valorft = (int)DataBinder.Eval(e.Row.DataItem, "fotos");
+                      Image imgft = (Image)e.Row.FindControl("imgfoto");
+                      if (valorft == 1)
+                      {
+                          imgft.ImageUrl = "~/Imagenes/PinesReporte/check.png";
+                      }
+                      if (valorft == 0)
+                      {
+                          imgft.ImageUrl = "~/Imagenes/PinesReporte/cross.png";
+                      }
 
-                    if (User.IsInRole("SysAdmin") || User.IsInRole("Administrador") || User.IsInRole("Visualizador"))
-                    {
-                        e.Row.Cells[15].Visible = true;
-                    }
-                    else
-                    {
-                        e.Row.Cells[15].Visible = false;
-                    }
-
-
-                    if (e.Row.Cells[5].Text.Equals("Sector Empresarial")
-                        || e.Row.Cells[5].Text.Equals("Sector Escolar")
-                        || e.Row.Cells[5].Text.Equals("Violencia contra la Mujer")
-                        || e.Row.Cells[5].Text.Equals("Departamento de Redes Vecinales")
-                        || e.Row.Cells[5].Text.Equals("Departamento de Deporte y Cultura")
-                        || e.Row.Cells[5].Text.Equals("Inclusión de personas en situación de vunerabilidad"))
-                    {
-                        e.Row.Cells[5].Text = "Conurbación Xalapa";
-                    }
+                      if (User.IsInRole("SysAdmin") || User.IsInRole("Administrador") || User.IsInRole("Visualizador"))
+                      {
+                          e.Row.Cells[15].Visible = true;
+                      }
+                      else
+                      {
+                          e.Row.Cells[15].Visible = false;
+                      }
 
 
-                    //if (e.Row.Cells[0].Text != null)
-                    //{
-                    //    e.Row.Cells[0].Text = "Aun no se genera el folio";
-                    //}
+                      if (e.Row.Cells[5].Text.Equals("Sector Empresarial")
+                          || e.Row.Cells[5].Text.Equals("Sector Escolar")
+                          || e.Row.Cells[5].Text.Equals("Violencia contra la Mujer")
+                          || e.Row.Cells[5].Text.Equals("Departamento de Redes Vecinales")
+                          || e.Row.Cells[5].Text.Equals("Departamento de Deporte y Cultura")
+                          || e.Row.Cells[5].Text.Equals("Inclusión de personas en situación de vunerabilidad"))
+                      {
+                          e.Row.Cells[5].Text = "Conurbación Xalapa";
+                      }
 
-                }
-            }
-            catch (Exception ex)
-            {
 
-            }
-        }
-     */
+                      //if (e.Row.Cells[0].Text != null)
+                      //{
+                      //    e.Row.Cells[0].Text = "Aun no se genera el folio";
+                      //}
+
+                  }
+              }
+              catch (Exception ex)
+              {
+
+              }
+          }
+       */
 
         #region****************METODO EXPORTACIÓN DE EXCEL CEDULAS
 
@@ -1055,7 +1141,8 @@ namespace SIICOP_V1._2.VistasReportes
                     }
                 }
             }
-            catch (Exception exe)
+            catch (Exception)
+            // catch (Exception exe)
             {
                 //lblError.Text = exe.Message;
             }
@@ -1091,7 +1178,8 @@ namespace SIICOP_V1._2.VistasReportes
                     }
                 }
             }
-            catch (Exception exe)
+            catch (Exception)
+            // catch (Exception exe)
             {
                 //lblError.Text = exe.Message;
             }
@@ -1127,7 +1215,8 @@ namespace SIICOP_V1._2.VistasReportes
                     }
                 }
             }
-            catch (Exception exe)
+            //   catch (Exception exe)
+            catch (Exception)
             {
                 //lblError.Text = exe.Message;
             }
@@ -1163,7 +1252,8 @@ namespace SIICOP_V1._2.VistasReportes
                     }
                 }
             }
-            catch (Exception exe)
+            catch (Exception)
+            //   catch (Exception exe)
             {
                 //lblError.Text = exe.Message;
             }
@@ -1177,7 +1267,6 @@ namespace SIICOP_V1._2.VistasReportes
                 int Renglon;
                 if (Session["dtPrincipalAC_Deporte"] == null)
                 {
-
                     List<vw_Indicadores_Acciones> listaReportes_AC_Deporte = ctx.vw_Indicadores_Acciones.Where(RT => RT.programasID == 12).ToList();
                     dtPrincipalAC_Deporte = ConvertToDataTable(listaReportes_AC_Deporte);
 
@@ -1199,7 +1288,8 @@ namespace SIICOP_V1._2.VistasReportes
                     }
                 }
             }
-            catch (Exception exe)
+            catch (Exception)
+            //   catch (Exception exe)
             {
                 //lblError.Text = exe.Message;
             }
@@ -1235,7 +1325,8 @@ namespace SIICOP_V1._2.VistasReportes
                     }
                 }
             }
-            catch (Exception exe)
+            // catch (Exception exe)
+            catch (Exception)
             {
                 //lblError.Text = exe.Message;
             }
@@ -1252,7 +1343,6 @@ namespace SIICOP_V1._2.VistasReportes
 
                     List<vw_Indicadores_Acciones> listaReportes_AC_Empre = ctx.vw_Indicadores_Acciones.Where(RT => RT.programasID == 13).ToList();
                     dtPrincipalAC_Empre = ConvertToDataTable(listaReportes_AC_Empre);
-
                     for (Renglon = 0; Renglon < dtPrincipalAC_Empre.Rows.Count; Renglon++)
                     {
                         XlworkSheetEmpresarial.Cells[Renglon + 11, 6].Value = dtPrincipalAC_Empre.Rows[Renglon]["ENERO"];
@@ -1271,7 +1361,8 @@ namespace SIICOP_V1._2.VistasReportes
                     }
                 }
             }
-            catch (Exception exe)
+            catch (Exception)
+            //  catch (Exception exe)
             {
                 //lblError.Text = exe.Message;
             }
@@ -1288,7 +1379,6 @@ namespace SIICOP_V1._2.VistasReportes
 
                     List<vw_Indicadores_Acciones_Convenios> listaReportes_AC_Empre_Convenios = ctx.vw_Indicadores_Acciones_Convenios.Where(RT => RT.programasID == 13).ToList();
                     dtPrincipalAC_Emprecon = ConvertToDataTable(listaReportes_AC_Empre_Convenios);
-
                     for (Renglon = 0; Renglon < dtPrincipalAC_Emprecon.Rows.Count; Renglon++)
                     {
                         XlworkSheetConvenios.Cells[Renglon + 11, 6].Value = dtPrincipalAC_Emprecon.Rows[Renglon]["ENERO"];
@@ -1303,11 +1393,11 @@ namespace SIICOP_V1._2.VistasReportes
                         XlworkSheetConvenios.Cells[Renglon + 11, 15].Value = dtPrincipalAC_Emprecon.Rows[Renglon]["OCTUBRE"];
                         XlworkSheetConvenios.Cells[Renglon + 11, 16].Value = dtPrincipalAC_Emprecon.Rows[Renglon]["NOVIEMBRE"];
                         XlworkSheetConvenios.Cells[Renglon + 11, 17].Value = dtPrincipalAC_Emprecon.Rows[Renglon]["DICIEMBRE"];
-
                     }
                 }
             }
-            catch (Exception exe)
+            //   catch (Exception exe)
+            catch (Exception)
             {
                 //lblError.Text = exe.Message;
             }
@@ -1343,7 +1433,8 @@ namespace SIICOP_V1._2.VistasReportes
                     }
                 }
             }
-            catch (Exception exe)
+            catch (Exception)
+            //  catch (Exception exe)
             {
                 //lblError.Text = exe.Message;
             }
@@ -1356,7 +1447,7 @@ namespace SIICOP_V1._2.VistasReportes
 
         protected void GvPCAdmin_RowCreated(object sender, GridViewRowEventArgs e)
         {
-          if (e.Row.RowType == DataControlRowType.Header)
+            if (e.Row.RowType == DataControlRowType.Header)
             {
                 foreach (TableCell tc in e.Row.Cells)
                 {
@@ -1365,18 +1456,18 @@ namespace SIICOP_V1._2.VistasReportes
                         LinkButton lb = (LinkButton)tc.Controls[0];
                         if (lb != null)
                         {
-                             Image icon = new Image();
-                              icon.ImageUrl = "~/Imagenes/sort-" + (GvPCAdmin.SortDirection == SortDirection.Ascending ? "asc" : "desc") + ".png";
-                              if (GvPCAdmin.SortExpression == lb.CommandArgument)
-                              {
-                                  tc.Controls.Add(new LiteralControl(" "));
-                                  tc.Controls.Add(icon);
-                              }
+                            Image icon = new Image();
+                            icon.ImageUrl = "~/Imagenes/sort-" + (GvPCAdmin.SortDirection == SortDirection.Ascending ? "asc" : "desc") + ".png";
+                            if (GvPCAdmin.SortExpression == lb.CommandArgument)
+                            {
+                                tc.Controls.Add(new LiteralControl(" "));
+                                tc.Controls.Add(icon);
+                            }
                         }
                     }
                 }
             }
-           
+
         }
 
 
@@ -1390,11 +1481,10 @@ namespace SIICOP_V1._2.VistasReportes
                 ddlProgramas.DataTextField = "NombrePrograma";
                 ddlProgramas.DataValueField = "programasID";
                 ddlProgramas.DataBind();
-
                 ddlProgramas.Items.Insert(0, new ListItem("-- Selecciona --", "0"));
             }
-
-            catch (Exception ex)
+            catch (Exception)
+            //   catch (Exception ex)
             {
 
             }
@@ -1412,11 +1502,10 @@ namespace SIICOP_V1._2.VistasReportes
                 ddlZona.DataTextField = "zona";
                 ddlZona.DataValueField = "idzona";
                 ddlZona.DataBind();
-
                 ddlZona.Items.Insert(0, new ListItem("-- Selecciona --", "0"));
             }
-
-            catch (Exception ex)
+            catch (Exception)
+            //   catch (Exception ex)
             {
 
             }
@@ -1424,29 +1513,29 @@ namespace SIICOP_V1._2.VistasReportes
         }
 
 
-     /*   private void CargarEje()
-        {
-            try
-            {
-                var repo = new UbicacionRepository();
+        /*   private void CargarEje()
+           {
+               try
+               {
+                   var repo = new UbicacionRepository();
 
-                ddlEjeAtencion.DataSource = repo.ObtenerCatalogoEjes();
-                ddlEjeAtencion.DataTextField = "Eje";
-                ddlEjeAtencion.DataValueField = "EjeId";
-                ddlEjeAtencion.DataBind();
+                   ddlEjeAtencion.DataSource = repo.ObtenerCatalogoEjes();
+                   ddlEjeAtencion.DataTextField = "Eje";
+                   ddlEjeAtencion.DataValueField = "EjeId";
+                   ddlEjeAtencion.DataBind();
 
-                ddlEjeAtencion.Items.Insert(0, new ListItem("-- Selecciona --", "0"));
-            }
+                   ddlEjeAtencion.Items.Insert(0, new ListItem("-- Selecciona --", "0"));
+               }
 
-            catch (Exception ex)
-            {
+               catch (Exception ex)
+               {
 
-            }
+               }
 
 
 
-        
-        }*/
+
+           }*/
 
 
         private void CargarMunicipiosPorZona(int idZona)
@@ -1469,70 +1558,186 @@ namespace SIICOP_V1._2.VistasReportes
         }
 
 
-    /*    protected void CargarDatosReporte()
-        {
-            try
+        /*    protected void CargarDatosReporte()
             {
-                GvPCAdmin.DataSource = null;
-                GvPCAdmin.DataBind();
-
-                DateTime? fechaInicial = null;
-                DateTime? fechaFinal = null;
-
-                if (!string.IsNullOrEmpty(txtFInicialC.Text))
+                try
                 {
-                    if (DateTime.TryParse(txtFInicialC.Text, out DateTime fecha))
-                    {
-                        fechaInicial = fecha;
-                    }
-                }
+                    GvPCAdmin.DataSource = null;
+                    GvPCAdmin.DataBind();
 
-                if (!string.IsNullOrEmpty(txtfechafin.Text))
-                {
-                    if (DateTime.TryParse(txtfechafin.Text, out DateTime fechaf))
+                    DateTime? fechaInicial = null;
+                    DateTime? fechaFinal = null;
+
+                    if (!string.IsNullOrEmpty(txtFInicialC.Text))
                     {
-                        fechaFinal = fechaf;
+                        if (DateTime.TryParse(txtFInicialC.Text, out DateTime fecha))
+                        {
+                            fechaInicial = fecha;
+                        }
                     }
 
-                }
+                    if (!string.IsNullOrEmpty(txtfechafin.Text))
+                    {
+                        if (DateTime.TryParse(txtfechafin.Text, out DateTime fechaf))
+                        {
+                            fechaFinal = fechaf;
+                        }
 
-                int? tiprograma = null;
-                if (ddlProgramas.SelectedValue != "0")
+                    }
+
+                    int? tiprograma = null;
+                    if (ddlProgramas.SelectedValue != "0")
+                    {
+                        tiprograma = ddlProgramas.SelectedValue == "0" ? 0 : Convert.ToInt32(this.ddlProgramas.SelectedValue);
+                    }
+
+                    int? zona = null;
+
+                    if (ddlZona.SelectedValue != "0")
+                    {
+                        zona = ddlZona.SelectedValue == "0" ? 0 : Convert.ToInt32(this.ddlZona.SelectedValue);
+                    }
+
+                    string institucion = null;
+                    if (!string.IsNullOrEmpty(txtInstitucionesParticipantes.Text))
+                    {
+                        institucion = txtInstitucionesParticipantes.Text;
+                    }
+
+
+
+                    var query = new ReporteRepository();
+                    var datos = query.ObtenerDatosReporte(fechaInicial, fechaFinal, null, zona, tiprograma, null, null, institucion);
+
+                    GvPCAdmin.DataSource = datos;
+                    GvPCAdmin.DataBind();
+
+                    lblTotalRegistros.Text = $"Total de registros: {datos.Count}";
+
+                }
+                catch (Exception)
                 {
-                    tiprograma = ddlProgramas.SelectedValue == "0" ? 0 : Convert.ToInt32(this.ddlProgramas.SelectedValue);
+
+                    throw;
                 }
-
-                int? zona = null;
-
-                if (ddlZona.SelectedValue != "0")
-                {
-                    zona = ddlZona.SelectedValue == "0" ? 0 : Convert.ToInt32(this.ddlZona.SelectedValue);
-                }
-
-                string institucion = null;
-                if (!string.IsNullOrEmpty(txtInstitucionesParticipantes.Text))
-                {
-                    institucion = txtInstitucionesParticipantes.Text;
-                }
-
-
-
-                var query = new ReporteRepository();
-                var datos = query.ObtenerDatosReporte(fechaInicial, fechaFinal, null, zona, tiprograma, null, null, institucion);
-
-                GvPCAdmin.DataSource = datos;
-                GvPCAdmin.DataBind();
-
-                lblTotalRegistros.Text = $"Total de registros: {datos.Count}";
-
             }
-            catch (Exception)
-            {
+        */
 
-                throw;
-            }
-        }
-    */
+        /*  protected void CargarDatosReporte(bool forzarBusquedaBD = false)
+          {
+              try
+              {
+                  if (!forzarBusquedaBD && Session["DatosReporte_Cache"] != null)
+                  {
+                      GvPCAdmin.DataSource = Session["DatosReporte_Cache"];
+                      GvPCAdmin.DataBind();
+                      return; 
+                  }
+                  GvPCAdmin.DataSource = null;
+                  GvPCAdmin.DataBind();
+                  DateTime? fechaInicial = null;
+                  DateTime? fechaFinal = null;
+                  if (!string.IsNullOrEmpty(txtFInicialC.Text))
+                  {
+                      if (DateTime.TryParse(txtFInicialC.Text, out DateTime fecha)) fechaInicial = fecha;
+                  }
+
+                  if (!string.IsNullOrEmpty(txtfechafin.Text))
+                  {
+                      if (DateTime.TryParse(txtfechafin.Text, out DateTime fechaf)) fechaFinal = fechaf;
+                  }
+                  int? tiprograma = ddlProgramas.SelectedValue != "0" ? Convert.ToInt32(this.ddlProgramas.SelectedValue) : (int?)null;
+                  int? zona = ddlZona.SelectedValue != "0" ? Convert.ToInt32(this.ddlZona.SelectedValue) : (int?)null;
+                  string institucion = !string.IsNullOrEmpty(txtInstitucionesParticipantes.Text) ? txtInstitucionesParticipantes.Text : null;
+                  var query = new ReporteRepository();
+                  var datos = query.ObtenerDatosReporte(fechaInicial, fechaFinal, null, zona, tiprograma, null, null, institucion);
+                  Session["DatosReporte_Cache"] = datos;
+                  GvPCAdmin.DataSource = datos;
+                  GvPCAdmin.DataBind();
+                  int total = datos != null ? datos.Count : 0;
+                  lblTotalRegistros.Text = $"Total de registros: {total}";
+              }
+              catch (Exception)
+              {
+                  throw;
+              }
+          }
+        */
+
+
+
+
+        /*   protected void CargarDatosReporte(bool forzarBusquedaBD = false)
+           {
+               int personalID;
+               try
+               {
+                   if (!forzarBusquedaBD && Session["DatosReporte_Cache"] != null)
+                   {
+                       var datosCache = Session["DatosReporte_Cache"];
+                       GvPCAdmin.DataSource = datosCache;
+                       GvPCAdmin.DataBind();
+                       int totalCache = datosCache != null ? ((dynamic)datosCache).Count : 0;
+                       lblTotalRegistros.Text = $"Total de registros: {totalCache}";
+                       return;
+                   }
+                   GvPCAdmin.DataSource = null;
+                   GvPCAdmin.DataBind();
+               //  DateTime? fechaInicial = null;
+               //  DateTime? fechaFinal = null;
+                   bool convertidoFI = DateTime.TryParse(txtFInicialC.Text, out DateTime fechaInicial);
+                   bool convertidoFF = DateTime.TryParse(txtfechafin.Text, out DateTime fechaFinal);
+                // int tiprograma = Convert.ToInt32(ddlProgramas.SelectedValue);
+                   if (!string.IsNullOrEmpty(txtFInicialC.Text) && DateTime.TryParse(txtFInicialC.Text, out DateTime fecha))
+                       fechaInicial = fecha;
+                   if (!string.IsNullOrEmpty(txtfechafin.Text) && DateTime.TryParse(txtfechafin.Text, out DateTime fechaf))
+                       fechaFinal = fechaf;
+                   int? tiprograma = ddlProgramas.SelectedValue != "0" ? Convert.ToInt32(this.ddlProgramas.SelectedValue) : (int?)null;
+                   int? zona = ddlZona.SelectedValue != "0" ? Convert.ToInt32(this.ddlZona.SelectedValue) : (int?)null;
+                   string institucion = !string.IsNullOrEmpty(txtInstitucionesParticipantes.Text) ? txtInstitucionesParticipantes.Text : null;
+                   string dependenciaBusqueda = null;
+                   if ((User.IsInRole("Administrador")|| (User.IsInRole("SysAdmin"))))// busqueda para administrador 
+                   {
+                       dependenciaBusqueda = null;
+                       var query = new ReporteRepository();
+                       var datos = query.ObtenerDatosReporte(fechaInicial, fechaFinal, dependenciaBusqueda, zona, tiprograma, null, null, institucion);
+                       Session["DatosReporte_Cache"] = datos;
+                       GvPCAdmin.DataSource = datos;
+                       GvPCAdmin.DataBind();
+                       int total = datos != null ? datos.Count : 0;
+                       lblTotalRegistros.Text = $"Total de registros: {total}";
+                   }
+                   else
+                   {                                  
+                       var usuario = ObtenerUsuarioActual();
+                       personalID = usuario.Personalid;
+                       List<Wv_DatosReportesHistorico> listaReportes;
+                       if (tiprograma == 0)
+                       {   /// por numero de personal
+                          listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF && R.Personalid == personalID))).ToList();
+                          //  listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF ))).ToList();
+
+                       }
+                       else
+                       {     /// por numero de personal
+                          listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF) && R.programasID == tiprograma && R.Personalid == personalID)).ToList();
+                         //  listaReportes = ctx.Wv_DatosReportesHistorico.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF) && R.programasID == tiprograma)).ToList();
+
+                       }
+                       GvPCAdmin.DataSource = listaReportes;
+                       GvPCAdmin.DataBind();
+                       int total = listaReportes != null ? listaReportes.Count : 0;
+                       lblTotalRegistros.Text = $"Total de registros: {total}";
+                   }
+               }
+               catch (Exception)
+               {
+                   throw;
+               }
+           }
+
+        */
+
 
         protected void CargarDatosReporte(bool forzarBusquedaBD = false)
         {
@@ -1540,38 +1745,76 @@ namespace SIICOP_V1._2.VistasReportes
             {
                 if (!forzarBusquedaBD && Session["DatosReporte_Cache"] != null)
                 {
-                    GvPCAdmin.DataSource = Session["DatosReporte_Cache"];
+                    var datosCache = Session["DatosReporte_Cache"];
+                    GvPCAdmin.DataSource = datosCache;
                     GvPCAdmin.DataBind();
-                    return; 
+                    int totalCache = datosCache != null ? ((dynamic)datosCache).Count : 0;
+                    lblTotalRegistros.Text = $"Total de registros: {totalCache}";
+                    return;
                 }
+
                 GvPCAdmin.DataSource = null;
                 GvPCAdmin.DataBind();
                 DateTime? fechaInicial = null;
                 DateTime? fechaFinal = null;
-                if (!string.IsNullOrEmpty(txtFInicialC.Text))
-                {
-                    if (DateTime.TryParse(txtFInicialC.Text, out DateTime fecha)) fechaInicial = fecha;
-                }
+                if (DateTime.TryParse(txtFInicialC.Text, out DateTime fi))
+                    fechaInicial = fi;
+                if (DateTime.TryParse(txtfechafin.Text, out DateTime ff))
+                    fechaFinal = ff;
 
-                if (!string.IsNullOrEmpty(txtfechafin.Text))
-                {
-                    if (DateTime.TryParse(txtfechafin.Text, out DateTime fechaf)) fechaFinal = fechaf;
-                }
-                int? tiprograma = ddlProgramas.SelectedValue != "0" ? Convert.ToInt32(this.ddlProgramas.SelectedValue) : (int?)null;
-                int? zona = ddlZona.SelectedValue != "0" ? Convert.ToInt32(this.ddlZona.SelectedValue) : (int?)null;
+                int? tiprograma = ddlProgramas.SelectedValue != "0" ? Convert.ToInt32(ddlProgramas.SelectedValue) : (int?)null;
+                int? zona = ddlZona.SelectedValue != "0" ? Convert.ToInt32(ddlZona.SelectedValue) : (int?)null;
                 string institucion = !string.IsNullOrEmpty(txtInstitucionesParticipantes.Text) ? txtInstitucionesParticipantes.Text : null;
-                var query = new ReporteRepository();
-                var datos = query.ObtenerDatosReporte(fechaInicial, fechaFinal, null, zona, tiprograma, null, null, institucion);
-                Session["DatosReporte_Cache"] = datos;
-                GvPCAdmin.DataSource = datos;
-                GvPCAdmin.DataBind();
-                int total = datos != null ? datos.Count : 0;
-                lblTotalRegistros.Text = $"Total de registros: {total}";
+
+                // --- ADMINISTRADOR, SYSADMIN ---
+                if (User.IsInRole("Administrador") || User.IsInRole("SysAdmin"))
+                {
+                    var queryRepo = new ReporteRepository();
+                    var datos = queryRepo.ObtenerDatosReporte(fechaInicial, fechaFinal, null, zona, tiprograma, null, null, institucion);
+                    Session["DatosReporte_Cache"] = datos;
+                    GvPCAdmin.DataSource = datos;
+                    GvPCAdmin.DataBind();
+                    int total = datos != null ? datos.Count : 0;
+                    lblTotalRegistros.Text = $"Total de registros: {total}";
+                }
+                else
+                {
+                    // --- DEMÁS USUARIOS ---
+                    var usuario = ObtenerUsuarioActual();
+                    int personalID = usuario.Personalid;
+                    var query = ctx.Wv_DatosReportesHistorico.AsQueryable();
+                    query = query.Where(r => r.Personalid == personalID);
+                    if (fechaInicial.HasValue)
+                        query = query.Where(r => r.fecha >= fechaInicial.Value);
+                    if (fechaFinal.HasValue)
+                        query = query.Where(r => r.fecha <= fechaFinal.Value);
+                    if (tiprograma.HasValue)
+                        query = query.Where(r => r.programasID == tiprograma.Value);
+                    var listaReportes = query.ToList();
+                    GvPCAdmin.DataSource = listaReportes;
+                    GvPCAdmin.DataBind();
+                    int total = listaReportes != null ? listaReportes.Count : 0;
+                    lblTotalRegistros.Text = $"Total de registros: {total}";
+                }
             }
             catch (Exception)
             {
                 throw;
             }
+        }
+
+
+        /// obtener el usuario para mostrar solo sus actividades
+        private Personales ObtenerUsuarioActual()
+        {
+            string usuarioActual =
+                System.Web.Security
+                    .Membership
+                    .GetUser()
+                    .UserName;
+            return ctx.Personales
+                      .FirstOrDefault(x =>
+                       x.login == usuarioActual);
         }
 
         /*
@@ -1607,28 +1850,20 @@ namespace SIICOP_V1._2.VistasReportes
                 {
                     tiprograma = ddlProgramas.SelectedValue == "0" ? 0 : Convert.ToInt32(this.ddlProgramas.SelectedValue);
                 }
-
                 int? zona = null;
-
                 if (ddlZona.SelectedValue != "0")
                 {
                     zona = ddlZona.SelectedValue == "0" ? 0 : Convert.ToInt32(this.ddlZona.SelectedValue);
                 }
-
                 string institucion = null;
                 if (!string.IsNullOrEmpty(txtInstitucionesParticipantes.Text))
                 {
                     institucion = txtInstitucionesParticipantes.Text;
                 }
-
-
-
                 var query = new ReporteRepository();
                 var datos = query.ObtenerDatosReporte(fechaInicial, fechaFinal, null, zona, tiprograma, null, null, institucion);
-
                 GvPCAdmin.DataSource = datos;
                 GvPCAdmin.DataBind();
-
                 lblTotalRegistros.Text = $"Total de registros: {datos.Count}";
 
             }
@@ -1641,21 +1876,32 @@ namespace SIICOP_V1._2.VistasReportes
         */
 
         #region ## FORMATO DE EXPORTACION DE IMAGENES A ZIP
+
         public void ExportaImagenesZip()
         {
+
             DateTime fechainicial = Convert.ToDateTime(this.txtFInicialC.Text);
             DateTime fechaFinal = Convert.ToDateTime(this.txtfechafin.Text);
-
+            string nombreArchivo = $"FOTOGRAFÍAS_ACTIVIDADES_{fechainicial:dd-MM-yyyy}_AL_{fechaFinal:dd-MM-yyyy}.zip";
             Response.ClearHeaders();
             Response.ClearContent();
-            Response.AddHeader("Content-Disposition", "attachment; filename=" + $"FOTOGRAFÍAS_ACTIVIDADES" + ".zip");
             Response.ContentType = "application/zip";
+            Response.AddHeader("Content-Disposition", $"attachment; filename=\"{nombreArchivo}\"");
             Response.Cookies.Add(new HttpCookie("downloadStarted", "1") { Expires = DateTime.Now.AddSeconds(40) });
-            string nombreArchivo = "";
-            //List<tb_fotografia> foto = ctx.tb_fotografia.Where(x => x.idResumenDiario == idExped).ToList();
             int programa = Convert.ToInt32(ddlProgramas.SelectedValue);
 
-
+            // public void ExportaImagenesZip()
+            // { 
+            //    DateTime fechainicial = Convert.ToDateTime(this.txtFInicialC.Text);
+            //    DateTime fechaFinal = Convert.ToDateTime(this.txtfechafin.Text);
+            //    Response.ClearHeaders();
+            //    Response.ClearContent();
+            //    Response.AddHeader("Content-Disposition", "attachment; filename=" + $"FOTOGRAFÍAS_ACTIVIDADES" + ".zip");
+            //    Response.ContentType = "application/zip";
+            //    Response.Cookies.Add(new HttpCookie("downloadStarted", "1") { Expires = DateTime.Now.AddSeconds(40) });
+            //    string nombreArchivo = "";
+            //    //List<tb_fotografia> foto = ctx.tb_fotografia.Where(x => x.idResumenDiario == idExped).ToList();
+            //    int programa = Convert.ToInt32(ddlProgramas.SelectedValue);
 
             if (programa == 0)
             {
@@ -1673,10 +1919,7 @@ namespace SIICOP_V1._2.VistasReportes
                                     Item2.image,
                                     Item1.FolioActividad,
                                     Item2.idfotgrafia
-
-
                                 }).ToList();
-
 
                 using (var zipStream = new ZipOutputStream(Response.OutputStream))
                 {
@@ -1692,7 +1935,6 @@ namespace SIICOP_V1._2.VistasReportes
                         if (item.image == null)
                         {
                             bytes = Convert.FromBase64String(base64StringImg);
-
                         }
                         else
                         {
@@ -1703,22 +1945,18 @@ namespace SIICOP_V1._2.VistasReportes
                         {
 
                             var x = NombreFoto.Split('.');
-
                             if (item.FolioActividad == null)
                             {
                                 nombreArchivo = $"{folio2}.{x[x.Length - 1]}";
-
                             }
                             else
                             {
                                 nombreArchivo = $"{fol1}.{x[x.Length - 1]}";
-
                             }
 
                             //nombreArchivo = FOlio;
                             var fileEntry = new ZipEntry(nombreArchivo)
                             {
-
 
                                 Size = bytes.Length
                             };
@@ -1760,11 +1998,9 @@ namespace SIICOP_V1._2.VistasReportes
                         string base64StringImg = item.ImgBase64;
                         string fol1 = item.idfotgrafia + "-" + item.FolioActividad;
                         string folio2 = item.idfotgrafia + "-" + item.idResumenDiario;
-
                         if (item.image == null)
                         {
                             bytes = Convert.FromBase64String(base64StringImg);
-
                         }
                         else
                         {
@@ -1773,25 +2009,18 @@ namespace SIICOP_V1._2.VistasReportes
 
                         if (NombreFoto != null)
                         {
-
                             var x = NombreFoto.Split('.');
-
                             if (item.FolioActividad == null)
                             {
                                 nombreArchivo = $"{folio2}.{x[x.Length - 1]}";
-
                             }
                             else
                             {
                                 nombreArchivo = $"{fol1}.{x[x.Length - 1]}";
-
                             }
-
                             //nombreArchivo = FOlio;
                             var fileEntry = new ZipEntry(nombreArchivo)
                             {
-
-
                                 Size = bytes.Length
                             };
 
@@ -1804,10 +2033,6 @@ namespace SIICOP_V1._2.VistasReportes
                     zipStream.Close();
                 }
             }
-
-
-
-
         }
 
         protected void lnkbtnZip_Click(object sender, EventArgs e)
@@ -1854,12 +2079,9 @@ namespace SIICOP_V1._2.VistasReportes
                 var repo = new UbicacionRepository();
 
                 var localidades = repo.ObtenerLocalidades(municipioId);
-
                 ddlLocalidad.DataSource = localidades;
                 ddlLocalidad.DataTextField = "Localidad";
-                ddlLocalidad.DataValueField = "LocalidadID"; // o ID si tienes uno
-                ddlLocalidad.DataBind();
-
+                ddlLocalidad.DataValueField = "LocalidadID";
                 ddlLocalidad.Items.Insert(0, new ListItem("-- Selecciona localidad --", "0"));
             }
 
@@ -1874,7 +2096,7 @@ namespace SIICOP_V1._2.VistasReportes
         protected void GvPCAdmin_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             GvPCAdmin.PageIndex = e.NewPageIndex;
-            CargarDatosReporte(); 
+            CargarDatosReporte();
         }
 
         protected void ddlZona_SelectedIndexChanged(object sender, EventArgs e)
@@ -1889,7 +2111,6 @@ namespace SIICOP_V1._2.VistasReportes
             {
                 ddlMunicipio.Items.Clear();
                 ddlMunicipio.Items.Insert(0, new ListItem("-- Selecciona municipio --", "0"));
-
                 ddlLocalidad.Items.Clear();
                 ddlLocalidad.Items.Insert(0, new ListItem("-- Selecciona localidad --", "0"));
             }
@@ -1898,4 +2119,4 @@ namespace SIICOP_V1._2.VistasReportes
 
     }
 }
-#endregion
+        #endregion

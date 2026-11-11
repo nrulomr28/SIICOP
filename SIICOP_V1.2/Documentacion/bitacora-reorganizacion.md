@@ -37,3 +37,6 @@ SeleccionPrograma.aspx conserva la asignación de Session["programasID"],
 la selección de entorno y la navegación hacia CapturaReporteActividades.
 
 Principal.aspx fue reclasificada como Legacy.
+
+## Carpetas y archivos que no se ocupan se clasificaron en legacy en el mismo orden
+## de carpeta y archivo.

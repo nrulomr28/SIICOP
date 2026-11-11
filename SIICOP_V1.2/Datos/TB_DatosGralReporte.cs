@@ -61,6 +61,7 @@ namespace SIICOP_V1._2.Datos
         public string segurichat { get; set; }
         public Nullable<int> ResponsabilidadId { get; set; }
         public Nullable<int> IndicadorId { get; set; }
+        public Nullable<int> NumAcciones { get; set; }
     
         public virtual Cat_IndicadorDesempeno Cat_IndicadorDesempeno { get; set; }
         public virtual Cat_ResponsabilidadPrincipal Cat_ResponsabilidadPrincipal { get; set; }

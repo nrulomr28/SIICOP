@@ -135,9 +135,7 @@ namespace SIICOP_V1._2.VistasReportes
                     DateTime fechaFinal = new DateTime();
                     convertidoFF = DateTime.TryParse(txtfechafin.Text, out fechaFinal);
 
-
                     int PROGRA = 10;
-
 
                     List<wv_reportesGeneralExcel> listaReportes = ctx.wv_reportesGeneralExcel.Where(R => (((convertidoFI && R.fecha >= fechaInicial) || !convertidoFI) && ((convertidoFF && R.fecha <= fechaFinal) || !convertidoFF) &&
                                                                                              (R.programasID == PROGRA))).ToList();
@@ -165,7 +163,8 @@ namespace SIICOP_V1._2.VistasReportes
                     }
                 }
             }
-            catch (Exception exe)
+            catch (Exception)
+         //   catch (Exception exe)
             {
                 //lblError.Text = exe.Message;
             }
@@ -632,9 +631,6 @@ namespace SIICOP_V1._2.VistasReportes
                                          on sp.idResumenDiario equals stdr.idResumenDiario
                                          where sp.fecha >= fechainicial && sp.fecha <= fechaFinal && sp.programasID == progragr
                                          select stdr.MunicipioID).Distinct().Count().ToString();
-
-
-
             int zonaNorte = 1;
             int ZonaCentroo = 2;
             int ZonaSur = 3;
@@ -780,7 +776,8 @@ namespace SIICOP_V1._2.VistasReportes
 
 
             }
-            catch (Exception ex)
+            catch (Exception )
+      //      catch (Exception ex)
             {
                 return null;
             }
@@ -837,7 +834,8 @@ namespace SIICOP_V1._2.VistasReportes
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
+          //  catch (Exception ex)
             {
                 return null;
             }
@@ -895,7 +893,8 @@ namespace SIICOP_V1._2.VistasReportes
 
 
             }
-            catch (Exception ex)
+          //  catch (Exception ex)
+            catch (Exception )
             {
                 return null;
             }
@@ -949,7 +948,8 @@ namespace SIICOP_V1._2.VistasReportes
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
+            //catch (Exception ex)
             {
                 return null;
             }
@@ -1006,7 +1006,8 @@ namespace SIICOP_V1._2.VistasReportes
 
 
             }
-            catch (Exception ex)
+          //  catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -1061,7 +1062,8 @@ namespace SIICOP_V1._2.VistasReportes
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
+          //  catch (Exception ex)
             {
                 return null;
             }
@@ -1096,7 +1098,8 @@ namespace SIICOP_V1._2.VistasReportes
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
+          //  catch (Exception ex)
             {
 
             }
@@ -1130,7 +1133,8 @@ namespace SIICOP_V1._2.VistasReportes
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
+          //  catch (Exception ex)
             {
 
             }

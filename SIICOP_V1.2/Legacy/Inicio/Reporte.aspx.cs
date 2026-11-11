@@ -6,7 +6,7 @@ using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Microsoft.Reporting.WebForms;
+//using Microsoft.Reporting.WebForms;
 
 
 namespace SIICOP_V1._2.Inicio
@@ -17,9 +17,9 @@ namespace SIICOP_V1._2.Inicio
         {
 
             //ReporteMaestro.ServerReport.ReportServerCredentials.NetworkCredentials = credenciales;
-            string dominio = "sspver.gob.mx";
-            string usuario = "jsantamariac";
-            string contraseña = "madafaka";
+       //     string dominio = "sspver.gob.mx";
+         //   string usuario = "jsantamariac";
+         //   string contraseña = "madafaka";
             ReporteMaestro.ProcessingMode = ProcessingMode.Remote;
 
             //NetworkCredential credenciales = new NetworkCredential(usuario, contraseña, dominio);

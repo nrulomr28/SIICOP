@@ -176,7 +176,8 @@ namespace SIICOP_V1._2.VistasReportes.DGTSV
 
                 }
             }
-            catch (Exception ex)
+          //  catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -428,7 +429,8 @@ namespace SIICOP_V1._2.VistasReportes.DGTSV
                     }
                 }
             }
-            catch (Exception exe)
+            catch (Exception)
+         //   catch (Exception ex)
             {
                 //lblError.Text = exe.Message;
             }

@@ -18,21 +18,18 @@ namespace SIICOP_V1._2.MenuProgramas
                 {
                     if (User.IsInRole("CapEjeAtencion"))
                     {
-
                         PanelEjeAtencion.Visible = true;
                         PanelEjeAtencion.Attributes["class"] = "col-md-6 col-sm-6 text-center contenedor col-md-offset-3";
                         PanelDGPVI.Visible = false;
                     }
                     else if (User.IsInRole("CapDGPVI"))
                     {
-
                         PanelEjeAtencion.Visible = false;
                         //PanelEjeAtencion.Attributes["class"] = "col-md-6 col-sm-6 text-center contenedor col-md-offset-3";
                         PanelDGPVI.Visible = true;
                     }
                     else
                     {
-
                         PanelEjeAtencion.Visible = true;
                         PanelEjeAtencion.Attributes["class"] = "col-md-6 col-sm-6 text-center contenedor";
                         PanelDGPVI.Visible = true;
@@ -54,19 +51,17 @@ namespace SIICOP_V1._2.MenuProgramas
             this.Session["idPrograma_Accion"] = 21;
             this.Session["idReporte_Accion"] = 1;
             this.Response.Redirect("~/Captura/DGTSV/Ficha_idetificacion_diaria.aspx");
-        }*/
+        }
+       */
 
         protected void Imagen_Click(object sender, CommandEventArgs e)
         {
             string opcion = e.CommandArgument?.ToString();
-
             if (opcion == "Estrategia")
             {
                 Session["ImagenSeleccionada"] = true;
                 Session["programasID"] = null;
-
                 RedirectHelper.RedirectTrue(this.Response, "~/Captura/CapturaReporteActividades.aspx");
-
                 return;
             }
             else
@@ -74,7 +69,9 @@ namespace SIICOP_V1._2.MenuProgramas
                 Session["ImagenSeleccionada"] = null;
                 RedirectHelper.RedirectTrue(this.Response, "~/MenuProgramas/SeleccionPrograma.aspx");
             }
-            /*   if (opcion == "DGPVI")
+
+            /* 
+             if (opcion == "DGPVI")
                {
                    Session["ImagenSeleccionada"] = true;
                    Session["programasID"] = null;
@@ -82,12 +79,11 @@ namespace SIICOP_V1._2.MenuProgramas
                    Response.Redirect(
                        "~/MenuProgramas/Principal.aspx",
                        true);
-
                    return;
-               }*/
+               }
+            */
 
             Session["ImagenSeleccionada"] = null;
-
             RedirectHelper.RedirectTrue(this.Response, "~/Captura/Entorno.aspx");
         }
 

@@ -38,7 +38,7 @@
                 </h2>
                 <small class="text-light">
                     Sistema Integral de Información,
-                    Control Operativo y Productividad
+                    Control y Productividad
                 </small>
             </div>
         </div>
@@ -94,7 +94,6 @@
             <p class="text-center mb-2">
                 El acceso, uso o modificación no autorizada de la información contenida en este sistema podrá ser sancionado conforme a la legislación aplicable.
             </p>
-
             <p class="text-center mb-1">
                 © <%: DateTime.Now.Year %> · GOBIERNO DEL ESTADO DE VERACRUZ
             </p>

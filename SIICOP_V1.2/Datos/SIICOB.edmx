@@ -5,6 +5,35 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SIICOPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SIICOP.dbo._Cat_Acciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="_Cat_Acciones">
+          <Key>
+            <PropertyRef Name="AccionesID" />
+          </Key>
+          <Property Name="AccionesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccionesNombre" Type="varchar" MaxLength="200" />
+          <Property Name="subprogramaId" Type="int" />
+          <Property Name="IdPrograma" Type="int" />
+        </EntityType>
+        <EntityType Name="Applications">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationName" Type="nvarchar" MaxLength="235" Nullable="false" />
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
         <EntityType Name="Cat_Acciones">
           <Key>
             <PropertyRef Name="AccionesID" />
@@ -136,6 +165,21 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Cat_Ravi' no tiene definida ningu
           <Property Name="MunicipioID" Type="int" Nullable="false" />
           <Property Name="prioritario" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ErrorLogId" />
+          </Key>
+          <Property Name="ErrorLogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Usuario" Type="nvarchar" MaxLength="100" />
+          <Property Name="Url" Type="nvarchar" MaxLength="500" />
+          <Property Name="Mensaje" Type="nvarchar(max)" />
+          <Property Name="StackTrace" Type="nvarchar(max)" />
+          <Property Name="IpAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserAgent" Type="nvarchar" MaxLength="500" />
+          <Property Name="ErrorType" Type="nvarchar" MaxLength="100" />
+          <Property Name="Pagina" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="Localidades">
           <Key>
             <PropertyRef Name="LocalidadID" />
@@ -144,6 +188,40 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Cat_Ravi' no tiene definida ningu
           <Property Name="MunicipioID" Type="int" />
           <Property Name="CLAVE" Type="nvarchar" MaxLength="255" />
           <Property Name="Localidad" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Memberships">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordFormat" Type="int" Nullable="false" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordQuestion" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordAnswer" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+          <Property Name="LastPasswordChangedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLockoutDate" Type="datetime" Nullable="false" />
+          <Property Name="FailedPasswordAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAttemptWindowStart" Type="datetime" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptWindowsStart" Type="datetime" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SIICOP.dbo.municipio' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="municipio">
+          <Key>
+            <PropertyRef Name="int" />
+          </Key>
+          <Property Name="int" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="region" Type="varchar" MaxLength="150" />
+          <Property Name="municipio" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Municipios">
           <Key>
@@ -195,6 +273,15 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Cat_Ravi' no tiene definida ningu
           <Property Name="PropertyValueStrings" Type="nvarchar" MaxLength="4000" Nullable="false" />
           <Property Name="PropertyValueBinary" Type="image" Nullable="false" />
           <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="Sessions">
           <Key>
@@ -447,6 +534,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Cat_Ravi' no tiene definida ningu
           <Property Name="segurichat" Type="varchar" MaxLength="200" />
           <Property Name="ResponsabilidadId" Type="int" />
           <Property Name="IndicadorId" Type="int" />
+          <Property Name="NumAcciones" Type="int" />
         </EntityType>
         <EntityType Name="tb_DireccionReporte">
           <Key>
@@ -731,6 +819,24 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Cat_Ravi' no tiene definida ningu
           <Property Name="IdCaptura" Type="uniqueidentifier" />
           <Property Name="idcapturaInt" Type="int" />
         </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+          <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'SIICOP.dbo.vw_Indicadores_Acciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vw_Indicadores_Acciones">
@@ -865,6 +971,25 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_DatosReportesHistorico' no tie
           <Property Name="descripcion_actividad" Type="varchar(max)" />
           <Property Name="personal_atendio_actividad" Type="varchar(max)" />
           <Property Name="fechacaptura" Type="datetime" />
+          <Property Name="coordinador" Type="varchar" MaxLength="200" />
+          <Property Name="mpio_prioritario" Type="bit" />
+          <Property Name="mpio_homicidio" Type="bit" />
+          <Property Name="col_prioritario" Type="bit" />
+          <Property Name="mpio_indigena" Type="bit" />
+          <Property Name="programa_istmo" Type="bit" />
+          <Property Name="segurichat" Type="varchar" MaxLength="200" />
+          <Property Name="plantel_diagnosticado" Type="bit" />
+          <Property Name="casos_ravi" Type="bit" />
+          <Property Name="nocasos_ravi" Type="int" />
+          <Property Name="dirigido" Type="varchar" MaxLength="200" />
+          <Property Name="giro_comercios" Type="varchar" MaxLength="300" />
+          <Property Name="no_acciones_dgpvi" Type="int" />
+          <Property Name="no_acciones_institucionales" Type="int" />
+          <Property Name="total_acciones_ravi" Type="int" />
+          <Property Name="ofrecieron_segurichat" Type="bit" />
+          <Property Name="seguimiento" Type="varchar" MaxLength="400" />
+          <Property Name="accion_implementada" Type="varchar" MaxLength="500" />
+          <Property Name="NumAcciones" Type="int" />
           <Property Name="fotos" Type="int" />
           <Property Name="Dependencia" Type="varchar" MaxLength="200" />
           <Property Name="DelegacionOcoonurbacion" Type="varchar" MaxLength="90" />
@@ -1528,6 +1653,90 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="MembershipApplication">
+          <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
+          <End Role="Memberships" Type="Self.Memberships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MembershipUser">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Memberships" Type="Self.Memberships" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RoleApplication">
+          <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserApplication">
+          <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserProfile">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Profiles" Type="Self.Profiles" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Profiles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsersInRoleRole">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="UsersInRoles" Type="Self.UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsersInRoleUser">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UsersInRoles" Type="Self.UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="CrearReporteEscolar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="descractividad" Type="varchar" Mode="In" />
           <Parameter Name="atendioactividadper" Type="varchar" Mode="In" />
@@ -1704,6 +1913,8 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="SIICOPModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Applications" EntityType="Self.Applications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cat_Acciones" EntityType="Self.Cat_Acciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cat_area" EntityType="Self.Cat_area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cat_Delegacion" EntityType="Self.Cat_Delegacion" Schema="dbo" store:Type="Tables" />
@@ -1717,11 +1928,14 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <EntitySet Name="Cat_SubAcciones" EntityType="Self.Cat_SubAcciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cat_Zona_Estado" EntityType="Self.cat_Zona_Estado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Colonias" EntityType="Self.Colonias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidades" EntityType="Self.Localidades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Memberships" EntityType="Self.Memberships" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Municipios" EntityType="Self.Municipios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Personales" EntityType="Self.Personales" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersonalUsuario" EntityType="Self.PersonalUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profiles" EntityType="Self.Profiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sessions" EntityType="Self.Sessions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_AcionesBeneficiadosXmes" EntityType="Self.tb_AcionesBeneficiadosXmes" Schema="dbo" store:Type="Tables" />
@@ -1746,6 +1960,16 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <EntitySet Name="tcProblematicaMunicipal" EntityType="Self.tcProblematicaMunicipal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tcProblematicaSeguridad" EntityType="Self.tcProblematicaSeguridad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tcProblematicaVialidad" EntityType="Self.tcProblematicaVialidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersInRoles" EntityType="Self.UsersInRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="_Cat_Acciones" EntityType="Self._Cat_Acciones" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [_Cat_Acciones].[AccionesID] AS [AccionesID], 
+    [_Cat_Acciones].[AccionesNombre] AS [AccionesNombre], 
+    [_Cat_Acciones].[subprogramaId] AS [subprogramaId], 
+    [_Cat_Acciones].[IdPrograma] AS [IdPrograma]
+    FROM [dbo].[_Cat_Acciones] AS [_Cat_Acciones]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Cat_Coordinador" EntityType="Self.Cat_Coordinador" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Cat_Coordinador].[CoordinadorId] AS [CoordinadorId], 
@@ -1761,6 +1985,13 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
     [Cat_Ravi].[RaviId] AS [RaviId], 
     [Cat_Ravi].[Num] AS [Num]
     FROM [dbo].[Cat_Ravi] AS [Cat_Ravi]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="municipio" EntityType="Self.municipio" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [municipio].[int] AS [int], 
+    [municipio].[region] AS [region], 
+    [municipio].[municipio] AS [municipio]
+    FROM [dbo].[municipio] AS [municipio]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_Indicadores_Acciones" EntityType="Self.vw_Indicadores_Acciones" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1881,6 +2112,25 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
     [Wv_DatosReportesHistorico].[descripcion_actividad] AS [descripcion_actividad], 
     [Wv_DatosReportesHistorico].[personal_atendio_actividad] AS [personal_atendio_actividad], 
     [Wv_DatosReportesHistorico].[fechacaptura] AS [fechacaptura], 
+    [Wv_DatosReportesHistorico].[coordinador] AS [coordinador], 
+    [Wv_DatosReportesHistorico].[mpio_prioritario] AS [mpio_prioritario], 
+    [Wv_DatosReportesHistorico].[mpio_homicidio] AS [mpio_homicidio], 
+    [Wv_DatosReportesHistorico].[col_prioritario] AS [col_prioritario], 
+    [Wv_DatosReportesHistorico].[mpio_indigena] AS [mpio_indigena], 
+    [Wv_DatosReportesHistorico].[programa_istmo] AS [programa_istmo], 
+    [Wv_DatosReportesHistorico].[segurichat] AS [segurichat], 
+    [Wv_DatosReportesHistorico].[plantel_diagnosticado] AS [plantel_diagnosticado], 
+    [Wv_DatosReportesHistorico].[casos_ravi] AS [casos_ravi], 
+    [Wv_DatosReportesHistorico].[nocasos_ravi] AS [nocasos_ravi], 
+    [Wv_DatosReportesHistorico].[dirigido] AS [dirigido], 
+    [Wv_DatosReportesHistorico].[giro_comercios] AS [giro_comercios], 
+    [Wv_DatosReportesHistorico].[no_acciones_dgpvi] AS [no_acciones_dgpvi], 
+    [Wv_DatosReportesHistorico].[no_acciones_institucionales] AS [no_acciones_institucionales], 
+    [Wv_DatosReportesHistorico].[total_acciones_ravi] AS [total_acciones_ravi], 
+    [Wv_DatosReportesHistorico].[ofrecieron_segurichat] AS [ofrecieron_segurichat], 
+    [Wv_DatosReportesHistorico].[seguimiento] AS [seguimiento], 
+    [Wv_DatosReportesHistorico].[accion_implementada] AS [accion_implementada], 
+    [Wv_DatosReportesHistorico].[NumAcciones] AS [NumAcciones], 
     [Wv_DatosReportesHistorico].[fotos] AS [fotos], 
     [Wv_DatosReportesHistorico].[Dependencia] AS [Dependencia], 
     [Wv_DatosReportesHistorico].[DelegacionOcoonurbacion] AS [DelegacionOcoonurbacion], 
@@ -2225,6 +2475,34 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
             <End Role="tc_PoliciaenTucolonia" EntitySet="tc_PoliciaenTucolonia" />
             <End Role="tcProblematicaVialidad" EntitySet="tcProblematicaVialidad" />
           </AssociationSet>
+          <AssociationSet Name="MembershipApplication" Association="Self.MembershipApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="MembershipUser" Association="Self.MembershipUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="RoleApplication" Association="Self.RoleApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="UserApplication" Association="Self.UserApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="UserProfile" Association="Self.UserProfile">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Profiles" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="UsersInRoleRole" Association="Self.UsersInRoleRole">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UsersInRoles" EntitySet="UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="UsersInRoleUser" Association="Self.UsersInRoleUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UsersInRoles" EntitySet="UsersInRoles" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -2348,6 +2626,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <Property Name="PropertyValueStrings" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PropertyValueBinary" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Users" Relationship="SIICOPModel.UserProfile" FromRole="Profiles" ToRole="Users" />
         </EntityType>
         <EntityType Name="Sessions">
           <Key>
@@ -2875,74 +3154,6 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <Property Name="DICIEMBRE" Type="Int32" />
           <Property Name="DICIEMBRE_OBTENIDO_B" Type="Int32" />
         </EntityType>
-        <EntityType Name="Wv_DatosReportesHistorico">
-          <Key>
-            <PropertyRef Name="idResumenDiario" />
-            <PropertyRef Name="Personalid" />
-            <PropertyRef Name="Eje" />
-          </Key>
-          <Property Name="idResumenDiario" Type="Guid" Nullable="false" />
-          <Property Name="fecha" Type="DateTime" Precision="0" />
-          <Property Name="Personalid" Type="Int32" Nullable="false" />
-          <Property Name="nombrecompleto" Type="String" MaxLength="1502" FixedLength="false" Unicode="false" />
-          <Property Name="cat_areaidarea" Type="Int32" />
-          <Property Name="AreaTrabajo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NombrePrograma" Type="String" MaxLength="420" FixedLength="false" Unicode="false" />
-          <Property Name="programasID" Type="Int32" />
-          <Property Name="subprogramaId" Type="Int32" />
-          <Property Name="NombreSubPrograma" Type="String" MaxLength="190" FixedLength="false" Unicode="false" />
-          <Property Name="AccionesID" Type="Int32" />
-          <Property Name="AccionesNombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="niños" Type="Int32" />
-          <Property Name="niñas" Type="Int32" />
-          <Property Name="hombres" Type="Int32" />
-          <Property Name="mujeres" Type="Int32" />
-          <Property Name="docentesH" Type="Int32" />
-          <Property Name="docentesM" Type="Int32" />
-          <Property Name="TotalHombresAtendidos" Type="Int32" />
-          <Property Name="TotalMujeresAtendidas" Type="Int32" />
-          <Property Name="total_atendidos" Type="Int32" />
-          <Property Name="RegionID" Type="Int32" />
-          <Property Name="RegionNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DelegacionNombre" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
-          <Property Name="DelegacionID" Type="Int32" />
-          <Property Name="Zona_Estado" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="ZonaID" Type="Int32" />
-          <Property Name="MUNICIPIO" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="MunicipioID" Type="Int32" />
-          <Property Name="calveMuni" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Localidad" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="LocalidadID" Type="Int32" />
-          <Property Name="clavelocali" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="calle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="coloni" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="NombreLugar_Escuela" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="ClavePlantel" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="Turno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Nivel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NombreContacto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="telcel" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="Longitud" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
-          <Property Name="Latitud" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
-          <Property Name="descripcion_actividad" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="personal_atendio_actividad" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="fechacaptura" Type="DateTime" Precision="3" />
-          <Property Name="fotos" Type="Int32" />
-          <Property Name="Dependencia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="DelegacionOcoonurbacion" Type="String" MaxLength="90" FixedLength="false" Unicode="false" />
-          <Property Name="FolioActividad" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
-          <Property Name="idzona" Type="Int32" />
-          <Property Name="zona" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="inst_participantes" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Eje" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="EjeId" Type="Int32" />
-          <Property Name="tema_impartido" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Ambito" Type="Int32" />
-          <Property Name="ResponsabilidadId" Type="Int32" />
-          <Property Name="IndicadorId" Type="Int32" />
-          <Property Name="DescripcionResponsabilidad" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="DescripcionIndicador" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="WV_Datosrepote_app">
           <Key>
             <PropertyRef Name="idResumenDiario" />
@@ -3378,7 +3589,6 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <EntitySet Name="vw_Indicadores_Acciones" EntityType="Self.vw_Indicadores_Acciones" />
           <EntitySet Name="vw_Indicadores_Acciones_Convenios" EntityType="Self.vw_Indicadores_Acciones_Convenios" />
           <EntitySet Name="vw_Indicadores_Beneficiados" EntityType="Self.vw_Indicadores_Beneficiados" />
-          <EntitySet Name="Wv_DatosReportesHistorico" EntityType="Self.Wv_DatosReportesHistorico" />
           <EntitySet Name="WV_Datosrepote_app" EntityType="Self.WV_Datosrepote_app" />
           <EntitySet Name="wv_personaluser" EntityType="Self.wv_personaluser" />
           <EntitySet Name="wv_PeticionesForPoliciaIntegralProxi" EntityType="Self.wv_PeticionesForPoliciaIntegralProxi" />
@@ -3717,6 +3927,39 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
             <End Role="TB_subprograma" EntitySet="TB_subprograma" />
             <End Role="tb_Reporte_Diario" EntitySet="tb_Reporte_Diario" />
           </AssociationSet>
+          <EntitySet Name="C__MigrationHistory" EntityType="SIICOPModel.C__MigrationHistory" />
+          <EntitySet Name="Applications" EntityType="SIICOPModel.Applications" />
+          <EntitySet Name="ErrorLog" EntityType="SIICOPModel.ErrorLog" />
+          <EntitySet Name="Memberships" EntityType="SIICOPModel.Memberships" />
+          <EntitySet Name="Roles" EntityType="SIICOPModel.Roles" />
+          <EntitySet Name="Users" EntityType="SIICOPModel.Users" />
+          <EntitySet Name="C_Cat_Acciones" EntityType="SIICOPModel.C_Cat_Acciones" />
+          <EntitySet Name="municipio" EntityType="SIICOPModel.municipio" />
+          <AssociationSet Name="MembershipApplication" Association="SIICOPModel.MembershipApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="RoleApplication" Association="SIICOPModel.RoleApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="UserApplication" Association="SIICOPModel.UserApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="MembershipUser" Association="SIICOPModel.MembershipUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="UserProfile" Association="SIICOPModel.UserProfile">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Profiles" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="UsersInRoles" Association="SIICOPModel.UsersInRoles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="Wv_DatosReportesHistorico" EntityType="SIICOPModel.Wv_DatosReportesHistorico" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -3973,6 +4216,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <NavigationProperty Name="Cat_IndicadorDesempeno" Relationship="SIICOPModel.FK_TB_DatosGralReporte_Cat_IndicadorDesempeno" FromRole="TB_DatosGralReporte" ToRole="Cat_IndicadorDesempeno" />
           <NavigationProperty Name="Cat_ResponsabilidadPrincipal" Relationship="SIICOPModel.FK_TB_DatosGralReporte_Cat_ResponsabilidadPrincipal" FromRole="TB_DatosGralReporte" ToRole="Cat_ResponsabilidadPrincipal" />
           <NavigationProperty Name="tb_Reporte_Diario" Relationship="SIICOPModel.FK_TB_DatosGralReporte_tb_Reporte_Diario" FromRole="TB_DatosGralReporte" ToRole="tb_Reporte_Diario" />
+          <Property Name="NumAcciones" Type="Int32" />
         </EntityType>
         <EntityType Name="Cat_Coordinador">
           <Key>
@@ -4228,6 +4472,261 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Applications">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationName" Type="String" Nullable="false" MaxLength="235" FixedLength="false" Unicode="true" />
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Memberships" Relationship="SIICOPModel.MembershipApplication" FromRole="Applications" ToRole="Memberships" />
+          <NavigationProperty Name="Roles" Relationship="SIICOPModel.RoleApplication" FromRole="Applications" ToRole="Roles" />
+          <NavigationProperty Name="Users" Relationship="SIICOPModel.UserApplication" FromRole="Applications" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ErrorLogId" />
+          </Key>
+          <Property Name="ErrorLogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Usuario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Mensaje" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StackTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserAgent" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ErrorType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Pagina" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Memberships">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordFormat" Type="Int32" Nullable="false" />
+          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordQuestion" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordAnswer" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <Property Name="IsLockedOut" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLoginDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastPasswordChangedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLockoutDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FailedPasswordAttemptCount" Type="Int32" Nullable="false" />
+          <Property Name="FailedPasswordAttemptWindowStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FailedPasswordAnswerAttemptCount" Type="Int32" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptWindowsStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Comment" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Applications" Relationship="SIICOPModel.MembershipApplication" FromRole="Memberships" ToRole="Applications" />
+          <NavigationProperty Name="Users" Relationship="SIICOPModel.MembershipUser" FromRole="Memberships" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="RoleId" Type="Guid" Nullable="false" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Applications" Relationship="SIICOPModel.RoleApplication" FromRole="Roles" ToRole="Applications" />
+          <NavigationProperty Name="Users" Relationship="SIICOPModel.UsersInRoles" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="LastActivityDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Applications" Relationship="SIICOPModel.UserApplication" FromRole="Users" ToRole="Applications" />
+          <NavigationProperty Name="Memberships" Relationship="SIICOPModel.MembershipUser" FromRole="Users" ToRole="Memberships" />
+          <NavigationProperty Name="Profiles" Relationship="SIICOPModel.UserProfile" FromRole="Users" ToRole="Profiles" />
+          <NavigationProperty Name="Roles" Relationship="SIICOPModel.UsersInRoles" FromRole="Users" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="C_Cat_Acciones">
+          <Key>
+            <PropertyRef Name="AccionesID" />
+          </Key>
+          <Property Name="AccionesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccionesNombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="subprogramaId" Type="Int32" />
+          <Property Name="IdPrograma" Type="Int32" />
+        </EntityType>
+        <EntityType Name="municipio">
+          <Key>
+            <PropertyRef Name="int" />
+          </Key>
+          <Property Name="int" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="region" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="municipio1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="MembershipApplication">
+          <End Type="SIICOPModel.Applications" Role="Applications" Multiplicity="1" />
+          <End Type="SIICOPModel.Memberships" Role="Memberships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RoleApplication">
+          <End Type="SIICOPModel.Applications" Role="Applications" Multiplicity="1" />
+          <End Type="SIICOPModel.Roles" Role="Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserApplication">
+          <End Type="SIICOPModel.Applications" Role="Applications" Multiplicity="1" />
+          <End Type="SIICOPModel.Users" Role="Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MembershipUser">
+          <End Type="SIICOPModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="SIICOPModel.Memberships" Role="Memberships" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserProfile">
+          <End Type="SIICOPModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="SIICOPModel.Profiles" Role="Profiles" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Profiles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsersInRoles">
+          <End Type="SIICOPModel.Roles" Role="Roles" Multiplicity="*" />
+          <End Type="SIICOPModel.Users" Role="Users" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Wv_DatosReportesHistorico">
+          <Key>
+            <PropertyRef Name="idResumenDiario" />
+            <PropertyRef Name="Personalid" />
+            <PropertyRef Name="Eje" />
+          </Key>
+          <Property Name="idResumenDiario" Type="Guid" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <Property Name="Personalid" Type="Int32" Nullable="false" />
+          <Property Name="nombrecompleto" Type="String" MaxLength="1502" FixedLength="false" Unicode="false" />
+          <Property Name="cat_areaidarea" Type="Int32" />
+          <Property Name="AreaTrabajo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NombrePrograma" Type="String" MaxLength="420" FixedLength="false" Unicode="false" />
+          <Property Name="programasID" Type="Int32" />
+          <Property Name="subprogramaId" Type="Int32" />
+          <Property Name="NombreSubPrograma" Type="String" MaxLength="190" FixedLength="false" Unicode="false" />
+          <Property Name="AccionesID" Type="Int32" />
+          <Property Name="AccionesNombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="niños" Type="Int32" />
+          <Property Name="niñas" Type="Int32" />
+          <Property Name="hombres" Type="Int32" />
+          <Property Name="mujeres" Type="Int32" />
+          <Property Name="docentesH" Type="Int32" />
+          <Property Name="docentesM" Type="Int32" />
+          <Property Name="TotalHombresAtendidos" Type="Int32" />
+          <Property Name="TotalMujeresAtendidas" Type="Int32" />
+          <Property Name="total_atendidos" Type="Int32" />
+          <Property Name="RegionID" Type="Int32" />
+          <Property Name="RegionNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DelegacionNombre" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="DelegacionID" Type="Int32" />
+          <Property Name="Zona_Estado" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="ZonaID" Type="Int32" />
+          <Property Name="MUNICIPIO" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MunicipioID" Type="Int32" />
+          <Property Name="calveMuni" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Eje" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Localidad" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LocalidadID" Type="Int32" />
+          <Property Name="clavelocali" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="calle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="coloni" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NombreLugar_Escuela" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ClavePlantel" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Turno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nivel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NombreContacto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="telcel" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="EjeId" Type="Int32" />
+          <Property Name="tema_impartido" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Ambito" Type="Int32" />
+          <Property Name="Longitud" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="Latitud" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion_actividad" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="personal_atendio_actividad" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fechacaptura" Type="DateTime" Precision="3" />
+          <Property Name="coordinador" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="mpio_prioritario" Type="Boolean" />
+          <Property Name="mpio_homicidio" Type="Boolean" />
+          <Property Name="col_prioritario" Type="Boolean" />
+          <Property Name="mpio_indigena" Type="Boolean" />
+          <Property Name="programa_istmo" Type="Boolean" />
+          <Property Name="segurichat" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="plantel_diagnosticado" Type="Boolean" />
+          <Property Name="casos_ravi" Type="Boolean" />
+          <Property Name="nocasos_ravi" Type="Int32" />
+          <Property Name="dirigido" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="giro_comercios" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="no_acciones_dgpvi" Type="Int32" />
+          <Property Name="no_acciones_institucionales" Type="Int32" />
+          <Property Name="total_acciones_ravi" Type="Int32" />
+          <Property Name="ofrecieron_segurichat" Type="Boolean" />
+          <Property Name="seguimiento" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="accion_implementada" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NumAcciones" Type="Int32" />
+          <Property Name="fotos" Type="Int32" />
+          <Property Name="Dependencia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DelegacionOcoonurbacion" Type="String" MaxLength="90" FixedLength="false" Unicode="false" />
+          <Property Name="FolioActividad" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="idzona" Type="Int32" />
+          <Property Name="zona" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="inst_participantes" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ResponsabilidadId" Type="Int32" />
+          <Property Name="IndicadorId" Type="Int32" />
+          <Property Name="DescripcionResponsabilidad" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DescripcionIndicador" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4868,73 +5367,6 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Wv_DatosReportesHistorico">
-            <EntityTypeMapping TypeName="SIICOPModel.Wv_DatosReportesHistorico">
-              <MappingFragment StoreEntitySet="Wv_DatosReportesHistorico">
-                <ScalarProperty Name="DescripcionIndicador" ColumnName="DescripcionIndicador" />
-                <ScalarProperty Name="DescripcionResponsabilidad" ColumnName="DescripcionResponsabilidad" />
-                <ScalarProperty Name="IndicadorId" ColumnName="IndicadorId" />
-                <ScalarProperty Name="ResponsabilidadId" ColumnName="ResponsabilidadId" />
-                <ScalarProperty Name="Ambito" ColumnName="Ambito" />
-                <ScalarProperty Name="tema_impartido" ColumnName="tema_impartido" />
-                <ScalarProperty Name="EjeId" ColumnName="EjeId" />
-                <ScalarProperty Name="Eje" ColumnName="Eje" />
-                <ScalarProperty Name="inst_participantes" ColumnName="inst_participantes" />
-                <ScalarProperty Name="zona" ColumnName="zona" />
-                <ScalarProperty Name="idzona" ColumnName="idzona" />
-                <ScalarProperty Name="idResumenDiario" ColumnName="idResumenDiario" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="Personalid" ColumnName="Personalid" />
-                <ScalarProperty Name="nombrecompleto" ColumnName="nombrecompleto" />
-                <ScalarProperty Name="cat_areaidarea" ColumnName="cat_areaidarea" />
-                <ScalarProperty Name="AreaTrabajo" ColumnName="AreaTrabajo" />
-                <ScalarProperty Name="NombrePrograma" ColumnName="NombrePrograma" />
-                <ScalarProperty Name="programasID" ColumnName="programasID" />
-                <ScalarProperty Name="subprogramaId" ColumnName="subprogramaId" />
-                <ScalarProperty Name="NombreSubPrograma" ColumnName="NombreSubPrograma" />
-                <ScalarProperty Name="AccionesID" ColumnName="AccionesID" />
-                <ScalarProperty Name="AccionesNombre" ColumnName="AccionesNombre" />
-                <ScalarProperty Name="niños" ColumnName="niños" />
-                <ScalarProperty Name="niñas" ColumnName="niñas" />
-                <ScalarProperty Name="hombres" ColumnName="hombres" />
-                <ScalarProperty Name="mujeres" ColumnName="mujeres" />
-                <ScalarProperty Name="docentesH" ColumnName="docentesH" />
-                <ScalarProperty Name="docentesM" ColumnName="docentesM" />
-                <ScalarProperty Name="TotalHombresAtendidos" ColumnName="TotalHombresAtendidos" />
-                <ScalarProperty Name="TotalMujeresAtendidas" ColumnName="TotalMujeresAtendidas" />
-                <ScalarProperty Name="total_atendidos" ColumnName="total_atendidos" />
-                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
-                <ScalarProperty Name="RegionNombre" ColumnName="RegionNombre" />
-                <ScalarProperty Name="DelegacionNombre" ColumnName="DelegacionNombre" />
-                <ScalarProperty Name="DelegacionID" ColumnName="DelegacionID" />
-                <ScalarProperty Name="Zona_Estado" ColumnName="Zona_Estado" />
-                <ScalarProperty Name="ZonaID" ColumnName="ZonaID" />
-                <ScalarProperty Name="MUNICIPIO" ColumnName="MUNICIPIO" />
-                <ScalarProperty Name="MunicipioID" ColumnName="MunicipioID" />
-                <ScalarProperty Name="calveMuni" ColumnName="calveMuni" />
-                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
-                <ScalarProperty Name="LocalidadID" ColumnName="LocalidadID" />
-                <ScalarProperty Name="clavelocali" ColumnName="clavelocali" />
-                <ScalarProperty Name="calle" ColumnName="calle" />
-                <ScalarProperty Name="coloni" ColumnName="coloni" />
-                <ScalarProperty Name="NombreLugar_Escuela" ColumnName="NombreLugar_Escuela" />
-                <ScalarProperty Name="ClavePlantel" ColumnName="ClavePlantel" />
-                <ScalarProperty Name="Turno" ColumnName="Turno" />
-                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
-                <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
-                <ScalarProperty Name="telcel" ColumnName="telcel" />
-                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
-                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
-                <ScalarProperty Name="descripcion_actividad" ColumnName="descripcion_actividad" />
-                <ScalarProperty Name="personal_atendio_actividad" ColumnName="personal_atendio_actividad" />
-                <ScalarProperty Name="fechacaptura" ColumnName="fechacaptura" />
-                <ScalarProperty Name="fotos" ColumnName="fotos" />
-                <ScalarProperty Name="Dependencia" ColumnName="Dependencia" />
-                <ScalarProperty Name="DelegacionOcoonurbacion" ColumnName="DelegacionOcoonurbacion" />
-                <ScalarProperty Name="FolioActividad" ColumnName="FolioActividad" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="WV_Datosrepote_app">
             <EntityTypeMapping TypeName="SIICOPModel.WV_Datosrepote_app">
               <MappingFragment StoreEntitySet="WV_Datosrepote_app">
@@ -5289,6 +5721,7 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
           <EntitySetMapping Name="TB_DatosGralReporte">
             <EntityTypeMapping TypeName="SIICOPModel.TB_DatosGralReporte">
               <MappingFragment StoreEntitySet="TB_DatosGralReporte">
+                <ScalarProperty Name="NumAcciones" ColumnName="NumAcciones" />
                 <ScalarProperty Name="IndicadorId" ColumnName="IndicadorId" />
                 <ScalarProperty Name="ResponsabilidadId" ColumnName="ResponsabilidadId" />
                 <ScalarProperty Name="segurichat" ColumnName="segurichat" />
@@ -5412,6 +5845,200 @@ advertencia 6002: La tabla o vista 'SIICOP.dbo.Wv_TotalSubprogramas' no tiene de
                 <ScalarProperty Name="seguimiento" ColumnName="seguimiento" />
                 <ScalarProperty Name="personal_atendio_actividad" ColumnName="personal_atendio_actividad" />
                 <ScalarProperty Name="descripcion_actividad" ColumnName="descripcion_actividad" />
+                <ScalarProperty Name="idResumenDiario" ColumnName="idResumenDiario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="SIICOPModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Applications">
+            <EntityTypeMapping TypeName="SIICOPModel.Applications">
+              <MappingFragment StoreEntitySet="Applications">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLog">
+            <EntityTypeMapping TypeName="SIICOPModel.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="Pagina" ColumnName="Pagina" />
+                <ScalarProperty Name="ErrorType" ColumnName="ErrorType" />
+                <ScalarProperty Name="UserAgent" ColumnName="UserAgent" />
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="ErrorLogId" ColumnName="ErrorLogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Memberships">
+            <EntityTypeMapping TypeName="SIICOPModel.Memberships">
+              <MappingFragment StoreEntitySet="Memberships">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptWindowsStart" ColumnName="FailedPasswordAnswerAttemptWindowsStart" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
+                <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
+                <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+                <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+                <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+                <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="SIICOPModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SIICOPModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+                <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C_Cat_Acciones">
+            <EntityTypeMapping TypeName="SIICOPModel.C_Cat_Acciones">
+              <MappingFragment StoreEntitySet="_Cat_Acciones">
+                <ScalarProperty Name="IdPrograma" ColumnName="IdPrograma" />
+                <ScalarProperty Name="subprogramaId" ColumnName="subprogramaId" />
+                <ScalarProperty Name="AccionesNombre" ColumnName="AccionesNombre" />
+                <ScalarProperty Name="AccionesID" ColumnName="AccionesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="municipio">
+            <EntityTypeMapping TypeName="SIICOPModel.municipio">
+              <MappingFragment StoreEntitySet="municipio">
+                <ScalarProperty Name="municipio1" ColumnName="municipio" />
+                <ScalarProperty Name="region" ColumnName="region" />
+                <ScalarProperty Name="int" ColumnName="int" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="UsersInRoles" TypeName="SIICOPModel.UsersInRoles" StoreEntitySet="UsersInRoles">
+            <EndProperty Name="Users">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Wv_DatosReportesHistorico">
+            <EntityTypeMapping TypeName="SIICOPModel.Wv_DatosReportesHistorico">
+              <MappingFragment StoreEntitySet="Wv_DatosReportesHistorico">
+                <ScalarProperty Name="DescripcionIndicador" ColumnName="DescripcionIndicador" />
+                <ScalarProperty Name="DescripcionResponsabilidad" ColumnName="DescripcionResponsabilidad" />
+                <ScalarProperty Name="IndicadorId" ColumnName="IndicadorId" />
+                <ScalarProperty Name="ResponsabilidadId" ColumnName="ResponsabilidadId" />
+                <ScalarProperty Name="inst_participantes" ColumnName="inst_participantes" />
+                <ScalarProperty Name="zona" ColumnName="zona" />
+                <ScalarProperty Name="idzona" ColumnName="idzona" />
+                <ScalarProperty Name="FolioActividad" ColumnName="FolioActividad" />
+                <ScalarProperty Name="DelegacionOcoonurbacion" ColumnName="DelegacionOcoonurbacion" />
+                <ScalarProperty Name="Dependencia" ColumnName="Dependencia" />
+                <ScalarProperty Name="fotos" ColumnName="fotos" />
+                <ScalarProperty Name="NumAcciones" ColumnName="NumAcciones" />
+                <ScalarProperty Name="accion_implementada" ColumnName="accion_implementada" />
+                <ScalarProperty Name="seguimiento" ColumnName="seguimiento" />
+                <ScalarProperty Name="ofrecieron_segurichat" ColumnName="ofrecieron_segurichat" />
+                <ScalarProperty Name="total_acciones_ravi" ColumnName="total_acciones_ravi" />
+                <ScalarProperty Name="no_acciones_institucionales" ColumnName="no_acciones_institucionales" />
+                <ScalarProperty Name="no_acciones_dgpvi" ColumnName="no_acciones_dgpvi" />
+                <ScalarProperty Name="giro_comercios" ColumnName="giro_comercios" />
+                <ScalarProperty Name="dirigido" ColumnName="dirigido" />
+                <ScalarProperty Name="nocasos_ravi" ColumnName="nocasos_ravi" />
+                <ScalarProperty Name="casos_ravi" ColumnName="casos_ravi" />
+                <ScalarProperty Name="plantel_diagnosticado" ColumnName="plantel_diagnosticado" />
+                <ScalarProperty Name="segurichat" ColumnName="segurichat" />
+                <ScalarProperty Name="programa_istmo" ColumnName="programa_istmo" />
+                <ScalarProperty Name="mpio_indigena" ColumnName="mpio_indigena" />
+                <ScalarProperty Name="col_prioritario" ColumnName="col_prioritario" />
+                <ScalarProperty Name="mpio_homicidio" ColumnName="mpio_homicidio" />
+                <ScalarProperty Name="mpio_prioritario" ColumnName="mpio_prioritario" />
+                <ScalarProperty Name="coordinador" ColumnName="coordinador" />
+                <ScalarProperty Name="fechacaptura" ColumnName="fechacaptura" />
+                <ScalarProperty Name="personal_atendio_actividad" ColumnName="personal_atendio_actividad" />
+                <ScalarProperty Name="descripcion_actividad" ColumnName="descripcion_actividad" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+                <ScalarProperty Name="Ambito" ColumnName="Ambito" />
+                <ScalarProperty Name="tema_impartido" ColumnName="tema_impartido" />
+                <ScalarProperty Name="EjeId" ColumnName="EjeId" />
+                <ScalarProperty Name="telcel" ColumnName="telcel" />
+                <ScalarProperty Name="NombreContacto" ColumnName="NombreContacto" />
+                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
+                <ScalarProperty Name="Turno" ColumnName="Turno" />
+                <ScalarProperty Name="ClavePlantel" ColumnName="ClavePlantel" />
+                <ScalarProperty Name="NombreLugar_Escuela" ColumnName="NombreLugar_Escuela" />
+                <ScalarProperty Name="coloni" ColumnName="coloni" />
+                <ScalarProperty Name="calle" ColumnName="calle" />
+                <ScalarProperty Name="clavelocali" ColumnName="clavelocali" />
+                <ScalarProperty Name="LocalidadID" ColumnName="LocalidadID" />
+                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+                <ScalarProperty Name="Eje" ColumnName="Eje" />
+                <ScalarProperty Name="calveMuni" ColumnName="calveMuni" />
+                <ScalarProperty Name="MunicipioID" ColumnName="MunicipioID" />
+                <ScalarProperty Name="MUNICIPIO" ColumnName="MUNICIPIO" />
+                <ScalarProperty Name="ZonaID" ColumnName="ZonaID" />
+                <ScalarProperty Name="Zona_Estado" ColumnName="Zona_Estado" />
+                <ScalarProperty Name="DelegacionID" ColumnName="DelegacionID" />
+                <ScalarProperty Name="DelegacionNombre" ColumnName="DelegacionNombre" />
+                <ScalarProperty Name="RegionNombre" ColumnName="RegionNombre" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="total_atendidos" ColumnName="total_atendidos" />
+                <ScalarProperty Name="TotalMujeresAtendidas" ColumnName="TotalMujeresAtendidas" />
+                <ScalarProperty Name="TotalHombresAtendidos" ColumnName="TotalHombresAtendidos" />
+                <ScalarProperty Name="docentesM" ColumnName="docentesM" />
+                <ScalarProperty Name="docentesH" ColumnName="docentesH" />
+                <ScalarProperty Name="mujeres" ColumnName="mujeres" />
+                <ScalarProperty Name="hombres" ColumnName="hombres" />
+                <ScalarProperty Name="niñas" ColumnName="niñas" />
+                <ScalarProperty Name="niños" ColumnName="niños" />
+                <ScalarProperty Name="AccionesNombre" ColumnName="AccionesNombre" />
+                <ScalarProperty Name="AccionesID" ColumnName="AccionesID" />
+                <ScalarProperty Name="NombreSubPrograma" ColumnName="NombreSubPrograma" />
+                <ScalarProperty Name="subprogramaId" ColumnName="subprogramaId" />
+                <ScalarProperty Name="programasID" ColumnName="programasID" />
+                <ScalarProperty Name="NombrePrograma" ColumnName="NombrePrograma" />
+                <ScalarProperty Name="AreaTrabajo" ColumnName="AreaTrabajo" />
+                <ScalarProperty Name="cat_areaidarea" ColumnName="cat_areaidarea" />
+                <ScalarProperty Name="nombrecompleto" ColumnName="nombrecompleto" />
+                <ScalarProperty Name="Personalid" ColumnName="Personalid" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="idResumenDiario" ColumnName="idResumenDiario" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -4,29 +4,39 @@
     <div id="pantallaCarga" class="loader-overlay">
         <div class="spinner"></div>
     </div>
-
     <style>
-    .loader-overlay {
-        position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: 9999;
-        display: none; 
-        justify-content: center;
-        align-items: center;
-    }
-    .spinner {
-        border: 6px solid #f3f3f3;
-        border-top: 6px solid #007bff; 
-        border-radius: 50%;
-        width: 60px; height: 60px;
-        animation: spin 1s linear infinite;
-    }
-    @keyframes spin { 
-        0% { transform: rotate(0deg); } 
-        100% { transform: rotate(360deg); } 
-    }
-</style>
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .spinner {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #007bff;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
     <br />
     <link href="../Content/styleFormularios.css" rel="stylesheet" />
     <div class="container" style="padding-top: 3%">
@@ -52,7 +62,6 @@
                     <img src="../Imagenes/PinesReporte/Empresarial.png" />
                     <p>Enlace con el Sector Empresarial</p>
                 </div>
-
                 <div class="col-md-1" style="text-align: center">
                     <img src="../Imagenes/PinesReporte/RedesVecinales.png" />
                     <p>Redes vecinales</p>
@@ -73,12 +82,10 @@
                     <img src="../Imagenes/PinesReporte/ConstrucionCultura.png" />
                     <p>Inclusión de personas en situación de vunerabilidad</p>
                 </div>
-
                 <div class="col-md-1" style="text-align: center">
                     <img src="../Imagenes/PinesReporte/DeporteYcultura.png" />
                     <p>Fomento a la Prevención a través del Deporte la Cultura</p>
                 </div>
-
             </div>
         </div>
     </div>
@@ -138,7 +145,7 @@
                                 <asp:DropDownList runat="server" ID="ddlProgramas" CssClass="form-control"></asp:DropDownList>
                             </div>
                         </div>
-                       <%--  <div class="col-md-2">
+                        <%--  <div class="col-md-2">
                              <asp:Label ID="Label8" runat="server" Text="Eje atención:" CssClass="control-label"></asp:Label>
                              <div class="form-group">
                                  <asp:DropDownList runat="server" ID="ddlEjeAtencion" CssClass="form-control"></asp:DropDownList>
@@ -156,16 +163,16 @@
                     <div class="row">
                         <div id="RESPONSA" runat="server">
                             <div class="col-md-8">
-                         <asp:LinkButton ID="btnBuscar" runat="server" CssClass="btn btn-info" OnClick="btnBuscar_Click" OnClientClick="mostrarLoader();"><span class="glyphicon glyphicon-search"></span>&nbsp;Buscar</asp:LinkButton>     
-                    <%-- <asp:LinkButton ID="lkbtnexcel" runat="server" Style="font-size: 1.5em" Text="excel" title="Exportar" OnClick="lkbtnexcel_Click">Actividades&nbsp;<span class="far fa-file-excel" style="color:green"></span></asp:LinkButton>--%>             
-                         <asp:LinkButton ID="lkbtnexcel" runat="server" CssClass="btn btn-info" Style="font-size: 1em" title="Exportar" OnClick="lkbtnexcel_Click" OnClientClick="mostrarLoaderExcel();">Actividades<span class="far fa-file-excel" style="color:green"></span></asp:LinkButton>
-                         <asp:LinkButton ID="lkmapa" runat="server" CssClass="btn btn-warning" Style="font-size: 1em" Text="excel" title="Ver georeferencia" OnClick="lkmapa_Click"><span class="fas fa-map-marked-alt"></span>Mapas&nbsp;</asp:LinkButton>
-                            
+                                <asp:LinkButton ID="btnBuscar" runat="server" CssClass="btn btn-info" OnClick="btnBuscar_Click" OnClientClick="mostrarLoader();"><span class="glyphicon glyphicon-search"></span>&nbsp;Buscar</asp:LinkButton>
+                                <%-- <asp:LinkButton ID="lkbtnexcel" runat="server" Style="font-size: 1.5em" Text="excel" title="Exportar" OnClick="lkbtnexcel_Click">Actividades&nbsp;<span class="far fa-file-excel" style="color:green"></span></asp:LinkButton>--%>
+                                <asp:LinkButton ID="lkbtnexcel" runat="server" CssClass="btn btn-info" Style="font-size: 1em" title="Exportar" OnClick="lkbtnexcel_Click" OnClientClick="mostrarLoaderExcel();">Actividades<span class="far fa-file-excel" style="color:green"></span></asp:LinkButton>
+                                <asp:LinkButton ID="lkmapa" runat="server" CssClass="btn btn-warning" Style="font-size: 1em" Text="excel" title="Ver georeferencia" OnClick="lkmapa_Click"><span class="fas fa-map-marked-alt"></span>Mapas&nbsp;</asp:LinkButton>
+                                <asp:LinkButton ID="lnkbtnZip" runat="server" CssClass="btn btn-info" Style="font-size: 1em" Text="Foto" title="Exportar" OnClick="lnkbtnZip_Click">Imágenes</asp:LinkButton>
                                 <div class="col-md-4" runat="server" id="Div1">
-                                 </div> 
-                                
+                                </div>
                             </div>
-                          <%--  <div class="col-md-4">
+
+                            <%--   <div class="col-md-4">
                                 <div class="dropdown">
                                     <a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><b>Descargar</b> <b class="caret"></b>&nbsp;<span class="fa fa-download" aria-hidden="true"></span></a>
                                     <ul class="dropdown-menu" style="font-size: 11px;">
@@ -175,16 +182,15 @@
                                             <asp:LinkButton ID="lnBtnExpCedula" runat="server" Style="font-size: 1.5em" Text="excel" title="Exportar" OnClick="lnBtnExpCedula_Click1">Cedulas &nbsp;<span style="color:blue" class="fas fa-chart-line"></span></asp:LinkButton>
                                         </li>
                                         <li runat="server">
-                                            <asp:LinkButton ID="lnkbtnZip" runat="server" Style="font-size: 1.5em" Text="Foto" title="Exportar" OnClick="lnkbtnZip_Click">Imagenes &nbsp;<span style="color:RED" class="fa fa-file-archive"></span></asp:LinkButton>
+                                            <asp:LinkButton ID="" runat="server" Style="font-size: 1.5em" Text="Foto" title="Exportar" OnClick="lnkbtnZip_Click">Imagenes &nbsp;<span style="color:RED" class="fa fa-file-archive"></span></asp:LinkButton>
                                         </li>
                                     </ul>
                                 </div>
                             </div>--%>
-
                         </div>
-                 
+
                     </div>
-                  <br />
+                    <br />
                     <div class="col-lg-2 pull-right">
                         <div class="form-group pull-right">
                             <asp:Label ID="lblTotalRegistros" runat="server" CssClass="label label-warning" Font-Size="18px" Font-Bold="true"></asp:Label>
@@ -202,7 +208,6 @@
                             OnRowCreated="GvPCAdmin_RowCreated" AllowSorting="True">
                             <Columns>
                                 <asp:BoundField DataField="FolioActividad" HeaderText="Folio" SortExpression="FolioActividad"></asp:BoundField>
-
                                 <asp:TemplateField HeaderText="Fecha" SortExpression="fecha">
                                     <ItemTemplate>
                                         <asp:Label runat="server" Text='<%# Bind("fecha", "{0:dddd-dd-MMMM-yyyy}") %>' ID="Label1"></asp:Label>
@@ -219,7 +224,6 @@
                                 <asp:BoundField DataField="TotalMujeresAtendidas" HeaderText="Mujeres" SortExpression="TotalMujeresAtendidas"></asp:BoundField>
                                 <asp:BoundField DataField="total_atendidos" HeaderText="Total beneficiados" SortExpression="total_atendidos"></asp:BoundField>
                                 <asp:BoundField DataField="descripcion_actividad" HeaderText="Descripción" SortExpression="descripcion_actividad"></asp:BoundField>
-
                                 <asp:TemplateField HeaderText="Pin">
                                     <ItemTemplate>
                                         <asp:Image runat="server" AlternateText='<%# Eval("programasID") %>' ID="imgpato" Width="25" Height="25"></asp:Image>
@@ -227,28 +231,27 @@
                                     <ItemStyle HorizontalAlign="Center"></ItemStyle>
                                 </asp:TemplateField>
 
-                         <asp:TemplateField HeaderText="¿Fotos cargadas?">
+                                <asp:TemplateField HeaderText="¿Fotos cargadas?">
                                     <ItemTemplate>
                                         <asp:ImageButton runat="server" AlternateText='<%# Eval("fotos") %>' ID="imgFoto" Width="25" Height="25" CommandArgument='<%# Eval("idResumenDiario") %>' CommandName="VERFOTO" ToolTip="Ver fotos" />
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center"></ItemStyle>
                                 </asp:TemplateField>
 
-                               <asp:TemplateField ShowHeader="False">
-                                <ItemStyle HorizontalAlign="Center" />
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="lkbEditar" runat="server" 
-                                        CssClass="btn btn-primary btn-sm" 
-                                        CommandName="Editar" 
-                                        CommandArgument='<%# Eval("idResumenDiario") %>' 
-                                        CausesValidation="False" 
-                                        ToolTip="Editar">
+                                <asp:TemplateField ShowHeader="False">
+                                    <ItemStyle HorizontalAlign="Center" />
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="lkbEditar" runat="server"
+                                            CssClass="btn btn-primary btn-sm"
+                                            CommandName="Editar"
+                                            CommandArgument='<%# Eval("idResumenDiario") %>'
+                                            CausesValidation="False"
+                                            ToolTip="Editar">
                                         <i class="fas fa-edit"></i> Editar
-                                    </asp:LinkButton>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-
-                             <%--   <asp:TemplateField ShowHeader="False">
+                                        </asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <%--   <asp:TemplateField ShowHeader="False">
                                     <ItemTemplate>
                                         <div class="col-md-7">
                                             <asp:LinkButton runat="server" Text="Editar" class="btn btn-primary btn-sm" CommandName="Editar" CausesValidation="False" ID="lkbEditar" ToolTip="Editar" CommandArgument='<%# Eval("idResumenDiario") %>'>
@@ -256,7 +259,8 @@
                                             </asp:LinkButton>
                                         </div>
                                     </ItemTemplate>
-                                </asp:TemplateField>--%>
+                                </asp:TemplateField>
+                                --%>
 
 
                                 <asp:TemplateField ShowHeader="False">
@@ -270,54 +274,54 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
-                             <PagerTemplate>
-                                <div class="row" style="margin-top: 20px; align-items: center;">      
+                            <PagerTemplate>
+                                <div class="row" style="margin-top: 20px; align-items: center;">
                                     <div class="col-lg-1" style="text-align: right;">
                                         <h5>
                                             <asp:Label ID="MessageLabel" Text="Pág." runat="server" />
                                         </h5>
-                                    </div>       
+                                    </div>
                                     <div class="col-lg-2 col-md-3" style="text-align: left;">
                                         <asp:DropDownList ID="PageDropDownListAdmin" Width="60%" AutoPostBack="true" OnSelectedIndexChanged="PageDropDownListAdmin_SelectedIndexChanged" runat="server" CssClass="form-control" />
-                                    </div>        
+                                    </div>
                                     <div class="col-lg-9 col-md-8" style="text-align: right;">
                                         <h3>
                                             <asp:Label ID="CurrentPageLabelAdmin" runat="server" CssClass="label label-success" />
                                         </h3>
-                                    </div>        
+                                    </div>
                                 </div>
                             </PagerTemplate>
-            <%--  <PagerTemplate>
-                                <div class="row" style="margin-top: 20px;">
-                                    <div class="col-lg-1" style="text-align: right;">
-                                        <h5>
-                                            <asp:Label ID="MessageLabel" Text="Pág." runat="server" /></h5>
-                                    </div>
-                                    <div class="col-lg-2 col-md-3" style="text-align: left;">
-                                        <h3>
-                                        <asp:DropDownList ID="PageDropDownListAdmin" Width="60%" AutoPostBack="true" OnSelectedIndexChanged="PageDropDownListAdmin_SelectedIndexChanged" runat="server" CssClass="form-control" /></h3>
-                                    </div>
-                                    <div class="col-lg-10" style="text-align: right;">
-                                        <h3>
-                                            <asp:Label ID="CurrentPageLabelAdmin" runat="server" CssClass="label label-success" />
-                                        </h3>
-                                    </div>
-                                </div>
-                  </PagerTemplate>
-             --%>
+                            <%--  <PagerTemplate>
+                                                <div class="row" style="margin-top: 20px;">
+                                                    <div class="col-lg-1" style="text-align: right;">
+                                                        <h5>
+                                                            <asp:Label ID="MessageLabel" Text="Pág." runat="server" /></h5>
+                                                    </div>
+                                                    <div class="col-lg-2 col-md-3" style="text-align: left;">
+                                                        <h3>
+                                                        <asp:DropDownList ID="PageDropDownListAdmin" Width="60%" AutoPostBack="true" OnSelectedIndexChanged="PageDropDownListAdmin_SelectedIndexChanged" runat="server" CssClass="form-control" /></h3>
+                                                    </div>
+                                                    <div class="col-lg-10" style="text-align: right;">
+                                                        <h3>
+                                                            <asp:Label ID="CurrentPageLabelAdmin" runat="server" CssClass="label label-success" />
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                  </PagerTemplate>
+                            --%>
                         </asp:GridView>
                     </div>
                 </div>
             </div>
         </ContentTemplate>
 
-                <%--     
-                    <Triggers>
-                     <asp:PostBackTrigger ControlID="lkbtnexcel" />
-                     <asp:PostBackTrigger ControlID="lnBtnExpCedula" />
-                     <asp:PostBackTrigger ControlID="lnkbtnZip" />
-                    </Triggers>    
-                --%>
+
+        <Triggers>
+            <%-- <asp:PostBackTrigger ControlID="lkbtnexcel" />
+                     <asp:PostBackTrigger ControlID="lnBtnExpCedula" />--%>
+            <asp:PostBackTrigger ControlID="lnkbtnZip" />
+        </Triggers>
+
 
     </asp:UpdatePanel>
     <div class="modal fade bd-example-modal-lg" id="exampleModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -327,8 +331,9 @@
                     <h5 class="modal-title" id="exampleModalLabel">Ubicación geografica</h5>
                 </div>
                 <div class="modal-body">
-                    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzKpx_jKJbeh1oiuY7p4pdfspnIcbmxco&callback=initMap"></script>
-                  <%--  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzKpx_jKJbeh1oiuY7p4pdfspnIcbmxco&callback=initMap" defer=""></script>--%>
+                    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzKpx_jKJbeh1oiuY7p4pdfspnIcbmxco&callback=initMap" defer=""></script>
+                    <%-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzKpx_jKJbeh1oiuY7p4pdfspnIcbmxco&callback=initMap"></script>
+                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzKpx_jKJbeh1oiuY7p4pdfspnIcbmxco&callback=initMap" defer=""></script>--%>
                     <div id="map" style="width: 100%; height: 600px;"></div>
                     <script type="text/javascript">
                         var opcion = 0;
@@ -556,8 +561,7 @@
 
                                             <iframe id="PdfEvidencia1"
                                                 runat="server"
-                                                style="width:100%; height:600px; border:none; display:none;">
-                                            </iframe>
+                                                style="width: 100%; height: 600px; border: none; display: none;"></iframe>
 
                                         </div>
                                         <div class="item" runat="server" id="fotodos" visible="false">
@@ -568,8 +572,7 @@
 
                                             <iframe id="PdfEvidencia2"
                                                 runat="server"
-                                                style="width:100%; height:600px; border:none; display:none;">
-                                            </iframe>
+                                                style="width: 100%; height: 600px; border: none; display: none;"></iframe>
 
                                         </div>
 
@@ -581,8 +584,7 @@
 
                                             <iframe id="PdfEvidencia3"
                                                 runat="server"
-                                                style="width:100%; height:600px; border:none; display:none;">
-                                            </iframe>
+                                                style="width: 100%; height: 600px; border: none; display: none;"></iframe>
 
                                         </div>
                                     </div>
@@ -635,42 +637,42 @@
         </div>
     </div>
     <script type="text/javascript"> 
-            window.AbrirModalValidador = function () {
-                $('#exampleModalValidador').modal('show');
+        window.AbrirModalValidador = function () {
+            $('#exampleModalValidador').modal('show');
             return false;
-             };
+        };
 
-            window.openModal = function () {
-                $('#exampleModal').modal('show');
+        window.openModal = function () {
+            $('#exampleModal').modal('show');
             return false;
-            };
+        };
 
-            window.AbrirModalFotos = function () {
-                $('#myModalConsultariMG').modal('show');
+        window.AbrirModalFotos = function () {
+            $('#myModalConsultariMG').modal('show');
             return false;
-             };
-             function ReactivarDropdown() {
-                $('.dropdown-toggle').off('click').on('click', function (e) {
-                    e.preventDefault();
-                    $(this).parent('.dropdown').toggleClass('open');
-                });
-
-                $(document).on('click', function (e) {
-                   if (!$(e.target).closest('.dropdown').length) {
-                   $('.dropdown').removeClass('open');
-                        }
-                    });
-                }
-
-       
-            $(document).ready(function () {
-                ReactivarDropdown();
-    });
-
-            var prm = Sys.WebForms.PageRequestManager.getInstance();
-            prm.add_endRequest(function () {
-                ReactivarDropdown();
+        };
+        function ReactivarDropdown() {
+            $('.dropdown-toggle').off('click').on('click', function (e) {
+                e.preventDefault();
+                $(this).parent('.dropdown').toggleClass('open');
             });
+
+            $(document).on('click', function (e) {
+                if (!$(e.target).closest('.dropdown').length) {
+                    $('.dropdown').removeClass('open');
+                }
+            });
+        }
+
+
+        $(document).ready(function () {
+            ReactivarDropdown();
+        });
+
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        prm.add_endRequest(function () {
+            ReactivarDropdown();
+        });
 
 
         function mostrarLoader() {
@@ -684,7 +686,7 @@
             return true;
         }
 
- 
+
         if (typeof Sys !== 'undefined') {
             Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
                 document.getElementById('pantallaCarga').style.display = 'none';

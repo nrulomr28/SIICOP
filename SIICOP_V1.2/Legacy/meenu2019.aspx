@@ -50,17 +50,17 @@
             border: 1px solid #e0e0e0;
         }
 
-            .ca-menu li:nth-child(5) {
+        .ca-menu li:nth-child(5) {
                 margin-right: 0px;
-            }
+        }
 
-            .ca-menu li a {
+        .ca-menu li a {
                 width: 100%;
                 height: 100%;
                 display: block;
                 color: #333;
                 position: relative;
-            }
+        }
 
         .ca-content {
             /*position: absolute;*/
@@ -107,9 +107,9 @@
             background: #fd9426;
         }
 
-            .ca-sub.one {
+        .ca-sub.one {
                 background: #fc3158;
-            }
+        }
 
             .ca-sub.two {
                 background: #147efb;

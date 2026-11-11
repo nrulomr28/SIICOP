@@ -104,7 +104,8 @@ namespace SIICOP_V1._2.Captura.DGTSV
                     Guid idExpediente = Guid.Parse(Session["idReporte_Accion"].ToString());
                     expediente_Llenar(idExpediente);
                 }
-                catch (Exception ex) { /*salidaBandeja();*/ }
+              //  catch (Exception ex)
+                catch (Exception) { /*salidaBandeja();*/ }
             }
             else
             {
@@ -477,7 +478,8 @@ namespace SIICOP_V1._2.Captura.DGTSV
                     var folio = ctx.sp_folio_actividad(id, claveF, extencion).ToString();
                     ScriptManager.RegisterStartupScript(this, GetType(), "openGuardadoExito", "openGuardadoExito();", true);
                 }
-                catch (Exception ex)
+                catch (Exception)
+                //catch (Exception ex)
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "error", "error();", true);
 
@@ -666,7 +668,8 @@ namespace SIICOP_V1._2.Captura.DGTSV
                 ScriptManager.RegisterStartupScript((Page)this, this.GetType(), "redirect", "alert('DATOS GUARDADOS CON EXITO'); window.location='" + this.Request.ApplicationPath + "Bienvenido_DGTSV.aspx';", true);
 
             }
-            catch (Exception EX)
+            catch (Exception )
+          //  catch (Exception EX)
             {
 
             }

@@ -79,7 +79,8 @@ namespace SIICOP_V1._2.Captura
                     Guid idExpediente = Guid.Parse(Session["idExpediente_Accion"].ToString());
                     expediente_Llenar(idExpediente);
                 }
-                catch (Exception ex) { /*salidaBandeja();*/ }
+              //  catch (Exception ex)
+                catch (Exception ) { /*salidaBandeja();*/ }
             }
             else
             {
@@ -289,7 +290,8 @@ namespace SIICOP_V1._2.Captura
                 this.Session["AccionExpediente"] = (object)null;
                 ScriptManager.RegisterStartupScript((Page)this, this.GetType(), "redirect", "alert('DATOS GUARDADOS CON EXITO'); window.location='" + this.Request.ApplicationPath + "TotalAccionesBeneficiados.aspx';", true);
             }
-            catch (Exception ex)
+            catch (Exception)
+           // catch (Exception ex)
             {
                 ScriptManager.RegisterClientScriptBlock((Page)this, this.GetType(), "alertMessage", "alert('¡Error al guardar los datos!')", true);
             }
@@ -302,7 +304,7 @@ namespace SIICOP_V1._2.Captura
             bool valido = true;
             string textoValidacion = "<ul>";
             int r = 0;
-            int tamanoarchivo;
+         //   int tamanoarchivo;
             string fileName = "";
             string contentType = "";
             bool actividadfueradefecha = Convert.ToBoolean(Session["actividades_fuera_tiempo"]);
@@ -610,7 +612,8 @@ namespace SIICOP_V1._2.Captura
                     HiddenField1.Value = null;
                     Session["actividades_fuera_tiempo"] = null;
                 }
-                catch (Exception ex)
+                catch (Exception )
+            //    catch (Exception ex)
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), "error", "error();", true);
 

@@ -27,9 +27,9 @@
         }
 
             /* Hover */
-            .custom-grid tbody tr:hover {
+       .custom-grid tbody tr:hover {
                 background-color: #f7fbff;
-            }
+       }
 
         /* Celdas */
         .custom-grid td {
@@ -39,29 +39,22 @@
     </style>
 
     <div class="container mt-4">
-
         <div class="text-center mb-4">
             <h3 class="fw-bold text-dark" style="letter-spacing: 1px;">ACCIONES Y BENEFICIADOS
             </h3>
             <span class="text-muted">Resumen del mes actual</span>
         </div>
-
         <div class="card shadow-sm border-0 rounded-4">
             <div class="card-body p-4">
 
                 <div class="table-responsive">
-
                     <asp:GridView ID="gvTotalAcciones" runat="server"
                         AutoGenerateColumns="False"
                         CssClass="table table-hover align-middle custom-grid"
                         AllowPaging="True" PageSize="10"
                         GridLines="None">
-
                         <HeaderStyle CssClass="custom-header" />
-
                         <Columns>
-
-
                             <asp:TemplateField HeaderText="#">
                                 <ItemTemplate>
                                     <span class="badge bg-light text-dark border rounded-pill px-3 py-1">
@@ -69,13 +62,9 @@
                                     </span>
                                 </ItemTemplate>
                             </asp:TemplateField>
-
-
                             <asp:BoundField DataField="NombrePrograma" HeaderText="Programa">
                                 <ItemStyle CssClass="text-start fw-semibold small" />
                             </asp:BoundField>
-
-
                             <asp:TemplateField HeaderText="Acciones">
                                 <ItemTemplate>
                                     <span class="fw-bold text-success fs-5">
@@ -83,7 +72,6 @@
                                     </span>
                                 </ItemTemplate>
                             </asp:TemplateField>
-
                             <asp:TemplateField HeaderText="Hombres">
                                 <ItemTemplate>
                                     <span class="fw-bold text-primary fs-5">
@@ -91,8 +79,6 @@
                                     </span>
                                 </ItemTemplate>
                             </asp:TemplateField>
-
-
                             <asp:TemplateField HeaderText="Mujeres">
                                 <ItemTemplate>
                                     <span class="fw-bold text-danger fs-5">
@@ -100,7 +86,6 @@
                                     </span>
                                 </ItemTemplate>
                             </asp:TemplateField>
-
                             <asp:TemplateField HeaderText="Total">
                                 <ItemTemplate>
                                     <span class="fw-bold text-danger fs-5">
@@ -108,8 +93,6 @@
                                     </span>
                                 </ItemTemplate>
                             </asp:TemplateField>
-
-
                         </Columns>
 
                     </asp:GridView>

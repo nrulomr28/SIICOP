@@ -3,7 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server" >
     <script src="<%= ResolveUrl("~/Scripts/sweetalert2.all.min.js") %>" type="text/javascript"></script>
     <link href="Content/BotonoesCargaTrabajo.css" rel="stylesheet" />
-        <script type="text/javascript">
+     <script type="text/javascript">
             function error() {
                 swal({
                     title: "Error!",

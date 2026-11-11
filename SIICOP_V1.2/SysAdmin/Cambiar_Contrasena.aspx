@@ -9,19 +9,23 @@
                     <td>
                         <asp:Label ID="lblUsuario" runat="server" Text="USUARIO A MODIFICAR:" />
                         <br />
-                        <asp:TextBox ID="txtLogin" runat="server"></asp:TextBox></td>
+                        <asp:TextBox ID="txtLogin" runat="server"></asp:TextBox>
+
+                    </td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>
                         <asp:Label ID="Label1" runat="server" Text="NUEVA CONTRASEÑA:" />
                         <br />
-                        <asp:TextBox ID="txtPassword" runat="server"></asp:TextBox></td>
+                        <asp:TextBox ID="txtPassword" runat="server"></asp:TextBox>
+                    </td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>
-                        <asp:Button ID="btnCambiar" runat="server" Text="Cambiar" OnClick="btnCambiar_Click"  /></td>
+                        <asp:Button ID="btnCambiar" runat="server" Text="Cambiar" OnClick="btnCambiar_Click"  />
+                    </td>
                 </tr>
                 <tr>
                     <td></td>
@@ -30,11 +34,8 @@
             </table>
         </section>
     </div>
-
-
     <asp:UpdatePanel ID="updPanel_Usuarios" runat="server">
         <ContentTemplate>
-
             <ajaxToolkit:ModalPopupExtender ID="mpe_msj" runat="server" PopupControlID="pnl_msj" OkControlID="btn_Ok" TargetControlID="btn_dummy" BackgroundCssClass="modalBackground">
             </ajaxToolkit:ModalPopupExtender>
             <asp:Panel ID="pnl_msj" runat="server" CssClass="modalPopup" align="center" Style="display: none">
